@@ -1,0 +1,861 @@
+---
+title: "iOS SDK"
+description: "The Radar SDK abstracts away cross-platform differences between location services, allowing you to add geofencing, location tracking, trip tracking, geocoding, and search to your apps with just a few lines of code."
+---
+
+Learn how to integrate the iOS SDK below. You can also see the [source](https://github.com/radarlabs/radar-sdk-ios) and a [detailed SDK reference](https://radarlabs.github.io/radar-sdk-ios/Classes/Radar.html) on GitHub.
+
+## []()Install SDK[#](#install-sdk "Direct link to heading")
+
+The best way to install the SDK is via [CocoaPods](https://cocoapods.org) or [Carthage](https://github.com/Carthage/Carthage).
+
+For details on the latest SDK releases, see the [releases page](https://github.com/radarlabs/radar-sdk-ios/releases) on GitHub. You can also star ⭐️ and watch 👀 the repo.
+
+The SDK is small and typically adds less than 500 KB to your compiled app.
+
+### []()CocoaPods[#](#cocoapods "Direct link to heading")
+
+Install [CocoaPods](https://cocoapods.org). If you don't have an existing `Podfile`, run `pod init` in your project directory. Add the following to your `Podfile`:
+
+```
+pod 'RadarSDK', '~> 3.21.5'
+```
+
+Copy
+
+Then, run `pod install`. You may also need to run `pod repo update`.
+
+After installing, use the `.xcworkspace` file to open your project in Xcode instead of the `.xcproject` file.
+
+### []()Swift Package Manager[#](#swift-package-manager "Direct link to heading")
+
+In Xcode, go to *File* > *Swift Packages* > *Add Package Dependency*. Enter `https://github.com/radarlabs/radar-sdk-ios-spm.git` for the *Package Repository URL*. This URL points to our [SPM optimized repo](https://github.com/radarlabs/radar-sdk-ios-spm), which has a smaller binary size to facilitate faster build times.
+
+**Note:** we recommend pinning the minor version you're installing as we occasionally introduce breaking changes in new minor versions. You can pin the minor version using the range operator:
+
+```
+3.21.5..<3.22.0
+```
+
+Copy
+
+Only select `RadarSDK` unless you are also intending to use the location metadata feature. Refer to [this section](/sdk/ios#location-metadata) for more information.
+
+### []()Carthage[#](#carthage "Direct link to heading")
+
+Install [Carthage](https://github.com/Carthage/Carthage). To include Radar as a `github` origin, add the following to your `Cartfile`:
+
+```
+github "radarlabs/radar-sdk-ios" ~> 3.21.5
+```
+
+Copy
+
+To include Radar as a `binary` origin, add the following to your `Cartfile`:
+
+```
+binary "https://raw.githubusercontent.com/radarlabs/radar-sdk-ios/master/RadarSDK.json" ~> 3.21.5
+```
+
+Copy
+
+Then, run `carthage update` and drag `Build/iOS/RadarSDK.framework` into the *Linked Frameworks and Libraries* section of your target. Do not add the framework as an input to your `copy-frameworks` run script.
+
+### []()Add manually[#](#add-manually "Direct link to heading")
+
+You can also add the SDK to your project manually. Download [the current release](https://github.com/radarlabs/radar-sdk-ios/releases), unzip the package, and drag `RadarSDK.xcframework` into your Xcode project. It will automatically appear in the *Frameworks, Libraries, and Embedded Content* section of your target settings. Switch *Do Not Embed* to *Embed & Sign*.
+
+## []()Dependencies[#](#dependencies "Direct link to heading")
+
+The SDK depends on Apple's `CoreLocation` framework. In your target settings, go to *General* > *Frameworks, Libraries, and Embedded Content* and add `CoreLocation` if you haven't already.
+
+The SDK currently supports iOS 10 and higher.
+
+## []()Initialize SDK[#](#initialize-sdk "Direct link to heading")
+
+When your app starts, initialize the SDK with your publishable API key, found on the [Settings page](https://radar.com/dashboard/settings).
+
+Use your `Test Publishable` key for testing and non-production environments. Use your `Live Publishable` key for production environments.
+
+Note that you should always use your publishable API keys, which are restricted in scope, in the SDK. Do not use your secret API keys, which are unrestricted in scope, in any client-side code.
+
+* Swift
+* Objective-C
+
+```
+import UIKitimport RadarSDK
+@UIApplicationMainclass AppDelegate: UIResponder, UIApplicationDelegate {
+    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {        Radar.initialize(publishableKey: "prj_test_pk_...")
+        return true    }
+}
+```
+
+Copy
+
+```
+#import "AppDelegate.h"@import RadarSDK;
+@implementation AppDelegate
+  - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {    [Radar initializeWithPublishableKey:@"prj_test_pk_..."];
+    return YES;}
+@end
+```
+
+Copy
+
+## []()Request permissions[#](#request-permissions "Direct link to heading")
+
+Radar respects [standard iOS location permissions](https://developer.apple.com/documentation/corelocation/requesting_authorization_for_location_services).
+
+For foreground tracking or trip tracking with continuous mode, the app's location authorization status must be or. For background tracking or geofencing with responsive mode, the app's location authorization status must be .
+
+If your app already requests the necessary location permissions, you can skip this step.
+
+Before requesting permissions, you must add location usage strings to your `Info.plist` file. For foreground permissions, you must add a value for `NSLocationWhenInUseUsageDescription` (*Privacy - Location When In Use Usage Description*). For background permissions, you must add a value for `NSLocationAlwaysAndWhenInUseUsageDescription` (*Privacy - Location Always and When In Use Usage Description*). These strings are displayed in permissions prompts.
+
+![](/images/sdk/f2vbu16fzuly/66LUD7W9uTt7f2H5pMmpBp/1e5a2bb2baaf79328e88c3ea47a7f6ff/permissions.png)
+
+To request foreground permissions, call on a `CLLocationManager` instance. To request background permissions in the app, make sure the user has granted foreground permissions first, then call on a `CLLocationManager` instance.
+
+To request foreground location permissions and then immediately request background location permissions:
+
+* Swift
+* Objective-C
+
+```
+import UIKitimport RadarSDKimport CoreLocation
+@UIApplicationMainclass AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate {
+    let locationManager = CLLocationManager()
+    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {        Radar.initialize(publishableKey: "prj_test_pk_...")        self.locationManager.delegate = self        self.requestLocationPermissions()
+        return true    }
+    func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {        self.requestLocationPermissions()    }
+    func requestLocationPermissions() {        let status = self.locationManager.authorizationStatus
+        if status == .notDetermined {            self.locationManager.requestWhenInUseAuthorization()        } else if status == .authorizedWhenInUse {            self.locationManager.requestAlwaysAuthorization()        }    }
+}
+```
+
+Copy
+
+```
+// AppDelegate.h
+#import <UIKit/UIKit.h>#import <CoreLocation/CoreLocation.h>
+@interface AppDelegate : UIResponder <UIApplicationDelegate, CLLocationManagerDelegate>
+@end
+// AppDelegate.m
+#import "AppDelegate.h"@import RadarSDK;
+@interface AppDelegate ()
+@property (strong, nonatomic) CLLocationManager *locationManager;
+@end
+@implementation AppDelegate
+- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {    [Radar initializeWithPublishableKey:@"prj_test_pk_..."];    self.locationManager = [CLLocationManager new];    self.locationManager.delegate = self;    [self requestLocationPermissions];
+    return YES;}
+- (void)locationManagerDidChangeAuthorization:(CLLocationManager *)manager {    [self requestPermissions];}
+- (void)requestPermissions {    CLAuthorizationStatus status = self.locationManager.authorizationStatus;
+    if (status == kCLAuthorizationStatusNotDetermined) {        [self.locationManager requestWhenInUseAuthorization];    } else if (status == kCLAuthorizationStatusAuthorizedAlways) {        [self.locationManager requestAlwaysAuthorization];    }}
+@end
+```
+
+Copy
+
+Build and run the app to make sure permissions prompts are displayed!
+
+Not seeing permissions prompts? First, make sure your location manager is in memory when you request permissions. Second, make sure you've added location usage strings to your `Info.plist` file. Finally, check your device settings to make sure you haven't already granted location permissions.
+
+### []()Background modes[#](#background-modes "Direct link to heading")
+
+If you are planning to use `RadarTrackingOptions.presetContinuous` or `RadarTrackingOptions.presetResponsive`, or if you are planning to [range beacons by UUID only](/beacons#ranging-by-uuid-only), you must enable the *Location updates* and *Background fetch* background modes.
+
+In your project settings, go to *Signing & Capabilities*, add *Background Modes*, and turn on *Location updates* and *Background fetch*.
+
+Note that this requires additional justification during App Store review. Learn more [below](#submit-to-app-store).
+
+![](/images/sdk/f2vbu16fzuly/UUjdS7HyuFgu5bzGzuOYd/3eb568125cea0d6c4cf9384327446f08/modes.png)
+
+## []()Foreground tracking[#](#foreground-tracking "Direct link to heading")
+
+Once the user has granted foreground permissions, you can track the user's location in the foreground.
+
+To track the user's location once in the foreground, call:
+
+* Swift
+* Objective-C
+
+```
+Radar.trackOnce { (status: RadarStatus, location: CLLocation?, events: [RadarEvent]?, user: RadarUser?) in    // do something with location, events, user}
+```
+
+Copy
+
+```
+[Radar trackOnceWithCompletionHandler:^(RadarStatus status, CLLocation *location, NSArray<RadarEvent *> *events, RadarUser *user) {    // do something with location, events, user}];
+```
+
+Copy
+
+You may provide an optional `completionHandler` that receives the request status, the user's location, the events generated, if any, and the user. The request status can be:
+
+* : success
+* : SDK not initialized
+* : location permissions not granted
+* : location services error or timeout (10 seconds)
+* : network error or timeout (10 seconds)
+* : bad request (missing or invalid params)
+* : unauthorized (invalid API key)
+* : payment required (organization disabled or usage exceeded)
+* : forbidden (insufficient permissions)
+* : not found
+* : too many requests ([rate limit](/api#track) exceeded)
+* : internal server error
+* : unknown error
+
+Build and run the app, then find your user on the [Users page](https://radar.com/dashboard/geofencing/users)! To trigger an event, you'll need to [create a geofence](https://radar.com/dashboard/geofencing/geofences) if you haven't already. Not seeing your user on the Users page? Check `status` in the `completionHandler` to see what went wrong.
+
+## []()Background tracking for geofencing[#](#background-tracking-for-geofencing "Direct link to heading")
+
+Once you have initialized the SDK and the user has authorized background permissions, you can start tracking the user's location in the background.
+
+The SDK supports custom tracking options as well as three presets.
+
+For geofencing, we recommend using `RadarTrackingOptions.presetResponsive`. This preset detects whether the device is stopped or moving. When moving, it tells the SDK to send location updates to the server every 2-3 minutes. When stopped, it tells the SDK to shut down to save battery. Once stopped, the device will need to move more than 100 meters to wake up and start moving again.
+
+Assuming the user has authorized background permissions, background tracking will work even if the app has been backgrounded or killed, as iOS location services will wake up the app to deliver events.
+
+Note that location updates may be delayed by if the device has connectivity issues, low battery, or wi-fi disabled.
+
+Though we recommend using presets for most use cases, you can modify the presets. See the [tracking options reference](/sdk/tracking).
+
+To start tracking for geofencing, call:
+
+* Swift
+* Objective-C
+
+```
+Radar.startTracking(trackingOptions: RadarTrackingOptions.presetResponsive)
+```
+
+Copy
+
+```
+[Radar startTrackingWithOptions:RadarTrackingOptions.presetResponsive];
+```
+
+Copy
+
+To determine whether tracking has been started, call:
+
+* Swift
+* Objective-C
+
+```
+Radar.isTracking()
+```
+
+Copy
+
+```
+[Radar isTracking];
+```
+
+Copy
+
+To stop tracking (e.g., when the user logs out), call:
+
+* Swift
+* Objective-C
+
+```
+Radar.stopTracking()
+```
+
+Copy
+
+```
+[Radar stopTracking];
+```
+
+Copy
+
+You only need to call these methods once, as these settings will be persisted across app sessions.
+
+To test, go for a walk or a drive! Not seeing location updates or events? Remember that, once stopped, the device will need to move more than 100 meters to wake up and start moving again. Also, check your device settings to make sure you've granted background location permissions.
+
+Don't forget! You can always find your user on the [Users page](https://radar.com/dashboard/users) or events on the [Events page](https://radar.com/dashboard/events). To trigger an event, you'll need to [create a geofence](https://radar.com/dashboard/geofencing/geofences) if you haven't already.
+
+## []()Background tracking for trips[#](#background-tracking-for-trips "Direct link to heading")
+
+For trips, we recommend using `RadarTrackingOptions.presetContinuous`. This preset tells the SDK to send location updates to the server every 30 seconds, regardless of whether the device is moving.
+
+By default, this preset shows the flashing blue status bar while tracking. If the flashing blue status bar is shown, only foreground permissions are required for tracking.
+
+Tracking for the duration of a trip is started or updated by including tracking options in the `startTrip` call:
+
+* Swift
+* Objective-C
+
+```
+Radar.startTrip(options: tripOptions, trackingOptions: .presetContinuous) { (status: RadarStatus, trip: RadarTrip?, events: [RadarEvent]?) in  if status == .success {    // do something  } else {    // handle error  }}
+```
+
+Copy
+
+```
+[Radar startTripWithOptions:tripOptions trackingOptions:RadarTrackingOptions.presetContinuous          completionHandler:^(RadarStatus status, RadarTrip * _Nullable trip, NSArray<RadarEvent *> * _Nullable events) {  if (status == RadarStatusSuccess) {    // do something  } else {    // handle error  }}];
+```
+
+Copy
+
+Not seeing the flashing blue status bar while tracking? Make sure you've added the *Location updates* background mode in your project settings.
+
+If tracking was disabled before the trip started, it will stop after the trip ends. Otherwise, it will revert to the tracking options in use before the trip started:
+
+* Swift
+* Objective-C
+
+```
+// complete tripRadar.completeTrip()
+// cancel tripRadar.cancelTrip()
+```
+
+Copy
+
+```
+// complete trip[Radar completeTrip];
+// cancel trip[Radar cancelTrip];
+```
+
+Copy
+
+Learn more about starting, completing, and canceling trips in the [trip tracking documentation](/trip-tracking).
+
+Don't forget! You can always find your user on the [Users page](https://radar.com/dashboard/users) or events on the [Events page](https://radar.com/dashboard/events). To trigger an event, you'll need to [create a geofence](https://radar.com/dashboard/geofencing/geofences) or [start a trip](/trip-tracking) if you haven't already. Also, check your device settings to make sure you've granted location permissions.
+
+## []()Mock tracking for testing[#](#mock-tracking-for-testing "Direct link to heading")
+
+Can't go for a walk or a drive? You can simulate a sequence of location updates. For example, to simulate a sequence of 10 location updates every 3 seconds by car from an origin to a destination, call:
+
+* Swift
+* Objective-C
+
+```
+Radar.mockTracking(  origin: CLLocation(latitude: 40.714708, longitude: -74.035807),  destination: CLLocation(latitude: 40.717410, longitude: -74.053334),  mode: .car,  steps: 10,  interval: 3) { (status: RadarStatus, location: CLLocation?, events: [RadarEvent]?, user: RadarUser?) in    // do something with location, events, user}
+```
+
+Copy
+
+```
+[Radar mockTrackingWithOrigin:origin                  destination:destination                         mode:RadarRouteModeCar                        steps:steps                     interval:1            completionHandler:^(RadarStatus status, CLLocation *location, NSArray<RadarEvent *> *events, RadarUser *user) {
+            }];
+```
+
+Copy
+
+Don't forget! You can always find your user on the [Users page](https://radar.com/dashboard/users) or events on the [Events page](https://radar.com/dashboard/events). To trigger an event, you'll need to [create a geofence](https://radar.com/dashboard/geofencing/geofences) if you haven't already.
+
+## []()Location metadata[#](#location-metadata "Direct link to heading")
+
+The SDK can also pass along information like motion activity detection, speed and heading via the location metadata field. Turn on `useLocationMetadata` in your `sdkConfiguration` to enable this feature.
+
+To collect motionActivity, you must include a value for `Privacy - Motion Usage Description` in your `info.plist`. and install the `RadarSDKMotion` companion module. Your app will request permission for Motion Activity data in the first track call.
+
+Add the following to your `Podfile`:
+
+```
+pod 'RadarSDKMotion', '~> 3.21.5'
+```
+
+Copy
+
+or add the `RadarSDKMotion` package product to your target via SPM.
+
+## []()Listening for events with a delegate[#](#listening-for-events-with-a-delegate "Direct link to heading")
+
+To listen for events, location updates, and errors client-side, set a `RadarDelegate`. Set your `RadarDelegate` in a codepath that will be initialized and executed in the background. For example, make your `AppDelegate` implement `RadarDelegate`, not a `ViewController`. `AppDelegate` will be initialized in the background, whereas a `ViewController` may not be.
+
+* Swift
+* Objective-C
+
+```
+import UIKitimport RadarSDK
+@UIApplicationMainclass AppDelegate: UIResponder, UIApplicationDelegate, RadarDelegate {
+    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {        Radar.initialize(publishableKey: "prj_test_pk_...")        Radar.setDelegate(self)
+        return true    }
+    func didReceiveEvents(_ events: [RadarEvent], user: RadarUser?) {        // do something with events, user    }
+    func didUpdateLocation(_ location: CLLocation, user: RadarUser) {        // do something with location, user    }
+    func didUpdateClientLocation(_ location: CLLocation, stopped: Bool, source: RadarLocationSource) {        // do something with location, stopped, source    }
+    func didFail(status: RadarStatus) {        // do something with status    }
+    func didLog(message: String) {        // print message for debug logs    }
+    func didUpdateLocationPermissionStatus(status: RadarLocationPermissionStatus){        // do something with location permission status    }
+}
+```
+
+Copy
+
+```
+#import "AppDelegate.h"@import RadarSDK;
+@implementation AppDelegate
+- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {    [Radar initializeWithPublishableKey:@"prj_test_pk_..."];    [Radar setDelegate:self];
+    return YES;}
+- (void)didReceiveEvents:(NSArray<RadarEvent *> *)events user:(RadarUser *)user {    // do something with events, user}
+- (void)didUpdateLocation:(CLLocation *)location user:(RadarUser *)user {    // do something with location, user}
+- (void)didUpdateClientLocation:(CLLocation *)location stopped:(BOOL)stopped source:(RadarLocationSource)source {    // do something with location, stopped, source}
+- (void)didFailWithStatus:(RadarStatus)status {    // do something with status}
+- (void)didLogMessage:(NSString *_Nonnull)message {    // print message for debug logs}
+- (void)didUpdateLocationPermissionStatus:(RadarLocationPermissionStatus *_Nonnull)status {  // do something with location permission status }
+@end
+```
+
+Copy
+
+The `RadarDelegate` should be instantiated only once and set before tracking begins.
+
+To listen for events server-side instead, add a [webhook](/integrations/webhooks) or enable an [integration](/integrations).
+
+## []()Manual tracking[#](#manual-tracking "Direct link to heading")
+
+If you want to manage location services yourself, you can manually update the user's location instead by calling:
+
+* Swift
+* Objective-C
+
+```
+Radar.trackOnce(  location: location) { (status: RadarStatus, location: CLLocation?, events: [RadarEvent]?, user: RadarUser?) in    // do something with location, events, user}
+```
+
+Copy
+
+```
+[Radar trackOnceWithLocation:location          completionHandler:^(RadarStatus status, CLLocation *location, NSArray<RadarEvent *> *events, RadarUser *user) {    // do something with location, events, user}];
+```
+
+Copy
+
+where `location` is a `CLLocation` instance with a valid latitude, longitude, and horizontal accuracy.
+
+## []()Identify user[#](#identify-user "Direct link to heading")
+
+The SDK automatically collects `installId` (a GUID generated on fresh install) and `deviceId` ([IDFV](https://developer.apple.com/documentation/uikit/uidevice/1620059-identifierforvendor)).
+
+You can also assign a custom `userId`, also called *External ID* in the dashboard. To set a custom `userId`, call:
+
+* Swift
+* Objective-C
+
+```
+Radar.setUserId(userId)
+```
+
+Copy
+
+```
+[Radar setUserId:userId];
+```
+
+Copy
+
+where `userId` is a stable unique ID for the user.
+
+Do not send any PII, like names, email addresses, or publicly available IDs, for `userId`. See [privacy best practices](/faqs#what-are-privacy-best-practices-for-radar) for more information.
+
+To set a dictionary of custom metadata for the user, call:
+
+* Swift
+* Objective-C
+
+```
+Radar.setMetadata(metadata)
+```
+
+Copy
+
+```
+[Radar setMetadata:metadata];
+```
+
+Copy
+
+where `metadata` is a dictionary with up to 16 keys and values of type string, boolean, or number.
+
+Finally, to set an optional description for the user, displayed in the dashboard, call:
+
+* Swift
+* Objective-C
+
+```
+Radar.setDescription(description)
+```
+
+Copy
+
+```
+[Radar setDescription:description];
+```
+
+Copy
+
+You only need to call these methods once, as these settings will be persisted across app sessions.
+
+Learn more about when Radar creates new user records [here](/faqs#what-is-a-unique-user-when-does-radar-create-a-new-user-record).
+
+## []()Debug logging[#](#debug-logging "Direct link to heading")
+
+By default, only critical errors are logged to the console. To enable debug logging, call:
+
+* Swift
+* Objective-C
+
+```
+Radar.setLogLevel(RadarLogLevel.debug)
+```
+
+Copy
+
+```
+[Radar setLogLevel:RadarLogLevelDebug];
+```
+
+Copy
+
+To log app lifecycle events, call the respective Radar methods in the `AppDelegate` lifecycle methods:
+
+* Swift
+* Objective-C
+
+```
+import UIKitimport RadarSDK
+@UIApplicationMainclass AppDelegate: UIResponder, UIApplicationDelegate, RadarDelegate {
+    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {        Radar.initialize(publishableKey: "prj_test_pk_...")        Radar.setDelegate(self)
+        return true    }
+  func applicationWillResignActive(_ application: UIApplication) {    // existing code    Radar.logResigningActive()  }
+  func applicationDidEnterBackground(_ application: UIApplication) {    // existing code    Radar.logBackgrounding()  }
+  func applicationWillTerminate(_ application: UIApplication) {    // existing code    Radar.logTermination()  }}
+```
+
+Copy
+
+```
+#import "AppDelegate.h"@import RadarSDK;
+@implementation AppDelegate
+- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {    [Radar initializeWithPublishableKey:@"prj_test_pk_..."];    [Radar setDelegate:self];
+    return YES;}
+- (void)applicationWillResignActive:(UIApplication *)application {  // existing code  [Radar logResigningActive];}
+- (void)applicationDidEnterBackground:(UIApplication *)application {  // existing code  [Radar logBackgrounding];}
+- (void)applicationWillTerminate:(UIApplication *)application {  // existing code  [Radar logTermination];}
+@end
+```
+
+Copy
+
+Contact your customer success manager to enable logging app lifecycle events.
+
+## []()Submit to App Store[#](#submit-to-app-store "Direct link to heading")
+
+Apple requires that you justify your use of background location. Add something materially similar to the following to the bottom of your App Store description: *This app uses background location to (insert use case here). Continued use of background location may decrease battery life.*
+
+If you turned on the *Location updates* background mode, Apple requires additional justification in your App Store review notes. If using `RadarTrackingOptions.presetResponsive`, add something like: *This app uses the Radar SDK ([https://radar.com](https://radar.com)) to (insert use case here). The Radar SDK requires the background location mode to support polygon geofences and nearby place detection, which cannot be accomplished with region monitoring or visit monitoring.* Or, if using `RadarTrackingOptions.presetContinuous`, add something like *This app uses the Radar SDK ([https://radar.com](https://radar.com)) to (insert use case here). The Radar SDK requires the location background mode for live trip tracking and live ETAs.*
+
+Learn more about this requirement in section 2.5.4 of the App Store Review Guidelines [here](https://developer.apple.com/app-store/review/guidelines/#software-requirements).
+
+## []()Other APIs[#](#other-apis "Direct link to heading")
+
+The iOS SDK also exposes APIs for beacons, anonymous context, geocoding, search, and distance.
+
+### []()Beacons[#](#beacons "Direct link to heading")
+
+If the user has granted location permissions, you can range and monitor [beacons](/beacons).
+
+To range beacons in the foreground, call:
+
+* Swift
+* Objective-C
+
+```
+Radar.trackOnce(desiredAccuracy: .high, beacons: true) { (status: RadarStatus, location: CLLocation?, events: [RadarEvent]?, user: RadarUser?) in    // do something with user.beacons}
+```
+
+Copy
+
+```
+[Radar trackOnceWithDesiredAccuracy:RadarTrackingOptionsDesiredAccuracyHigh beacons:YES completionHandler:^(RadarStatus status, CLLocation *location, NSArray<RadarEvent *> *events, RadarUser *user) {    // do something with user.beacons}];
+```
+
+Copy
+
+To monitor beacons in the background, update your tracking options:
+
+* Swift
+* Objective-C
+
+```
+let trackingOptions = RadarTrackingOptions.presetResponsivetrackingOptions.beacons = trueRadar.startTracking(trackingOptions: trackingOptions)
+```
+
+Copy
+
+```
+RadarTrackingOptions *trackingOptions = RadarTrackingOptions.presetResponsive;trackingOptions.beacons = YES;[Radar startTrackingWithOptions:trackingOptions];
+```
+
+Copy
+
+### []()Get location[#](#get-location "Direct link to heading")
+
+Get a single location update without sending it to the server:
+
+* Swift
+* Objective-C
+
+```
+Radar.getLocation { (status: RadarStatus, location: CLLocation?, stopped: Bool) in    // do something with location}
+```
+
+Copy
+
+```
+[Radar getLocationWithCompletionHandler:^(RadarStatus status, CLLocation *location, BOOL stopped) {    // do something with location}];
+```
+
+Copy
+
+### []()Context[#](#context "Direct link to heading")
+
+With the [context API](/api#context), get context for a location without sending device or user identifiers to the server:
+
+* Swift
+* Objective-C
+
+```
+Radar.getContext { (status: RadarStatus, location: CLLocation?, context: RadarContext?) in    // do something with context}
+```
+
+Copy
+
+```
+[Radar getContextWithCompletionHandler:^(RadarStatus status, CLLocation *location, RadarContext *context) {    // do something with context}];
+```
+
+Copy
+
+### []()Geocoding[#](#geocoding "Direct link to heading")
+
+With the [forward geocoding API](/api#forward-geocode), geocode an address, converting address to coordinates:
+
+* Swift
+* Objective-C
+
+```
+Radar.geocode(    address: "20 jay st brooklyn ny") { (status: RadarStatus, addresses: [RadarAddress]?) in    // do something with addresses}
+```
+
+Copy
+
+```
+[Radar geocodeAddress:@"20 jay st brooklyn ny"    completionHandler:^(RadarStatus status, NSArray<RadarAddress *> *addresses) {    // do something with addresses}];
+```
+
+Copy
+
+With the [reverse geocoding API](/api#reverse-geocode), reverse geocode a location, converting coordinates to address:
+
+* Swift
+* Objective-C
+
+```
+Radar.reverseGeocode(    location: location) { (status: RadarStatus, addresses: [RadarAddress]?) in    // do something with addresses}
+```
+
+Copy
+
+```
+[Radar reverseGeocodeLocation:location            completionHandler:^(RadarStatus status, NSArray<RadarAddress *> *addresses) {    // do something with addresses}];
+```
+
+Copy
+
+With the [IP geocoding API](/api#ip-geocode), geocode the device's current IP address, converting IP address to city, state, and country:
+
+* Swift
+* Objective-C
+
+```
+Radar.ipGeocode { (status: RadarStatus, address: RadarAddress, proxy: Bool) in    // do something with address, proxy}
+```
+
+Copy
+
+```
+[Radar ipGeocodeWithCompletionHandler:^(RadarStatus status, RadarAddress *address, BOOL proxy) {    // do something with address, proxy}];
+```
+
+Copy
+
+### []()Search[#](#search "Direct link to heading")
+
+With the [autocomplete API](/api#autocomplete), autocomplete partial addresses and place names, sorted by relevance:
+
+* Swift
+* Objective-C
+
+```
+Radar.autocomplete(    query: "brooklyn roasting",    near: location,    limit: 10) { (status: RadarStatus, addresses: [RadarAddress]?) in  // do something with addresses}
+```
+
+Copy
+
+```
+[Radar autocompleteQuery:@"brooklyn roasting"                    near:location                  limit:10      completionHandler:^(RadarStatus status, NSArray<RadarAddress *> *addresses) {  // do something with addresses}];
+```
+
+Copy
+
+With the [geofence search API](/api#search-geofences), search for geofences near a location, sorted by distance:
+
+* Swift
+* Objective-C
+
+```
+Radar.searchGeofences(    near: location,    radius: 1000, // meters    tags: ["store"],    metadata: nil,    limit: 10) { (status: RadarStatus, location: CLLocation?, geofences: [RadarGeofence]?) in  // do something with geofences}
+```
+
+Copy
+
+```
+[Radar searchGeofencesNear:location                    radius:1000 // meters                      tags:@[@"store"]                  metadata:nil                    limit:100        completionHandler:^(RadarStatus status, CLLocation *location, NSArray<RadarGeofence *> *geofences) {  // do something with geofences}];
+```
+
+Copy
+
+With the [places search API](/api#search-places), search for places near a location, sorted by distance:
+
+* Swift
+* Objective-C
+
+```
+Radar.searchPlaces(    near: location,    radius: 1000, // meters    chains: ["starbucks"],    categories: nil,    groups: nil,    limit: 10) { (status: RadarStatus, location: CLLocation?, places: [RadarPlace]?) in  // do something with places}
+```
+
+Copy
+
+```
+[Radar searchGeofencesNear:location                    radius:1000 // meters                    chains:@[@"starbucks"]                categories:nil                    groups:nil                    limit:100        completionHandler:^(RadarStatus status, CLLocation *location, NSArray<RadarPlace *> *places) {  // do something with places}];
+```
+
+Copy
+
+With the [address validation API](/api##validate-an-address) (currently in beta), validate a structured address in the US or Canada:
+
+* Swift
+* Objective-C
+
+```
+Radar.validateAddress(    address: address) { (status: RadarStatus, address: RadarAddress?, result: ValidationResult) in    // do something with validation result and address}
+```
+
+Copy
+
+```
+[Radar validateAddress:address     completionHandler:^(RadarStatus status, RadarAddress *address, ValidationResult result) {    // do something with validation result and address}];
+```
+
+Copy
+
+### []()Distance[#](#distance "Direct link to heading")
+
+With the [distance API](/api#distance), calculate the travel distance and duration between an origin and a destination:
+
+* Swift
+* Objective-C
+
+```
+Radar.getDistance(    origin: origin,    destination: destination,    modes: [.foot, .car],    units: .imperial) { (status: RadarStatus, routes: RadarRoutes?) in  // do something with routes}
+```
+
+Copy
+
+```
+[Radar getDistanceFromOrigin:origin                destination:destination                      modes:RadarRouteModeFoot | RadarRouteModeCar                      units:RadarRouteUnitsImperial          completionHandler:^(RadarStatus status, RadarRoutes *routes) {  // do something with routes}];
+```
+
+Copy
+
+### []()Matrix[#](#matrix "Direct link to heading")
+
+With the [matrix API](/api#matrix), calculate the travel distance and duration between multiple origins and destinations for up to 25 routes:
+
+* Swift
+* Objective-C
+
+```
+Radar.getMatrix(    origins: origins,    destinations: destinations,    mode: .car,    units: .imperial) { (status: RadarStatus, matrix: RadarRouteMatrix?) in  // do something with matrix.routeBetween(originIndex:destinationIndex:)}
+```
+
+Copy
+
+```
+[Radar getMatrixFromOrigins:origin              destinations:destinations                      mode:RadarRouteModeCar                      units:RadarRouteUnitsImperial          completionHandler:^(RadarStatus status, RadarRouteMatrix *matrix) {  // do something with [matrix routeBetweenOriginIndex:destinationIndex:]}];
+```
+
+Copy
+
+### []()Conversions[#](#conversions "Direct link to heading")
+
+With the [conversions API](/api#log-a-conversion), log a conversion, such as a purchase or signup, to analyze alongside your app's location activity:
+
+* Swift
+* Objective-C
+
+```
+Radar.logConversion(  name: name,  metadata: metadata,) { (status: RadarStatus, event: RadarEvent?) in  // do something with the conversion event}
+// conversion with revenueRadar.logConversion(  name: name,  revenue: revenue,  metadata: metadata,) { (status: RadarStatus, event: RadarEvent?) in  // do something with the conversion event}
+```
+
+Copy
+
+```
+[Radar logConversionWithName:name                    metadata:metadata           completionHandler:^(RadarStatus status, RadarEvent *event) {  // do something with the conversion event}];
+// conversion with revenue[Radar logConversionWithName:name                     revenue:revenue                    metadata:metadata           completionHandler:^(RadarStatus status, RadarEvent *event) {  // do something with the conversion event}];
+```
+
+Copy
+
+Radar can associate `opened_app` events with a notification that was clicked on to open the app. To set this up automatically, set the relevant flag on the initialization options.
+
+* Swift
+* Objective-C
+
+```
+import UIKitimport RadarSDK
+@UIApplicationMainclass AppDelegate: UIResponder, UIApplicationDelegate {
+    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {        let radarInitializeOptions = RadarInitializeOptions()        radarInitializeOptions.autoLogNotificationConversions = true        Radar.initialize(publishableKey: "prj_test_pk_...", options: radarInitializeOptions)
+        return true    }
+}
+```
+
+Copy
+
+```
+#import "AppDelegate.h"@import RadarSDK;
+@implementation AppDelegate
+  - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {    RadarInitializeOptions *radarInitializeOptions = [[RadarInitializeOptions alloc] init];    radarInitializeOptions.autoLogNotificationConversions = YES;    [Radar initializeWithPublishableKey:@"prj_test_pk_..." options:radarInitializeOptions];
+    return YES;}
+@end
+```
+
+Copy
+
+Alternatively, perform the manual setup:
+
+* Swift
+* Objective-C
+
+```
+func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse) async {   Radar.logConversion(response: response) }
+```
+
+Copy
+
+```
+- (void)userNotificationCenter:(UNUserNotificationCenter *)center didReceiveNotificationResponse:(UNNotificationResponse *)response withCompletionHandler:(void (^)(void))completionHandler {    [Radar logConversionWithNotificationResponse:response];    completionHandler();}
+```
+
+Copy
+
+[Edit this page](https://github.com/radarlabs/docs/edit/main/docs/sdk/ios.mdx)

@@ -1,0 +1,333 @@
+---
+title: "Airship"
+description: "The Airship integration is available on the ."
+---
+
+Radar can send events and tags to [Airship](https://www.airship.com).
+
+Use the Airship integration to send location-triggered and location-targeted messages to increase engagement and conversion, measure the ROI of location-based messaging, and build location-based user segments.
+
+## []()Configuration[#](#configuration "Direct link to heading")
+
+On the Airship *Tokens* page in *Settings*, create a token with the *All Access* role and copy the app key and access token. Under *Partner Integrations*, enable Radar to enable auto-population of custom event names and properties in the Airship Automation Composer.
+
+Then, on the Radar [Integrations page](https://radar.com/dashboard/integrations#airship) under *Airship*, set *Enabled* to *Yes* and paste your app key and access token. Note that you can set separate API keys for the *Test* and *Live* environments.
+
+Whenever events are generated, Radar will send custom events and tags to Airship. Note that for tags to populate, you must manually create [tag groups](https://docs.airship.com/guides/messaging/user-guide/audience/segmentation/tags/) in Airship first.
+
+If you are using Airship SDK `13.x` or earlier with Radar iOS SDK `3.0.4` or earlier or Radar Android SDK `3.0.6` or earlier, the Radar SDK will automatically collect Airship channel ID and Airship session ID. However, if you are using Airship SDK `14.0` or later with Radar iOS SDK `3.0.5` or later or Radar Android SDK `3.0.7` or later, you must set Radar `metadata.airshipChannelId` and `metadata.airshipSessionId` manually to collect Airship channel ID and Airship session ID.
+
+* Swift
+* Kotlin
+
+```
+Radar.setMetadata([  "airshipChannelId": Airship.channel.identifier,  "airshipSessionId": Airship.analytics.sessionID])
+```
+
+Copy
+
+```
+val channelId = UAirship.shared().channel.idval sessionId = UAirship.shared().analytics.sessionIdRadar.setMetadata(JSONObject().put("airshipChannelId",channelId).put("airshipSessionId",sessionId))
+```
+
+Copy
+
+It is recommended to set the Radar user metadata once the Airship channel ID becomes available. This can be performed via the `addChannelListener` [Airship methods](https://docs.airship.com/platform/mobile/audience/#accessing-the-airship-channel-id).
+
+## []()Verify integration data delivery[#](#verify-integration-data-delivery "Direct link to heading")
+
+To test that the integration is configured correctly and can deliver data, use the [Simulator](https://radar.com/dashboard/simulate) to generate events. Click *View* on an event row and scroll down to the *Logs* section on the details page to verify delivery. Perform a similar process via a test app build with Radar location tracking enabled by spoofing location or moving into the relevant boundary.
+
+![Verify integration event delivery](/assets/images/verify_integration_airship-be166dad18c8594c3079aec7fbf3117c.gif)
+
+All integration delivery can be monitored via the integration's event logs by clicking *View event logs* on the [Integrations page](https://radar.com/dashboard/integrations#airship).
+
+## []()Example use cases[#](#example-use-cases "Direct link to heading")
+
+### []()Send a personalized push notification when a user arrives at a store[#](#send-a-personalized-push-notification-when-a-user-arrives-at-a-store "Direct link to heading")
+
+1. Create [Geofences](/geofences#create-geofences) in Radar with the geofence tag set to `store`. The geofence tag will be used to trigger messages for the subset of geofence entries where this tag is present.
+2. Set up an Airship campaign triggered from the Radar geofence entry event, the `radar_geofence_entered` custom event in Airship, and add property filtering where `radar_geofence_tag` is `store`. These same events can be used as part of an Airship campaign and the event properties can be used in message personalization with [handlebars](https://handlebarsjs.com/).
+
+![Radar triggered Airship campaign](/images/integrations/assets/images/airship_radar_entered_geofence-d9717627ded917f199e371328bc38bdc.png)
+
+### []()Message all users nearby a store[#](#message-all-users-nearby-a-store "Direct link to heading")
+
+1. Create [Geofences](/geofences#create-geofences) in Radar to represent nearby store boundaries with geofence tag set to `nearby-store`. The geofence tag will be used to target messages for the subset of geofences where this tag is present.
+2. Set up an Airship campaign targeted with the `radar_geofence_tags` tag group that Radar sends. This will be an array of all geofences the user is currently in, so set the tag to match the value of `nearby-store` for the `radar_geofence_tag` group. Additional attribute filtering can be performed for more complex targeting, including regional targeting.
+
+![Radar targeted Airship campaign](/images/integrations/assets/images/airship_radar_targeted_messaging-6936971923eaf1153653b61bef96c196.png)
+
+### []()In-app messaging[#](#in-app-messaging "Direct link to heading")
+
+To trigger in-app messaging from detected user state on app open, custom events need to deliver through Airship's SDK rather than via Radar's server to server integration with Airship. To support this, implement custom logic in the SDK leveraging Radar's location update listener, on [iOS](/sdk/ios#listening-for-events-with-a-delegate) or [Android](/sdk/android#listening-for-events-with-a-receiver), to send foreground detections to Airship. The example code below assumes you are calling `Radar.trackOnce()` on application launch. See the [iOS](/sdk/ios#foreground-tracking) and [Android](/sdk/android#foreground-tracking) tracking references if needed.
+
+* Swift
+* Kotlin
+
+```
+import RadarSDKimport AirshipKit
+@mainclass AppDelegate: UIResponder, UIApplicationDelegate, RadarDelegate {
+  func didUpdateLocation(_ location: CLLocation, user: RadarUser) {    if (user.foreground  && user.source == RadarLocationSource.foregroundLocation) {      if let place = user.place {        let event = CustomEvent(name: "radar_fg_place_detected");        event.interactionType = "location"        event.properties = [          "radar_place_name": place.name,          "radar_place_categories": place.categories.joined(separator: ","),          "radar_place_chain_slug": place.chain?.slug ?? ""        ]        event.track()      }      if let geofences = user.geofences {        let event = CustomEvent(name: "radar_fg_geofences_detected");        event.interactionType = "location"        event.properties = [          "radar_geofence_descriptions": geofences.compactMap({ $0.description }),          "radar_geofence_tags": geofences.compactMap({ $0.tag }),          "radar_geofence_external_ids": geofences.compactMap({ $0.externalId })        ]        event.track()      }    }  }}
+```
+
+Copy
+
+```
+class MyRadarReceiver: RadarReceiver() {  override fun onLocationUpdated(context: Context, location: Location, user: RadarUser) {    if (user.foreground && user.source == RadarLocationSource.FOREGROUND_LOCATION) {      var userGeofences = user.geofences      var userPlace = user.place      if (userGeofences != null && userGeofences.isNotEmpty()) {        CustomEvent.newBuilder("radar_fg_geofences_entered")          .addProperty("geofence_descriptions", userGeofences.map { it.description }.joinToString())          .addProperty("geofence_tags", userGeofences.map { it.tag }.joinToString())          .addProperty("geofence_external_ids", userGeofences.map { it.externalId }.joinToString())          .build()          .track()      }      if (userPlace != null) {        val chain: String =  userPlace.chain?.slug ?: ""        CustomEvent.newBuilder("radar_fg_place_entered")          .addProperty("place_name", userPlace.name)          .addProperty("place_chain", chain)          .addProperty("categories", userPlace.categories.joinToString())          .build()          .track()      }    }  }}
+```
+
+Copy
+
+## []()User mapping[#](#user-mapping "Direct link to heading")
+
+| Radar User Field                     | Airship Tag Group Name                        | Type           | Example Tag                    | Context Type                    |
+| ------------------------------------ | --------------------------------------------- | -------------- | ------------------------------ | ------------------------------- |
+| `locationAuthorization`              | `radar_location_authorization`                | string         | `"GRANTED_FOREGROUND"`         |                                 |
+| `locationAccuracyAuthorization`      | `radar_location_accuracy_authorization`       | string         | `"FULL"`                       |                                 |
+| `updatedAt`                          | `radar_updated_at`                            | timestamp      | `"2018-06-22T15:23:39.000Z"`   |                                 |
+| `segments[*].externalId`             | `radar_segment_external_ids`                  | array\[string] | `["starbucks-visitors"]`       |                                 |
+| `topChains[*].slug`                  | `radar_top_chain_slugs`                       | array\[string] | `["starbucks"]`                |                                 |
+| `topChains[*].externalId`            | `radar_top_chain_external_ids`                | array\[string] | `["123"]`                      |                                 |
+| `geofences[*]._id`                   | `radar_geofence_ids`                          | array\[string] | `["5b2c0906f5874b001aecfd8e"]` | [Geofences](/geofences)         |
+| `geofences[*].description`           | `radar_geofence_descriptions`                 | array\[string] | `["Store #123"]`               | [Geofences](/geofences)         |
+| `geofences[*].tag`                   | `radar_geofence_tags`                         | array\[string] | `["store"]`                    | [Geofences](/geofences)         |
+| `geofences[*].externalId`            | `radar_geofence_external_ids`                 | array\[string] | `["123"]`                      | [Geofences](/geofences)         |
+| `place._id`                          | `radar_place_id`                              | string         | `"59302bcf8f27e8a156bd4f91"`   | [Places](/places)               |
+| `place.name`                         | `radar_place_name`                            | string         | `"Starbucks"`                  | [Places](/places)               |
+| `place.categories`                   | `radar_place_categories`                      | string         | `"coffee-shop"`                | [Places](/places)               |
+| `place.chain.slug`                   | `radar_place_chain_slug`                      | string         | `"starbucks"`                  | [Places](/places)               |
+| `place.chain.name`                   | `radar_place_chain_name`                      | string         | `"Starbucks"`                  | [Places](/places)               |
+| `country.code`                       | `radar_region_country_code`                   | string         | `"US"`                         | [Regions](/regions)             |
+| `country.name`                       | `radar_region_country_name`                   | string         | `"United States"`              | [Regions](/regions)             |
+| `state.code`                         | `radar_region_state_code`                     | string         | `"MD"`                         | [Regions](/regions)             |
+| `state.name`                         | `radar_region_state_name`                     | string         | `"Maryland"`                   | [Regions](/regions)             |
+| `dma.code`                           | `radar_region_dma_code`                       | string         | `"26"`                         | [Regions](/regions)             |
+| `dma.name`                           | `radar_region_dma_name`                       | string         | `"Baltimore"`                  | [Regions](/regions)             |
+| `postalCode.code`                    | `radar_region_postal_code`                    | string         | `"21014"`                      | [Regions](/regions)             |
+| `trip.externalId`                    | `radar_trip_external_id`                      | string         | `"299"`                        | [Trip Tracking](/trip-tracking) |
+| `trip.destinationGeofenceTag`        | `radar_trip_destination_geofence_tag`         | string         | `"store"`                      | [Trip Tracking](/trip-tracking) |
+| `trip.destinationGeofenceExternalId` | `radar_trip_destination_geofence_external_id` | string         | `"123"`                        | [Trip Tracking](/trip-tracking) |
+| `beacons[*]._id`                     | `radar_beacon_ids`                            | array\[string] | `["5b2c0906f5874b001aecfd8f"]` | [Beacons](/beacons)             |
+| `beacons[*].description`             | `radar_beacon_descriptions`                   | array\[string] | `["Store #123 - Drive-Thru"]`  | [Beacons](/beacons)             |
+| `beacons[*].tag`                     | `radar_beacon_tags`                           | array\[string] | `["drive-thru"]`               | [Beacons](/beacons)             |
+| `beacons[*].externalId`              | `radar_beacon_external_ids`                   | array\[string] | `["123"]`                      | [Beacons](/beacons)             |
+
+## []()Event mapping[#](#event-mapping "Direct link to heading")
+
+| Radar Event                         | Context Type                    | Airship Event                        |
+| ----------------------------------- | ------------------------------- | ------------------------------------ |
+| `user.entered_geofence`             | [Geofences](/geofences)         | `radar_geofence_entered`             |
+| `user.exited_geofence`              | [Geofences](/geofences)         | `radar_geofence_exited`              |
+| `user.dwelled_in_geofence`          | [Geofences](/geofences)         | `radar_dwelled_in_geofence`          |
+| `user.entered_place`                | [Places](/places)               | `radar_place_entered`                |
+| `user.exited_place`                 | [Places](/places)               | `radar_place_exited`                 |
+| `user.entered_region_country`       | [Regions](/regions)             | `radar_country_entered`              |
+| `user.exited_region_country`        | [Regions](/regions)             | `radar_country_exited`               |
+| `user.entered_region_state`         | [Regions](/regions)             | `radar_state_entered`                |
+| `user.exited_region_state`          | [Regions](/regions)             | `radar_state_exited`                 |
+| `user.entered_region_dma`           | [Regions](/regions)             | `radar_dma_entered`                  |
+| `user.exited_region_dma`            | [Regions](/regions)             | `radar_dma_exited`                   |
+| `user.started_trip`                 | [Trip Tracking](/trip-tracking) | `radar_started_trip`                 |
+| `user.updated_trip`                 | [Trip Tracking](/trip-tracking) | `radar_updated_trip`                 |
+| `user.approaching_trip_destination` | [Trip Tracking](/trip-tracking) | `radar_approaching_trip_destination` |
+| `user.arrived_at_trip_destination`  | [Trip Tracking](/trip-tracking) | `radar_arrived_at_trip_destination`  |
+| `user.stopped_trip`                 | [Trip Tracking](/trip-tracking) | `radar_stopped_trip`                 |
+| `user.entered_beacon`               | [Beacons](/beacons)             | `radar_beacon_entered`               |
+| `user.exited_beacon`                | [Beacons](/beacons)             | `radar_beacon_exited`                |
+
+### []()radar\_geofence\_entered[#](#radar_geofence_entered "Direct link to heading")
+
+| Radar Event Field          | Airship Event Property          | Type    | Example Value                |
+| -------------------------- | ------------------------------- | ------- | ---------------------------- |
+| `geofence._id`             | `radar_geofence_id`             | string  | `"5b2c0906f5874b001aecfd8e"` |
+| `geofence.description`     | `radar_geofence_description`    | string  | `"Store #123"`               |
+| `geofence.tag`             | `radar_geofence_tag`            | string  | `"store"`                    |
+| `geofence.externalId`      | `radar_geofence_external_id`    | string  | `"123"`                      |
+| `geofence.metadata[{key}]` | `radar_geofence_metadata_{key}` | \{type} | `{value}`                    |
+| `confidence`               | `radar_confidence`              | string  | `"high"`                     |
+| `foreground`               | `radar_foreground`              | boolean | `true`                       |
+
+### []()radar\_geofence\_exited[#](#radar_geofence_exited "Direct link to heading")
+
+| Radar Event Field          | Airship Event Property          | Type             | Example Value                |
+| -------------------------- | ------------------------------- | ---------------- | ---------------------------- |
+| `geofence._id`             | `radar_geofence_id`             | string           | `"5b2c0906f5874b001aecfd8e"` |
+| `geofence.description`     | `radar_geofence_description`    | string           | `"Store #123"`               |
+| `geofence.tag`             | `radar_geofence_tag`            | string           | `"store"`                    |
+| `geofence.externalId`      | `radar_geofence_external_id`    | string           | `"123"`                      |
+| `geofence.metadata[{key}]` | `radar_geofence_metadata_{key}` | \{type}          | `{value}`                    |
+| `confidence`               | `radar_confidence`              | string           | `"high"`                     |
+| `duration`                 | `radar_duration`                | number (minutes) | `42.1`                       |
+| `foreground`               | `radar_foreground`              | boolean          | `true`                       |
+
+### []()radar\_dwelled\_in\_geofence[#](#radar_dwelled_in_geofence "Direct link to heading")
+
+| Radar Event Field          | Airship Event Property          | Type             | Example Value                |
+| -------------------------- | ------------------------------- | ---------------- | ---------------------------- |
+| `geofence._id`             | `radar_geofence_id`             | string           | `"5b2c0906f5874b001aecfd8e"` |
+| `geofence.description`     | `radar_geofence_description`    | string           | `"Store #123"`               |
+| `geofence.tag`             | `radar_geofence_tag`            | string           | `"store"`                    |
+| `geofence.externalId`      | `radar_geofence_external_id`    | string           | `"123"`                      |
+| `geofence.metadata[{key}]` | `radar_geofence_metadata_{key}` | \{type}          | `{value}`                    |
+| `confidence`               | `radar_confidence`              | string           | `"high"`                     |
+| `duration`                 | `radar_duration`                | number (minutes) | `5`                          |
+| `foreground`               | `radar_foreground`              | boolean          | `true`                       |
+
+### []()radar\_place\_entered[#](#radar_place_entered "Direct link to heading")
+
+| Radar Event Field             | Airship Event Property             | Type                     | Example Value                      |
+| ----------------------------- | ---------------------------------- | ------------------------ | ---------------------------------- |
+| `place._id`                   | `radar_place_id`                   | string                   | `"59302bcf8f27e8a156bd4f91"`       |
+| `place.name`                  | `radar_place_name`                 | string                   | `"Starbucks"`                      |
+| `place.chain.slug`            | `radar_place_chain_slug`           | string                   | `"starbucks"`                      |
+| `place.chain.name`            | `radar_place_chain_name`           | string                   | `"Starbucks"`                      |
+| `place.chain.metadata[{key}]` | `radar_place_chain_metadata_{key}` | \{type}                  | `{value}`                          |
+| `place.categories`            | `radar_place_categories`           | string (comma-separated) | `"food-beverage,cafe,coffee-shop"` |
+| `confidence`                  | `radar_confidence`                 | string                   | `"high"`                           |
+| `foreground`                  | `radar_foreground`                 | boolean                  | `true`                             |
+
+### []()radar\_place\_exited[#](#radar_place_exited "Direct link to heading")
+
+| Radar Event Field             | Airship Event Property             | Type                     | Example Value                      |
+| ----------------------------- | ---------------------------------- | ------------------------ | ---------------------------------- |
+| `place._id`                   | `radar_place_id`                   | string                   | `"59302bcf8f27e8a156bd4f91"`       |
+| `place.name`                  | `radar_place_name`                 | string                   | `"Starbucks"`                      |
+| `place.chain.slug`            | `radar_place_chain_id`             | string                   | `"starbucks"`                      |
+| `place.chain.name`            | `radar_place_chain_name`           | string                   | `"Starbucks"`                      |
+| `place.chain.metadata[{key}]` | `radar_place_chain_metadata_{key}` | \{type}                  | `{value}`                          |
+| `place.categories`            | `radar_place_categories`           | string (comma-separated) | `"food-beverage,cafe,coffee-shop"` |
+| `confidence`                  | `radar_confidence`                 | string                   | `"high"`                           |
+| `duration`                    | `radar_duration`                   | number (minutes)         | `42.1`                             |
+| `foreground`                  | `radar_foreground`                 | boolean                  | `true`                             |
+
+### []()radar\_country\_entered[#](#radar_country_entered "Direct link to heading")
+
+| Radar Event Attribute | Airship Event Property | Type    | Example Value     |
+| --------------------- | ---------------------- | ------- | ----------------- |
+| `region.code`         | `radar_region_code`    | string  | `"US"`            |
+| `region.name`         | `radar_region_name`    | string  | `"United States"` |
+| `confidence`          | `radar_confidence`     | string  | `"high"`          |
+| `foreground`          | `radar_foreground`     | boolean | `true`            |
+
+### []()radar\_country\_exited[#](#radar_country_exited "Direct link to heading")
+
+| Radar Event Attribute | Airship Event Property | Type    | Example Value     |
+| --------------------- | ---------------------- | ------- | ----------------- |
+| `region.code`         | `radar_region_code`    | string  | `"US"`            |
+| `region.name`         | `radar_region_name`    | string  | `"United States"` |
+| `confidence`          | `radar_confidence`     | string  | `"high"`          |
+| `foreground`          | `radar_foreground`     | boolean | `true`            |
+
+### []()radar\_state\_entered[#](#radar_state_entered "Direct link to heading")
+
+| Radar Event Attribute | Airship Event Property | Type    | Example Value |
+| --------------------- | ---------------------- | ------- | ------------- |
+| `region.code`         | `radar_region_code`    | string  | `"MD"`        |
+| `region.name`         | `radar_region_name`    | string  | `"Maryland"`  |
+| `confidence`          | `radar_confidence`     | string  | `"high"`      |
+| `foreground`          | `radar_foreground`     | boolean | `true`        |
+
+### []()radar\_state\_exited[#](#radar_state_exited "Direct link to heading")
+
+| Radar Event Attribute | Airship Event Property | Type    | Example Value |
+| --------------------- | ---------------------- | ------- | ------------- |
+| `region.code`         | `radar_region_code`    | string  | `"MD"`        |
+| `region.name`         | `radar_region_name`    | string  | `"Maryland"`  |
+| `confidence`          | `radar_confidence`     | string  | `"high"`      |
+| `foreground`          | `radar_foreground`     | boolean | `true`        |
+
+### []()radar\_dma\_entered[#](#radar_dma_entered "Direct link to heading")
+
+| Radar Event Attribute | Airship Event Property | Type    | Example Value |
+| --------------------- | ---------------------- | ------- | ------------- |
+| `region.code`         | `radar_region_code`    | string  | `"26"`        |
+| `region.name`         | `radar_region_name`    | string  | `"Baltimore"` |
+| `confidence`          | `radar_confidence`     | string  | `"high"`      |
+| `foreground`          | `radar_foreground`     | boolean | `true`        |
+
+### []()radar\_dma\_exited[#](#radar_dma_exited "Direct link to heading")
+
+| Radar Event Attribute | Airship Event Property | Type    | Example Value |
+| --------------------- | ---------------------- | ------- | ------------- |
+| `region.code`         | `radar_region_code`    | string  | `"26"`        |
+| `region.name`         | `radar_region_name`    | string  | `"Baltimore"` |
+| `confidence`          | `radar_confidence`     | string  | `"high"`      |
+| `foreground`          | `radar_foreground`     | boolean | `true`        |
+
+### []()radar\_started\_trip[#](#radar_started_trip "Direct link to heading")
+
+| Radar Event Attribute                | Airship Event Property                        | Type    | Example Value |
+| ------------------------------------ | --------------------------------------------- | ------- | ------------- |
+| `trip.externalId`                    | `radar_trip_external_id`                      | string  | `"299"`       |
+| `trip.metadata[{key}]`               | `radar_trip_metadata_{key}`                   | \{type} | `{value}`     |
+| `trip.destinationGeofenceTag`        | `radar_trip_destination_geofence_tag`         | string  | `"store"`     |
+| `trip.destinationGeofenceExternalId` | `radar_trip_destination_geofence_external_id` | string  | `"123"`       |
+| `foreground`                         | `radar_foreground`                            | boolean | `true`        |
+
+### []()radar\_updated\_trip[#](#radar_updated_trip "Direct link to heading")
+
+| Radar Event Attribute                | Airship Event Property                        | Type    | Example Value |
+| ------------------------------------ | --------------------------------------------- | ------- | ------------- |
+| `trip.externalId`                    | `radar_trip_external_id`                      | string  | `"299"`       |
+| `trip.metadata[{key}]`               | `radar_trip_metadata_{key}`                   | \{type} | `{value}`     |
+| `trip.destinationGeofenceTag`        | `radar_trip_destination_geofence_tag`         | string  | `"store"`     |
+| `trip.destinationGeofenceExternalId` | `radar_trip_destination_geofence_external_id` | string  | `"123"`       |
+| `foreground`                         | `radar_foreground`                            | boolean | `true`        |
+
+### []()radar\_approaching\_trip\_destination[#](#radar_approaching_trip_destination "Direct link to heading")
+
+| Radar Event Attribute                | Airship Event Property                        | Type    | Example Value |
+| ------------------------------------ | --------------------------------------------- | ------- | ------------- |
+| `trip.externalId`                    | `radar_trip_external_id`                      | string  | `"299"`       |
+| `trip.metadata[{key}]`               | `radar_trip_metadata_{key}`                   | \{type} | `{value}`     |
+| `trip.destinationGeofenceTag`        | `radar_trip_destination_geofence_tag`         | string  | `"store"`     |
+| `trip.destinationGeofenceExternalId` | `radar_trip_destination_geofence_external_id` | string  | `"123"`       |
+| `foreground`                         | `radar_foreground`                            | boolean | `true`        |
+
+### []()radar\_arrived\_at\_trip\_destination[#](#radar_arrived_at_trip_destination "Direct link to heading")
+
+| Radar Event Attribute                | Airship Event Property                        | Type    | Example Value |
+| ------------------------------------ | --------------------------------------------- | ------- | ------------- |
+| `trip.externalId`                    | `radar_trip_external_id`                      | string  | `"299"`       |
+| `trip.metadata[{key}]`               | `radar_trip_metadata_{key}`                   | \{type} | `{value}`     |
+| `trip.destinationGeofenceTag`        | `radar_trip_destination_geofence_tag`         | string  | `"store"`     |
+| `trip.destinationGeofenceExternalId` | `radar_trip_destination_geofence_external_id` | string  | `"123"`       |
+| `foreground`                         | `radar_foreground`                            | boolean | `true`        |
+
+### []()radar\_stopped\_trip[#](#radar_stopped_trip "Direct link to heading")
+
+| Radar Event Attribute                | Airship Event Property                        | Type    | Example Value |
+| ------------------------------------ | --------------------------------------------- | ------- | ------------- |
+| `trip.externalId`                    | `radar_trip_external_id`                      | string  | `"299"`       |
+| `trip.metadata[{key}]`               | `radar_trip_metadata_{key}`                   | \{type} | `{value}`     |
+| `trip.destinationGeofenceTag`        | `radar_trip_destination_geofence_tag`         | string  | `"store"`     |
+| `trip.destinationGeofenceExternalId` | `radar_trip_destination_geofence_external_id` | string  | `"123"`       |
+| `foreground`                         | `radar_foreground`                            | boolean | `true`        |
+
+### []()radar\_beacon\_entered[#](#radar_beacon_entered "Direct link to heading")
+
+| Radar Event Attribute    | Airship Event Property      | Type    | Example Value                |
+| ------------------------ | --------------------------- | ------- | ---------------------------- |
+| `beacon._id`             | `radar_beacon_id`           | string  | `"5b2c0906f5874b001aecfd8f"` |
+| `beacon.description`     | `radar_beacon_description`  | string  | `"Store #123 - Drive-Thru"`  |
+| `beacon.tag`             | `radar_beacon_tag`          | string  | `"drive-thru"`               |
+| `beacon.externalId`      | `radar_beacon_external_id`  | string  | `"123"`                      |
+| `beacon.metadata[{key}]` | `radar_trip_metadata_{key}` | \{type} | `{value}`                    |
+| `confidence`             | `radar_confidence`          | string  | `"high"`                     |
+| `foreground`             | `radar_foreground`          | boolean | `true`                       |
+
+### []()radar\_beacon\_exited[#](#radar_beacon_exited "Direct link to heading")
+
+| Radar Event Attribute    | Airship Event Property      | Type             | Example Value                |
+| ------------------------ | --------------------------- | ---------------- | ---------------------------- |
+| `beacon._id`             | `radar_beacon_id`           | string           | `"5b2c0906f5874b001aecfd8f"` |
+| `beacon.description`     | `radar_beacon_description`  | string           | `"Store #123 - Drive-Thru"`  |
+| `beacon.tag`             | `radar_beacon_tag`          | string           | `"drive-thru"`               |
+| `beacon.externalId`      | `radar_beacon_external_id`  | string           | `"123"`                      |
+| `beacon.metadata[{key}]` | `radar_trip_metadata_{key}` | \{type}          | `{value}`                    |
+| `confidence`             | `radar_confidence`          | string           | `"high"`                     |
+| `duration`               | `radar_duration`            | number (minutes) | `1.42`                       |
+| `foreground`             | `radar_foreground`          | boolean          | `true`                       |
+
+[Edit this page](https://github.com/radarlabs/docs/edit/main/docs/integrations/urban-airship.mdx)
