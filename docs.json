@@ -3,8 +3,8 @@
   "theme": "mint",
   "name": "Radar",
   "colors": {
-    "primary": "#000257",
-    "light": "#000257",
+    "primary": "#0003A5",
+    "light": "#0003A5",
     "dark": "#A6BAED"
   },
   "favicon": "/favicon.svg",
