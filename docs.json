@@ -20,13 +20,13 @@
         "group": "Geofencing Platform",
         "pages": [
           "geofencing/overview",
-          "geofences",
-          "trip-tracking",
-          "places",
-          "regions",
-          "beacons",
-          "fraud",
-          "campaigns",
+          "geofencing/geofences",
+          "geofencing/trip-tracking",
+          "geofencing/places",
+          "geofencing/regions",
+          "geofencing/beacons",
+          "geofencing/fraud",
+          "geofencing/campaigns",
           {
             "group": "Integrations",
             "pages": [
