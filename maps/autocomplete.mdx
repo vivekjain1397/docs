@@ -5,11 +5,11 @@ description: "Use Radar's autocomplete component to add address autocomplete to 
 
 You can also check out the [autocomplete explorer](https://radar.com/dashboard/maps/maps-explorer/autocomplete) in the dashboard, or check out a full-page [maps demo](https://radar.com/demo/maps) and [store locator demo](https://radar.com/demo/locator) with an autocomplete component.
 
-## []()How it works[#](#how-it-works "Direct link to heading")
+## [How it works](#how-it-works "Direct link to heading")
 
 To use the autocomplete component, simply initialize the Radar SDK with your publishable key and specify the container to render the input into.
 
-## []()Configuration[#](#configuration "Direct link to heading")
+## [Configuration](#configuration "Direct link to heading")
 
 When creating the autocomplete component, you can provide options to customize the autocomplete behavior, as well as the size and style of the input.
 
@@ -37,66 +37,162 @@ Available options include:
 | `markerColor`   | `#acbdc8`        | string                       | The CSS color of marker icons in the results list.                                                                                                                                                                                                                                                | Web               |
 | `style`         | `null`           | React Native style object    | Styles for the element. See the [code](https://github.com/radarlabs/react-native-radar/blob/master/js/ui/autocomplete.jsx) for more info.                                                                                                                                                         | React Native      |
 
-## []()Quickstart[#](#quickstart "Direct link to heading")
+## [Quickstart](#quickstart "Direct link to heading")
 
 First, [sign up](https://radar.com/signup) for Radar and get an API key.
 
 Then, get started with the sample code below.
 
-### []()JavaScript[#](#javascript "Direct link to heading")
+### [JavaScript](#javascript "Direct link to heading")
 
+```html
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no" />
+    <link href="https://js.radar.com/v4.5.3/radar.css" rel="stylesheet">
+    <script src="https://js.radar.com/v4.5.3/radar.min.js"></script>
+  </head>
+
+  <body>
+    <div id="autocomplete" />
+
+    <script type="text/javascript">
+      Radar.initialize('prj_live_pk_...');
+
+      Radar.ui.autocomplete({
+        container: 'autocomplete',
+        width: '600px',
+        onSelection: (address) => {
+          // do something with selected address
+        },
+      });
+    </script>
+  </body>
+</html>
 ```
-<!DOCTYPE html><html>  <head>    <meta charset="utf-8" />    <meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no" />    <link href="https://js.radar.com/v4.5.3/radar.css" rel="stylesheet">    <script src="https://js.radar.com/v4.5.3/radar.min.js"></script>  </head>
-  <body>    <div id="autocomplete" />
-    <script type="text/javascript">      Radar.initialize('prj_live_pk_...');
-      Radar.ui.autocomplete({        container: 'autocomplete',        width: '600px',        onSelection: (address) => {          // do something with selected address        },      });    </script>  </body></html>
-```
 
-Copy
+### [React](#react "Direct link to heading")
 
-### []()React[#](#react "Direct link to heading")
+```javascript
+import React, { useEffect, useRef } from 'react';
+import Radar from 'radar-sdk-js';
+import 'radar-sdk-js/dist/radar.css';
 
-```
-import React, { useEffect, useRef } from 'react';import Radar from 'radar-sdk-js';import 'radar-sdk-js/dist/radar.css';
-const RadarAutocomplete = () => {  const autocompleteRef = useRef(null);
-  useEffect(() => {      Radar.initialize('prj_live_pk_...');
-      autocompleteRef.current = Radar.ui.autocomplete({        container: 'autocomplete',        width: '600px',        onSelection: (address) => {          // Do something with the selected address          console.log(address);        },      });
-    return () => {        autocompleteRef.current?.remove();    };  }, []);
-  return (    <div id="autocomplete" />  );};
+const RadarAutocomplete = () => {
+  const autocompleteRef = useRef(null);
+
+  useEffect(() => {
+      Radar.initialize('prj_live_pk_...');
+
+      autocompleteRef.current = Radar.ui.autocomplete({
+        container: 'autocomplete',
+        width: '600px',
+        onSelection: (address) => {
+          // Do something with the selected address
+          console.log(address);
+        },
+      });
+
+    return () => {
+        autocompleteRef.current?.remove();
+    };
+  }, []);
+
+  return (
+    <div id="autocomplete" />
+  );
+};
+
 export default RadarAutocomplete;
-```
-
-Copy
-
-### []()React Native[#](#react-native "Direct link to heading")
 
 ```
-import { View } from 'react-native';import { useState, useEffect } from 'react';import Radar, { Autocomplete } from 'react-native-radar';
+
+### [React Native](#react-native "Direct link to heading")
+
+```javascript
+import { View } from 'react-native';
+import { useState, useEffect } from 'react';
+import Radar, { Autocomplete } from 'react-native-radar';
+
 Radar.initialize('prj_live_pk_...');
-export const App = () => (  <View>    <Autocomplete options={      onSelection: (address) => {        // do something with selected address      },    } />  </View>);
+
+export const App = () => (
+  <View>
+    <Autocomplete options={
+      onSelection: (address) => {
+        // do something with selected address
+      },
+    } />
+  </View>
+);
 ```
 
-Copy
+## [Examples](#examples "Direct link to heading")
 
-## []()Examples[#](#examples "Direct link to heading")
-
-### []()Use Autocomplete with Radar Maps in React[#](#use-autocomplete-with-radar-maps-in-react "Direct link to heading")
+### [Use Autocomplete with Radar Maps in React](#use-autocomplete-with-radar-maps-in-react "Direct link to heading")
 
 Below is an example of how you can use [Radar Maps](https://radar.com/maps/maps) with Radar Autocomplete in React.
 
-```
-import React, { useEffect, useRef } from 'react';import Radar from 'radar-sdk-js';import 'radar-sdk-js/dist/radar.css';
-const RadarMap = () => {  const radarInitialized = useRef(false);  const mapRef = useRef(null);  const markerRef = useRef(null);  const autocompleteRef = useRef(null);
-  useEffect(() => {    Radar.initialize('prj_live_pk_...');
-    // Create a map    const map = Radar.ui.map({      container: 'map',      style: 'radar-default-v1',      center: [-73.9911, 40.7342], // NYC      zoom: 14,    });    mapRef.current = map;
-    // Add a marker to the map    const marker = Radar.ui.marker({ text: 'Radar HQ' })      .setLngLat([-73.9910078, 40.7342465]) // default example.      .addTo(map);    markerRef.current = marker;
-    // Initialize Radar autocomplete    autocompleteRef.current = Radar.ui.autocomplete({      container: 'autocomplete',      width: '400px',      onSelection: (address) => {        const { latitude, longitude } = address;        console.log('Selected address:', address);
-        // Update marker position        markerRef.current.setLngLat([longitude, latitude]);
-        // Center the map on the selected address        mapRef.current.flyTo({ center: [longitude, latitude], zoom: 14 });      },    });    return () => {        autocompleteRef.current?.remove();    };  }, []);
-  return (    <div style={{ display: 'flex', height: '100vh' }}>      <div id="autocomplete" style={{ width: '400px', padding: '10px' }} />      <div id="map" style={{ flex: 1 }} />    </div>  );};
+```javascript
+import React, { useEffect, useRef } from 'react';
+import Radar from 'radar-sdk-js';
+import 'radar-sdk-js/dist/radar.css';
+
+const RadarMap = () => {
+  const radarInitialized = useRef(false);
+  const mapRef = useRef(null);
+  const markerRef = useRef(null);
+  const autocompleteRef = useRef(null);
+
+  useEffect(() => {
+    Radar.initialize('prj_live_pk_...');
+
+    // Create a map
+    const map = Radar.ui.map({
+      container: 'map',
+      style: 'radar-default-v1',
+      center: [-73.9911, 40.7342], // NYC
+      zoom: 14,
+    });
+    mapRef.current = map;
+
+    // Add a marker to the map
+    const marker = Radar.ui.marker({ text: 'Radar HQ' })
+      .setLngLat([-73.9910078, 40.7342465]) // default example.
+      .addTo(map);
+    markerRef.current = marker;
+
+    // Initialize Radar autocomplete
+    autocompleteRef.current = Radar.ui.autocomplete({
+      container: 'autocomplete',
+      width: '400px',
+      onSelection: (address) => {
+        const { latitude, longitude } = address;
+        console.log('Selected address:', address);
+
+        // Update marker position
+        markerRef.current.setLngLat([longitude, latitude]);
+
+        // Center the map on the selected address
+        mapRef.current.flyTo({ center: [longitude, latitude], zoom: 14 });
+      },
+    });
+    return () => {
+        autocompleteRef.current?.remove();
+    };
+  }, []);
+
+  return (
+    <div style={{ display: 'flex', height: '100vh' }}>
+      <div id="autocomplete" style={{ width: '400px', padding: '10px' }} />
+      <div id="map" style={{ flex: 1 }} />
+    </div>
+  );
+};
+
 export default RadarMap;
 ```
-
-Copy
 
 [Edit this page](https://github.com/radarlabs/docs/edit/main/docs/maps/autocomplete.mdx)
