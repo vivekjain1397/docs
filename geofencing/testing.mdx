@@ -3,17 +3,17 @@ title: "Testing"
 description: "Use this guide to troubleshoot issues with location tracking and event generation."
 ---
 
-## []()Device is not showing up in the dashboard[#](#device-is-not-showing-up-in-the-dashboard "Direct link to heading")
+## [Device is not showing up in the dashboard](#device-is-not-showing-up-in-the-dashboard "Direct link to heading")
 
 A device will show up in the Radar dashboard once a successful [track API](/api#track) call has been sent to the server. The Radar [SDK](/sdk) collects location updates and then sends them to the server via the track API.
 
-### []()Common issues[#](#common-issues "Direct link to heading")
+### [Common issues](#common-issues "Direct link to heading")
 
 * Location permissions have not been granted.
 * The Radar SDK has not been properly initialized.
 * Radar tracking methods have not been implemented correctly.
 
-### []()Troubleshooting steps[#](#troubleshooting-steps "Direct link to heading")
+### [Troubleshooting steps](#troubleshooting-steps "Direct link to heading")
 
 1. Verify location permissions have been granted.
 2. Verify that initializing the SDK uses the correct publishable key and happens during application launch. This initialization should happen in the `onCreate()` method of the `Application` class on [Android](/sdk/android#initialize-sdk) and the `didFinishLaunchingWithOptions()` method of the `AppDelegate` on [iOS](/sdk/ios#initialize-sdk).
@@ -26,19 +26,17 @@ A device will show up in the Radar dashboard once a successful [track API](/api#
 2022-11-08 11:33:01.784759-0500 RadarImplementation[6947:250060] 📍 Radar API response | method = POST; url = https://api.radar.io/v1/track; statusCode = 200;
 ```
 
-Copy
-
 Once a successful API call is made, there will be a corresponding user on the [Users page](https://radar.com/dashboard/users) in the dashboard.
 
 **Verify that Radar is registering users on the Users page:**
 
 ![Users Page](/images/geofencing/assets/images/dashboard_users_page-5bcc7ad96306f57e6ecdc60cd0cbeb7f.png)
 
-## []()Events are not firing when the app is backgrounded[#](#events-are-not-firing-when-the-app-is-backgrounded "Direct link to heading")
+## [Events are not firing when the app is backgrounded](#events-are-not-firing-when-the-app-is-backgrounded "Direct link to heading")
 
 As the Radar SDK collects location updates and sends them to the server, it will generate events based on location context (e.g., the device moves into or out of a geofence or starts a trip). Generated events will appear on the [Events page](https://radar.com/dashboard/events) in the dashboard if location updates are triggering events as expected. If the device's last location is in a geofence or a place, that information will be displayed on the details page for that user.
 
-### []()Common issues[#](#common-issues-1 "Direct link to heading")
+### [Common issues](#common-issues-1 "Direct link to heading")
 
 * Background location permissions have not been granted.
 * Radar events are not enabled on the [Settings page](https://radar.com/dashboard/settings) in the dashboard.
@@ -46,7 +44,7 @@ As the Radar SDK collects location updates and sends them to the server, it will
 * The test device has issues collecting location updates (e.g., location sensors are not working in the simulator).
 * Flawed testing based on the [tracking options](/sdk/tracking) applied (e.g., geofence stop detection is on, but the device is not dwelling long enough to detect a stop).
 
-### []()Troubleshooting steps[#](#troubleshooting-steps-1 "Direct link to heading")
+### [Troubleshooting steps](#troubleshooting-steps-1 "Direct link to heading")
 
 1. Verify that initializing the SDK uses the correct publishable key and happens during application launch. This initialization should happen in the `onCreate()` method of the `Application` class on [Android](/sdk/android#initialize-sdk) and the `didFinishLaunchingWithOptions()` method of the `AppDelegate` on [iOS](/sdk/ios#initialize-sdk). On iOS, verify that the *Location updates* [background mode](/sdk/ios#background-modes) has been enabled if using the responsive or continuous presets.
 2. Confirm that events are enabled for the context type you are testing on the [Settings page](https://radar.com/dashboard/settings).
@@ -64,35 +62,35 @@ As the Radar SDK collects location updates and sends them to the server, it will
 
 **Note: a device needs to exit a geofence before generating a subsequent entry event, so ensure that the device has been detected outside of the geofence prior to testing another entry.**
 
-## []()Event listeners are not delivering[#](#event-listeners-are-not-delivering "Direct link to heading")
+## [Event listeners are not delivering](#event-listeners-are-not-delivering "Direct link to heading")
 
-### []()Common issues[#](#common-issues-2 "Direct link to heading")
+### [Common issues](#common-issues-2 "Direct link to heading")
 
 * Radar event listeners are not implemented correctly.
 * Radar events are not generating from location updates.
 
-### []()Troubleshooting steps[#](#troubleshooting-steps-2 "Direct link to heading")
+### [Troubleshooting steps](#troubleshooting-steps-2 "Direct link to heading")
 
 1. Verify the `RadarDelegate` on [iOS](/sdk/ios#listening-for-events-with-a-delegate) and `RadarReceiver` on [Android](/sdk/android#listening-for-events-with-a-receiver) are implemented correctly. For cross-platform frameworks such as [React Native](/sdk/react-native#background-tracking) and [Capacitor](/sdk/capacitor#background-tracking), ensure that the listeners are set up outside of the view lifecycle. Verify that you are using the correct native SDK version via the [Users page](https://radar.com/dashboard/users) in the dashboard.
 2. Verify that expected events are firing when testing the listeners.
 3. Understand the behavior of each of the listeners. The client location listener (`onClientLocationUpdated` on Android, `didUpdateClientLocation` on iOS) is triggered whenever the Radar SDK receives an update from the device. The location updated listener (`onLocationUpdated` on Android, `didUpdateLocation` on iOS) delivers location updates processed by Radar servers and will return refreshed user context. The Radar events listener (`didReceiveEvents` on Android and iOS) will only fire if events are triggered from location updates.
 4. Implement the error listener methods (`onError` on Android, `didFail` on iOS) to determine if errors are firing. Review the error messages returned to diagnose the root cause.
 
-## []()Troubleshooting other behavior[#](#troubleshooting-other-behavior "Direct link to heading")
+## [Troubleshooting other behavior](#troubleshooting-other-behavior "Direct link to heading")
 
-### []()Multiple Radar users have the same user ID or device ID[#](#multiple-radar-users-have-the-same-user-id-or-device-id "Direct link to heading")
+### [Multiple Radar users have the same user ID or device ID](#multiple-radar-users-have-the-same-user-id-or-device-id "Direct link to heading")
 
 Learn more about when Radar creates new user records [here](/faqs#what-is-a-unique-user-when-does-radar-create-a-new-user-record).
 
-### []()Rate limit errors are occurring when tracking location[#](#rate-limit-errors-are-occurring-when-tracking-location "Direct link to heading")
+### [Rate limit errors are occurring when tracking location](#rate-limit-errors-are-occurring-when-tracking-location "Direct link to heading")
 
 Radar has device specific rate limits per second, hour and day for the [track API endpoint](/api#track), which sends location updates to Radar. To mitigate rate limits, adjust [tracking options](/sdk/tracking) to collect locations less frequently. If you hit the per hour or day limits while testing, reinstalling the application with the Radar SDK will reset the rate limits.
 
-## []()Simulator[#](#simulator "Direct link to heading")
+## [Simulator](#simulator "Direct link to heading")
 
 The [simulator](https://radar.com/dashboard/simulate) is the easiest way to generate location updates to test and visualize entry and exit events at will. Gone are the days of needing to drive around or download spoofing apps to try out location-enabled features. The simulator acts as a playground to experiment with our API without any code!
 
-### []()How it works[#](#how-it-works "Direct link to heading")
+### [How it works](#how-it-works "Direct link to heading")
 
 1. **Click around the map to generate locations and events.** The activity feed is populated in real-time to mirror how our APIs would surface locations and events in your app. The data generated flows through to your enabled [integrations](https://radar.com/dashboard/integrations) in the corresponding environment. The locations and events generated abide by your project's [settings](https://radar.com/dashboard/settings) and will persist across the dashboard. To avoid any production side effects, use the test environment with the default user provided (`simulated-user-id`).
 
@@ -102,11 +100,11 @@ The [simulator](https://radar.com/dashboard/simulate) is the easiest way to gene
 
 ![Simulator.gif](/assets/images/simulator-2674659db05c1ee82e4ff3ee900f4e46.gif)
 
-## []()User Activity[#](#user-activity "Direct link to heading")
+## [User Activity](#user-activity "Direct link to heading")
 
 The User Activity page is the most straightforward way to debug a user's recent locations and events. Navigate to the [Users page](https://radar.com/dashboard/users) and select *View* within the desired user row. Then, click *View Activity*. Filter the user's recent activity down to the minute to investigate why events did or did not fire, and understand [confidence levels](/geofences#confidence-and-accuracy) for events in real-world scenarios.
 
-### []()How it works[#](#how-it-works-1 "Direct link to heading")
+### [How it works](#how-it-works-1 "Direct link to heading")
 
 1. **See a unified view of locations, events, and geofences.** The User Activity map displays a user's recent locations and events alongside geofences to pin down exactly when entries and exits occurred.
 
@@ -116,7 +114,7 @@ The User Activity page is the most straightforward way to debug a user's recent 
 
 ![UserActivity.gif](/assets/images/user_activity-f2bd510e6027b73607f2632351158c13.gif)
 
-### []()Location sources[#](#location-sources "Direct link to heading")
+### [Location sources](#location-sources "Direct link to heading")
 
 * **`FOREGROUND_LOCATION`**: location update triggered by `Radar.trackOnce`
 * **`BACKGROUND_LOCATION`**: location updated triggered by `Radar.startTracking`
