@@ -11,8 +11,30 @@ Beacons are like hardware-enabled micro-geofences, accurate down to a few meters
 
 Beacons provides the following user context:
 
-```
-{  "beacons": [    {      "type": "ibeacon",      "uuid": "b9407f30-f5f8-466e-aff9-25556b57fe6d",      "major": "100",      "minor": "1",      "description": "Store 123 - Register 1",      "tag": "store-register",      "externalId": "123-1",      "enabled": true    },    {      "type": "eddystone",      "uid": "f7826da6bc5b71e0893e",      "instance": "4456384b726a",      "description": "Store 123 - Aisle A",      "tag": "store-aisle",      "externalId": "123-A",      "enabled": true    }  ]}
+```json
+{
+  "beacons": [
+    {
+      "type": "ibeacon",
+      "uuid": "b9407f30-f5f8-466e-aff9-25556b57fe6d",
+      "major": "100",
+      "minor": "1",
+      "description": "Store 123 - Register 1",
+      "tag": "store-register",
+      "externalId": "123-1",
+      "enabled": true
+    },
+    {
+      "type": "eddystone",
+      "uid": "f7826da6bc5b71e0893e",
+      "instance": "4456384b726a",
+      "description": "Store 123 - Aisle A",
+      "tag": "store-aisle",
+      "externalId": "123-A",
+      "enabled": true
+    }
+  ]
+}
 ```
 
 Copy
@@ -24,7 +46,7 @@ Beacons also provides the following events:
 
 You can receive events client-side via the [SDK](/sdk) or server-side via [event integrations](/integrations), including webhooks.
 
-## []()Quickstart[#](#quickstart "Direct link to heading")
+## [Quickstart](#quickstart "Direct link to heading")
 
 First, [sign up](https://radar.com/signup) for Radar and get an API key.
 
@@ -32,7 +54,7 @@ Then, [create beacons](#create-beacons).
 
 From there, [integrate the SDK](/sdk) and call `Radar.trackOnce()` with `beacons = true` or `Radar.startTracking()` with `trackingOptions.beacons = true`, depending on your use case. Radar will generate an entry event on the first location update within range of a beacon.
 
-## []()How it works[#](#how-it-works "Direct link to heading")
+## [How it works](#how-it-works "Direct link to heading")
 
 Beacon detection works on iOS and Android in the foreground and in the background. After you import beacons, Radar will sync nearby beacons to the SDK on every location update.
 
@@ -44,13 +66,13 @@ To range beacons, the user must grant location permissions. On Android, the user
 
 Beacon entry and exit events are sent to the SDK, to [webhooks](/integrations#webhooks), and to [integrations](/integrations) just like geofence entry and exit events.
 
-### []()Ranging by UUID only[#](#ranging-by-uuid-only "Direct link to heading")
+### [Ranging by UUID only](#ranging-by-uuid-only "Direct link to heading")
 
 By default, Radar will sync nearby beacons to the SDK on every location update using the `coordinates` specified for each beacon. The SDK will then range nearby beacons based on `uuid`, `major`, and `minor` for iBeacon or `uid` and `instance` for Eddystone.
 
 Alternatively, the SDK can range beacons based on `uuid` or `uid` only, regardless of the `coordinates` specified for each beacon. To enable this, set *iBeacon UUIDs* and/or `Eddystone UIDs` on the [Settings page](https://radar.com/dashboard/settings), under *Beacons*. On iOS, you must also enable the *Location updates* [background mode](/sdk/ios#background-modes).
 
-## []()Create beacons[#](#create-beacons "Direct link to heading")
+## [Create beacons](#create-beacons "Direct link to heading")
 
 You can create beacons via the dashboard, CSV import, or through the API. You can create beacons in the Test environment for development and testing, and in the Live environment for production.
 
@@ -60,11 +82,11 @@ You also specify the identifiers used to range the beacon, including `uuid`, `ma
 
 **Beacons should be uniquely referenced by tag and external ID, assigned by you when a beacon is created. To disable or rotate identifiers for a beacon, re-import the beacon with the same tag and external ID.**
 
-### []()Dashboard[#](#dashboard "Direct link to heading")
+### [Dashboard](#dashboard "Direct link to heading")
 
 To create a beacon via the dashboard, go to the [Beacons page](https://radar.com/dashboard/beacons) and click the *New* button. Optionally search for an address or place, then enter a type, tag, external ID, UUID, major, minor, and optional metadata. Click *Create* to create the beacon.
 
-### []()CSV import[#](#csv-import "Direct link to heading")
+### [CSV import](#csv-import "Direct link to heading")
 
 To import beacons via CSV import, go to the [Beacons page](https://radar.com/dashboard/beacons) and click the *Import* button. Then, select a CSV to upload.
 
@@ -89,24 +111,39 @@ The CSV may have the following columns:
 
 For example, to import beacons installed on registers and in parking spaces at a store, you could use the following CSV:
 
+```csv
+description,tag,externalId,type,uuid,major,minor,uid,instance,coordinates,enabled,metadata
+"Store #123 - Register #1",store-register,123-1,ibeacon,"b9407f30-f5f8-466e-aff9-25556b57fe6d",100,1,,,"[-73.975384,40.783747]",true,{}
+"Store #123 - Register #2",store-register,123-2,ibeacon,"c9407f30-f5f8-466e-aff9-25556B57fe6d",100,2,,,"[-73.975384,40.783747]",true,{}
+"Store #123 - Parking Space #1",store-parking,123-1,ibeacon,"d9407f30-f5f8-466e-aff9-25556b57fe6d",101,1,,,"[-73.975363,40.783826]",true,{}
+"Store #123 - Parking Space #2",store-parking,123-2,ibeacon,"e9407f30-f5f8-466e-aff9-25556b57fe6d",101,2,,,"[-73.975363,40.783826]",true,"{""type"":""parking""}"
+"Store #123 - Aisle A",store-aisle,123-A,eddystone,,,,"f7826da6bc5b71e0893e","4456384b726a","[-73.974317,40.785541]",true,{}
+"Store #123 - Aisle B",store-aisle,123-B,eddystone,,,,"f7826da6bc5b71e0893e","4456384b726b","[-73.974317,40.785541]",true,{}
 ```
-description,tag,externalId,type,uuid,major,minor,uid,instance,coordinates,enabled,metadata"Store #123 - Register #1",store-register,123-1,ibeacon,"b9407f30-f5f8-466e-aff9-25556b57fe6d",100,1,,,"[-73.975384,40.783747]",true,{}"Store #123 - Register #2",store-register,123-2,ibeacon,"c9407f30-f5f8-466e-aff9-25556B57fe6d",100,2,,,"[-73.975384,40.783747]",true,{}"Store #123 - Parking Space #1",store-parking,123-1,ibeacon,"d9407f30-f5f8-466e-aff9-25556b57fe6d",101,1,,,"[-73.975363,40.783826]",true,{}"Store #123 - Parking Space #2",store-parking,123-2,ibeacon,"e9407f30-f5f8-466e-aff9-25556b57fe6d",101,2,,,"[-73.975363,40.783826]",true,"{""type"":""parking""}""Store #123 - Aisle A",store-aisle,123-A,eddystone,,,,"f7826da6bc5b71e0893e","4456384b726a","[-73.974317,40.785541]",true,{}"Store #123 - Aisle B",store-aisle,123-B,eddystone,,,,"f7826da6bc5b71e0893e","4456384b726b","[-73.974317,40.785541]",true,{}
-```
-
-Copy
 
 **Again, note that longitude comes before latitude, a GeoJSON convention.**
 
 You can find a history of past imports on the [Beacons import history page](https://radar.com/dashboard/beacons/imports).
 
-### []()API[#](#api "Direct link to heading")
+### [API](#api "Direct link to heading")
 
 You can also create beacons programmatically via the [API](/api). You can create a beacon via POST `/api/v1/beacons`, or upsert a beacon based on tag and external ID via PUT `/api/v1/beacons/:tag/:externalId`.
 
 For example, to upsert a beacon within a store via the [API](/api):
 
-```
-curl "https://api.radar.io/v1/beacons/drive-thru/store123-beacon-1" \    -H "Authorization: prj_live_sk_..." \    -X PUT \    -d "description=Store 123 - Register 1" \    -d "tag=store-register" \    -d "tag=123-1" \    -d "type=ibeacon" \    -d "uuid=b9407f30-f5f8-466e-aff9-25556b57fe6d" \    -d "major=100" \    -d "minor=1" \    -d "coordinates=[-73.975384,40.783747]" \    -d "enabled=true"
+```sh
+curl "https://api.radar.io/v1/beacons/drive-thru/store123-beacon-1" \
+    -H "Authorization: prj_live_sk_..." \
+    -X PUT \
+    -d "description=Store 123 - Register 1" \
+    -d "tag=store-register" \
+    -d "tag=123-1" \
+    -d "type=ibeacon" \
+    -d "uuid=b9407f30-f5f8-466e-aff9-25556b57fe6d" \
+    -d "major=100" \
+    -d "minor=1" \
+    -d "coordinates=[-73.975384,40.783747]" \
+    -d "enabled=true"
 ```
 
 Copy

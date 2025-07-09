@@ -5,7 +5,7 @@ description: "Campaign analytics and frequency capping require  or above. Client
 
 Use campaigns to create location-based notifications effortlessly. Campaigns let you customize your notification content and targeting behavior with ease.
 
-## []()Quickstart[#](#quickstart "Direct link to heading")
+## [Quickstart](#quickstart)
 
 First, [sign up](https://radar.com/signup) for Radar and get an API key.
 
@@ -17,13 +17,13 @@ To use campaigns with events, ensure that the desired trigger events are enabled
 
 Once set up, [create your campaigns](/campaigns#create-campaigns) using the dashboard.
 
-## []()Create campaigns[#](#create-campaigns "Direct link to heading")
+## [Create campaigns](#create-campaigns)
 
 To create a campaign via the dashboard, navigate to the [campaigns page](https://radar.com/dashboard/geofencing/campaigns) and click **Create**. Provide the campaign's name, notification body, and targeting details. You can target users using either geofences or places.
 
-## []()Campaign types[#](#campaign-types "Direct link to heading")
+## [Campaign types](#campaign-types)
 
-### []()Client side geofence[#](#client-side-geofence "Direct link to heading")
+### [Client side geofence](#client-side-geofence)
 
 Use Radar's client side geofence notifications to display a notification on iOS devices when a user enters a geofence. These notifications work with foreground or **"when in use"** permissions, dramatically improving their reachable audience.
 
@@ -35,7 +35,7 @@ Radar only controls the registration of notifications on the device. Once that h
 
 If the device is already inside the geofence when its client-side geofence notification is being synced, it will fire upon subsequent entry, not immediately.
 
-## []()Targeting options[#](#targeting-options "Direct link to heading")
+## [Targeting options](#targeting-options)
 
 Campaigns allow you to target users based on different triggers. Note not all triggers are available for client side geofence notifications.
 
@@ -47,143 +47,192 @@ For event based campaigns, you can target users based on their device type (iOS,
 
 Under advanced options, you can find User ID (the [external ID](/sdk/ios#identify-user)) based targeting to target individual users.
 
-## []()Notification configurations[#](#notification-configurations "Direct link to heading")
+## [Notification configurations](#notification-configurations)
 
 You can configure the notifications Radar sends to users when they enter a geofence or place. Customize the notification body, and optionally, the notification title and the deep link URL.
 
-## []()Frequency Capping[#](#frequency-capping "Direct link to heading")
+## [Frequency Capping](#frequency-capping)
 
 With frequency capping, you can limit the number of notifications a user receives from a campaign. This is useful to prevent excessive notifications for users. To set up frequency capping, navigate to the [setting page](https://radar.com/dashboard/settings). Under the campaigns section, define the maximum number of notifications allowed in the specified time window.
 
 The SDK will only sync up to the frequency cap number of notifications. As such, we'd recommend setting a cap of 2 notifications for a time window of 48 hours instead of 1 notification for 24 hours.
 
-## []()Analytics (iOS only)[#](#analytics-ios-only "Direct link to heading")
+## [Analytics (iOS only)](#analytics-ios-only)
 
 With Radar [Conversions](/api#log-a-conversion), you can log an event whenever a user interacts with a campaign notification.
 
-With Radar [Conversions](/api#log-a-conversion), you can also retrieve the source of an *opened\_app* conversion for iOS apps. Within the *metadata* object of the [logged conversion](/sdk/ios#conversions), we will return a *conversion\_source* with either
+With Radar [Conversions](/api#log-a-conversion), you can also retrieve the source of an _opened_app_ conversion for iOS apps. Within the _metadata_ object of the [logged conversion](/sdk/ios#conversions), we will return a _conversion_source_ with either
 
-* **`notification`** (app was opened using an external 3rd party notification)
-* **`radar_notification`** (app was opened using the configured on-prem notification):
+- **`notification`** (app was opened using an external 3rd party notification)
+- **`radar_notification`** (app was opened using the configured on-prem notification):
 
-You can view these campaign conversion analytics by pressing the analytics button on the campaign's page. Alternatively, you can navigate to Geofencing -> Analytics -> Events -> Filters (top right) -> select Type as *opened\_app* -> Apply Filters. From there, select *campaign\_name* from the *grouped\_by* dropdown. See screenshot below: ![OnPremiseNotifications](/images/assets/images/conversion_source_analytics-4a52cd8a87055b91f37bebaecc7f5f16.png)
+You can view these campaign conversion analytics by pressing the analytics button on the campaign's page. Alternatively, you can navigate to Geofencing -\> Analytics -\> Events -\> Filters (top right) -\> select Type as _opened_app_ -\> Apply Filters. From there, select _campaign_name_ from the _grouped_by_ dropdown. See screenshot below:
 
-### []()Automated iOS setup[#](#automated-ios-setup "Direct link to heading")
+![OnPremiseNotifications](/images/assets/images/conversion_source_analytics-4a52cd8a87055b91f37bebaecc7f5f16.png)
+
+### [Automated iOS setup](#automated-ios-setup)
 
 Radar can associate `opened_app` events with a campaign notification that was clicked on to open the app. To set this up automatically, set the relevant flag on the initialization options.
 
-* Swift
-* Objective-C
+<CodeGroup>
 
-```
-import UIKitimport RadarSDK
-@UIApplicationMainclass AppDelegate: UIResponder, UIApplicationDelegate {
-    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {        let radarInitializeOptions = RadarInitializeOptions()        radarInitializeOptions.autoLogNotificationConversions = true        Radar.initialize(publishableKey: "prj_test_pk_...", options: radarInitializeOptions)
-        return true    }
+```swift Swift
+import UIKit
+import RadarSDK
+
+@UIApplicationMain
+class AppDelegate: UIResponder, UIApplicationDelegate {
+
+    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+        let radarInitializeOptions = RadarInitializeOptions()
+        radarInitializeOptions.autoLogNotificationConversions = true
+        Radar.initialize(publishableKey: "prj_test_pk_...", options: radarInitializeOptions)
+
+        return true
+    }
+
 }
 ```
 
-Copy
 
-```
-#import "AppDelegate.h"@import RadarSDK;
+```c Objective-C
+#import "AppDelegate.h"
+@import RadarSDK;
+
 @implementation AppDelegate
-  - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {    RadarInitializeOptions *radarInitializeOptions = [[RadarInitializeOptions alloc] init];    radarInitializeOptions.autoLogNotificationConversions = YES;    [Radar initializeWithPublishableKey:@"prj_test_pk_..." options:radarInitializeOptions];
-    return YES;}
+
+  - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+    RadarInitializeOptions *radarInitializeOptions = [[RadarInitializeOptions alloc] init];
+    radarInitializeOptions.autoLogNotificationConversions = YES;
+    [Radar initializeWithPublishableKey:@"prj_test_pk_..." options:radarInitializeOptions];
+
+    return YES;
+}
+
 @end
 ```
 
-Copy
+</CodeGroup>
 
-### []()Manual iOS setup[#](#manual-ios-setup "Direct link to heading")
+### [Manual iOS setup](#manual-ios-setup)
 
 Alternatively, perform the manual setup:
 
-* Swift
-* Objective-C
+<CodeGroup>
 
-```
-func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse) async {   Radar.logConversion(response: response) }
-```
-
-Copy
-
-```
-- (void)userNotificationCenter:(UNUserNotificationCenter *)center didReceiveNotificationResponse:(UNNotificationResponse *)response withCompletionHandler:(void (^)(void))completionHandler {    [Radar logConversionWithNotificationResponse:response];    completionHandler();}
+```swift Swift
+func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse) async {
+   Radar.logConversion(response: response) 
+}
 ```
 
-Copy
 
-## []()Deep linking (iOS only)[#](#deep-linking-ios-only "Direct link to heading")
+```c Objective-C
+- (void)userNotificationCenter:(UNUserNotificationCenter *)center didReceiveNotificationResponse:(UNNotificationResponse *)response withCompletionHandler:(void (^)(void))completionHandler {
+    [Radar logConversionWithNotificationResponse:response];
+    completionHandler();
+}
+```
+
+</CodeGroup>
+
+## [Deep linking (iOS only)](#deep-linking-ios-only)
 
 Radar's client side geofence notifications can be used for deep linking. This means that you can use Radar's deep linking functionality to open a specific view via on premise notification taps.
 
 Set up deep linking from the Radar's Dashboards by adding the **`radar:notificationURL`** to the `URL Schemes` of the desired navigation view of your app.
 
-### []()Automated iOS setup[#](#automated-ios-setup-1 "Direct link to heading")
+### [Automated iOS setup](#automated-ios-setup-1)
 
 Radar's iOS SDK can automatically set up deep linking for you. To enable this feature, set the `autoHandleNotificationDeepLinks` option to `true` in the Radar `initialize` call.
 
-* Swift
-* Objective-C
+<CodeGroup>
 
-```
-import UIKitimport RadarSDK
-@UIApplicationMainclass AppDelegate: UIResponder, UIApplicationDelegate {
-    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {        let radarInitializeOptions = RadarInitializeOptions()        radarInitializeOptions.autoHandleNotificationDeepLinks = true        Radar.initialize(publishableKey: "prj_test_pk_...", options: radarInitializeOptions)
-        return true    }
+```swift Swift
+import UIKit
+import RadarSDK
+
+@UIApplicationMain
+class AppDelegate: UIResponder, UIApplicationDelegate {
+
+    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+        let radarInitializeOptions = RadarInitializeOptions()
+        radarInitializeOptions.autoHandleNotificationDeepLinks = true
+        Radar.initialize(publishableKey: "prj_test_pk_...", options: radarInitializeOptions)
+
+        return true
+    }
+
 }
 ```
 
-Copy
 
-```
-#import "AppDelegate.h"@import RadarSDK;
+```c Objective-C
+#import "AppDelegate.h"
+@import RadarSDK;
+
 @implementation AppDelegate
-  - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {    RadarInitializeOptions *radarInitializeOptions = [[RadarInitializeOptions alloc] init];    radarInitializeOptions.autoHandleNotificationDeepLinks = YES;    [Radar initializeWithPublishableKey:@"prj_test_pk_..." options:radarInitializeOptions];
-    return YES;}
+
+  - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+    RadarInitializeOptions *radarInitializeOptions = [[RadarInitializeOptions alloc] init];
+    radarInitializeOptions.autoHandleNotificationDeepLinks = YES;
+    [Radar initializeWithPublishableKey:@"prj_test_pk_..." options:radarInitializeOptions];
+
+    return YES;
+}
+
 @end
 ```
 
-Copy
+</CodeGroup>
 
 It is recommended to use the automatic setup in conjugation with the `RadarURLDelegate` to handle the URL open. This implementation provides the most light way approach to get started with deep linking.
 
-### []()Manual iOS setup[#](#manual-ios-setup-1 "Direct link to heading")
+### [Manual iOS setup](#manual-ios-setup-1)
 
 If you want to set up deep linking manually, you can do so by adding the following line to your `UNUserNotificationCenterDelegate` implementation.
 
-* Swift
-* Objective-C
+<CodeGroup>
 
-```
-func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse) async {  Radar.openURLFromNotification(response.notification)}
-```
-
-Copy
-
-```
-- (void)userNotificationCenter:(UNUserNotificationCenter *)center didReceiveNotificationResponse:(UNNotificationResponse *)response withCompletionHandler:(void (^)(void))completionHandler {    [Radar openURLFromNotification:response.notification];    completionHandler();}
+```swift Swift
+func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse) async {
+  Radar.openURLFromNotification(response.notification)
+}
 ```
 
-Copy
 
-### []()Automated React Native setup (iOS only)[#](#automated-react-native-setup-ios-only "Direct link to heading")
+```c Objective-C
+- (void)userNotificationCenter:(UNUserNotificationCenter *)center didReceiveNotificationResponse:(UNNotificationResponse *)response withCompletionHandler:(void (^)(void))completionHandler {
+    [Radar openURLFromNotification:response.notification];
+    completionHandler();
+}
+```
+
+</CodeGroup>
+
+### [Automated React Native setup (iOS only)](#automated-react-native-setup-ios-only)
 
 Radar's React Native SDK can automatically set up deep linking for you. To enable this feature, set the `autoHandleNotificationDeepLinks` option to `true` in the `radarInitializeOptions` via the `AppDelegate.mm`.
 
-```
-- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions{  self.moduleName = @"main";  self.initialProps = @{};
-  BOOL res = [super application:application didFinishLaunchingWithOptions:launchOptions];  RadarInitializeOptions *radarInitializeOptions = [[RadarInitializeOptions alloc] init];  radarInitializeOptions.autoHandleNotificationDeepLinks = YES;  [Radar nativeSetup:radarInitializeOptions];  return res;}
+```c#
+- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
+{
+  self.moduleName = @"main";
+  self.initialProps = @{};
+
+  BOOL res = [super application:application didFinishLaunchingWithOptions:launchOptions];
+  RadarInitializeOptions *radarInitializeOptions = [[RadarInitializeOptions alloc] init];
+  radarInitializeOptions.autoHandleNotificationDeepLinks = YES;
+  [Radar nativeSetup:radarInitializeOptions];
+  return res;
+}
 ```
 
-Copy
-
-### []()Handle system deep link[#](#handle-system-deep-link "Direct link to heading")
+### [Handle system deep link](#handle-system-deep-link)
 
 Opening the notification will result in the SDK calling `[application openURL:url options:@{} completionHandler:nil];` This will open the URL in the app if it is registered for the scheme, or open the URL in the browser if it is not. Developers should handle this by handling the [custom URL scheme](https://developer.apple.com/documentation/xcode/defining-a-custom-url-scheme-for-your-app) or [universal link](https://developer.apple.com/documentation/xcode/supporting-universal-links-in-your-app) in their app. React Native developers should also implement the native iOS handling of the deep link in their app.
 
-## []()Support[#](#support "Direct link to heading")
+## [Support](#support)
 
 Have questions or difficulties with campaigns? Contact us at [radar.com/support](https://radar.com/support).
 
