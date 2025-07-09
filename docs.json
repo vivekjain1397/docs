@@ -21,7 +21,7 @@
         "pages": [
           "geofencing/overview",
           "geofencing/geofences",
-          "geofencing/trip-tracking",
+          "geofencing/trips",
           "geofencing/places",
           "geofencing/regions",
           "geofencing/beacons",
