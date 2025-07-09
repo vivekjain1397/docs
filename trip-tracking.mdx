@@ -7,8 +7,36 @@ description: "With Trips, you can track trips and calculate live ETAs from an or
 
 Trips provides the following user context:
 
-```
-{  "trip": {    "_id": "5f3e50491c2b7d005c81f5d9",    "live": true,    "status": "started",    "externalId": "299",    "metadata": {      "Customer Name": "Jacob Pena",      "Car Model": "Green Honda Civic"    },    "mode": "car",    "destinationGeofenceTag": "store",    "destinationGeofenceExternalId": "123",    "destinationLocation": {      "coordinates": [        -105.06119826017914,        39.7793665      ],      "type": "Point"    },    "eta": {      "duration": 5.5, // minutes      "distance": 1331 // meters    },    "createdAt": "2020-08-20T10:27:55.830Z",    "updatedAt": "2020-08-20T10:30:55.837Z",    "endedAt": "2020-08-20T10:30:55.837Z"  }}
+```json
+{
+  "trip": {
+    "_id": "5f3e50491c2b7d005c81f5d9",
+    "live": true,
+    "status": "started",
+    "externalId": "299",
+    "metadata": {
+      "Customer Name": "Jacob Pena",
+      "Car Model": "Green Honda Civic"
+    },
+    "mode": "car",
+    "destinationGeofenceTag": "store",
+    "destinationGeofenceExternalId": "123",
+    "destinationLocation": {
+      "coordinates": [
+        -105.06119826017914,
+        39.7793665
+      ],
+      "type": "Point"
+    },
+    "eta": {
+      "duration": 5.5, // minutes
+      "distance": 1331 // meters
+    },
+    "createdAt": "2020-08-20T10:27:55.830Z",
+    "updatedAt": "2020-08-20T10:30:55.837Z",
+    "endedAt": "2020-08-20T10:30:55.837Z"
+  }
+}
 ```
 
 Copy
@@ -21,7 +49,7 @@ Trips also provides the following events:
 * `user.arrived_at_trip_destination`
 * `user.stopped_trip`
 
-## []()Quickstart[#](#quickstart "Direct link to heading")
+## [Quickstart](#quickstart "Direct link to heading")
 
 First, [sign up](https://radar.com/signup) for Radar and get an API key.
 
@@ -29,7 +57,7 @@ Then, [create a destination geofence](/geofences#create-a-geofence).
 
 From there, [integrate the SDK](/sdk) and call `Radar.startTrip()`. Radar will generate trip events with ETAs to the destination geofence.
 
-## []()Starting trips[#](#starting-trips "Direct link to heading")
+## [Starting trips](#starting-trips "Direct link to heading")
 
 When it's time to start a trip (e.g., when a user taps "I'm on my way" for a pickup, or when a delivery starts), start a trip with trip options (including an external ID for the trip, a destination geofence, a travel mode, and any custom metadata) and tracking options to be used during the trip (usually `RadarTrackingOptions.CONTINUOUS`).
 
@@ -44,6 +72,42 @@ As the trip progresses, the status will update from `started` to `approaching` (
 let metadata = [  "Customer Name": "Jacob Pena",  "Car Model": "Green Honda Civic"]let tripOptions = RadarTripOptions(externalId: "299", destinationGeofenceTag: "store", destinationGeofenceExternalId: "123")tripOptions.mode = .cartripOptions.metadata = metadata
 Radar.startTrip(options: tripOptions, trackingOptions: .presetContinuous) { (status: RadarStatus, trip: RadarTrip?, events: [RadarEvent]?) in  if status == .success {    // do something  } else {    // handle error  }}
 ```
+
+<CodeGroup>
+```swift swift
+let metadata = [
+  "Customer Name": "Jacob Pena",
+  "Car Model": "Green Honda Civic"
+]
+let tripOptions = RadarTripOptions(externalId: "299", destinationGeofenceTag: "store", destinationGeofenceExternalId: "123")
+tripOptions.mode = .car
+tripOptions.metadata = metadata
+
+Radar.startTrip(options: tripOptions, trackingOptions: .presetContinuous) { (status: RadarStatus, trip: RadarTrip?, events: [RadarEvent]?) in
+  if status == .success {
+    // do something
+  } else {
+    // handle error
+  }
+}
+```
+```objectivec Objective-C
+RadarTripOptions *tripOptions = [RadarTripOptions new];
+tripOptions.externalId = @"299";
+tripOptions.destinationGeofenceTag = @"store";
+tripOptions.destinationGeofenceExternalId = @"123";
+tripOptions.metadata = @{@"Customer Name": @"Jacob Pena",@"Car Model":@"Green Honda Civic"};
+[Radar startTripWithOptions:tripOptions trackingOptions:RadarTrackingOptions.presetContinuous
+          completionHandler:^(RadarStatus status, RadarTrip * _Nullable trip, NSArray<RadarEvent *> * _Nullable events) {
+  if (status == RadarStatusSuccess) {
+    // do something
+  } else {
+    // handle error
+  }
+}];
+```
+
+</CodeGroup>
 
 Copy
 
