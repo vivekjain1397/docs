@@ -7,7 +7,7 @@ Radar can send events and user properties to [Amplitude](https://amplitude.com).
 
 Use the Amplitude integration to enrich behavioral events with location context, measure the ROI of location-based features, and build location-based user segments.
 
-## []()Configuration[#](#configuration "Direct link to heading")
+## [Configuration](#configuration "Direct link to heading")
 
 On the Amplitude *Manage Project* page, copy your API key.
 
@@ -15,7 +15,7 @@ Then, on the Radar [Integrations page](https://radar.com/dashboard/integrations)
 
 Whenever events are generated, Radar will send events and user properties to Amplitude.
 
-## []()User mapping[#](#user-mapping "Direct link to heading")
+## [User mapping](#user-mapping "Direct link to heading")
 
 Note that Radar uses the special string `"(null)"` to represent `null` user property values.
 
@@ -63,7 +63,7 @@ Note that Radar uses the special string `"(null)"` to represent `null` user prop
 | `beacons[*].tag`                     | `[Radar] Beacon Tags`                           | array\[string] | `["drive-thru"]`                           | [Beacons](/beacons)             |
 | `beacons[*].externalId`              | `[Radar] Beacon External IDs`                   | array\[string] | `["123"]`                                  | [Beacons](/beacons)             |
 
-## []()Event mapping[#](#event-mapping "Direct link to heading")
+## [Event mapping](#event-mapping "Direct link to heading")
 
 | Radar Event                         | Context Type                    | Amplitude Event                        |
 | ----------------------------------- | ------------------------------- | -------------------------------------- |
@@ -86,7 +86,7 @@ Note that Radar uses the special string `"(null)"` to represent `null` user prop
 | `user.entered_beacon`               | [Beacons](/beacons)             | `[Radar] Beacon Entered`               |
 | `user.exited_beacon`                | [Beacons](/beacons)             | `[Radar] Beacon Exited`                |
 
-### []()\[Radar] Geofence Entered[#](#radar-geofence-entered "Direct link to heading")
+### [Radar Geofence Entered](#radar-geofence-entered "Direct link to heading")
 
 | Radar Event Field          | Amplitude Event Property  | Type            | Example Value                |
 | -------------------------- | ------------------------- | --------------- | ---------------------------- |
@@ -118,7 +118,7 @@ If [Regions](/regions) is enabled, Radar will also send the following attributes
 | `postalCode.code` | `Postal Code`            | string | `"21014"`                    |
 | `postalCode._id`  | `Postal Code ID`         | string | `"5b2c0906f5874b001aecfd8f"` |
 
-### []()\[Radar] Geofence Exited[#](#radar-geofence-exited "Direct link to heading")
+### [Radar Geofence Exited](#radar-geofence-exited "Direct link to heading")
 
 | Radar Event Field          | Amplitude Event Property  | Type             | Example Value                |
 | -------------------------- | ------------------------- | ---------------- | ---------------------------- |
@@ -151,7 +151,7 @@ If [Regions](/regions) is enabled, Radar will also send the following attributes
 | `postalCode.code` | `Postal Code`            | string | `"21014"`                    |
 | `postalCode._id`  | `Postal Code ID`         | string | `"5b2c0906f5874b001aecfd8f"` |
 
-### []()\[Radar] Dwelled in Geofence[#](#radar-dwelled-in-geofence "Direct link to heading")
+### [Radar Dwelled in Geofence](#radar-dwelled-in-geofence "Direct link to heading")
 
 | Radar Event Field          | Amplitude Event Property  | Type             | Example Value                |
 | -------------------------- | ------------------------- | ---------------- | ---------------------------- |
@@ -184,7 +184,7 @@ If [Regions](/regions) is enabled, Radar will also send the following attributes
 | `postalCode.code` | `Postal Code`            | string | `"21014"`                    |
 | `postalCode._id`  | `Postal Code ID`         | string | `"5b2c0906f5874b001aecfd8f"` |
 
-### []()\[Radar] Place Entered[#](#radar-place-entered "Direct link to heading")
+### [Radar Place Entered](#radar-place-entered "Direct link to heading")
 
 | Radar Event Field  | Amplitude Event Property | Type            | Example Value                              |
 | ------------------ | ------------------------ | --------------- | ------------------------------------------ |
@@ -216,7 +216,7 @@ If [Regions](/regions) is enabled, Radar will also send the following attributes
 | `postalCode.code` | `Postal Code`            | string | `"21014"`                    |
 | `postalCode._id`  | `Postal Code ID`         | string | `"5b2c0906f5874b001aecfd8f"` |
 
-### []()\[Radar] Place Exited[#](#radar-place-exited "Direct link to heading")
+### [Radar Place Exited](#radar-place-exited "Direct link to heading")
 
 | Radar Event Field  | Amplitude Event Property | Type             | Example Value                              |
 | ------------------ | ------------------------ | ---------------- | ------------------------------------------ |
@@ -249,7 +249,7 @@ If [Regions](/regions) is enabled, Radar will also send the following attributes
 | `postalCode.code` | `Postal Code`            | string | `"21014"`                    |
 | `postalCode._id`  | `Postal Code ID`         | string | `"5b2c0906f5874b001aecfd8f"` |
 
-### []()\[Radar] Country Entered[#](#radar-country-entered "Direct link to heading")
+### [Radar Country Entered](#radar-country-entered "Direct link to heading")
 
 | Radar Event Field | Amplitude Event Property | Type            | Example Value     |
 | ----------------- | ------------------------ | --------------- | ----------------- |
@@ -278,7 +278,7 @@ If [Regions](/regions) is enabled, Radar will also send the following attributes
 | `postalCode.code` | `Postal Code`            | string | `"21014"`                    |
 | `postalCode._id`  | `Postal Code ID`         | string | `"5b2c0906f5874b001aecfd8f"` |
 
-### []()\[Radar] Country Exited[#](#radar-country-exited "Direct link to heading")
+### [Radar Country Exited](#radar-country-exited "Direct link to heading")
 
 | Radar Event Field | Amplitude Event Property | Type            | Example Value     |
 | ----------------- | ------------------------ | --------------- | ----------------- |
@@ -307,7 +307,7 @@ If [Regions](/regions) is enabled, Radar will also send the following attributes
 | `postalCode.code` | `Postal Code`            | string | `"21014"`                    |
 | `postalCode._id`  | `Postal Code ID`         | string | `"5b2c0906f5874b001aecfd8f"` |
 
-### []()\[Radar] State Entered[#](#radar-state-entered "Direct link to heading")
+### [Radar State Entered](#radar-state-entered "Direct link to heading")
 
 | Radar Event Field | Amplitude Event Property | Type            | Example Value |
 | ----------------- | ------------------------ | --------------- | ------------- |
@@ -336,7 +336,7 @@ If [Regions](/regions) is enabled, Radar will also send the following attributes
 | `postalCode.code` | `Postal Code`            | string | `"21014"`                    |
 | `postalCode._id`  | `Postal Code ID`         | string | `"5b2c0906f5874b001aecfd8f"` |
 
-### []()\[Radar] State Exited[#](#radar-state-exited "Direct link to heading")
+### [Radar State Exited](#radar-state-exited "Direct link to heading")
 
 | Radar Event Field | Amplitude Event Property | Type            | Example Value |
 | ----------------- | ------------------------ | --------------- | ------------- |
@@ -365,7 +365,7 @@ If [Regions](/regions) is enabled, Radar will also send the following attributes
 | `postalCode.code` | `Postal Code`            | string | `"21014"`                    |
 | `postalCode._id`  | `Postal Code ID`         | string | `"5b2c0906f5874b001aecfd8f"` |
 
-### []()\[Radar] DMA Entered[#](#radar-dma-entered "Direct link to heading")
+### [Radar DMA Entered](#radar-dma-entered "Direct link to heading")
 
 | Radar Event Field | Amplitude Event Property | Type            | Example Value |
 | ----------------- | ------------------------ | --------------- | ------------- |
@@ -394,7 +394,7 @@ If [Regions](/regions) is enabled, Radar will also send the following attributes
 | `postalCode.code` | `Postal Code`            | string | `"21014"`                    |
 | `postalCode._id`  | `Postal Code ID`         | string | `"5b2c0906f5874b001aecfd8f"` |
 
-### []()\[Radar] DMA Exited[#](#radar-dma-exited "Direct link to heading")
+### [Radar DMA Exited](#radar-dma-exited "Direct link to heading")
 
 | Radar Event Field | Amplitude Event Property | Type            | Example Value |
 | ----------------- | ------------------------ | --------------- | ------------- |
@@ -423,7 +423,7 @@ If [Regions](/regions) is enabled, Radar will also send the following attributes
 | `postalCode.code` | `Postal Code`            | string | `"21014"`                    |
 | `postalCode._id`  | `Postal Code ID`         | string | `"5b2c0906f5874b001aecfd8f"` |
 
-### []()\[Radar] Started Trip[#](#radar-started-trip "Direct link to heading")
+### [Radar Started Trip](#radar-started-trip "Direct link to heading")
 
 | Radar Event Attribute                | Amplitude Event Property                | Type            | Example Value |
 | ------------------------------------ | --------------------------------------- | --------------- | ------------- |
@@ -453,7 +453,7 @@ If [Regions](/regions) is enabled, Radar will also send the following attributes
 | `postalCode.code` | `Postal Code`            | string | `"21014"`                    |
 | `postalCode._id`  | `Postal Code ID`         | string | `"5b2c0906f5874b001aecfd8f"` |
 
-### []()\[Radar] Updated Trip[#](#radar-updated-trip "Direct link to heading")
+### [Radar Updated Trip](#radar-updated-trip "Direct link to heading")
 
 | Radar Event Attribute                | Amplitude Event Property                | Type            | Example Value |
 | ------------------------------------ | --------------------------------------- | --------------- | ------------- |
@@ -483,7 +483,7 @@ If [Regions](/regions) is enabled, Radar will also send the following attributes
 | `postalCode.code` | `Postal Code`            | string | `"21014"`                    |
 | `postalCode._id`  | `Postal Code ID`         | string | `"5b2c0906f5874b001aecfd8f"` |
 
-### []()\[Radar] Approaching Trip Destination[#](#radar-approaching-trip-destination "Direct link to heading")
+### [Radar Approaching Trip Destination](#radar-approaching-trip-destination "Direct link to heading")
 
 | Radar Event Attribute                | Amplitude Event Property                | Type            | Example Value |
 | ------------------------------------ | --------------------------------------- | --------------- | ------------- |
@@ -513,7 +513,7 @@ If [Regions](/regions) is enabled, Radar will also send the following attributes
 | `postalCode.code` | `Postal Code`            | string | `"21014"`                    |
 | `postalCode._id`  | `Postal Code ID`         | string | `"5b2c0906f5874b001aecfd8f"` |
 
-### []()\[Radar] Arrived at Trip Destination[#](#radar-arrived-at-trip-destination "Direct link to heading")
+### [Radar Arrived at Trip Destination](#radar-arrived-at-trip-destination "Direct link to heading")
 
 | Radar Event Attribute                | Amplitude Event Property                | Type            | Example Value |
 | ------------------------------------ | --------------------------------------- | --------------- | ------------- |
@@ -543,7 +543,7 @@ If [Regions](/regions) is enabled, Radar will also send the following attributes
 | `postalCode.code` | `Postal Code`            | string | `"21014"`                    |
 | `postalCode._id`  | `Postal Code ID`         | string | `"5b2c0906f5874b001aecfd8f"` |
 
-### []()\[Radar] Stopped Trip[#](#radar-stopped-trip "Direct link to heading")
+### [Radar Stopped Trip](#radar-stopped-trip "Direct link to heading")
 
 | Radar Event Attribute                | Amplitude Event Property                | Type            | Example Value |
 | ------------------------------------ | --------------------------------------- | --------------- | ------------- |
@@ -573,7 +573,7 @@ If [Regions](/regions) is enabled, Radar will also send the following attributes
 | `postalCode.code` | `Postal Code`            | string | `"21014"`                    |
 | `postalCode._id`  | `Postal Code ID`         | string | `"5b2c0906f5874b001aecfd8f"` |
 
-### []()\[Radar] Beacon Entered[#](#radar-beacon-entered "Direct link to heading")
+### [Radar Beacon Entered](#radar-beacon-entered "Direct link to heading")
 
 | Radar Event Attribute    | Amplitude Event Property | Type    | Example Value                |
 | ------------------------ | ------------------------ | ------- | ---------------------------- |
@@ -603,7 +603,7 @@ If [Regions](/regions) is enabled, Radar will also send the following attributes
 | `postalCode.code` | `Postal Code`            | string | `"21014"`                    |
 | `postalCode._id`  | `Postal Code ID`         | string | `"5b2c0906f5874b001aecfd8f"` |
 
-### []()\[Radar] Beacon Exited[#](#radar-beacon-exited "Direct link to heading")
+### [Radar Beacon Exited](#radar-beacon-exited "Direct link to heading")
 
 | Radar Event Attribute    | Amplitude Event Property | Type             | Example Value                |
 | ------------------------ | ------------------------ | ---------------- | ---------------------------- |
