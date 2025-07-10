@@ -112,7 +112,7 @@ curl "https://api.radar.io/v1/track" \
 
 ###### [Sample response](#sample-response "Direct link to heading")
 
-```sh
+```json
 {
   "meta": {
     "code": 200
@@ -514,7 +514,8 @@ Publishable
 ###### [Sample request](#sample-request-4 "Direct link to heading")
 
 ```sh
-curl "https://api.radar.io/v1/geocode/reverse?coordinates=40.70390,-73.98670" \  -H "Authorization: prj_live_pk_..."
+curl "https://api.radar.io/v1/geocode/reverse?coordinates=40.70390,-73.98670" \
+  -H "Authorization: prj_live_pk_..."
 ```
 
 
@@ -522,7 +523,44 @@ curl "https://api.radar.io/v1/geocode/reverse?coordinates=40.70390,-73.98670" \ 
 ###### [Sample responses](#sample-responses "Direct link to heading")
 
 ```json
-{  "meta": {    "code": 200  },  "addresses": [    {      "latitude": 40.70390,      "longitude": -73.98670,      "geometry": {        "type": "Point",        "coordinates": [-73.98670, 40.70390]      },      "addressLabel": "20 Jay Street",      "formattedAddress": "20 Jay Street, Brooklyn, New York, NY 11201 USA",      "country": "United States",      "countryCode": "US",      "countryFlag": "🇺🇸",      "state": "New York",      "stateCode": "NY",      "postalCode": "11201",      "city": "New York",      "borough": "Brooklyn",      "county": "Kings County",      "neighborhood": "DUMBO",      "timeZone": {        "id": "America/New_York",        "name": "Eastern Daylight Time",        "code": "EDT",        "currentTime": "2024-04-09T10:12:00-04:00",        "utcOffset": -14400,        "dstOffset": 3600      },      "number": "20",      "distance": 5,      "layer": "address"    }  ]}
+{
+  "meta": {
+    "code": 200
+  },
+  "addresses": [
+    {
+      "latitude": 40.70390,
+      "longitude": -73.98670,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-73.98670, 40.70390]
+      },
+      "addressLabel": "20 Jay Street",
+      "formattedAddress": "20 Jay Street, Brooklyn, New York, NY 11201 USA",
+      "country": "United States",
+      "countryCode": "US",
+      "countryFlag": "🇺🇸",
+      "state": "New York",
+      "stateCode": "NY",
+      "postalCode": "11201",
+      "city": "New York",
+      "borough": "Brooklyn",
+      "county": "Kings County",
+      "neighborhood": "DUMBO",
+      "timeZone": {
+        "id": "America/New_York",
+        "name": "Eastern Daylight Time",
+        "code": "EDT",
+        "currentTime": "2024-04-09T10:12:00-04:00",
+        "utcOffset": -14400,
+        "dstOffset": 3600
+      },
+      "number": "20",
+      "distance": 5,
+      "layer": "address"
+    }
+  ]
+}
 ```
 
 #### [IP geocode](#ip-geocode "Direct link to heading")
@@ -544,13 +582,43 @@ Publishable
 ###### [Sample request](#sample-request-5 "Direct link to heading")
 
 ```sh
-curl "https://api.radar.io/v1/geocode/ip" \  -H "Authorization: prj_live_pk_..."
+curl "https://api.radar.io/v1/geocode/ip" \
+  -H "Authorization: prj_live_pk_..."
 ```
 
 ###### [Sample response](#sample-response-3 "Direct link to heading")
 
 ```json
-{  "meta": {    "code": 200  },  "address": {    "latitude": 40.70390,    "longitude": -73.98670,    "geometry": {      "type": "Point",      "coordinates": [-73.98670, 40.70390]    },    "country": "United States",    "countryCode": "US",    "countryFlag": "🇺🇸",    "state": "New York",    "stateCode": "NY",    "postalCode": "11201",    "city": "New York",    "timeZone": {      "id": "America/New_York",      "name": "Eastern Daylight Time",      "code": "EDT",      "currentTime": "2024-04-09T10:12:00-04:00",      "utcOffset": -14400,      "dstOffset": 3600    },  },  "proxy": false,  "ip": "107.77.199.117"}
+{
+  "meta": {
+    "code": 200
+  },
+  "address": {
+    "latitude": 40.70390,
+    "longitude": -73.98670,
+    "geometry": {
+      "type": "Point",
+      "coordinates": [-73.98670, 40.70390]
+    },
+    "country": "United States",
+    "countryCode": "US",
+    "countryFlag": "🇺🇸",
+    "state": "New York",
+    "stateCode": "NY",
+    "postalCode": "11201",
+    "city": "New York",
+    "timeZone": {
+      "id": "America/New_York",
+      "name": "Eastern Daylight Time",
+      "code": "EDT",
+      "currentTime": "2024-04-09T10:12:00-04:00",
+      "utcOffset": -14400,
+      "dstOffset": 3600
+    },
+  },
+  "proxy": false,
+  "ip": "107.77.199.117"
+}
 ```
 
 ### [Search](#search "Direct link to heading")
@@ -589,7 +657,8 @@ Publishable
 ###### [Sample request](#sample-request-6 "Direct link to heading")
 
 ```sh
-curl "https://api.radar.io/v1/search/autocomplete?query=brooklyn+roasting&near=40.70390,-73.98670" \  -H "Authorization: prj_live_pk_..."
+curl "https://api.radar.io/v1/search/autocomplete?query=brooklyn+roasting&near=40.70390,-73.98670" \
+  -H "Authorization: prj_live_pk_..."
 ```
 
 
@@ -597,7 +666,37 @@ curl "https://api.radar.io/v1/search/autocomplete?query=brooklyn+roasting&near=4
 ###### [Sample response](#sample-response-4 "Direct link to heading")
 
 ```json
-{  "meta": {    "code": 200  },  "addresses": [    {      "latitude": 40.695779,      "longitude": -73.991489,      "geometry": {        "type": "Point",        "coordinates": [-73.991489,40.695779]      },      "country": "United States",      "countryCode": "US",      "countryFlag": "🇺🇸",      "county": "Kings County",      "distance": 990,      "borough": "Brooklyn",      "city": "Brooklyn",      "number": "1",      "neighborhood": "Brooklyn Heights",      "postalCode": "11201",      "stateCode": "NY",      "state": "New York",      "street": "Clinton St",      "layer": "place",      "formattedAddress": "1 Clinton St, Brooklyn, New York, NY 11201 USA",      "placeLabel": "Brooklyn Roasting Company"    }  ]}
+{
+  "meta": {
+    "code": 200
+  },
+  "addresses": [
+    {
+      "latitude": 40.695779,
+      "longitude": -73.991489,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-73.991489,40.695779]
+      },
+      "country": "United States",
+      "countryCode": "US",
+      "countryFlag": "🇺🇸",
+      "county": "Kings County",
+      "distance": 990,
+      "borough": "Brooklyn",
+      "city": "Brooklyn",
+      "number": "1",
+      "neighborhood": "Brooklyn Heights",
+      "postalCode": "11201",
+      "stateCode": "NY",
+      "state": "New York",
+      "street": "Clinton St",
+      "layer": "place",
+      "formattedAddress": "1 Clinton St, Brooklyn, New York, NY 11201 USA",
+      "placeLabel": "Brooklyn Roasting Company"
+    }
+  ]
+}
 ```
 
 
@@ -629,7 +728,8 @@ Secret
 ###### [Sample request](#sample-request-7 "Direct link to heading")
 
 ```sh
-curl "https://api.radar.io/v1/search/users?near=40.78382,-73.97536&radius=1000&limit=10" \  -H "Authorization: prj_live_sk_..."
+curl "https://api.radar.io/v1/search/users?near=40.78382,-73.97536&radius=1000&limit=10" \
+  -H "Authorization: prj_live_sk_..."
 ```
 
 
@@ -637,7 +737,21 @@ curl "https://api.radar.io/v1/search/users?near=40.78382,-73.97536&radius=1000&l
 ###### [Sample response](#sample-response-5 "Direct link to heading")
 
 ```json
-{  "meta": {    "code": 200  },  "users": [    {      "_id": "56db1f4613012711002229f4",      "live": true,      "userId": "1",      "deviceId": "C305F2DB-56DC-404F-B6C1-BC52F0B680D8",      ...    },    ...  ]}
+{
+  "meta": {
+    "code": 200
+  },
+  "users": [
+    {
+      "_id": "56db1f4613012711002229f4",
+      "live": true,
+      "userId": "1",
+      "deviceId": "C305F2DB-56DC-404F-B6C1-BC52F0B680D8",
+      ...
+    },
+    ...
+  ]
+}
 ```
 
 
@@ -672,7 +786,8 @@ Publishable
 ###### [Sample request](#sample-request-8 "Direct link to heading")
 
 ```sh
-curl "https://api.radar.io/v1/search/geofences?tags=store&metadata%5Boffers%5D=true&near=40.783826,-73.975363&radius=1000&limit=10" \  -H "Authorization: prj_live_pk_..."
+curl "https://api.radar.io/v1/search/geofences?tags=store&metadata%5Boffers%5D=true&near=40.783826,-73.975363&radius=1000&limit=10" \
+  -H "Authorization: prj_live_pk_..."
 ```
 
 
@@ -680,7 +795,30 @@ curl "https://api.radar.io/v1/search/geofences?tags=store&metadata%5Boffers%5D=t
 ###### [Sample response](#sample-response-6 "Direct link to heading")
 
 ```json
-{  "meta": {    "code": 200  },  "geofences": [    {      "_id": "56db1f4613012711002229f5",      "createdAt": "2016-06-10T13:44:10.535Z",      "live": true,      "tag": "store",      "externalId": "123",      "description": "Store #123",      "metadata": {        "rating": "4.5"      },      "geometryCenter": {        "type": "Point",        "coordinates": [-73.97536, 40.78382]      },      ...    },    ...  ]}
+{
+  "meta": {
+    "code": 200
+  },
+  "geofences": [
+    {
+      "_id": "56db1f4613012711002229f5",
+      "createdAt": "2016-06-10T13:44:10.535Z",
+      "live": true,
+      "tag": "store",
+      "externalId": "123",
+      "description": "Store #123",
+      "metadata": {
+        "rating": "4.5"
+      },
+      "geometryCenter": {
+        "type": "Point",
+        "coordinates": [-73.97536, 40.78382]
+      },
+      ...
+    },
+    ...
+  ]
+}
 ```
 
 
@@ -714,7 +852,8 @@ Publishable
 ###### [Sample request](#sample-request-9 "Direct link to heading")
 
 ```sh
-curl "https://api.radar.io/v1/search/places?chains=starbucks&near=40.78382,-73.97779&radius=1000&limit=10" \  -H "Authorization: prj_live_pk_..."
+curl "https://api.radar.io/v1/search/places?chains=starbucks&near=40.78382,-73.97779&radius=1000&limit=10" \
+  -H "Authorization: prj_live_pk_..."
 ```
 
 
@@ -722,7 +861,36 @@ curl "https://api.radar.io/v1/search/places?chains=starbucks&near=40.78382,-73.9
 ###### [Sample response](#sample-response-7 "Direct link to heading")
 
 ```json
-{  "meta": {    "code": 200  },  "places": [    {      "name": "Starbucks",      "chain": {        "name": "Starbucks",        "slug": "starbucks",        "externalId": "123",        "metadata": {          "customFlag": true        }      },      "categories": [        "food-beverage",        "coffee-shop"      ],      "location": {        "type": "Point",        "coordinates": [          -73.97779,          40.78382        ]      }    },    ...  ]}
+{
+  "meta": {
+    "code": 200
+  },
+  "places": [
+    {
+      "name": "Starbucks",
+      "chain": {
+        "name": "Starbucks",
+        "slug": "starbucks",
+        "externalId": "123",
+        "metadata": {
+          "customFlag": true
+        }
+      },
+      "categories": [
+        "food-beverage",
+        "coffee-shop"
+      ],
+      "location": {
+        "type": "Point",
+        "coordinates": [
+          -73.97779,
+          40.78382
+        ]
+      }
+    },
+    ...
+  ]
+}
 ```
 
 
@@ -780,7 +948,8 @@ Publishable
 ###### [Sample request](#sample-request-10 "Direct link to heading")
 
 ```sh
-curl "https://api.radar.io/v1/addresses/validate?countryCode=US&stateCode=NY&city=New%20York&number=841&postalCode=10003&street=Broadway&unit=Fl%7" \  -H "Authorization: prj_live_pk_..."
+curl "https://api.radar.io/v1/addresses/validate?countryCode=US&stateCode=NY&city=New%20York&number=841&postalCode=10003&street=Broadway&unit=Fl%7" \
+  -H "Authorization: prj_live_pk_..."
 ```
 
 
@@ -788,7 +957,31 @@ curl "https://api.radar.io/v1/addresses/validate?countryCode=US&stateCode=NY&cit
 ###### [Sample response](#sample-response-8 "Direct link to heading")
 
 ```json
-{  "meta": {    "code": 200  },  "address": {    "addressLabel": "841 BROADWAY FL 7",    "unit": "FL 7",    "number": "841",    "street": "BROADWAY",    "city": "NEW YORK",    "stateCode": "NY",    "postalCode": "10003",    "plus4": "4704",    "county": "NEW YORK",    "countryCode": "US",    "formattedAddress": "841 BROADWAY FL 7, NEW YORK, NY 10003-4704 US",    "metadata": {      "recordType": "H",      "propertyType": "commercial"    }  },  "result": {    "verificationStatus": "verified"  }}
+{
+  "meta": {
+    "code": 200
+  },
+  "address": {
+    "addressLabel": "841 BROADWAY FL 7",
+    "unit": "FL 7",
+    "number": "841",
+    "street": "BROADWAY",
+    "city": "NEW YORK",
+    "stateCode": "NY",
+    "postalCode": "10003",
+    "plus4": "4704",
+    "county": "NEW YORK",
+    "countryCode": "US",
+    "formattedAddress": "841 BROADWAY FL 7, NEW YORK, NY 10003-4704 US",
+    "metadata": {
+      "recordType": "H",
+      "propertyType": "commercial"
+    }
+  },
+  "result": {
+    "verificationStatus": "verified"
+  }
+}
 ```
 
 
@@ -823,7 +1016,8 @@ Publishable
 ###### [Sample request](#sample-request-11 "Direct link to heading")
 
 ```sh
-curl "https://api.radar.io/v1/route/distance?origin=40.78382,-73.97536&destination=40.70390,-73.98690&modes=foot,car&units=imperial" \  -H "Authorization: prj_live_pk_..."
+curl "https://api.radar.io/v1/route/distance?origin=40.78382,-73.97536&destination=40.70390,-73.98690&modes=foot,car&units=imperial" \
+  -H "Authorization: prj_live_pk_..."
 ```
 
 
@@ -831,7 +1025,39 @@ curl "https://api.radar.io/v1/route/distance?origin=40.78382,-73.97536&destinati
 ###### [Sample response](#sample-response-9 "Direct link to heading")
 
 ```json
-{  "meta": {    "code": 200  },  "routes": {    "geodesic": {      "distance": {        "value": 29333.03,        "text": "5.6 mi"      }    },    "foot": {      "distance": {        "value": 54596.46,        "text": "10.3 mi",      },      "duration": {        "value": 98.48,        "text": "1 hr 38 min"      }    },    "car": {      "distance": {        "value": 42480.31,        "text": "8.0 mi"      },      "duration": {        "value": 19.9,        "text": "20 mins"      }    }  }}
+{
+  "meta": {
+    "code": 200
+  },
+  "routes": {
+    "geodesic": {
+      "distance": {
+        "value": 29333.03,
+        "text": "5.6 mi"
+      }
+    },
+    "foot": {
+      "distance": {
+        "value": 54596.46,
+        "text": "10.3 mi",
+      },
+      "duration": {
+        "value": 98.48,
+        "text": "1 hr 38 min"
+      }
+    },
+    "car": {
+      "distance": {
+        "value": 42480.31,
+        "text": "8.0 mi"
+      },
+      "duration": {
+        "value": 19.9,
+        "text": "20 mins"
+      }
+    }
+  }
+}
 ```
 
 
@@ -863,7 +1089,8 @@ Publishable
 ###### [Sample request](#sample-request-12 "Direct link to heading")
 
 ```sh
-curl "https://api.radar.io/v1/route/matrix?origins=40.78382,-73.97536&destinations=40.70390,-73.98690|40.73237,-73.94884&mode=car&units=imperial" \  -H "Authorization: prj_live_pk_..."
+curl "https://api.radar.io/v1/route/matrix?origins=40.78382,-73.97536&destinations=40.70390,-73.98690|40.73237,-73.94884&mode=car&units=imperial" \
+  -H "Authorization: prj_live_pk_..."
 ```
 
 
@@ -871,7 +1098,55 @@ curl "https://api.radar.io/v1/route/matrix?origins=40.78382,-73.97536&destinatio
 ###### [Sample response](#sample-response-10 "Direct link to heading")
 
 ```json
-{  "meta": {    "code": 200  },  "origins": [    {      "latitude": 40.78382,      "longitude": -73.97536    }  ],  "destinations": [    {      "latitude": 40.70390,      "longitude": -73.98670    },    {      "latitude": 40.73237,      "longitude": -73.94884    }  ],  "matrix": [    [      {        "distance": {          "value": 42480.31,          "text": "8.0 mi"        },        "duration": {          "value": 19.9,          "text": "20 mins"        },        "originIndex": 0,        "destinationIndex": 0      },      {        "distance": {          "value": 31108.92,          "text": "5.8 mi"        },        "duration": {          "value": 17.13,          "text": "17 mins"        },        "originIndex": 0,        "destinationIndex": 1      }    ]  ]}
+{
+  "meta": {
+    "code": 200
+  },
+  "origins": [
+    {
+      "latitude": 40.78382,
+      "longitude": -73.97536
+    }
+  ],
+  "destinations": [
+    {
+      "latitude": 40.70390,
+      "longitude": -73.98670
+    },
+    {
+      "latitude": 40.73237,
+      "longitude": -73.94884
+    }
+  ],
+  "matrix": [
+    [
+      {
+        "distance": {
+          "value": 42480.31,
+          "text": "8.0 mi"
+        },
+        "duration": {
+          "value": 19.9,
+          "text": "20 mins"
+        },
+        "originIndex": 0,
+        "destinationIndex": 0
+      },
+      {
+        "distance": {
+          "value": 31108.92,
+          "text": "5.8 mi"
+        },
+        "duration": {
+          "value": 17.13,
+          "text": "17 mins"
+        },
+        "originIndex": 0,
+        "destinationIndex": 1
+      }
+    ]
+  ]
+}
 ```
 
 
@@ -923,7 +1198,11 @@ Publishable
 ###### [Sample request](#sample-request-13 "Direct link to heading")
 
 ```sh
-curl "https://api.radar.io/v1/route/match" \  -H "Authorization: prj_live_pk_..." \  -H "Content-Type: application/json" \  -X POST \  -d '{"path": [{"coordinates": "40.754231505412264,-73.98465161242224", "createdAt": "2024-03-29T20:47:49Z", "accuracy": 23}, {"coordinates": "40.73988226756973,-73.9950818342906", "createdAt": "2024-03-29T20:49:02Z", "accuracy": 27}], "mode": "car", "roadAttributes": "speedLimit,names,roadClass"}'
+curl "https://api.radar.io/v1/route/match" \
+  -H "Authorization: prj_live_pk_..." \
+  -H "Content-Type: application/json" \
+  -X POST \
+  -d '{"path": [{"coordinates": "40.754231505412264,-73.98465161242224", "createdAt": "2024-03-29T20:47:49Z", "accuracy": 23}, {"coordinates": "40.73988226756973,-73.9950818342906", "createdAt": "2024-03-29T20:49:02Z", "accuracy": 27}], "mode": "car", "roadAttributes": "speedLimit,names,roadClass"}'
 ```
 
 
@@ -931,7 +1210,106 @@ curl "https://api.radar.io/v1/route/match" \  -H "Authorization: prj_live_pk_...
 ###### [Sample response](#sample-response-11 "Direct link to heading")
 
 ```json
-{  "meta": {    "code": 200  },  "matchedPath": [    {      "latitude": 40.754233,      "longitude": -73.984727,      "originalIndex": 0    },    {      "latitude": 40.739919,      "longitude": -73.995156,      "originalIndex": 1    }  ],  "roadAttributes": [    {      "roadClass": "residential",      "speedLimit": {        "value": 25,        "text": "25 mph"      },      "names": [        "West 41st Street"      ],      "startLocation": {        "latitude": 40.754233,        "longitude": -73.984728      },      "endLocation": {        "latitude": 40.754464,        "longitude": -73.985276      },      "originalIndex": 0    },    {      "roadClass": "secondary",      "speedLimit": {        "value": 25,        "text": "25 mph"      },      "names": [        "7th Avenue"      ],      "startLocation": {        "latitude": 40.755373,        "longitude": -73.987447      },      "endLocation": {        "latitude": 40.75532,        "longitude": -73.987485      }    },    {      "roadClass": "residential",      "speedLimit": {        "value": 25,        "text": "25 mph"      },      "names": [        "West 18th Street"      ],      "startLocation": {        "latitude": 40.741056,        "longitude": -73.997862      },      "endLocation": {        "latitude": 40.740997,        "longitude": -73.997721      }    },    {      "roadClass": "residential",      "speedLimit": {        "value": 25,        "text": "25 mph"      },      "names": [        "West 18th Street"      ],      "startLocation": {        "latitude": 40.740997,        "longitude": -73.997721      },      "endLocation": {        "latitude": 40.739919,        "longitude": -73.995157      },      "originalIndex": 1    }  ],  "geometry": {    "polyline": "qbmvlAnltblCmMfa@Wx@mApDYz@s@xBcZd_Ag@|Aw@fCc@vA{AvE}Lba@cBrFhBjAbQ|KtLvHnBnAlBnAl]vTbC|AtClBj]jUdDzB|AbAt]nUjCdBhBlA`^vUnBrA`CxAl^hUzBvAlBpAz^lVhDzBnEvCz^dVhBnAjCbB~AdA`ZxRTNrCjBxA`At@d@n\\tTxBvA`C|Az]hUpChBlBtAh]pVpBpAjCdBvOhJrFdDxErCPLrBrAnBpAvQtL|JvGlCdBnBpAhUhOvGjEvBxAvBtA~]hUbC|AfBjAxUrOdG|DjCfBrBrAlD|BtJpGjMjI`EjCbEnCFDnO~JlNfJzBxAzBtAb^vUvBtAfBjAtTvNxFxDtBvAjBnA`\\bTdC`BbBfArTrN`G`ExBxAtByGjbAg_D"  },  "distance": {    "value": 7439.501747250396,    "text": "1.4 mi"  }}
+{
+  "meta": {
+    "code": 200
+  },
+  "matchedPath": [
+    {
+      "latitude": 40.754233,
+      "longitude": -73.984727,
+      "originalIndex": 0
+    },
+    {
+      "latitude": 40.739919,
+      "longitude": -73.995156,
+      "originalIndex": 1
+    }
+  ],
+  "roadAttributes": [
+    {
+      "roadClass": "residential",
+      "speedLimit": {
+        "value": 25,
+        "text": "25 mph"
+      },
+      "names": [
+        "West 41st Street"
+      ],
+      "startLocation": {
+        "latitude": 40.754233,
+        "longitude": -73.984728
+      },
+      "endLocation": {
+        "latitude": 40.754464,
+        "longitude": -73.985276
+      },
+      "originalIndex": 0
+    },
+    {
+      "roadClass": "secondary",
+      "speedLimit": {
+        "value": 25,
+        "text": "25 mph"
+      },
+      "names": [
+        "7th Avenue"
+      ],
+      "startLocation": {
+        "latitude": 40.755373,
+        "longitude": -73.987447
+      },
+      "endLocation": {
+        "latitude": 40.75532,
+        "longitude": -73.987485
+      }
+    },
+    {
+      "roadClass": "residential",
+      "speedLimit": {
+        "value": 25,
+        "text": "25 mph"
+      },
+      "names": [
+        "West 18th Street"
+      ],
+      "startLocation": {
+        "latitude": 40.741056,
+        "longitude": -73.997862
+      },
+      "endLocation": {
+        "latitude": 40.740997,
+        "longitude": -73.997721
+      }
+    },
+    {
+      "roadClass": "residential",
+      "speedLimit": {
+        "value": 25,
+        "text": "25 mph"
+      },
+      "names": [
+        "West 18th Street"
+      ],
+      "startLocation": {
+        "latitude": 40.740997,
+        "longitude": -73.997721
+      },
+      "endLocation": {
+        "latitude": 40.739919,
+        "longitude": -73.995157
+      },
+      "originalIndex": 1
+    }
+  ],
+  "geometry": {
+    "polyline": "qbmvlAnltblCmMfa@Wx@mApDYz@s@xBcZd_Ag@|Aw@fCc@vA{AvE}Lba@cBrFhBjAbQ|KtLvHnBnAlBnAl]vTbC|AtClBj]jUdDzB|AbAt]nUjCdBhBlA`^vUnBrA`CxAl^hUzBvAlBpAz^lVhDzBnEvCz^dVhBnAjCbB~AdA`ZxRTNrCjBxA`At@d@n\\tTxBvA`C|Az]hUpChBlBtAh]pVpBpAjCdBvOhJrFdDxErCPLrBrAnBpAvQtL|JvGlCdBnBpAhUhOvGjEvBxAvBtA~]hUbC|AfBjAxUrOdG|DjCfBrBrAlD|BtJpGjMjI`EjCbEnCFDnO~JlNfJzBxAzBtAb^vUvBtAfBjAtTvNxFxDtBvAjBnA`\\bTdC`BbBfArTrN`G`ExBxAtByGjbAg_D"
+  },
+  "distance": {
+    "value": 7439.501747250396,
+    "text": "1.4 mi"
+  }
+}
 ```
 
 
@@ -983,7 +1361,8 @@ Publishable
 ###### [Sample request](#sample-request-14 "Direct link to heading")
 
 ```sh
-curl "https://api.radar.io/v1/route/directions?locations=40.734250,-73.990934|40.712971,-73.951385|40.745580,-73.903162|40.774419,-73.872746&mode=car&units=imperial" \  -H "Authorization: prj_live_pk_..."
+curl "https://api.radar.io/v1/route/directions?locations=40.734250,-73.990934|40.712971,-73.951385|40.745580,-73.903162|40.774419,-73.872746&mode=car&units=imperial" \
+  -H "Authorization: prj_live_pk_..."
 ```
 
 
@@ -991,7 +1370,961 @@ curl "https://api.radar.io/v1/route/directions?locations=40.734250,-73.990934|40
 ###### [Sample response](#sample-response-12 "Direct link to heading")
 
 ```json
-{  "meta": {    "code": 200  },  "routes": [    {      "duration": {        "value": 39.36884333333333,        "text": "39 mins"      },      "distance": {        "value": 74156.82651999999,        "text": "14.0 mi"      },      "legs": [        {          "startLocation": {            "latitude": 40.73425,            "longitude": -73.990934          },          "endLocation": {            "latitude": 40.712971,            "longitude": -73.951385          },          "duration": {            "value": 15.764213333333332,            "text": "16 mins"          },          "distance": {            "value": 19937.66468,            "text": "3.8 mi"          },          "geometry": {            "polyline": "kafulAnn`clCfKxAhCF`CJdg@vGtB\\|BZfJrAh[lEhC^dBThMjBjRjCdBZn@Pd@Nh@Pf@Vf@Vh@`@vWxSv@l@t@l@`BpArB`BtYjU~AlAbBtA`BzAdVnQfEhD`ClBhRfOlCxBjBxAhBxAxKzItNhL|BhBnB|Af]rXnB~A|AnAn[fWbAv@~ArAzBfBxStPbInGtB`BlBzA~b@l]bAx@d@\\jBxAjMdKTPxGlFnJvH|StPnCxBhFbEr@{EfEeYvCyRf@kD\\{BBUtC}RfAoFbAcFpDsNh@qBp@oCfLcd@r@sCn@cC`Lsc@p@kCl@aCjE}P`E}O^cBhAgFvDbAd@L~fAtYhTrF~Ab@tBh@rA\\bd@vLvA^|Ab@`B^f`@dLxAf@lBl@xAd@tF~AxPzEpBl@tF~AnAmFpBsD~BkE`DyNlGmY^cBjA_G`AwEX}AnG}Zd@}B~@uEj@uCtKyh@XsAh@gCd@yBbJ{c@\\aBr@iD~AeIz@yDn@wCpD}PVmAf@eCf@eC`Joc@VsAf@aCd@}BpHm^r@kDXoAfAkFbA{EtIsb@Z}A`@uBR_AXeAd@}A`AwCtEsNrAsEjAeEb@aBd@aBr@sCz@cDjBcHbIoY|@kD\\qAXkAxDgRzAmHzSgdA~J_g@|\\gcBpb@_uB|U{kAdIcTdVqpAl~DssRj_@{hB|Fq_@zt@opDtG_UrEcU`AoFjCkOd@yC`@}CToCTwChAeTx@}PRkCb@eDd@gCn@sCrP_r@\\uAjAuEmCuAsP}I}KsG}@i@kAq@QeFo@uTAMiBy_@wBac@KkBMsBSaDk@mIs@{Io@aMmBs]{AmXS}EQ{CoBac@OeDeA{ScAoTUmEUeEsA{X}@yPoEi~@WkF}AcPScFG}AUkFaDXm[fCgKv@aCRec@hD_CP{CZo]bD"          },          "steps": [            {              "distance": {                "value": 3674.5407999999998,                "text": "0.7 mi"              },              "duration": {                "value": 2.1034166666666665,                "text": "2 mins"              },              "start_location": {                "latitude": 40.734246,                "longitude": -73.990904              },              "end_location": {                "latitude": 40.725384,                "longitude": -73.996813              },              "instructions": "Drive south on Broadway.",              "geometry": {                "polyline": "kafulAnn`clCfKxAhCF`CJdg@vGtB\\|BZfJrAh[lEhC^dBThMjBjRjCdBZn@Pd@Nh@Pf@Vf@Vh@`@vWxSv@l@t@l@`BpArB`BtYjU~AlAbBtA`BzAdVnQfEhD`ClBhRfOlCxBjBxAhBxAxKzItNhL|BhBnB|Af]rXnB~A|AnAn[fWbAv@~ArAzBfBxStPbInGtB`BlBzA~b@l]bAx@d@\\jBxAjMdKTPxGlFnJvH|StPnCxBhFbE"              },              "travel_mode": "DRIVE",              "manuever": "start"            },            {              "distance": {                "value": 1233.59584,                "text": "0.2 mi"              },              "duration": {                "value": 0.8153,                "text": "1 min"              },              "start_location": {                "latitude": 40.725384,                "longitude": -73.996813              },              "end_location": {                "latitude": 40.724094,                "longitude": -73.992697              },              "instructions": "Turn left onto East Houston Street.",              "geometry": {                "polyline": "owttlAx_lclCr@{EfEeYvCyRf@kD\\{BBUtC}RfAoFbAcFpDsNh@qBp@oCfLcd@r@sCn@cC`Lsc@p@kCl@aCjE}P`E}O^cBhAgF"              },              "travel_mode": "DRIVE",              "manuever": "left"            },            {              "distance": {                "value": 1420.60372,                "text": "0.3 mi"              },              "duration": {                "value": 0.7290833333333333,                "text": "1 min"              },              "start_location": {                "latitude": 40.724094,                "longitude": -73.992697              },              "end_location": {                "latitude": 40.720342,                "longitude": -73.994113              },              "instructions": "Turn right onto Bowery.",              "geometry": {                "polyline": "{frtlAp~cclCvDbAd@L~fAtYhTrF~Ab@tBh@rA\\bd@vLvA^|Ab@`B^f`@dLxAf@lBl@xAd@tF~AxPzEpBl@tF~A"              },              "travel_mode": "DRIVE",              "manuever": "right"            },            {              "distance": {                "value": 4573.49096,                "text": "0.9 mi"              },              "duration": {                "value": 1.9212833333333335,                "text": "2 mins"              },              "start_location": {                "latitude": 40.720342,                "longitude": -73.994113              },              "end_location": {                "latitude": 40.715536,                "longitude": -73.978895              },              "instructions": "Turn left onto Delancey Street.",              "geometry": {                "polyline": "k|jtlA`wfclCnAmFpBsD~BkE`DyNlGmY^cBjA_G`AwEX}AnG}Zd@}B~@uEj@uCtKyh@XsAh@gCd@yBbJ{c@\\aBr@iD~AeIz@yDn@wCpD}PVmAf@eCf@eC`Joc@VsAf@aCd@}BpHm^r@kDXoAfAkFbA{EtIsb@Z}A`@uBR_AXeAd@}A`AwCtEsNrAsEjAeEb@aBd@aBr@sCz@cDjBcHbIoY|@kD\\qAXkAxDgRzAmHzSgdA~J_g@|\\gcBpb@_uB|U{kA"              },              "travel_mode": "DRIVE",              "manuever": "left"            },            {              "distance": {                "value": 5000.00016,                "text": "0.9 mi"              },              "duration": {                "value": 1.63395,                "text": "2 mins"              },              "start_location": {                "latitude": 40.715536,                "longitude": -73.978895              },              "end_location": {                "latitude": 40.710432,                "longitude": -73.962139              },              "instructions": "Keep right to take Broadway toward I 278 West, Staten Island.",              "geometry": {                "polyline": "_patlA|_iblCdIcTdVqpAl~DssRj_@{hB|Fq_@zt@opD"              },              "travel_mode": "DRIVE",              "manuever": "stay-right"            },            {              "distance": {                "value": 213.2546,                "text": "213.3 ft"              },              "duration": {                "value": 0.07121666666666666,                "text": "0.1 min"              },              "start_location": {                "latitude": 40.710432,                "longitude": -73.962139              },              "end_location": {                "latitude": 40.710187,                "longitude": -73.961433              },              "instructions": "Take the exit on the right toward I 278 West, Broadway West. Then Keep left toward Broadway East.",              "geometry": {                "polyline": "_qwslAthhalCtG_UrEcU"              },              "travel_mode": "DRIVE",              "manuever": "exit-right"            },            {              "distance": {                "value": 757.87404,                "text": "757.9 ft"              },              "duration": {                "value": 0.4671666666666667,                "text": "0.5 min"              },              "start_location": {                "latitude": 40.710187,                "longitude": -73.961433              },              "end_location": {                "latitude": 40.709554,                "longitude": -73.95886              },              "instructions": "Keep left toward Broadway East, South 5th Street.",              "geometry": {                "polyline": "uawslAp|falC`AoFjCkOd@yC`@}CToCTwChAeTx@}PRkCb@eDd@gCn@sCrP_r@\\uAjAuE"              },              "travel_mode": "DRIVE",              "manuever": "stay-left"            },            {              "distance": {                "value": 259.18636,                "text": "259.2 ft"              },              "duration": {                "value": 0.15403333333333336,                "text": "0.2 min"              },              "start_location": {                "latitude": 40.709554,                "longitude": -73.95886              },              "end_location": {                "latitude": 40.710183,                "longitude": -73.958458              },              "instructions": "Turn left onto Havemeyer Street. Then Turn right onto Borinquen Place.",              "geometry": {                "polyline": "czuslAv{aalCmCuAsP}I}KsG}@i@kAq@"              },              "travel_mode": "DRIVE",              "manuever": "left"            },            {              "distance": {                "value": 2050.525,                "text": "0.4 mi"              },              "duration": {                "value": 0.93725,                "text": "1 min"              },              "start_location": {                "latitude": 40.710183,                "longitude": -73.958458              },              "end_location": {                "latitude": 40.710961,                "longitude": -73.951119              },              "instructions": "Turn right onto Borinquen Place.",              "geometry": {                "polyline": "mawslArbaalCQeFo@uTAMiBy_@wBac@KkBMsBSaDk@mIs@{Io@aMmBs]{AmXS}EQ{CoBac@OeDeA{ScAoTUmEUeEsA{X}@yPoEi~@WkF}AcPScFG}AUkF"              },              "travel_mode": "DRIVE",              "manuever": "right"            },            {              "distance": {                "value": 734.90816,                "text": "734.9 ft"              },              "duration": {                "value": 0.4403166666666667,                "text": "0.4 min"              },              "start_location": {                "latitude": 40.710961,                "longitude": -73.951119              },              "end_location": {                "latitude": 40.712967,                "longitude": -73.951428              },              "instructions": "Turn left onto Union Avenue.",              "geometry": {                "polyline": "arxslA|wr`lCaDXm[fCgKv@aCRec@hD_CP{CZo]bD"              },              "travel_mode": "DRIVE",              "manuever": "left"            },            {              "distance": {                "value": 0,                "text": "0.0 ft"              },              "duration": {                "value": 0,                "text": "0 min"              },              "start_location": {                "latitude": 40.712967,                "longitude": -73.951428              },              "end_location": {                "latitude": 40.712967,                "longitude": -73.951428              },              "instructions": "You have arrived at your destination.",              "geometry": {                "polyline": "mo|slAfks`lC"              },              "travel_mode": "DRIVE",              "manuever": "destination"            }          ]        },        {          "startLocation": {            "latitude": 40.712971,            "longitude": -73.951385          },          "endLocation": {            "latitude": 40.74558,            "longitude": -73.903162          },          "duration": {            "value": 15.217113333333334,            "text": "15 mins"          },          "distance": {            "value": 37089.8962,            "text": "7.0 mi"          },          "geometry": {            "polyline": "mo|slAfks`lCyGn@}k@pFgIj@wCR?jG@jX@bY@vJ?lEAnEEpX?zCAdKA~GGva@vDdBjM~G~DpBdCpAd[~OrMxG~DGbN|EdZjOvUhKhQvInPnFfOjDxYnFzNlEhQbHviAhi@d{Axs@tW~LfyBldAv`@fSll@fZtB|E~m@x\\fUhMzNhKjTnRvHfEbDvAtDyChWwZ|BkC}D{AmPoGcc@uJmSmFqh@kPcf@aUoiA_i@evBcbA_]}PwuAkp@cBy@qSmKmCuAmq@y`@sXcPa]{RkO}IeyAk{@cTaNkSaOgQsO{HcIyu@ew@g_@{d@ya@{j@e`@km@w]ml@ckAqsBe}@y`Bsc@e{@gd@g|@iPk\\oSyb@aQk^mNmZkCsFoCsFkCiFgC{EuCaFoCwEmCqEyh@{x@gDkFmCkEoCwEgCuEiCeFcC_FaCiF{^ky@uDgI}BqF_CwFqCiHgCaHqB{FmBiGsAgFcBoGyAgGqAyFqAcGeAkFyAiIgBsKiHsd@mPg_AaFw\\wD{V{Ms|@_AsGeAsGcAkGeA{FmAqGuA{GsAyFuAkGyAuF}AwFeBmFwB{GmBuFiBaFqBeF}BuFoBeE_CaFqCsF_CwE}BaE}CaFuCqE_DwEgCqDeCyCqDaF}CqDkCaDsE{FgkB_|B}DmEaEaEwDwD_E}DyDuD{DoD}EiEwE{D_FeEyEuDmFwDqF{DwGqEsFmD{FmDyqC}_BsDyBwDaCqCqBeDgCkDqCkDuC_DuCqDmDkDsDyDkEaD{DoDaFsDyF}CgFkCuEiCsEyBwE}B{EoBoEuBmFuJo\\y@gCyDqMcDyLgEwMqBoJmB_JkBsImAcHaBiJmAoHiA{GcAwG}@iGu@uFw@{Gw@mGu@qHs@sH_A{L{@uQeAcQy@yPo@qPi@iQ_Bml@[aPu@kQ_AiP}}@s{McB}Wi@mHs@qHu@wHm@eFy@uG{@eGaAsGaAeGkAoGkAcGuAoGuAeGsAuFaBeGaByFcBuFmB}Fwd@{sAqEqM}E_OsE_OwDoM_@wAcCiJy@{CSw@uBcIcHmXeUi|@kB}GwAoF}AsF}AiFmBwF{BaGsBiF{BqF_CiFuBuEeCgFaCqEoCcFwCeFoDqFcHeKq|@}jA}M}PktA{gBom@}w@}R}WaLqMcF{E_GkF{FeEoEyC{DoCmEaC{DeBeGsBsFwAkFiA}GgAmF_@wEMeF?sFL}EZcE`@{Ej@cF|@wDr@iEdAuElAoEnAeTnDaKlEuIjDaNjFyEhB{MtFyMtFeOdIuFhAq@Ly@Aq@So@_@m@w@e@gA]oAkAiFtEmNdUqp@rIwYvAmEfFk@zQqBbb@wENApDa@dAbUpAjYpCvh@tAhW|Dnw@|Ddw@zDjv@rAbXxAvXPnDZnGjDzr@NxCRbEvDlu@NnCP`EvDhz@pEf_A"          },          "steps": [            {              "distance": {                "value": 406.82416,                "text": "406.8 ft"              },              "duration": {                "value": 0.18710000000000002,                "text": "0.2 min"              },              "start_location": {                "latitude": 40.712967,                "longitude": -73.951428              },              "end_location": {                "latitude": 40.714067,                "longitude": -73.951605              },              "instructions": "Drive north on Union Avenue. Then, in 100 meters, Turn left onto Metropolitan Avenue.",              "geometry": {                "polyline": "mo|slAfks`lCyGn@}k@pFgIj@wCR"              },              "travel_mode": "DRIVE",              "manuever": "start"            },            {              "distance": {                "value": 757.87404,                "text": "757.9 ft"              },              "duration": {                "value": 0.41185,                "text": "0.4 min"              },              "start_location": {                "latitude": 40.714067,                "longitude": -73.951605              },              "end_location": {                "latitude": 40.714074,                "longitude": -73.95434              },              "instructions": "Turn left onto Metropolitan Avenue.",              "geometry": {                "polyline": "et~slAhvs`lC?jG@jX@bY@vJ?lEAnEEpX?zCAdKA~GGva@"              },              "travel_mode": "DRIVE",              "manuever": "left"            },            {              "distance": {                "value": 469.16012,                "text": "469.2 ft"              },              "duration": {                "value": 0.22013333333333335,                "text": "0.2 min"              },              "start_location": {                "latitude": 40.714074,                "longitude": -73.95434              },              "end_location": {                "latitude": 40.712904,                "longitude": -73.955046              },              "instructions": "Turn left onto Marcy Avenue. Then Bear left toward I 278 West.",              "geometry": {                "polyline": "st~slAfay`lCvDdBjM~G~DpBdCpAd[~OrMxG"              },              "travel_mode": "DRIVE",              "manuever": "left"            },            {              "distance": {                "value": 3645.0132399999998,                "text": "0.7 mi"              },              "duration": {                "value": 0.8754333333333334,                "text": "1 min"              },              "start_location": {                "latitude": 40.712904,                "longitude": -73.955046              },              "end_location": {                "latitude": 40.703669,                "longitude": -73.959976              },              "instructions": "Bear left toward I 278 West, Brooklyn-Queens Expressway.",              "geometry": {                "polyline": "ok|slAjmz`lC~DGbN|EdZjOvUhKhQvInPnFfOjDxYnFzNlEhQbHviAhi@d{Axs@tW~LfyBldAv`@fSll@fZ"              },              "travel_mode": "DRIVE",              "manuever": "slight-left"            },            {              "distance": {                "value": 843.17588,                "text": "843.2 ft"              },              "duration": {                "value": 0.19875,                "text": "0.2 min"              },              "start_location": {                "latitude": 40.703669,                "longitude": -73.959976              },              "end_location": {                "latitude": 40.701668,                "longitude": -73.961446              },              "instructions": "Take exit 31 on the right toward Wythe Avenue, Kent Avenue. Then Turn left onto Wythe Avenue.",              "geometry": {                "polyline": "ijjslAnadalCtB|E~m@x\\fUhMzNhKjTnRvHfEbDvA"              },              "travel_mode": "DRIVE",              "manuever": "exit-right"            },            {              "distance": {                "value": 259.18636,                "text": "259.2 ft"              },              "duration": {                "value": 0.19641666666666666,                "text": "0.2 min"              },              "start_location": {                "latitude": 40.701668,                "longitude": -73.961446              },              "end_location": {                "latitude": 40.701125,                "longitude": -73.960855              },              "instructions": "Turn left onto Wythe Avenue. Then Turn left onto Williamsburg Street East.",              "geometry": {                "polyline": "gmfslAj}falCtDyChWwZ|BkC"              },              "travel_mode": "DRIVE",              "manuever": "left"            },            {              "distance": {                "value": 141.07612,                "text": "141.1 ft"              },              "duration": {                "value": 0.18068333333333333,                "text": "0.2 min"              },              "start_location": {                "latitude": 40.701125,                "longitude": -73.960855              },              "end_location": {                "latitude": 40.701499,                "longitude": -73.960673              },              "instructions": "Turn left onto Williamsburg Street East. Then Bear left toward I 278 East.",              "geometry": {                "polyline": "ikeslAlxealC}D{AmPoG"              },              "travel_mode": "DRIVE",              "manuever": "left"            },            {              "distance": {                "value": 11059.71164,                "text": "2.1 mi"              },              "duration": {                "value": 2.7424666666666666,                "text": "3 mins"              },              "start_location": {                "latitude": 40.701499,                "longitude": -73.960673              },              "end_location": {                "latitude": 40.724281,                "longitude": -73.936285              },              "instructions": "Bear left toward I 278 East, Brooklyn-Queens Expressway.",              "geometry": {                "polyline": "ubfslA`mealCcc@uJmSmFqh@kPcf@aUoiA_i@evBcbA_]}PwuAkp@cBy@qSmKmCuAmq@y`@sXcPa]{RkO}IeyAk{@cTaNkSaOgQsO{HcIyu@ew@g_@{d@ya@{j@e`@km@w]ml@ckAqsBe}@y`Bsc@e{@gd@g|@iPk\\oSyb@aQk^mNmZkCsFoCsFkCiFgC{EuCaFoCwEmCqEyh@{x@gDkFmCkEoCwEgCuEiCeFcC_FaCiF{^ky@uDgI}BqF_CwFqCiHgCaHqB{FmBiGsAgFcBoGyAgGqAyFqAcGeAkFyAiIgBsKiHsd@"              },              "travel_mode": "DRIVE",              "manuever": "slight-left"            },            {              "distance": {                "value": 15072.17896,                "text": "2.9 mi"              },              "duration": {                "value": 3.8308666666666666,                "text": "4 mins"              },              "start_location": {                "latitude": 40.724281,                "longitude": -73.936285              },              "end_location": {                "latitude": 40.746265,                "longitude": -73.894711              },              "instructions": "Keep left to stay on Brooklyn-Queens Expressway.",              "geometry": {                "polyline": "qrrtlAxxu_lCmPg_AaFw\\wD{V{Ms|@_AsGeAsGcAkGeA{FmAqGuA{GsAyFuAkGyAuF}AwFeBmFwB{GmBuFiBaFqBeF}BuFoBeE_CaFqCsF_CwE}BaE}CaFuCqE_DwEgCqDeCyCqDaF}CqDkCaDsE{FgkB_|B}DmEaEaEwDwD_E}DyDuD{DoD}EiEwE{D_FeEyEuDmFwDqF{DwGqEsFmD{FmDyqC}_BsDyBwDaCqCqBeDgCkDqCkDuC_DuCqDmDkDsDyDkEaD{DoDaFsDyF}CgFkCuEiCsEyBwE}B{EoBoEuBmFuJo\\y@gCyDqMcDyLgEwMqBoJmB_JkBsImAcHaBiJmAoHiA{GcAwG}@iGu@uFw@{Gw@mGu@qHs@sH_A{L{@uQeAcQy@yPo@qPi@iQ_Bml@[aPu@kQ_AiP}}@s{McB}Wi@mHs@qHu@wHm@eFy@uG{@eGaAsGaAeGkAoGkAcGuAoGuAeGsAuFaBeGaByFcBuFmB}Fwd@{sAqEqM}E_OsE_OwDoM_@wAcCiJy@{CSw@uBcIcHmXeUi|@kB}GwAoF}AsF}AiFmBwF{BaGsBiF{BqF_CiFuBuEeCgFaCqEoCcFwCeFoDqFcHeKq|@}jA}M}PktA{gBom@}w@}R}WaLqMcF{E_GkF{FeEoEyC{DoCmEaC{DeBeGsBsFwAkFiA}GgAmF_@wEMeF?sFL}EZcE`@{Ej@cF|@wDr@iEdAuElAoEnA"              },              "travel_mode": "DRIVE",              "manuever": "stay-left"            },            {              "distance": {                "value": 849.73756,                "text": "849.7 ft"              },              "duration": {                "value": 0.2906833333333333,                "text": "0.3 min"              },              "start_location": {                "latitude": 40.746265,                "longitude": -73.894711              },              "end_location": {                "latitude": 40.748373,                "longitude": -73.895364              },              "instructions": "Take exit 40 on the right toward Roosevelt Avenue.",              "geometry": {                "polyline": "qp}ulAlrd}kCeTnDaKlEuIjDaNjFyEhB{MtFyMtFeOdIuFhAq@Ly@Aq@So@_@m@w@e@gA]oAkAiF"              },              "travel_mode": "DRIVE",              "manuever": "exit-right"            },            {              "distance": {                "value": 501.96852,                "text": "502.0 ft"              },              "duration": {                "value": 0.24676666666666666,                "text": "0.2 min"              },              "start_location": {                "latitude": 40.748373,                "longitude": -73.895364              },              "end_location": {                "latitude": 40.747697,                "longitude": -73.893793              },              "instructions": "Turn right onto Broadway.",              "geometry": {                "polyline": "itavlAf{e}kCtEmNdUqp@rIwYvAmE"              },              "travel_mode": "DRIVE",              "manuever": "right"            },            {              "distance": {                "value": 396.98163999999997,                "text": "397.0 ft"              },              "duration": {                "value": 0.29313333333333336,                "text": "0.3 min"              },              "start_location": {                "latitude": 40.747697,                "longitude": -73.893793              },              "end_location": {                "latitude": 40.74662,                "longitude": -73.893588              },              "instructions": "Turn right onto 72nd Street.",              "geometry": {                "polyline": "aj`vlA`yb}kCfFk@zQqBbb@wENApDa@"              },              "travel_mode": "DRIVE",              "manuever": "right"            },            {              "distance": {                "value": 2673.8846,                "text": "0.5 mi"              },              "duration": {                "value": 1.195,                "text": "1 min"              },              "start_location": {                "latitude": 40.74662,                "longitude": -73.893588              },              "end_location": {                "latitude": 40.745624,                "longitude": -73.90317              },              "instructions": "Turn right onto Roosevelt Avenue.",              "geometry": {                "polyline": "wf~ulAflb}kCdAbUpAjYpCvh@tAhW|Dnw@|Ddw@zDjv@rAbXxAvXPnDZnGjDzr@NxCRbEvDlu@NnCP`EvDhz@pEf_A"              },              "travel_mode": "DRIVE",              "manuever": "right"            },            {              "distance": {                "value": 0,                "text": "0.0 ft"              },              "duration": {                "value": 0,                "text": "0 min"              },              "start_location": {                "latitude": 40.745624,                "longitude": -73.90317              },              "end_location": {                "latitude": 40.745624,                "longitude": -73.90317              },              "instructions": "You have arrived at your destination.",              "geometry": {                "polyline": "oh|ulAbcu}kC"              },              "travel_mode": "DRIVE",              "manuever": "destination"            }          ]        },        {          "startLocation": {            "latitude": 40.74558,            "longitude": -73.903162          },          "endLocation": {            "latitude": 40.774419,            "longitude": -73.872746          },          "duration": {            "value": 8.387516666666667,            "text": "8 mins"          },          "distance": {            "value": 17129.26564,            "text": "3.2 mi"          },          "geometry": {            "polyline": "oh|ulAbcu}kCqEg_AwDiz@QaEOoCwDmu@ScEOyCkD{r@[oGQoDyAwXsAcX{Dkv@}Dew@wC\\ea@vEwAPgBTc_@jEqBTgCXg@Fef@pF_@D}C~@M}Cc@{Ke@}IoAqC_AaBeAy@kAm@oBg@s@UiAQcA?g@Pk@@_AZaAXu@\\qG~Cyg@xWgHjDoI|D}G~CeGnCaDfA{DhAaE`AiEx@sNzFsHl@aVnAm_@nD}ShDaQ`EiQfIs~@vg@mc@|V}CfBkZbJaa@pM_UlGwWpFkGxAe^|GkS`BaMz@qLQuM{@wQeDwM}DeNeFqQkGwg@q[e^_Ti_C}wA}l@i`@sE_DuDsCsDaDyDeEwCkDuCyD_DwEkLqRmCwDuDuEoDeE{CuC{CoC}EkDaAm@wBsAmF_CuDcAwEuAyQkEoEuAsDoAeD}A}CsBkCsByCyC}DqEiCyD}BsEuBwEeBmFkAkEeAaFs@_Gg@kG[sFSsHaAyh@c@eRm@cRcCyl@kAcVqIqs@{A_Q_B{PaBgPgBwPmBoPuBkPwBcPiCoQsBuMeCwOoC}OyCiPqCyO{C_PcDaPcDsOiDoOqDoOuDkO_EqOiEaOcEaOoE_OuE_O}E{N{EqNgFkN}Va}@mHuRcHkQqFaNaF}MyGiQgLkZaGqVm@sBq@kCmAaGoAyGgAiH_A{Gw@cH_@}EiEyy@wGesA]mJEqEuAKmWwAkJ[{EFwDZuARwB^sDp@sFhA}P`DwDl@yB\\cBTyEn@mVdFwBr@{B~@yCfBqEvDkElEcCxCk@x@eAvAgCwCOQmCeDqAqBmAoBaAsB}@mB{@{Bw@aCw@sCwBqJm@oCZgALMqA}GUmBg@yAkA}LmFin@eIe}@gByA_ET??"          },          "steps": [            {              "distance": {                "value": 1909.44888,                "text": "0.4 mi"              },              "duration": {                "value": 0.7839333333333334,                "text": "1 min"              },              "start_location": {                "latitude": 40.745624,                "longitude": -73.90317              },              "end_location": {                "latitude": 40.746333,                "longitude": -73.896325              },              "instructions": "Drive east on Roosevelt Avenue.",              "geometry": {                "polyline": "oh|ulAbcu}kCqEg_AwDiz@QaEOoCwDmu@ScEOyCkD{r@[oGQoDyAwXsAcX{Dkv@}Dew@"              },              "travel_mode": "DRIVE",              "manuever": "start"            },            {              "distance": {                "value": 777.55908,                "text": "777.6 ft"              },              "duration": {                "value": 0.4279,                "text": "0.4 min"              },              "start_location": {                "latitude": 40.746333,                "longitude": -73.896325              },              "end_location": {                "latitude": 40.748433,                "longitude": -73.896754              },              "instructions": "Turn left onto 69th Street.",              "geometry": {                "polyline": "yt}ulAhwg}kCwC\\ea@vEwAPgBTc_@jEqBTgCXg@Fef@pF_@D}C~@"              },              "travel_mode": "DRIVE",              "manuever": "left"            },            {              "distance": {                "value": 127.95276,                "text": "128.0 ft"              },              "duration": {                "value": 0.19558333333333333,                "text": "0.2 min"              },              "start_location": {                "latitude": 40.748433,                "longitude": -73.896754              },              "end_location": {                "latitude": 40.748477,                "longitude": -73.896294              },              "instructions": "Turn right onto 37th Avenue. Then Turn left to take the I 278 East ramp.",              "geometry": {                "polyline": "axavlAbrh}kCM}Cc@{Ke@}I"              },              "travel_mode": "DRIVE",              "manuever": "right"            },            {              "distance": {                "value": 2385.17068,                "text": "0.5 mi"              },              "duration": {                "value": 0.5895166666666667,                "text": "1 min"              },              "start_location": {                "latitude": 40.748477,                "longitude": -73.896294              },              "end_location": {                "latitude": 40.754551,                "longitude": -73.898787              },              "instructions": "Turn left to take the I 278 East ramp toward Brooklyn Queens Expressway, LaGuardia.",              "geometry": {                "polyline": "yzavlAjug}kCoAqC_AaBeAy@kAm@oBg@s@UiAQcA?g@Pk@@_AZaAXu@\\qG~Cyg@xWgHjDoI|D}G~CeGnCaDfA{DhAaE`AiEx@sNzFsHl@aVnAm_@nD}ShDaQ`EiQfIs~@vg@mc@|V}CfB"              },              "travel_mode": "DRIVE",              "manuever": "ramp-left"            },            {              "distance": {                "value": 7890.4202,                "text": "1.5 mi"              },              "duration": {                "value": 1.8856166666666667,                "text": "2 mins"              },              "start_location": {                "latitude": 40.754551,                "longitude": -73.898787              },              "end_location": {                "latitude": 40.768452,                "longitude": -73.882677              },              "instructions": "Keep right to take exit 42 onto Brooklyn-Queens Expressway East toward La Guardia Airport.",              "geometry": {                "polyline": "mvmvlAdql}kCkZbJaa@pM_UlGwWpFkGxAe^|GkS`BaMz@qLQuM{@wQeDwM}DeNeFqQkGwg@q[e^_Ti_C}wA}l@i`@sE_DuDsCsDaDyDeEwCkDuCyD_DwEkLqRmCwDuDuEoDeE{CuC{CoC}EkDaAm@wBsAmF_CuDcAwEuAyQkEoEuAsDoAeD}A}CsBkCsByCyC}DqEiCyD}BsEuBwEeBmFkAkEeAaFs@_Gg@kG[sFSsHaAyh@c@eRm@cRcCyl@kAcVqIqs@{A_Q_B{PaBgPgBwPmBoPuBkPwBcPiCoQsBuMeCwOoC}OyCiPqCyO{C_PcDaPcDsOiDoOqDoOuDkO_EqOiEaOcEaOoE_OuE_O}E{N{EqNgFkN"              },              "travel_mode": "DRIVE",              "manuever": "stay-right"            },            {              "distance": {                "value": 2017.7166,                "text": "0.4 mi"              },              "duration": {                "value": 0.7967,                "text": "1 min"              },              "start_location": {                "latitude": 40.768452,                "longitude": -73.882677              },              "end_location": {                "latitude": 40.770346,                "longitude": -73.875965              },              "instructions": "Take exit 6 on the right toward Parking B, 94th Street.",              "geometry": {                "polyline": "g{hwlAhbm|kC}Va}@mHuRcHkQqFaNaF}MyGiQgLkZaGqVm@sBq@kCmAaGoAyGgAiH_A{Gw@cH_@}EiEyy@wGesA]mJEqE"              },              "travel_mode": "DRIVE",              "manuever": "exit-right"            },            {              "distance": {                "value": 1017.0604,                "text": "0.2 mi"              },              "duration": {                "value": 0.4999,                "text": "0.5 min"              },              "start_location": {                "latitude": 40.770346,                "longitude": -73.875965              },              "end_location": {                "latitude": 40.772982,                "longitude": -73.876731              },              "instructions": "Turn left onto 94th Street.",              "geometry": {                "polyline": "sqlwlAx~_|kCuAKmWwAkJ[{EFwDZuARwB^sDp@sFhA}P`DwDl@yB\\cBTyEn@mVdFwBr@{B~@yCfBqEvDkElEcCxCk@x@eAvA"              },              "travel_mode": "DRIVE",              "manuever": "left"            },            {              "distance": {                "value": 295.2756,                "text": "295.3 ft"              },              "duration": {                "value": 0.2730166666666667,                "text": "0.3 min"              },              "start_location": {                "latitude": 40.772982,                "longitude": -73.876731              },              "end_location": {                "latitude": 40.773442,                "longitude": -73.875879              },              "instructions": "Turn right onto Runway Drive. Then, in 90 meters, Turn right.",              "geometry": {                "polyline": "kvqwlAtna|kCgCwCOQmCeDqAqBmAoBaAsB}@mB{@{Bw@aCw@sCwBqJm@oC"              },              "travel_mode": "DRIVE",              "manuever": "right"            },            {              "distance": {                "value": 13.12336,                "text": "13.1 ft"              },              "duration": {                "value": 0.028916666666666667,                "text": "0 min"              },              "start_location": {                "latitude": 40.773442,                "longitude": -73.875879              },              "end_location": {                "latitude": 40.773421,                "longitude": -73.875836              },              "instructions": "Turn right. Then Turn left.",              "geometry": {                "polyline": "csrwlAly_|kCZgALM"              },              "travel_mode": "DRIVE",              "manuever": "right"            },            {              "distance": {                "value": 688.9764,                "text": "689.0 ft"              },              "duration": {                "value": 0.5099166666666667,                "text": "1 min"              },              "start_location": {                "latitude": 40.773421,                "longitude": -73.875836              },              "end_location": {                "latitude": 40.773961,                "longitude": -73.873584              },              "instructions": "Turn left.",              "geometry": {                "polyline": "yqrwlAvv_|kCqA}GUmBg@yAkA}LmFin@eIe}@gByA_ET??"              },              "travel_mode": "DRIVE",              "manuever": "left"            },            {              "distance": {                "value": 0,                "text": "0.0 ft"              },              "duration": {                "value": 0,                "text": "0 min"              },              "start_location": {                "latitude": 40.773961,                "longitude": -73.873584              },              "end_location": {                "latitude": 40.773961,                "longitude": -73.873584              },              "instructions": "Your destination is on the right.",              "geometry": {                "polyline": "qsswlA~i{{kC"              },              "travel_mode": "DRIVE",              "manuever": "destination-right"            }          ]        }      ],      "geometry": {        "polyline": "kafulAnn`clCfKxAhCF`CJdg@vGtB\\|BZfJrAh[lEhC^dBThMjBjRjCdBZn@Pd@Nh@Pf@Vf@Vh@`@vWxSv@l@t@l@`BpArB`BtYjU~AlAbBtA`BzAdVnQfEhD`ClBhRfOlCxBjBxAhBxAxKzItNhL|BhBnB|Af]rXnB~A|AnAn[fWbAv@~ArAzBfBxStPbInGtB`BlBzA~b@l]bAx@d@\\jBxAjMdKTPxGlFnJvH|StPnCxBhFbEr@{EfEeYvCyRf@kD\\{BBUtC}RfAoFbAcFpDsNh@qBp@oCfLcd@r@sCn@cC`Lsc@p@kCl@aCjE}P`E}O^cBhAgFvDbAd@L~fAtYhTrF~Ab@tBh@rA\\bd@vLvA^|Ab@`B^f`@dLxAf@lBl@xAd@tF~AxPzEpBl@tF~AnAmFpBsD~BkE`DyNlGmY^cBjA_G`AwEX}AnG}Zd@}B~@uEj@uCtKyh@XsAh@gCd@yBbJ{c@\\aBr@iD~AeIz@yDn@wCpD}PVmAf@eCf@eC`Joc@VsAf@aCd@}BpHm^r@kDXoAfAkFbA{EtIsb@Z}A`@uBR_AXeAd@}A`AwCtEsNrAsEjAeEb@aBd@aBr@sCz@cDjBcHbIoY|@kD\\qAXkAxDgRzAmHzSgdA~J_g@|\\gcBpb@_uB|U{kAdIcTdVqpAl~DssRj_@{hB|Fq_@zt@opDtG_UrEcU`AoFjCkOd@yC`@}CToCTwChAeTx@}PRkCb@eDd@gCn@sCrP_r@\\uAjAuEmCuAsP}I}KsG}@i@kAq@QeFo@uTAMiBy_@wBac@KkBMsBSaDk@mIs@{Io@aMmBs]{AmXS}EQ{CoBac@OeDeA{ScAoTUmEUeEsA{X}@yPoEi~@WkF}AcPScFG}AUkFaDXm[fCgKv@aCRec@hD_CP{CZo]bDyGn@}k@pFgIj@wCR?jG@jX@bY@vJ?lEAnEEpX?zCAdKA~GGva@vDdBjM~G~DpBdCpAd[~OrMxG~DGbN|EdZjOvUhKhQvInPnFfOjDxYnFzNlEhQbHviAhi@d{Axs@tW~LfyBldAv`@fSll@fZtB|E~m@x\\fUhMzNhKjTnRvHfEbDvAtDyChWwZ|BkC}D{AmPoGcc@uJmSmFqh@kPcf@aUoiA_i@evBcbA_]}PwuAkp@cBy@qSmKmCuAmq@y`@sXcPa]{RkO}IeyAk{@cTaNkSaOgQsO{HcIyu@ew@g_@{d@ya@{j@e`@km@w]ml@ckAqsBe}@y`Bsc@e{@gd@g|@iPk\\oSyb@aQk^mNmZkCsFoCsFkCiFgC{EuCaFoCwEmCqEyh@{x@gDkFmCkEoCwEgCuEiCeFcC_FaCiF{^ky@uDgI}BqF_CwFqCiHgCaHqB{FmBiGsAgFcBoGyAgGqAyFqAcGeAkFyAiIgBsKiHsd@mPg_AaFw\\wD{V{Ms|@_AsGeAsGcAkGeA{FmAqGuA{GsAyFuAkGyAuF}AwFeBmFwB{GmBuFiBaFqBeF}BuFoBeE_CaFqCsF_CwE}BaE}CaFuCqE_DwEgCqDeCyCqDaF}CqDkCaDsE{FgkB_|B}DmEaEaEwDwD_E}DyDuD{DoD}EiEwE{D_FeEyEuDmFwDqF{DwGqEsFmD{FmDyqC}_BsDyBwDaCqCqBeDgCkDqCkDuC_DuCqDmDkDsDyDkEaD{DoDaFsDyF}CgFkCuEiCsEyBwE}B{EoBoEuBmFuJo\\y@gCyDqMcDyLgEwMqBoJmB_JkBsImAcHaBiJmAoHiA{GcAwG}@iGu@uFw@{Gw@mGu@qHs@sH_A{L{@uQeAcQy@yPo@qPi@iQ_Bml@[aPu@kQ_AiP}}@s{McB}Wi@mHs@qHu@wHm@eFy@uG{@eGaAsGaAeGkAoGkAcGuAoGuAeGsAuFaBeGaByFcBuFmB}Fwd@{sAqEqM}E_OsE_OwDoM_@wAcCiJy@{CSw@uBcIcHmXeUi|@kB}GwAoF}AsF}AiFmBwF{BaGsBiF{BqF_CiFuBuEeCgFaCqEoCcFwCeFoDqFcHeKq|@}jA}M}PktA{gBom@}w@}R}WaLqMcF{E_GkF{FeEoEyC{DoCmEaC{DeBeGsBsFwAkFiA}GgAmF_@wEMeF?sFL}EZcE`@{Ej@cF|@wDr@iEdAuElAoEnAeTnDaKlEuIjDaNjFyEhB{MtFyMtFeOdIuFhAq@Ly@Aq@So@_@m@w@e@gA]oAkAiFtEmNdUqp@rIwYvAmEfFk@zQqBbb@wENApDa@dAbUpAjYpCvh@tAhW|Dnw@|Ddw@zDjv@rAbXxAvXPnDZnGjDzr@NxCRbEvDlu@NnCP`EvDhz@pEf_AqEg_AwDiz@QaEOoCwDmu@ScEOyCkD{r@[oGQoDyAwXsAcX{Dkv@}Dew@wC\\ea@vEwAPgBTc_@jEqBTgCXg@Fef@pF_@D}C~@M}Cc@{Ke@}IoAqC_AaBeAy@kAm@oBg@s@UiAQcA?g@Pk@@_AZaAXu@\\qG~Cyg@xWgHjDoI|D}G~CeGnCaDfA{DhAaE`AiEx@sNzFsHl@aVnAm_@nD}ShDaQ`EiQfIs~@vg@mc@|V}CfBkZbJaa@pM_UlGwWpFkGxAe^|GkS`BaMz@qLQuM{@wQeDwM}DeNeFqQkGwg@q[e^_Ti_C}wA}l@i`@sE_DuDsCsDaDyDeEwCkDuCyD_DwEkLqRmCwDuDuEoDeE{CuC{CoC}EkDaAm@wBsAmF_CuDcAwEuAyQkEoEuAsDoAeD}A}CsBkCsByCyC}DqEiCyD}BsEuBwEeBmFkAkEeAaFs@_Gg@kG[sFSsHaAyh@c@eRm@cRcCyl@kAcVqIqs@{A_Q_B{PaBgPgBwPmBoPuBkPwBcPiCoQsBuMeCwOoC}OyCiPqCyO{C_PcDaPcDsOiDoOqDoOuDkO_EqOiEaOcEaOoE_OuE_O}E{N{EqNgFkN}Va}@mHuRcHkQqFaNaF}MyGiQgLkZaGqVm@sBq@kCmAaGoAyGgAiH_A{Gw@cH_@}EiEyy@wGesA]mJEqEuAKmWwAkJ[{EFwDZuARwB^sDp@sFhA}P`DwDl@yB\\cBTyEn@mVdFwBr@{B~@yCfBqEvDkElEcCxCk@x@eAvAgCwCOQmCeDqAqBmAoBaAsB}@mB{@{Bw@aCw@sCwBqJm@oCZgALMqA}GUmBg@yAkA}LmFin@eIe}@gByA_ET??"      }    }  ]}
+{
+  "meta": {
+    "code": 200
+  },
+  "routes": [
+    {
+      "duration": {
+        "value": 39.36884333333333,
+        "text": "39 mins"
+      },
+      "distance": {
+        "value": 74156.82651999999,
+        "text": "14.0 mi"
+      },
+      "legs": [
+        {
+          "startLocation": {
+            "latitude": 40.73425,
+            "longitude": -73.990934
+          },
+          "endLocation": {
+            "latitude": 40.712971,
+            "longitude": -73.951385
+          },
+          "duration": {
+            "value": 15.764213333333332,
+            "text": "16 mins"
+          },
+          "distance": {
+            "value": 19937.66468,
+            "text": "3.8 mi"
+          },
+          "geometry": {
+            "polyline": "kafulAnn`clCfKxAhCF`CJdg@vGtB\\|BZfJrAh[lEhC^dBThMjBjRjCdBZn@Pd@Nh@Pf@Vf@Vh@`@vWxSv@l@t@l@`BpArB`BtYjU~AlAbBtA`BzAdVnQfEhD`ClBhRfOlCxBjBxAhBxAxKzItNhL|BhBnB|Af]rXnB~A|AnAn[fWbAv@~ArAzBfBxStPbInGtB`BlBzA~b@l]bAx@d@\\jBxAjMdKTPxGlFnJvH|StPnCxBhFbEr@{EfEeYvCyRf@kD\\{BBUtC}RfAoFbAcFpDsNh@qBp@oCfLcd@r@sCn@cC`Lsc@p@kCl@aCjE}P`E}O^cBhAgFvDbAd@L~fAtYhTrF~Ab@tBh@rA\\bd@vLvA^|Ab@`B^f`@dLxAf@lBl@xAd@tF~AxPzEpBl@tF~AnAmFpBsD~BkE`DyNlGmY^cBjA_G`AwEX}AnG}Zd@}B~@uEj@uCtKyh@XsAh@gCd@yBbJ{c@\\aBr@iD~AeIz@yDn@wCpD}PVmAf@eCf@eC`Joc@VsAf@aCd@}BpHm^r@kDXoAfAkFbA{EtIsb@Z}A`@uBR_AXeAd@}A`AwCtEsNrAsEjAeEb@aBd@aBr@sCz@cDjBcHbIoY|@kD\\qAXkAxDgRzAmHzSgdA~J_g@|\\gcBpb@_uB|U{kAdIcTdVqpAl~DssRj_@{hB|Fq_@zt@opDtG_UrEcU`AoFjCkOd@yC`@}CToCTwChAeTx@}PRkCb@eDd@gCn@sCrP_r@\\uAjAuEmCuAsP}I}KsG}@i@kAq@QeFo@uTAMiBy_@wBac@KkBMsBSaDk@mIs@{Io@aMmBs]{AmXS}EQ{CoBac@OeDeA{ScAoTUmEUeEsA{X}@yPoEi~@WkF}AcPScFG}AUkFaDXm[fCgKv@aCRec@hD_CP{CZo]bD"
+          },
+          "steps": [
+            {
+              "distance": {
+                "value": 3674.5407999999998,
+                "text": "0.7 mi"
+              },
+              "duration": {
+                "value": 2.1034166666666665,
+                "text": "2 mins"
+              },
+              "start_location": {
+                "latitude": 40.734246,
+                "longitude": -73.990904
+              },
+              "end_location": {
+                "latitude": 40.725384,
+                "longitude": -73.996813
+              },
+              "instructions": "Drive south on Broadway.",
+              "geometry": {
+                "polyline": "kafulAnn`clCfKxAhCF`CJdg@vGtB\\|BZfJrAh[lEhC^dBThMjBjRjCdBZn@Pd@Nh@Pf@Vf@Vh@`@vWxSv@l@t@l@`BpArB`BtYjU~AlAbBtA`BzAdVnQfEhD`ClBhRfOlCxBjBxAhBxAxKzItNhL|BhBnB|Af]rXnB~A|AnAn[fWbAv@~ArAzBfBxStPbInGtB`BlBzA~b@l]bAx@d@\\jBxAjMdKTPxGlFnJvH|StPnCxBhFbE"
+              },
+              "travel_mode": "DRIVE",
+              "manuever": "start"
+            },
+            {
+              "distance": {
+                "value": 1233.59584,
+                "text": "0.2 mi"
+              },
+              "duration": {
+                "value": 0.8153,
+                "text": "1 min"
+              },
+              "start_location": {
+                "latitude": 40.725384,
+                "longitude": -73.996813
+              },
+              "end_location": {
+                "latitude": 40.724094,
+                "longitude": -73.992697
+              },
+              "instructions": "Turn left onto East Houston Street.",
+              "geometry": {
+                "polyline": "owttlAx_lclCr@{EfEeYvCyRf@kD\\{BBUtC}RfAoFbAcFpDsNh@qBp@oCfLcd@r@sCn@cC`Lsc@p@kCl@aCjE}P`E}O^cBhAgF"
+              },
+              "travel_mode": "DRIVE",
+              "manuever": "left"
+            },
+            {
+              "distance": {
+                "value": 1420.60372,
+                "text": "0.3 mi"
+              },
+              "duration": {
+                "value": 0.7290833333333333,
+                "text": "1 min"
+              },
+              "start_location": {
+                "latitude": 40.724094,
+                "longitude": -73.992697
+              },
+              "end_location": {
+                "latitude": 40.720342,
+                "longitude": -73.994113
+              },
+              "instructions": "Turn right onto Bowery.",
+              "geometry": {
+                "polyline": "{frtlAp~cclCvDbAd@L~fAtYhTrF~Ab@tBh@rA\\bd@vLvA^|Ab@`B^f`@dLxAf@lBl@xAd@tF~AxPzEpBl@tF~A"
+              },
+              "travel_mode": "DRIVE",
+              "manuever": "right"
+            },
+            {
+              "distance": {
+                "value": 4573.49096,
+                "text": "0.9 mi"
+              },
+              "duration": {
+                "value": 1.9212833333333335,
+                "text": "2 mins"
+              },
+              "start_location": {
+                "latitude": 40.720342,
+                "longitude": -73.994113
+              },
+              "end_location": {
+                "latitude": 40.715536,
+                "longitude": -73.978895
+              },
+              "instructions": "Turn left onto Delancey Street.",
+              "geometry": {
+                "polyline": "k|jtlA`wfclCnAmFpBsD~BkE`DyNlGmY^cBjA_G`AwEX}AnG}Zd@}B~@uEj@uCtKyh@XsAh@gCd@yBbJ{c@\\aBr@iD~AeIz@yDn@wCpD}PVmAf@eCf@eC`Joc@VsAf@aCd@}BpHm^r@kDXoAfAkFbA{EtIsb@Z}A`@uBR_AXeAd@}A`AwCtEsNrAsEjAeEb@aBd@aBr@sCz@cDjBcHbIoY|@kD\\qAXkAxDgRzAmHzSgdA~J_g@|\\gcBpb@_uB|U{kA"
+              },
+              "travel_mode": "DRIVE",
+              "manuever": "left"
+            },
+            {
+              "distance": {
+                "value": 5000.00016,
+                "text": "0.9 mi"
+              },
+              "duration": {
+                "value": 1.63395,
+                "text": "2 mins"
+              },
+              "start_location": {
+                "latitude": 40.715536,
+                "longitude": -73.978895
+              },
+              "end_location": {
+                "latitude": 40.710432,
+                "longitude": -73.962139
+              },
+              "instructions": "Keep right to take Broadway toward I 278 West, Staten Island.",
+              "geometry": {
+                "polyline": "_patlA|_iblCdIcTdVqpAl~DssRj_@{hB|Fq_@zt@opD"
+              },
+              "travel_mode": "DRIVE",
+              "manuever": "stay-right"
+            },
+            {
+              "distance": {
+                "value": 213.2546,
+                "text": "213.3 ft"
+              },
+              "duration": {
+                "value": 0.07121666666666666,
+                "text": "0.1 min"
+              },
+              "start_location": {
+                "latitude": 40.710432,
+                "longitude": -73.962139
+              },
+              "end_location": {
+                "latitude": 40.710187,
+                "longitude": -73.961433
+              },
+              "instructions": "Take the exit on the right toward I 278 West, Broadway West. Then Keep left toward Broadway East.",
+              "geometry": {
+                "polyline": "_qwslAthhalCtG_UrEcU"
+              },
+              "travel_mode": "DRIVE",
+              "manuever": "exit-right"
+            },
+            {
+              "distance": {
+                "value": 757.87404,
+                "text": "757.9 ft"
+              },
+              "duration": {
+                "value": 0.4671666666666667,
+                "text": "0.5 min"
+              },
+              "start_location": {
+                "latitude": 40.710187,
+                "longitude": -73.961433
+              },
+              "end_location": {
+                "latitude": 40.709554,
+                "longitude": -73.95886
+              },
+              "instructions": "Keep left toward Broadway East, South 5th Street.",
+              "geometry": {
+                "polyline": "uawslAp|falC`AoFjCkOd@yC`@}CToCTwChAeTx@}PRkCb@eDd@gCn@sCrP_r@\\uAjAuE"
+              },
+              "travel_mode": "DRIVE",
+              "manuever": "stay-left"
+            },
+            {
+              "distance": {
+                "value": 259.18636,
+                "text": "259.2 ft"
+              },
+              "duration": {
+                "value": 0.15403333333333336,
+                "text": "0.2 min"
+              },
+              "start_location": {
+                "latitude": 40.709554,
+                "longitude": -73.95886
+              },
+              "end_location": {
+                "latitude": 40.710183,
+                "longitude": -73.958458
+              },
+              "instructions": "Turn left onto Havemeyer Street. Then Turn right onto Borinquen Place.",
+              "geometry": {
+                "polyline": "czuslAv{aalCmCuAsP}I}KsG}@i@kAq@"
+              },
+              "travel_mode": "DRIVE",
+              "manuever": "left"
+            },
+            {
+              "distance": {
+                "value": 2050.525,
+                "text": "0.4 mi"
+              },
+              "duration": {
+                "value": 0.93725,
+                "text": "1 min"
+              },
+              "start_location": {
+                "latitude": 40.710183,
+                "longitude": -73.958458
+              },
+              "end_location": {
+                "latitude": 40.710961,
+                "longitude": -73.951119
+              },
+              "instructions": "Turn right onto Borinquen Place.",
+              "geometry": {
+                "polyline": "mawslArbaalCQeFo@uTAMiBy_@wBac@KkBMsBSaDk@mIs@{Io@aMmBs]{AmXS}EQ{CoBac@OeDeA{ScAoTUmEUeEsA{X}@yPoEi~@WkF}AcPScFG}AUkF"
+              },
+              "travel_mode": "DRIVE",
+              "manuever": "right"
+            },
+            {
+              "distance": {
+                "value": 734.90816,
+                "text": "734.9 ft"
+              },
+              "duration": {
+                "value": 0.4403166666666667,
+                "text": "0.4 min"
+              },
+              "start_location": {
+                "latitude": 40.710961,
+                "longitude": -73.951119
+              },
+              "end_location": {
+                "latitude": 40.712967,
+                "longitude": -73.951428
+              },
+              "instructions": "Turn left onto Union Avenue.",
+              "geometry": {
+                "polyline": "arxslA|wr`lCaDXm[fCgKv@aCRec@hD_CP{CZo]bD"
+              },
+              "travel_mode": "DRIVE",
+              "manuever": "left"
+            },
+            {
+              "distance": {
+                "value": 0,
+                "text": "0.0 ft"
+              },
+              "duration": {
+                "value": 0,
+                "text": "0 min"
+              },
+              "start_location": {
+                "latitude": 40.712967,
+                "longitude": -73.951428
+              },
+              "end_location": {
+                "latitude": 40.712967,
+                "longitude": -73.951428
+              },
+              "instructions": "You have arrived at your destination.",
+              "geometry": {
+                "polyline": "mo|slAfks`lC"
+              },
+              "travel_mode": "DRIVE",
+              "manuever": "destination"
+            }
+          ]
+        },
+        {
+          "startLocation": {
+            "latitude": 40.712971,
+            "longitude": -73.951385
+          },
+          "endLocation": {
+            "latitude": 40.74558,
+            "longitude": -73.903162
+          },
+          "duration": {
+            "value": 15.217113333333334,
+            "text": "15 mins"
+          },
+          "distance": {
+            "value": 37089.8962,
+            "text": "7.0 mi"
+          },
+          "geometry": {
+            "polyline": "mo|slAfks`lCyGn@}k@pFgIj@wCR?jG@jX@bY@vJ?lEAnEEpX?zCAdKA~GGva@vDdBjM~G~DpBdCpAd[~OrMxG~DGbN|EdZjOvUhKhQvInPnFfOjDxYnFzNlEhQbHviAhi@d{Axs@tW~LfyBldAv`@fSll@fZtB|E~m@x\\fUhMzNhKjTnRvHfEbDvAtDyChWwZ|BkC}D{AmPoGcc@uJmSmFqh@kPcf@aUoiA_i@evBcbA_]}PwuAkp@cBy@qSmKmCuAmq@y`@sXcPa]{RkO}IeyAk{@cTaNkSaOgQsO{HcIyu@ew@g_@{d@ya@{j@e`@km@w]ml@ckAqsBe}@y`Bsc@e{@gd@g|@iPk\\oSyb@aQk^mNmZkCsFoCsFkCiFgC{EuCaFoCwEmCqEyh@{x@gDkFmCkEoCwEgCuEiCeFcC_FaCiF{^ky@uDgI}BqF_CwFqCiHgCaHqB{FmBiGsAgFcBoGyAgGqAyFqAcGeAkFyAiIgBsKiHsd@mPg_AaFw\\wD{V{Ms|@_AsGeAsGcAkGeA{FmAqGuA{GsAyFuAkGyAuF}AwFeBmFwB{GmBuFiBaFqBeF}BuFoBeE_CaFqCsF_CwE}BaE}CaFuCqE_DwEgCqDeCyCqDaF}CqDkCaDsE{FgkB_|B}DmEaEaEwDwD_E}DyDuD{DoD}EiEwE{D_FeEyEuDmFwDqF{DwGqEsFmD{FmDyqC}_BsDyBwDaCqCqBeDgCkDqCkDuC_DuCqDmDkDsDyDkEaD{DoDaFsDyF}CgFkCuEiCsEyBwE}B{EoBoEuBmFuJo\\y@gCyDqMcDyLgEwMqBoJmB_JkBsImAcHaBiJmAoHiA{GcAwG}@iGu@uFw@{Gw@mGu@qHs@sH_A{L{@uQeAcQy@yPo@qPi@iQ_Bml@[aPu@kQ_AiP}}@s{McB}Wi@mHs@qHu@wHm@eFy@uG{@eGaAsGaAeGkAoGkAcGuAoGuAeGsAuFaBeGaByFcBuFmB}Fwd@{sAqEqM}E_OsE_OwDoM_@wAcCiJy@{CSw@uBcIcHmXeUi|@kB}GwAoF}AsF}AiFmBwF{BaGsBiF{BqF_CiFuBuEeCgFaCqEoCcFwCeFoDqFcHeKq|@}jA}M}PktA{gBom@}w@}R}WaLqMcF{E_GkF{FeEoEyC{DoCmEaC{DeBeGsBsFwAkFiA}GgAmF_@wEMeF?sFL}EZcE`@{Ej@cF|@wDr@iEdAuElAoEnAeTnDaKlEuIjDaNjFyEhB{MtFyMtFeOdIuFhAq@Ly@Aq@So@_@m@w@e@gA]oAkAiFtEmNdUqp@rIwYvAmEfFk@zQqBbb@wENApDa@dAbUpAjYpCvh@tAhW|Dnw@|Ddw@zDjv@rAbXxAvXPnDZnGjDzr@NxCRbEvDlu@NnCP`EvDhz@pEf_A"
+          },
+          "steps": [
+            {
+              "distance": {
+                "value": 406.82416,
+                "text": "406.8 ft"
+              },
+              "duration": {
+                "value": 0.18710000000000002,
+                "text": "0.2 min"
+              },
+              "start_location": {
+                "latitude": 40.712967,
+                "longitude": -73.951428
+              },
+              "end_location": {
+                "latitude": 40.714067,
+                "longitude": -73.951605
+              },
+              "instructions": "Drive north on Union Avenue. Then, in 100 meters, Turn left onto Metropolitan Avenue.",
+              "geometry": {
+                "polyline": "mo|slAfks`lCyGn@}k@pFgIj@wCR"
+              },
+              "travel_mode": "DRIVE",
+              "manuever": "start"
+            },
+            {
+              "distance": {
+                "value": 757.87404,
+                "text": "757.9 ft"
+              },
+              "duration": {
+                "value": 0.41185,
+                "text": "0.4 min"
+              },
+              "start_location": {
+                "latitude": 40.714067,
+                "longitude": -73.951605
+              },
+              "end_location": {
+                "latitude": 40.714074,
+                "longitude": -73.95434
+              },
+              "instructions": "Turn left onto Metropolitan Avenue.",
+              "geometry": {
+                "polyline": "et~slAhvs`lC?jG@jX@bY@vJ?lEAnEEpX?zCAdKA~GGva@"
+              },
+              "travel_mode": "DRIVE",
+              "manuever": "left"
+            },
+            {
+              "distance": {
+                "value": 469.16012,
+                "text": "469.2 ft"
+              },
+              "duration": {
+                "value": 0.22013333333333335,
+                "text": "0.2 min"
+              },
+              "start_location": {
+                "latitude": 40.714074,
+                "longitude": -73.95434
+              },
+              "end_location": {
+                "latitude": 40.712904,
+                "longitude": -73.955046
+              },
+              "instructions": "Turn left onto Marcy Avenue. Then Bear left toward I 278 West.",
+              "geometry": {
+                "polyline": "st~slAfay`lCvDdBjM~G~DpBdCpAd[~OrMxG"
+              },
+              "travel_mode": "DRIVE",
+              "manuever": "left"
+            },
+            {
+              "distance": {
+                "value": 3645.0132399999998,
+                "text": "0.7 mi"
+              },
+              "duration": {
+                "value": 0.8754333333333334,
+                "text": "1 min"
+              },
+              "start_location": {
+                "latitude": 40.712904,
+                "longitude": -73.955046
+              },
+              "end_location": {
+                "latitude": 40.703669,
+                "longitude": -73.959976
+              },
+              "instructions": "Bear left toward I 278 West, Brooklyn-Queens Expressway.",
+              "geometry": {
+                "polyline": "ok|slAjmz`lC~DGbN|EdZjOvUhKhQvInPnFfOjDxYnFzNlEhQbHviAhi@d{Axs@tW~LfyBldAv`@fSll@fZ"
+              },
+              "travel_mode": "DRIVE",
+              "manuever": "slight-left"
+            },
+            {
+              "distance": {
+                "value": 843.17588,
+                "text": "843.2 ft"
+              },
+              "duration": {
+                "value": 0.19875,
+                "text": "0.2 min"
+              },
+              "start_location": {
+                "latitude": 40.703669,
+                "longitude": -73.959976
+              },
+              "end_location": {
+                "latitude": 40.701668,
+                "longitude": -73.961446
+              },
+              "instructions": "Take exit 31 on the right toward Wythe Avenue, Kent Avenue. Then Turn left onto Wythe Avenue.",
+              "geometry": {
+                "polyline": "ijjslAnadalCtB|E~m@x\\fUhMzNhKjTnRvHfEbDvA"
+              },
+              "travel_mode": "DRIVE",
+              "manuever": "exit-right"
+            },
+            {
+              "distance": {
+                "value": 259.18636,
+                "text": "259.2 ft"
+              },
+              "duration": {
+                "value": 0.19641666666666666,
+                "text": "0.2 min"
+              },
+              "start_location": {
+                "latitude": 40.701668,
+                "longitude": -73.961446
+              },
+              "end_location": {
+                "latitude": 40.701125,
+                "longitude": -73.960855
+              },
+              "instructions": "Turn left onto Wythe Avenue. Then Turn left onto Williamsburg Street East.",
+              "geometry": {
+                "polyline": "gmfslAj}falCtDyChWwZ|BkC"
+              },
+              "travel_mode": "DRIVE",
+              "manuever": "left"
+            },
+            {
+              "distance": {
+                "value": 141.07612,
+                "text": "141.1 ft"
+              },
+              "duration": {
+                "value": 0.18068333333333333,
+                "text": "0.2 min"
+              },
+              "start_location": {
+                "latitude": 40.701125,
+                "longitude": -73.960855
+              },
+              "end_location": {
+                "latitude": 40.701499,
+                "longitude": -73.960673
+              },
+              "instructions": "Turn left onto Williamsburg Street East. Then Bear left toward I 278 East.",
+              "geometry": {
+                "polyline": "ikeslAlxealC}D{AmPoG"
+              },
+              "travel_mode": "DRIVE",
+              "manuever": "left"
+            },
+            {
+              "distance": {
+                "value": 11059.71164,
+                "text": "2.1 mi"
+              },
+              "duration": {
+                "value": 2.7424666666666666,
+                "text": "3 mins"
+              },
+              "start_location": {
+                "latitude": 40.701499,
+                "longitude": -73.960673
+              },
+              "end_location": {
+                "latitude": 40.724281,
+                "longitude": -73.936285
+              },
+              "instructions": "Bear left toward I 278 East, Brooklyn-Queens Expressway.",
+              "geometry": {
+                "polyline": "ubfslA`mealCcc@uJmSmFqh@kPcf@aUoiA_i@evBcbA_]}PwuAkp@cBy@qSmKmCuAmq@y`@sXcPa]{RkO}IeyAk{@cTaNkSaOgQsO{HcIyu@ew@g_@{d@ya@{j@e`@km@w]ml@ckAqsBe}@y`Bsc@e{@gd@g|@iPk\\oSyb@aQk^mNmZkCsFoCsFkCiFgC{EuCaFoCwEmCqEyh@{x@gDkFmCkEoCwEgCuEiCeFcC_FaCiF{^ky@uDgI}BqF_CwFqCiHgCaHqB{FmBiGsAgFcBoGyAgGqAyFqAcGeAkFyAiIgBsKiHsd@"
+              },
+              "travel_mode": "DRIVE",
+              "manuever": "slight-left"
+            },
+            {
+              "distance": {
+                "value": 15072.17896,
+                "text": "2.9 mi"
+              },
+              "duration": {
+                "value": 3.8308666666666666,
+                "text": "4 mins"
+              },
+              "start_location": {
+                "latitude": 40.724281,
+                "longitude": -73.936285
+              },
+              "end_location": {
+                "latitude": 40.746265,
+                "longitude": -73.894711
+              },
+              "instructions": "Keep left to stay on Brooklyn-Queens Expressway.",
+              "geometry": {
+                "polyline": "qrrtlAxxu_lCmPg_AaFw\\wD{V{Ms|@_AsGeAsGcAkGeA{FmAqGuA{GsAyFuAkGyAuF}AwFeBmFwB{GmBuFiBaFqBeF}BuFoBeE_CaFqCsF_CwE}BaE}CaFuCqE_DwEgCqDeCyCqDaF}CqDkCaDsE{FgkB_|B}DmEaEaEwDwD_E}DyDuD{DoD}EiEwE{D_FeEyEuDmFwDqF{DwGqEsFmD{FmDyqC}_BsDyBwDaCqCqBeDgCkDqCkDuC_DuCqDmDkDsDyDkEaD{DoDaFsDyF}CgFkCuEiCsEyBwE}B{EoBoEuBmFuJo\\y@gCyDqMcDyLgEwMqBoJmB_JkBsImAcHaBiJmAoHiA{GcAwG}@iGu@uFw@{Gw@mGu@qHs@sH_A{L{@uQeAcQy@yPo@qPi@iQ_Bml@[aPu@kQ_AiP}}@s{McB}Wi@mHs@qHu@wHm@eFy@uG{@eGaAsGaAeGkAoGkAcGuAoGuAeGsAuFaBeGaByFcBuFmB}Fwd@{sAqEqM}E_OsE_OwDoM_@wAcCiJy@{CSw@uBcIcHmXeUi|@kB}GwAoF}AsF}AiFmBwF{BaGsBiF{BqF_CiFuBuEeCgFaCqEoCcFwCeFoDqFcHeKq|@}jA}M}PktA{gBom@}w@}R}WaLqMcF{E_GkF{FeEoEyC{DoCmEaC{DeBeGsBsFwAkFiA}GgAmF_@wEMeF?sFL}EZcE`@{Ej@cF|@wDr@iEdAuElAoEnA"
+              },
+              "travel_mode": "DRIVE",
+              "manuever": "stay-left"
+            },
+            {
+              "distance": {
+                "value": 849.73756,
+                "text": "849.7 ft"
+              },
+              "duration": {
+                "value": 0.2906833333333333,
+                "text": "0.3 min"
+              },
+              "start_location": {
+                "latitude": 40.746265,
+                "longitude": -73.894711
+              },
+              "end_location": {
+                "latitude": 40.748373,
+                "longitude": -73.895364
+              },
+              "instructions": "Take exit 40 on the right toward Roosevelt Avenue.",
+              "geometry": {
+                "polyline": "qp}ulAlrd}kCeTnDaKlEuIjDaNjFyEhB{MtFyMtFeOdIuFhAq@Ly@Aq@So@_@m@w@e@gA]oAkAiF"
+              },
+              "travel_mode": "DRIVE",
+              "manuever": "exit-right"
+            },
+            {
+              "distance": {
+                "value": 501.96852,
+                "text": "502.0 ft"
+              },
+              "duration": {
+                "value": 0.24676666666666666,
+                "text": "0.2 min"
+              },
+              "start_location": {
+                "latitude": 40.748373,
+                "longitude": -73.895364
+              },
+              "end_location": {
+                "latitude": 40.747697,
+                "longitude": -73.893793
+              },
+              "instructions": "Turn right onto Broadway.",
+              "geometry": {
+                "polyline": "itavlAf{e}kCtEmNdUqp@rIwYvAmE"
+              },
+              "travel_mode": "DRIVE",
+              "manuever": "right"
+            },
+            {
+              "distance": {
+                "value": 396.98163999999997,
+                "text": "397.0 ft"
+              },
+              "duration": {
+                "value": 0.29313333333333336,
+                "text": "0.3 min"
+              },
+              "start_location": {
+                "latitude": 40.747697,
+                "longitude": -73.893793
+              },
+              "end_location": {
+                "latitude": 40.74662,
+                "longitude": -73.893588
+              },
+              "instructions": "Turn right onto 72nd Street.",
+              "geometry": {
+                "polyline": "aj`vlA`yb}kCfFk@zQqBbb@wENApDa@"
+              },
+              "travel_mode": "DRIVE",
+              "manuever": "right"
+            },
+            {
+              "distance": {
+                "value": 2673.8846,
+                "text": "0.5 mi"
+              },
+              "duration": {
+                "value": 1.195,
+                "text": "1 min"
+              },
+              "start_location": {
+                "latitude": 40.74662,
+                "longitude": -73.893588
+              },
+              "end_location": {
+                "latitude": 40.745624,
+                "longitude": -73.90317
+              },
+              "instructions": "Turn right onto Roosevelt Avenue.",
+              "geometry": {
+                "polyline": "wf~ulAflb}kCdAbUpAjYpCvh@tAhW|Dnw@|Ddw@zDjv@rAbXxAvXPnDZnGjDzr@NxCRbEvDlu@NnCP`EvDhz@pEf_A"
+              },
+              "travel_mode": "DRIVE",
+              "manuever": "right"
+            },
+            {
+              "distance": {
+                "value": 0,
+                "text": "0.0 ft"
+              },
+              "duration": {
+                "value": 0,
+                "text": "0 min"
+              },
+              "start_location": {
+                "latitude": 40.745624,
+                "longitude": -73.90317
+              },
+              "end_location": {
+                "latitude": 40.745624,
+                "longitude": -73.90317
+              },
+              "instructions": "You have arrived at your destination.",
+              "geometry": {
+                "polyline": "oh|ulAbcu}kC"
+              },
+              "travel_mode": "DRIVE",
+              "manuever": "destination"
+            }
+          ]
+        },
+        {
+          "startLocation": {
+            "latitude": 40.74558,
+            "longitude": -73.903162
+          },
+          "endLocation": {
+            "latitude": 40.774419,
+            "longitude": -73.872746
+          },
+          "duration": {
+            "value": 8.387516666666667,
+            "text": "8 mins"
+          },
+          "distance": {
+            "value": 17129.26564,
+            "text": "3.2 mi"
+          },
+          "geometry": {
+            "polyline": "oh|ulAbcu}kCqEg_AwDiz@QaEOoCwDmu@ScEOyCkD{r@[oGQoDyAwXsAcX{Dkv@}Dew@wC\\ea@vEwAPgBTc_@jEqBTgCXg@Fef@pF_@D}C~@M}Cc@{Ke@}IoAqC_AaBeAy@kAm@oBg@s@UiAQcA?g@Pk@@_AZaAXu@\\qG~Cyg@xWgHjDoI|D}G~CeGnCaDfA{DhAaE`AiEx@sNzFsHl@aVnAm_@nD}ShDaQ`EiQfIs~@vg@mc@|V}CfBkZbJaa@pM_UlGwWpFkGxAe^|GkS`BaMz@qLQuM{@wQeDwM}DeNeFqQkGwg@q[e^_Ti_C}wA}l@i`@sE_DuDsCsDaDyDeEwCkDuCyD_DwEkLqRmCwDuDuEoDeE{CuC{CoC}EkDaAm@wBsAmF_CuDcAwEuAyQkEoEuAsDoAeD}A}CsBkCsByCyC}DqEiCyD}BsEuBwEeBmFkAkEeAaFs@_Gg@kG[sFSsHaAyh@c@eRm@cRcCyl@kAcVqIqs@{A_Q_B{PaBgPgBwPmBoPuBkPwBcPiCoQsBuMeCwOoC}OyCiPqCyO{C_PcDaPcDsOiDoOqDoOuDkO_EqOiEaOcEaOoE_OuE_O}E{N{EqNgFkN}Va}@mHuRcHkQqFaNaF}MyGiQgLkZaGqVm@sBq@kCmAaGoAyGgAiH_A{Gw@cH_@}EiEyy@wGesA]mJEqEuAKmWwAkJ[{EFwDZuARwB^sDp@sFhA}P`DwDl@yB\\cBTyEn@mVdFwBr@{B~@yCfBqEvDkElEcCxCk@x@eAvAgCwCOQmCeDqAqBmAoBaAsB}@mB{@{Bw@aCw@sCwBqJm@oCZgALMqA}GUmBg@yAkA}LmFin@eIe}@gByA_ET??"
+          },
+          "steps": [
+            {
+              "distance": {
+                "value": 1909.44888,
+                "text": "0.4 mi"
+              },
+              "duration": {
+                "value": 0.7839333333333334,
+                "text": "1 min"
+              },
+              "start_location": {
+                "latitude": 40.745624,
+                "longitude": -73.90317
+              },
+              "end_location": {
+                "latitude": 40.746333,
+                "longitude": -73.896325
+              },
+              "instructions": "Drive east on Roosevelt Avenue.",
+              "geometry": {
+                "polyline": "oh|ulAbcu}kCqEg_AwDiz@QaEOoCwDmu@ScEOyCkD{r@[oGQoDyAwXsAcX{Dkv@}Dew@"
+              },
+              "travel_mode": "DRIVE",
+              "manuever": "start"
+            },
+            {
+              "distance": {
+                "value": 777.55908,
+                "text": "777.6 ft"
+              },
+              "duration": {
+                "value": 0.4279,
+                "text": "0.4 min"
+              },
+              "start_location": {
+                "latitude": 40.746333,
+                "longitude": -73.896325
+              },
+              "end_location": {
+                "latitude": 40.748433,
+                "longitude": -73.896754
+              },
+              "instructions": "Turn left onto 69th Street.",
+              "geometry": {
+                "polyline": "yt}ulAhwg}kCwC\\ea@vEwAPgBTc_@jEqBTgCXg@Fef@pF_@D}C~@"
+              },
+              "travel_mode": "DRIVE",
+              "manuever": "left"
+            },
+            {
+              "distance": {
+                "value": 127.95276,
+                "text": "128.0 ft"
+              },
+              "duration": {
+                "value": 0.19558333333333333,
+                "text": "0.2 min"
+              },
+              "start_location": {
+                "latitude": 40.748433,
+                "longitude": -73.896754
+              },
+              "end_location": {
+                "latitude": 40.748477,
+                "longitude": -73.896294
+              },
+              "instructions": "Turn right onto 37th Avenue. Then Turn left to take the I 278 East ramp.",
+              "geometry": {
+                "polyline": "axavlAbrh}kCM}Cc@{Ke@}I"
+              },
+              "travel_mode": "DRIVE",
+              "manuever": "right"
+            },
+            {
+              "distance": {
+                "value": 2385.17068,
+                "text": "0.5 mi"
+              },
+              "duration": {
+                "value": 0.5895166666666667,
+                "text": "1 min"
+              },
+              "start_location": {
+                "latitude": 40.748477,
+                "longitude": -73.896294
+              },
+              "end_location": {
+                "latitude": 40.754551,
+                "longitude": -73.898787
+              },
+              "instructions": "Turn left to take the I 278 East ramp toward Brooklyn Queens Expressway, LaGuardia.",
+              "geometry": {
+                "polyline": "yzavlAjug}kCoAqC_AaBeAy@kAm@oBg@s@UiAQcA?g@Pk@@_AZaAXu@\\qG~Cyg@xWgHjDoI|D}G~CeGnCaDfA{DhAaE`AiEx@sNzFsHl@aVnAm_@nD}ShDaQ`EiQfIs~@vg@mc@|V}CfB"
+              },
+              "travel_mode": "DRIVE",
+              "manuever": "ramp-left"
+            },
+            {
+              "distance": {
+                "value": 7890.4202,
+                "text": "1.5 mi"
+              },
+              "duration": {
+                "value": 1.8856166666666667,
+                "text": "2 mins"
+              },
+              "start_location": {
+                "latitude": 40.754551,
+                "longitude": -73.898787
+              },
+              "end_location": {
+                "latitude": 40.768452,
+                "longitude": -73.882677
+              },
+              "instructions": "Keep right to take exit 42 onto Brooklyn-Queens Expressway East toward La Guardia Airport.",
+              "geometry": {
+                "polyline": "mvmvlAdql}kCkZbJaa@pM_UlGwWpFkGxAe^|GkS`BaMz@qLQuM{@wQeDwM}DeNeFqQkGwg@q[e^_Ti_C}wA}l@i`@sE_DuDsCsDaDyDeEwCkDuCyD_DwEkLqRmCwDuDuEoDeE{CuC{CoC}EkDaAm@wBsAmF_CuDcAwEuAyQkEoEuAsDoAeD}A}CsBkCsByCyC}DqEiCyD}BsEuBwEeBmFkAkEeAaFs@_Gg@kG[sFSsHaAyh@c@eRm@cRcCyl@kAcVqIqs@{A_Q_B{PaBgPgBwPmBoPuBkPwBcPiCoQsBuMeCwOoC}OyCiPqCyO{C_PcDaPcDsOiDoOqDoOuDkO_EqOiEaOcEaOoE_OuE_O}E{N{EqNgFkN"
+              },
+              "travel_mode": "DRIVE",
+              "manuever": "stay-right"
+            },
+            {
+              "distance": {
+                "value": 2017.7166,
+                "text": "0.4 mi"
+              },
+              "duration": {
+                "value": 0.7967,
+                "text": "1 min"
+              },
+              "start_location": {
+                "latitude": 40.768452,
+                "longitude": -73.882677
+              },
+              "end_location": {
+                "latitude": 40.770346,
+                "longitude": -73.875965
+              },
+              "instructions": "Take exit 6 on the right toward Parking B, 94th Street.",
+              "geometry": {
+                "polyline": "g{hwlAhbm|kC}Va}@mHuRcHkQqFaNaF}MyGiQgLkZaGqVm@sBq@kCmAaGoAyGgAiH_A{Gw@cH_@}EiEyy@wGesA]mJEqE"
+              },
+              "travel_mode": "DRIVE",
+              "manuever": "exit-right"
+            },
+            {
+              "distance": {
+                "value": 1017.0604,
+                "text": "0.2 mi"
+              },
+              "duration": {
+                "value": 0.4999,
+                "text": "0.5 min"
+              },
+              "start_location": {
+                "latitude": 40.770346,
+                "longitude": -73.875965
+              },
+              "end_location": {
+                "latitude": 40.772982,
+                "longitude": -73.876731
+              },
+              "instructions": "Turn left onto 94th Street.",
+              "geometry": {
+                "polyline": "sqlwlAx~_|kCuAKmWwAkJ[{EFwDZuARwB^sDp@sFhA}P`DwDl@yB\\cBTyEn@mVdFwBr@{B~@yCfBqEvDkElEcCxCk@x@eAvA"
+              },
+              "travel_mode": "DRIVE",
+              "manuever": "left"
+            },
+            {
+              "distance": {
+                "value": 295.2756,
+                "text": "295.3 ft"
+              },
+              "duration": {
+                "value": 0.2730166666666667,
+                "text": "0.3 min"
+              },
+              "start_location": {
+                "latitude": 40.772982,
+                "longitude": -73.876731
+              },
+              "end_location": {
+                "latitude": 40.773442,
+                "longitude": -73.875879
+              },
+              "instructions": "Turn right onto Runway Drive. Then, in 90 meters, Turn right.",
+              "geometry": {
+                "polyline": "kvqwlAtna|kCgCwCOQmCeDqAqBmAoBaAsB}@mB{@{Bw@aCw@sCwBqJm@oC"
+              },
+              "travel_mode": "DRIVE",
+              "manuever": "right"
+            },
+            {
+              "distance": {
+                "value": 13.12336,
+                "text": "13.1 ft"
+              },
+              "duration": {
+                "value": 0.028916666666666667,
+                "text": "0 min"
+              },
+              "start_location": {
+                "latitude": 40.773442,
+                "longitude": -73.875879
+              },
+              "end_location": {
+                "latitude": 40.773421,
+                "longitude": -73.875836
+              },
+              "instructions": "Turn right. Then Turn left.",
+              "geometry": {
+                "polyline": "csrwlAly_|kCZgALM"
+              },
+              "travel_mode": "DRIVE",
+              "manuever": "right"
+            },
+            {
+              "distance": {
+                "value": 688.9764,
+                "text": "689.0 ft"
+              },
+              "duration": {
+                "value": 0.5099166666666667,
+                "text": "1 min"
+              },
+              "start_location": {
+                "latitude": 40.773421,
+                "longitude": -73.875836
+              },
+              "end_location": {
+                "latitude": 40.773961,
+                "longitude": -73.873584
+              },
+              "instructions": "Turn left.",
+              "geometry": {
+                "polyline": "yqrwlAvv_|kCqA}GUmBg@yAkA}LmFin@eIe}@gByA_ET??"
+              },
+              "travel_mode": "DRIVE",
+              "manuever": "left"
+            },
+            {
+              "distance": {
+                "value": 0,
+                "text": "0.0 ft"
+              },
+              "duration": {
+                "value": 0,
+                "text": "0 min"
+              },
+              "start_location": {
+                "latitude": 40.773961,
+                "longitude": -73.873584
+              },
+              "end_location": {
+                "latitude": 40.773961,
+                "longitude": -73.873584
+              },
+              "instructions": "Your destination is on the right.",
+              "geometry": {
+                "polyline": "qsswlA~i{{kC"
+              },
+              "travel_mode": "DRIVE",
+              "manuever": "destination-right"
+            }
+          ]
+        }
+      ],
+      "geometry": {
+        "polyline": "kafulAnn`clCfKxAhCF`CJdg@vGtB\\|BZfJrAh[lEhC^dBThMjBjRjCdBZn@Pd@Nh@Pf@Vf@Vh@`@vWxSv@l@t@l@`BpArB`BtYjU~AlAbBtA`BzAdVnQfEhD`ClBhRfOlCxBjBxAhBxAxKzItNhL|BhBnB|Af]rXnB~A|AnAn[fWbAv@~ArAzBfBxStPbInGtB`BlBzA~b@l]bAx@d@\\jBxAjMdKTPxGlFnJvH|StPnCxBhFbEr@{EfEeYvCyRf@kD\\{BBUtC}RfAoFbAcFpDsNh@qBp@oCfLcd@r@sCn@cC`Lsc@p@kCl@aCjE}P`E}O^cBhAgFvDbAd@L~fAtYhTrF~Ab@tBh@rA\\bd@vLvA^|Ab@`B^f`@dLxAf@lBl@xAd@tF~AxPzEpBl@tF~AnAmFpBsD~BkE`DyNlGmY^cBjA_G`AwEX}AnG}Zd@}B~@uEj@uCtKyh@XsAh@gCd@yBbJ{c@\\aBr@iD~AeIz@yDn@wCpD}PVmAf@eCf@eC`Joc@VsAf@aCd@}BpHm^r@kDXoAfAkFbA{EtIsb@Z}A`@uBR_AXeAd@}A`AwCtEsNrAsEjAeEb@aBd@aBr@sCz@cDjBcHbIoY|@kD\\qAXkAxDgRzAmHzSgdA~J_g@|\\gcBpb@_uB|U{kAdIcTdVqpAl~DssRj_@{hB|Fq_@zt@opDtG_UrEcU`AoFjCkOd@yC`@}CToCTwChAeTx@}PRkCb@eDd@gCn@sCrP_r@\\uAjAuEmCuAsP}I}KsG}@i@kAq@QeFo@uTAMiBy_@wBac@KkBMsBSaDk@mIs@{Io@aMmBs]{AmXS}EQ{CoBac@OeDeA{ScAoTUmEUeEsA{X}@yPoEi~@WkF}AcPScFG}AUkFaDXm[fCgKv@aCRec@hD_CP{CZo]bDyGn@}k@pFgIj@wCR?jG@jX@bY@vJ?lEAnEEpX?zCAdKA~GGva@vDdBjM~G~DpBdCpAd[~OrMxG~DGbN|EdZjOvUhKhQvInPnFfOjDxYnFzNlEhQbHviAhi@d{Axs@tW~LfyBldAv`@fSll@fZtB|E~m@x\\fUhMzNhKjTnRvHfEbDvAtDyChWwZ|BkC}D{AmPoGcc@uJmSmFqh@kPcf@aUoiA_i@evBcbA_]}PwuAkp@cBy@qSmKmCuAmq@y`@sXcPa]{RkO}IeyAk{@cTaNkSaOgQsO{HcIyu@ew@g_@{d@ya@{j@e`@km@w]ml@ckAqsBe}@y`Bsc@e{@gd@g|@iPk\\oSyb@aQk^mNmZkCsFoCsFkCiFgC{EuCaFoCwEmCqEyh@{x@gDkFmCkEoCwEgCuEiCeFcC_FaCiF{^ky@uDgI}BqF_CwFqCiHgCaHqB{FmBiGsAgFcBoGyAgGqAyFqAcGeAkFyAiIgBsKiHsd@mPg_AaFw\\wD{V{Ms|@_AsGeAsGcAkGeA{FmAqGuA{GsAyFuAkGyAuF}AwFeBmFwB{GmBuFiBaFqBeF}BuFoBeE_CaFqCsF_CwE}BaE}CaFuCqE_DwEgCqDeCyCqDaF}CqDkCaDsE{FgkB_|B}DmEaEaEwDwD_E}DyDuD{DoD}EiEwE{D_FeEyEuDmFwDqF{DwGqEsFmD{FmDyqC}_BsDyBwDaCqCqBeDgCkDqCkDuC_DuCqDmDkDsDyDkEaD{DoDaFsDyF}CgFkCuEiCsEyBwE}B{EoBoEuBmFuJo\\y@gCyDqMcDyLgEwMqBoJmB_JkBsImAcHaBiJmAoHiA{GcAwG}@iGu@uFw@{Gw@mGu@qHs@sH_A{L{@uQeAcQy@yPo@qPi@iQ_Bml@[aPu@kQ_AiP}}@s{McB}Wi@mHs@qHu@wHm@eFy@uG{@eGaAsGaAeGkAoGkAcGuAoGuAeGsAuFaBeGaByFcBuFmB}Fwd@{sAqEqM}E_OsE_OwDoM_@wAcCiJy@{CSw@uBcIcHmXeUi|@kB}GwAoF}AsF}AiFmBwF{BaGsBiF{BqF_CiFuBuEeCgFaCqEoCcFwCeFoDqFcHeKq|@}jA}M}PktA{gBom@}w@}R}WaLqMcF{E_GkF{FeEoEyC{DoCmEaC{DeBeGsBsFwAkFiA}GgAmF_@wEMeF?sFL}EZcE`@{Ej@cF|@wDr@iEdAuElAoEnAeTnDaKlEuIjDaNjFyEhB{MtFyMtFeOdIuFhAq@Ly@Aq@So@_@m@w@e@gA]oAkAiFtEmNdUqp@rIwYvAmEfFk@zQqBbb@wENApDa@dAbUpAjYpCvh@tAhW|Dnw@|Ddw@zDjv@rAbXxAvXPnDZnGjDzr@NxCRbEvDlu@NnCP`EvDhz@pEf_AqEg_AwDiz@QaEOoCwDmu@ScEOyCkD{r@[oGQoDyAwXsAcX{Dkv@}Dew@wC\\ea@vEwAPgBTc_@jEqBTgCXg@Fef@pF_@D}C~@M}Cc@{Ke@}IoAqC_AaBeAy@kAm@oBg@s@UiAQcA?g@Pk@@_AZaAXu@\\qG~Cyg@xWgHjDoI|D}G~CeGnCaDfA{DhAaE`AiEx@sNzFsHl@aVnAm_@nD}ShDaQ`EiQfIs~@vg@mc@|V}CfBkZbJaa@pM_UlGwWpFkGxAe^|GkS`BaMz@qLQuM{@wQeDwM}DeNeFqQkGwg@q[e^_Ti_C}wA}l@i`@sE_DuDsCsDaDyDeEwCkDuCyD_DwEkLqRmCwDuDuEoDeE{CuC{CoC}EkDaAm@wBsAmF_CuDcAwEuAyQkEoEuAsDoAeD}A}CsBkCsByCyC}DqEiCyD}BsEuBwEeBmFkAkEeAaFs@_Gg@kG[sFSsHaAyh@c@eRm@cRcCyl@kAcVqIqs@{A_Q_B{PaBgPgBwPmBoPuBkPwBcPiCoQsBuMeCwOoC}OyCiPqCyO{C_PcDaPcDsOiDoOqDoOuDkO_EqOiEaOcEaOoE_OuE_O}E{N{EqNgFkN}Va}@mHuRcHkQqFaNaF}MyGiQgLkZaGqVm@sBq@kCmAaGoAyGgAiH_A{Gw@cH_@}EiEyy@wGesA]mJEqEuAKmWwAkJ[{EFwDZuARwB^sDp@sFhA}P`DwDl@yB\\cBTyEn@mVdFwBr@{B~@yCfBqEvDkElEcCxCk@x@eAvAgCwCOQmCeDqAqBmAoBaAsB}@mB{@{Bw@aCw@sCwBqJm@oCZgALMqA}GUmBg@yAkA}LmFin@eIe}@gByA_ET??"
+      }
+    }
+  ]
+}
 ```
 
 
@@ -1022,7 +2355,8 @@ Publishable
 ###### [Sample request](#sample-request-15 "Direct link to heading")
 
 ```sh
-curl "https://api.radar.io/v1/route/optimize?locations=40.7343164,-73.995688|40.6396701,-73.9257626|40.6390023,-73.9975035|40.7227423,-73.9983234|40.6410279,-73.7746107&mode=car&units=imperial" \  -H "Authorization: prj_live_pk_..."
+curl "https://api.radar.io/v1/route/optimize?locations=40.7343164,-73.995688|40.6396701,-73.9257626|40.6390023,-73.9975035|40.7227423,-73.9983234|40.6410279,-73.7746107&mode=car&units=imperial" \
+  -H "Authorization: prj_live_pk_..."
 ```
 
 
@@ -1030,7 +2364,115 @@ curl "https://api.radar.io/v1/route/optimize?locations=40.7343164,-73.995688|40.
 ###### [Sample response](#sample-response-13 "Direct link to heading")
 
 ```json
-{  "meta": {    "code": 200  },  "route": {    "distance": {      "value": 137388.45584,      "text": "26.0 mi"    },    "duration": {      "value": 49.1802166667,      "text": "49 mins"    },    "legs": [      {        "startLocation": {          "latitude": 40.7343164,          "longitude": -73.995688        },        "endLocation": {          "latitude": 40.7227423,          "longitude": -73.9983234        },        "startIndex": 0,        "endIndex": 3,        "distance": {          "value": 9137.1394,          "text": "1.7 mi"        },        "duration": {          "value": 5.2633833333333335,          "text": "5 mins"        },        "geometry": {          "polyline": "kefulAxyiclCg_AlxCiBzFmBjGa}@`uC_AxCsAhEeBvEhJrEd^fQj@XfClAvAr@lHlD~BlAfFfClCpAtLjG~Av@vBfAp[lOpI`EjB|@tBbAdF`CtIbE`JfEjD`BhBz@lCnAlEtB|L|FnB~@xCvA|SzJ~E~BfK~EvJtE`Ab@~@d@fFbCjNvGl]lPlKbFxCvAdBx@bPvHhD`B~At@tPdIdCjAlBbAr\\lQdNvFhDvAvBXjEj@d[dChJt@dBNhCN~CNl_@zCjCTXsGzJc{BZgHmC{@oOwEmEsFaDaB}@eAe@yA\\gDvA_FvHsR~@aC~@cCjH}QzH_Sv@sBjAuChRef@`AeC|@}BhP}a@rAmDtAqD~Tkk@jTkj@`AcC|@_CzG}PxHwRbAkCnAaDjNg^bBqHBG~@mFfCrB~LzJvq@zi@xAjAbAx@fM`Kpw@xn@|AnAjAmDFShJ_Z"        }      },      {        "startLocation": {          "latitude": 40.7227423,          "longitude": -73.9983234        },        "endLocation": {          "latitude": 40.6390023,          "longitude": -73.9975035        },        "startIndex": 3,        "endIndex": 2,        "distance": {          "value": 44586.6156,          "text": "8.4 mi"        },        "duration": {          "value": 15.074816666666667,          "text": "15 mins"        },        "geometry": {          "polyline": "{uotlAt{nclCjEeNt@aCh@aBdQci@hBwFnApFre@h]`CdBnAqFbCcKn@oCj@aClM{i@FUf@yBl@eCjMwi@p@sCh@yBtLug@DQh@}Bh@yBDQjLmf@h@}BFW`AaEjEjAtIbCxGMzWjIlCz@fBj@ju@nUnCz@bC|@LFvRnIfUpJlV~KtBbAlB~@hc@tUhR|J|DrBzDAbBOvAWjAg@|Y{PfHsF`B}AhBsBfByBnFkH|AiBzAeBzAcB|A{AdB}ApBwAhCyAbCqAtVqKzq[o~N`UoK|@a@rNaDtCcA|Bi@pCYnAKbBLxAb@rAbA~@pA`AzAt@tB\\lCJtCClCYvBg@nBw@~AkAnAqAlAmLnAgFKmIOmg@kAyDh@BcBd@oYHsDB{ANoJr@_[`Cu`@~Bop@z@gGdAiIh@cEv@uGt@yE~@cF`A_Ez@cDjA}B~@wAbBaBzAaAjA]`B]rA@|AVlA^jAt@x@bAx@bBp@zBT~BC~CQbDg@|BcA~BkLlOoV|Y{PzRcRvTsE`G{EpH{FjKiChFuDfIcCfHwCbJaBfGiBzHgBzIgAhIy@|HqBxSeBnScBzR}Drf@iAnM}Etn@iAfP{Cxk@Y|Qi@nSWjOWfUHfJT|LPvH^xMj@hHdA`Ix@rFpAbIjBhJnB`KrB|IjD|LrJzZnLfZvH~TvL|VhJ`NdL~NzNfMzOvJhVhKtt@xXf`@rNvl@fUrcAt_@hyAxi@da@jNfPhEbRrG~MxDjLpBnMz@vOBhJi@pU{Cld@cOnc@kO~KqC~KeBvLu@lGCjGZlNbClN|DnNpErxMpcFv\\~Nr`@lOdb@lMfPhDzNnAfXa@vSkDjJaDbHaDpIcFrI_Gdx@mr@~V{R`g@g_@fn@ec@z`Li~FtQgJdVgJfTeJjH}AbD}@`D}ArF{DxBoBzBmC|EaH`GiLpIeQhOyX`J{Q~JuQzt@m{A~Ow[no@apAzZyk@tBoD~DsG|CkFvCuEtCaEfFwG`OqPlJ{J~HaHjS{O|dBmhAr[mT`U_ShVoXhPmUtRw\\rS{`@`k@shAvCyFln@g~@lk@}~@`Te\\zCeAbCfCxAxA~XxYfBn@tJu@l{@wIxJkAv]wDto@wHx{@oIpCk@|X}Cx_BkQfEe@xC]pgByRzC[pBrGvAzHj[llAzAlCzBdClCdJjArDnQzn@bXv_AbCnInUpx@dAdDbAlDvA~E`BvF`GbU`h@jhBjGpTlEjOjAxChAnCbGfLpMxUdB`D~ArChGbK~Q~ZdHtL|HzM|IhOtHnMlItNtE|H`BrCnAtBpZ`h@~GnLfJzOpHhMzJvPbQdZlDbGhCjEpHjMpIvNrIzNfChEfNtUlHbMdIdNfIjN|\\xk@cm@dkAeC|Eb]f^|CbDbZ}k@l@kA"        }      },      {        "startLocation": {          "latitude": 40.6390023,          "longitude": -73.9975035        },        "endLocation": {          "latitude": 40.6396701,          "longitude": -73.9257626        },        "startIndex": 2,        "endIndex": 1,        "distance": {          "value": 28047.90116,          "text": "5.3 mi"        },        "duration": {          "value": 13.328916666666666,          "text": "13 mins"        },        "geometry": {          "polyline": "{glolAjcmclCtKaTzBmEaBqC{EgIeIgNwHsM}\\yk@gIkNeIeNmHcMgNuUgCiEsI{NqIwNqHkMiCkEmDcGcQeZ{JwPqHiMgJ{O_HoLqZah@oAuBaBsCuE}HmIuNuHoM}IiO}H{MeHuL_R_[iGcK_BsCeBaDqMyUcGgLiAoCkAyCmEkOkGqTah@khBaGcUaBwFwA_FcAmDeAeDoUqx@cCoIcXw_AoQ{n@kAsDmCeJcDqNm@oD]yC{@aQ[yEoD_q@[uG]oG{@sOgA_TaBcZaB}ZgBc]mEyx@qEyx@mDwr@MmH@mCHqCbBm[FaATqCVkDzAqT|D}k@VoDFuEOyEg@uDaCaJqL}`@kAwD_AgDgDmLuIc[u@uHs@oHsKu_@cV}y@_AaD{@sCoSir@}Rmq@}@{Co@uBoS{r@wRgq@_AaDw@oC{Rqq@iN_e@s@aCwDsMmUax@mIiY}D_N{HsVaWa~@eWu{@}Usy@OuHmE_pBH_I~@oHxQsb@|ByAjB]lJg@|BeAxBuDOsRkA}EC_Fk@qXsDujB{@qb@w@g`@oH}sDu@c_@aEaqBAYy@_a@aAw`@s@wYi@aSc@_Qi@kSsBo{@k@aUc@wQg@_SsBey@g@sRc@oQg@gSsBky@c@mQi@aTi@cTi@aTmAqf@]yMu@wYa@yOuBs{@g@kSi@kTe@{QsBiy@e@}Pi@mSm@mUg@iTe@wRc@sRuBey@e@mQg@qSo@wVi@gVc@kSc@oRyBgy@g@eRi@wSi@qSuBy{@i@eSc@kQg@uRuBo{@i@eTkAqf@[sLG_DGsBa@sOe@mR_Ag[IqCIsCYiJvErArA`@h]vJzZvIrYjIvUxGxTzFdOxDbXhHjRnFhOdE~Ab@pRjFdVdGf_AtWpX`F~CTzDZ`D\\lEd@tJdAtfAfLzJdAfE`@pD^lC\\xGt@bHv@ph@|Ft]pCjQvA|D`@dFf@`QlBzaBdRbPhBvD^hDZvP`A|YfBrkA`M`UnA|SbB"        }      },      {        "startLocation": {          "latitude": 40.6396701,          "longitude": -73.9257626        },        "endLocation": {          "latitude": 40.6410279,          "longitude": -73.7746107        },        "startIndex": 1,        "endIndex": 4,        "distance": {          "value": 55616.79968,          "text": "10.5 mi"        },        "duration": {          "value": 15.5131,          "text": "16 mins"        },        "geometry": {          "polyline": "qjmolAbia_lC}ScBaUoAskAaM}YgBwPaAiD[wD_@cPiB{aBeRaQmBeFg@}Da@kQwAu]qCqh@}FcHw@yGu@mC]qD_@gEa@{JeAufAgLuJeAmEe@aD]{D[_DUqXaFg_AuWeVeGqRkF_Bc@iOeEkRoFcXiHeOyDyT{FwUyGsYkIe`@uUwF}AmP_FqA_@cF{A[gOK_IK_IGwQfAoy@z@iy@BaGHeG^_[j@kh@HwILuH~@es@b@{T`@uTXuTVcWtAamAZ}R?}GPkMV_VXe\\JeLKcXMiM]i[W_U_@uIi@iHiAqNeDwa@_Giu@mD_e@eEii@]oEaDua@aGot@gRq~Bw@mJqA_P_AkLcBgJeDwK}CyHyFcLyI_P_h@o_A{EeH{HeIsSgToFcIaC}H_AaKcB_UiCu]G{@m@}Hc@aHsA_TaDsg@wAgSyDid@oDic@w@sJWyHJsK|@qPnFaq@lEcj@nCi_@PiHKaGa@iFcBmIiCwJsR{l@{P{h@}EeOkDmKsF}PwBuGaCoHq[{`AiJcYc\\wbAgQki@kYs{@{Km\\ea@}nAaJuXi]seA{IiX}J}Z}Tar@aKa[{Yu|@iPke@qBgG{Oef@kCeIePsi@eRek@qKg\\ic@esAuWix@ePch@_\\idAeAsCgE}KeKySyHoO{KsQyKkQmTe\\uQkXyRmYcHcLcDcIiDuMqAeMYuDuBsXa@mFsCc`@_Qi}B_@wE_@}EMiBuHabA{B_ZcCq[gDkc@eC{]_Eok@qDmh@{O_oBeIodAgBkU_CgZ}G_|@sDyh@{Fut@mXukDKqAqC}`@a@kI?uDBoBfa@mdBl\\k`BP_AvFsX~SmdAbHk]vE_c@tFon@|Dm_@tFgZ|Gs]vHa^jAiFfI{^jJm[`L}[zNa]bc@ibArKgX`IqUxHg[vHaYnI}n@p~@uwGtLqeAnGcm@~WsqDlJkoApX_gDtEoi@zBqVpAuNzRapCjf@atIz@sPbAyTXeXYiY{A}[mCwXuDiY}EaVcG_UkHoUgZa{@wNgb@_Lia@yJce@_Hod@}G_k@}BmUo@iHg@cGk@wGg@}Ge@{Gc@kGe@iHa@yGsAecACeE?cEFoDRkD^oDb@gDr@kD`AkDbA{CnAyCvAkC~AcChByBlBqBhB}A|BwA`CkAbC_A`Cs@jCi@jCUdCKnCBrCRhCZzBl@~Bx@pBbAvBpAjBlAhFnD~BzAnCzArCjAvIzC|B`Cna@n^dlAxfArDfDdJfInD`DxDdDrD|CvDxCzDzCrDpCzDtC~DpCxDfCfEhC`EbC|DzBfDjBf@V|DtBzBhAfAh@fErBbEjBlEpBnEjBlEdBjE`BpE`BhExAnExArEtArEpAnElApEfAtEdApE`A`FbApEx@tEx@tEr@pEp@vBVdBRrEh@hAJrCVxE`@xE\\zE\\rETbFTpEN|EJtEHbFDvE@vECbFEzEIxEOtEQvESxEYvE[tE_@|Ee@tEg@`Fk@tEm@xEu@rEs@rEy@xE_AnE_AvEeApEgAtEiApEoAlEoAtEyAlE{AhEyAnE_BpEiBhEgBlEmBbEiBhKcFxKwFdKuFlK_GbK_GfKcG~JeGfKsGzJoG`KwG|JwGzJ}GvJaHxJgHvJmHrJkHlJmHrJ{HlJyHnJ}HdJ_IlJkI`JeIfJoI|IoIdJ}I~IwIxI{IpDsDvIaJxIgJzIuJjIcJpIsJjIyJbIcKzCeEzCsEtCoEfHqLnGsLjGmMxFyMlFeN|EqNlE}N`EiOlDuOhDqPfC}N~BoPjBkP~AuPjAsP|@}Pf@aQNcHHgGDwG@gHEuHC}GKaHQaHQiHy@qYuByv@u@yWe@{Pg@wQ]oLa@{P_@yPwBsxA@{GByGJeHNcHNaHdAsa@PmHL}GFwGBaHAeHEwGKeHQaHSaHY{G]kG[aFKuAi@sGsDoa@yDo]}J}a@kIwVaHkU}Nkd@oNyc@sRgn@_Ogd@sFaOwEqRoAqIUsH`A{LzBwKjEqMpCwFzDoGlFkGlMqLd_@kUfH{EvGeGrE}FxDwJ`AuFz@}IjEqi@d@aFj@iEr@cDv@wClNmd@b@wBZ{BRiCJiCAiCIwC]iDa@sC?A"        }      }    ]  }}
+{
+  "meta": {
+    "code": 200
+  },
+  "route": {
+    "distance": {
+      "value": 137388.45584,
+      "text": "26.0 mi"
+    },
+    "duration": {
+      "value": 49.1802166667,
+      "text": "49 mins"
+    },
+    "legs": [
+      {
+        "startLocation": {
+          "latitude": 40.7343164,
+          "longitude": -73.995688
+        },
+        "endLocation": {
+          "latitude": 40.7227423,
+          "longitude": -73.9983234
+        },
+        "startIndex": 0,
+        "endIndex": 3,
+        "distance": {
+          "value": 9137.1394,
+          "text": "1.7 mi"
+        },
+        "duration": {
+          "value": 5.2633833333333335,
+          "text": "5 mins"
+        },
+        "geometry": {
+          "polyline": "kefulAxyiclCg_AlxCiBzFmBjGa}@`uC_AxCsAhEeBvEhJrEd^fQj@XfClAvAr@lHlD~BlAfFfClCpAtLjG~Av@vBfAp[lOpI`EjB|@tBbAdF`CtIbE`JfEjD`BhBz@lCnAlEtB|L|FnB~@xCvA|SzJ~E~BfK~EvJtE`Ab@~@d@fFbCjNvGl]lPlKbFxCvAdBx@bPvHhD`B~At@tPdIdCjAlBbAr\\lQdNvFhDvAvBXjEj@d[dChJt@dBNhCN~CNl_@zCjCTXsGzJc{BZgHmC{@oOwEmEsFaDaB}@eAe@yA\\gDvA_FvHsR~@aC~@cCjH}QzH_Sv@sBjAuChRef@`AeC|@}BhP}a@rAmDtAqD~Tkk@jTkj@`AcC|@_CzG}PxHwRbAkCnAaDjNg^bBqHBG~@mFfCrB~LzJvq@zi@xAjAbAx@fM`Kpw@xn@|AnAjAmDFShJ_Z"
+        }
+      },
+      {
+        "startLocation": {
+          "latitude": 40.7227423,
+          "longitude": -73.9983234
+        },
+        "endLocation": {
+          "latitude": 40.6390023,
+          "longitude": -73.9975035
+        },
+        "startIndex": 3,
+        "endIndex": 2,
+        "distance": {
+          "value": 44586.6156,
+          "text": "8.4 mi"
+        },
+        "duration": {
+          "value": 15.074816666666667,
+          "text": "15 mins"
+        },
+        "geometry": {
+          "polyline": "{uotlAt{nclCjEeNt@aCh@aBdQci@hBwFnApFre@h]`CdBnAqFbCcKn@oCj@aClM{i@FUf@yBl@eCjMwi@p@sCh@yBtLug@DQh@}Bh@yBDQjLmf@h@}BFW`AaEjEjAtIbCxGMzWjIlCz@fBj@ju@nUnCz@bC|@LFvRnIfUpJlV~KtBbAlB~@hc@tUhR|J|DrBzDAbBOvAWjAg@|Y{PfHsF`B}AhBsBfByBnFkH|AiBzAeBzAcB|A{AdB}ApBwAhCyAbCqAtVqKzq[o~N`UoK|@a@rNaDtCcA|Bi@pCYnAKbBLxAb@rAbA~@pA`AzAt@tB\\lCJtCClCYvBg@nBw@~AkAnAqAlAmLnAgFKmIOmg@kAyDh@BcBd@oYHsDB{ANoJr@_[`Cu`@~Bop@z@gGdAiIh@cEv@uGt@yE~@cF`A_Ez@cDjA}B~@wAbBaBzAaAjA]`B]rA@|AVlA^jAt@x@bAx@bBp@zBT~BC~CQbDg@|BcA~BkLlOoV|Y{PzRcRvTsE`G{EpH{FjKiChFuDfIcCfHwCbJaBfGiBzHgBzIgAhIy@|HqBxSeBnScBzR}Drf@iAnM}Etn@iAfP{Cxk@Y|Qi@nSWjOWfUHfJT|LPvH^xMj@hHdA`Ix@rFpAbIjBhJnB`KrB|IjD|LrJzZnLfZvH~TvL|VhJ`NdL~NzNfMzOvJhVhKtt@xXf`@rNvl@fUrcAt_@hyAxi@da@jNfPhEbRrG~MxDjLpBnMz@vOBhJi@pU{Cld@cOnc@kO~KqC~KeBvLu@lGCjGZlNbClN|DnNpErxMpcFv\\~Nr`@lOdb@lMfPhDzNnAfXa@vSkDjJaDbHaDpIcFrI_Gdx@mr@~V{R`g@g_@fn@ec@z`Li~FtQgJdVgJfTeJjH}AbD}@`D}ArF{DxBoBzBmC|EaH`GiLpIeQhOyX`J{Q~JuQzt@m{A~Ow[no@apAzZyk@tBoD~DsG|CkFvCuEtCaEfFwG`OqPlJ{J~HaHjS{O|dBmhAr[mT`U_ShVoXhPmUtRw\\rS{`@`k@shAvCyFln@g~@lk@}~@`Te\\zCeAbCfCxAxA~XxYfBn@tJu@l{@wIxJkAv]wDto@wHx{@oIpCk@|X}Cx_BkQfEe@xC]pgByRzC[pBrGvAzHj[llAzAlCzBdClCdJjArDnQzn@bXv_AbCnInUpx@dAdDbAlDvA~E`BvF`GbU`h@jhBjGpTlEjOjAxChAnCbGfLpMxUdB`D~ArChGbK~Q~ZdHtL|HzM|IhOtHnMlItNtE|H`BrCnAtBpZ`h@~GnLfJzOpHhMzJvPbQdZlDbGhCjEpHjMpIvNrIzNfChEfNtUlHbMdIdNfIjN|\\xk@cm@dkAeC|Eb]f^|CbDbZ}k@l@kA"
+        }
+      },
+      {
+        "startLocation": {
+          "latitude": 40.6390023,
+          "longitude": -73.9975035
+        },
+        "endLocation": {
+          "latitude": 40.6396701,
+          "longitude": -73.9257626
+        },
+        "startIndex": 2,
+        "endIndex": 1,
+        "distance": {
+          "value": 28047.90116,
+          "text": "5.3 mi"
+        },
+        "duration": {
+          "value": 13.328916666666666,
+          "text": "13 mins"
+        },
+        "geometry": {
+          "polyline": "{glolAjcmclCtKaTzBmEaBqC{EgIeIgNwHsM}\\yk@gIkNeIeNmHcMgNuUgCiEsI{NqIwNqHkMiCkEmDcGcQeZ{JwPqHiMgJ{O_HoLqZah@oAuBaBsCuE}HmIuNuHoM}IiO}H{MeHuL_R_[iGcK_BsCeBaDqMyUcGgLiAoCkAyCmEkOkGqTah@khBaGcUaBwFwA_FcAmDeAeDoUqx@cCoIcXw_AoQ{n@kAsDmCeJcDqNm@oD]yC{@aQ[yEoD_q@[uG]oG{@sOgA_TaBcZaB}ZgBc]mEyx@qEyx@mDwr@MmH@mCHqCbBm[FaATqCVkDzAqT|D}k@VoDFuEOyEg@uDaCaJqL}`@kAwD_AgDgDmLuIc[u@uHs@oHsKu_@cV}y@_AaD{@sCoSir@}Rmq@}@{Co@uBoS{r@wRgq@_AaDw@oC{Rqq@iN_e@s@aCwDsMmUax@mIiY}D_N{HsVaWa~@eWu{@}Usy@OuHmE_pBH_I~@oHxQsb@|ByAjB]lJg@|BeAxBuDOsRkA}EC_Fk@qXsDujB{@qb@w@g`@oH}sDu@c_@aEaqBAYy@_a@aAw`@s@wYi@aSc@_Qi@kSsBo{@k@aUc@wQg@_SsBey@g@sRc@oQg@gSsBky@c@mQi@aTi@cTi@aTmAqf@]yMu@wYa@yOuBs{@g@kSi@kTe@{QsBiy@e@}Pi@mSm@mUg@iTe@wRc@sRuBey@e@mQg@qSo@wVi@gVc@kSc@oRyBgy@g@eRi@wSi@qSuBy{@i@eSc@kQg@uRuBo{@i@eTkAqf@[sLG_DGsBa@sOe@mR_Ag[IqCIsCYiJvErArA`@h]vJzZvIrYjIvUxGxTzFdOxDbXhHjRnFhOdE~Ab@pRjFdVdGf_AtWpX`F~CTzDZ`D\\lEd@tJdAtfAfLzJdAfE`@pD^lC\\xGt@bHv@ph@|Ft]pCjQvA|D`@dFf@`QlBzaBdRbPhBvD^hDZvP`A|YfBrkA`M`UnA|SbB"
+        }
+      },
+      {
+        "startLocation": {
+          "latitude": 40.6396701,
+          "longitude": -73.9257626
+        },
+        "endLocation": {
+          "latitude": 40.6410279,
+          "longitude": -73.7746107
+        },
+        "startIndex": 1,
+        "endIndex": 4,
+        "distance": {
+          "value": 55616.79968,
+          "text": "10.5 mi"
+        },
+        "duration": {
+          "value": 15.5131,
+          "text": "16 mins"
+        },
+        "geometry": {
+          "polyline": "qjmolAbia_lC}ScBaUoAskAaM}YgBwPaAiD[wD_@cPiB{aBeRaQmBeFg@}Da@kQwAu]qCqh@}FcHw@yGu@mC]qD_@gEa@{JeAufAgLuJeAmEe@aD]{D[_DUqXaFg_AuWeVeGqRkF_Bc@iOeEkRoFcXiHeOyDyT{FwUyGsYkIe`@uUwF}AmP_FqA_@cF{A[gOK_IK_IGwQfAoy@z@iy@BaGHeG^_[j@kh@HwILuH~@es@b@{T`@uTXuTVcWtAamAZ}R?}GPkMV_VXe\\JeLKcXMiM]i[W_U_@uIi@iHiAqNeDwa@_Giu@mD_e@eEii@]oEaDua@aGot@gRq~Bw@mJqA_P_AkLcBgJeDwK}CyHyFcLyI_P_h@o_A{EeH{HeIsSgToFcIaC}H_AaKcB_UiCu]G{@m@}Hc@aHsA_TaDsg@wAgSyDid@oDic@w@sJWyHJsK|@qPnFaq@lEcj@nCi_@PiHKaGa@iFcBmIiCwJsR{l@{P{h@}EeOkDmKsF}PwBuGaCoHq[{`AiJcYc\\wbAgQki@kYs{@{Km\\ea@}nAaJuXi]seA{IiX}J}Z}Tar@aKa[{Yu|@iPke@qBgG{Oef@kCeIePsi@eRek@qKg\\ic@esAuWix@ePch@_\\idAeAsCgE}KeKySyHoO{KsQyKkQmTe\\uQkXyRmYcHcLcDcIiDuMqAeMYuDuBsXa@mFsCc`@_Qi}B_@wE_@}EMiBuHabA{B_ZcCq[gDkc@eC{]_Eok@qDmh@{O_oBeIodAgBkU_CgZ}G_|@sDyh@{Fut@mXukDKqAqC}`@a@kI?uDBoBfa@mdBl\\k`BP_AvFsX~SmdAbHk]vE_c@tFon@|Dm_@tFgZ|Gs]vHa^jAiFfI{^jJm[`L}[zNa]bc@ibArKgX`IqUxHg[vHaYnI}n@p~@uwGtLqeAnGcm@~WsqDlJkoApX_gDtEoi@zBqVpAuNzRapCjf@atIz@sPbAyTXeXYiY{A}[mCwXuDiY}EaVcG_UkHoUgZa{@wNgb@_Lia@yJce@_Hod@}G_k@}BmUo@iHg@cGk@wGg@}Ge@{Gc@kGe@iHa@yGsAecACeE?cEFoDRkD^oDb@gDr@kD`AkDbA{CnAyCvAkC~AcChByBlBqBhB}A|BwA`CkAbC_A`Cs@jCi@jCUdCKnCBrCRhCZzBl@~Bx@pBbAvBpAjBlAhFnD~BzAnCzArCjAvIzC|B`Cna@n^dlAxfArDfDdJfInD`DxDdDrD|CvDxCzDzCrDpCzDtC~DpCxDfCfEhC`EbC|DzBfDjBf@V|DtBzBhAfAh@fErBbEjBlEpBnEjBlEdBjE`BpE`BhExAnExArEtArEpAnElApEfAtEdApE`A`FbApEx@tEx@tEr@pEp@vBVdBRrEh@hAJrCVxE`@xE\\zE\\rETbFTpEN|EJtEHbFDvE@vECbFEzEIxEOtEQvESxEYvE[tE_@|Ee@tEg@`Fk@tEm@xEu@rEs@rEy@xE_AnE_AvEeApEgAtEiApEoAlEoAtEyAlE{AhEyAnE_BpEiBhEgBlEmBbEiBhKcFxKwFdKuFlK_GbK_GfKcG~JeGfKsGzJoG`KwG|JwGzJ}GvJaHxJgHvJmHrJkHlJmHrJ{HlJyHnJ}HdJ_IlJkI`JeIfJoI|IoIdJ}I~IwIxI{IpDsDvIaJxIgJzIuJjIcJpIsJjIyJbIcKzCeEzCsEtCoEfHqLnGsLjGmMxFyMlFeN|EqNlE}N`EiOlDuOhDqPfC}N~BoPjBkP~AuPjAsP|@}Pf@aQNcHHgGDwG@gHEuHC}GKaHQaHQiHy@qYuByv@u@yWe@{Pg@wQ]oLa@{P_@yPwBsxA@{GByGJeHNcHNaHdAsa@PmHL}GFwGBaHAeHEwGKeHQaHSaHY{G]kG[aFKuAi@sGsDoa@yDo]}J}a@kIwVaHkU}Nkd@oNyc@sRgn@_Ogd@sFaOwEqRoAqIUsH`A{LzBwKjEqMpCwFzDoGlFkGlMqLd_@kUfH{EvGeGrE}FxDwJ`AuFz@}IjEqi@d@aFj@iEr@cDv@wClNmd@b@wBZ{BRiCJiCAiCIwC]iDa@sC?A"
+        }
+      }
+    ]
+  }
+}
 ```
 
 
@@ -1071,7 +2513,119 @@ A user represents a user tracked in your project. Users can be referenced by Rad
 ###### [Sample object](#sample-object "Direct link to heading")
 
 ```json
-{  "_id": "56db1f4613012711002229f4",  "live": true,  "userId": "1",  "deviceId": "C305F2DB-56DC-404F-B6C1-BC52F0B680D8",  "metadata": {    "customId": "123",    "customFlag": false  },  "location": {    "type": "Point",    "coordinates": [-73.97536, 40.78382]  },  "locationAccuracy": 5,  "foreground": true,  "stopped": true,  "deviceType": "iOS",  "updatedAt": "2016-06-10T13:44:10.535Z",  "geofences": [    {      "_id": "56db1f4613012711002229f5",      "tag": "neighborhood",      "externalId": "1",      "description": "Upper West Side",      ...    },    ...  ],  "trip:": {    "_id": "5f3e50491c2b7d005c81f5d9",    "live": true,    "status": "started",    "externalId": "299",    "metadata": {      "Customer Name": "Jacob Pena",      "Car Model": "Green Honda Civic"    },    "mode": "car",    "destinationGeofenceTag": "store",    "destinationGeofenceExternalId": "123",    "destinationLocation": {      "coordinates": [        -105.061198,        39.779366      ],      "type": "Point"    },    "eta": {      "duration": 5.5,      "distance": 1331    },    ...  },  "place": {    "_id": "56db1f4613012711002229f7",    "facebookId": "37965424481",    "name": "Starbucks",    "categories": [      "food-beverage",      "cafe",      "coffee-shop"    ],    "chain": {      "name": "Starbucks",      "slug": "starbucks"    }  },  "country": {    "name": "United States",    "code": "US"  },  "state": {    "name": "New Jersey",    "code": "NJ"  },  "dma": {    "name": "New York",    "code": "501"  },  "postalCode": {    "code": "07302"  },  "beacons": [    {      "type": "ibeacon",      "uuid": "b9407f30-f5f8-466e-aff9-25556b57fe6d",      "major": "100",      "minor": "1",      "description": "Store #123 - Register #1",      "tag": "store-register",      "externalId": "123-1",      "enabled": true    }  ],  "fraud": {    "verified": true,    "passed": false,    "bypassed": false,    "blocked": false,    "mocked": true,    "jumped": false,    "compromised": false,    "inaccurate": false,    "proxy": false,    "sharing": false    "lastMockedAt": "2023-07-27T17:18:28.536Z",    "lastJumpedAt": "2023-07-27T17:18:28.536Z",    "lastCompromisedAt": null,    "lastInaccurateAt": null,    "lastProxyAt": null,    "lastSharingAt": null  }}
+{
+  "_id": "56db1f4613012711002229f4",
+  "live": true,
+  "userId": "1",
+  "deviceId": "C305F2DB-56DC-404F-B6C1-BC52F0B680D8",
+  "metadata": {
+    "customId": "123",
+    "customFlag": false
+  },
+  "location": {
+    "type": "Point",
+    "coordinates": [-73.97536, 40.78382]
+  },
+  "locationAccuracy": 5,
+  "foreground": true,
+  "stopped": true,
+  "deviceType": "iOS",
+  "updatedAt": "2016-06-10T13:44:10.535Z",
+  "geofences": [
+    {
+      "_id": "56db1f4613012711002229f5",
+      "tag": "neighborhood",
+      "externalId": "1",
+      "description": "Upper West Side",
+      ...
+    },
+    ...
+  ],
+  "trip:": {
+    "_id": "5f3e50491c2b7d005c81f5d9",
+    "live": true,
+    "status": "started",
+    "externalId": "299",
+    "metadata": {
+      "Customer Name": "Jacob Pena",
+      "Car Model": "Green Honda Civic"
+    },
+    "mode": "car",
+    "destinationGeofenceTag": "store",
+    "destinationGeofenceExternalId": "123",
+    "destinationLocation": {
+      "coordinates": [
+        -105.061198,
+        39.779366
+      ],
+      "type": "Point"
+    },
+    "eta": {
+      "duration": 5.5,
+      "distance": 1331
+    },
+    ...
+  },
+  "place": {
+    "_id": "56db1f4613012711002229f7",
+    "facebookId": "37965424481",
+    "name": "Starbucks",
+    "categories": [
+      "food-beverage",
+      "cafe",
+      "coffee-shop"
+    ],
+    "chain": {
+      "name": "Starbucks",
+      "slug": "starbucks"
+    }
+  },
+  "country": {
+    "name": "United States",
+    "code": "US"
+  },
+  "state": {
+    "name": "New Jersey",
+    "code": "NJ"
+  },
+  "dma": {
+    "name": "New York",
+    "code": "501"
+  },
+  "postalCode": {
+    "code": "07302"
+  },
+  "beacons": [
+    {
+      "type": "ibeacon",
+      "uuid": "b9407f30-f5f8-466e-aff9-25556b57fe6d",
+      "major": "100",
+      "minor": "1",
+      "description": "Store #123 - Register #1",
+      "tag": "store-register",
+      "externalId": "123-1",
+      "enabled": true
+    }
+  ],
+  "fraud": {
+    "verified": true,
+    "passed": false,
+    "bypassed": false,
+    "blocked": false,
+    "mocked": true,
+    "jumped": false,
+    "compromised": false,
+    "inaccurate": false,
+    "proxy": false,
+    "sharing": false
+    "lastMockedAt": "2023-07-27T17:18:28.536Z",
+    "lastJumpedAt": "2023-07-27T17:18:28.536Z",
+    "lastCompromisedAt": null,
+    "lastInaccurateAt": null,
+    "lastProxyAt": null,
+    "lastSharingAt": null
+  }
+}
 ```
 
 
@@ -1107,7 +2661,8 @@ Secret
 ###### [Sample request](#sample-request-16 "Direct link to heading")
 
 ```sh
-curl "https://api.radar.io/v1/users" \  -H "Authorization: prj_live_sk_..."
+curl "https://api.radar.io/v1/users" \
+  -H "Authorization: prj_live_sk_..."
 ```
 
 
@@ -1115,7 +2670,22 @@ curl "https://api.radar.io/v1/users" \  -H "Authorization: prj_live_sk_..."
 ###### [Sample response](#sample-response-14 "Direct link to heading")
 
 ```json
-{  "meta": {    "code": 200,    "hasMore": true  },  "users": [    {      "_id": "56db1f4613012711002229f4",      "live": true,      "userId": "1",      "deviceId": "C305F2DB-56DC-404F-B6C1-BC52F0B680D8",      ...    },    ...  ]}
+{
+  "meta": {
+    "code": 200,
+    "hasMore": true
+  },
+  "users": [
+    {
+      "_id": "56db1f4613012711002229f4",
+      "live": true,
+      "userId": "1",
+      "deviceId": "C305F2DB-56DC-404F-B6C1-BC52F0B680D8",
+      ...
+    },
+    ...
+  ]
+}
 ```
 
 
@@ -1139,7 +2709,8 @@ Secret
 ###### [Sample request](#sample-request-17 "Direct link to heading")
 
 ```sh
-curl "https://api.radar.io/v1/users/56db1f4613012711002229f4" \  -H "Authorization: prj_live_sk_..."
+curl "https://api.radar.io/v1/users/56db1f4613012711002229f4" \
+  -H "Authorization: prj_live_sk_..."
 ```
 
 
@@ -1147,7 +2718,18 @@ curl "https://api.radar.io/v1/users/56db1f4613012711002229f4" \  -H "Authorizati
 ###### [Sample response](#sample-response-15 "Direct link to heading")
 
 ```json
-{  "meta": {    "code": 200  },  "user": {    "_id": "56db1f4613012711002229f4",    "live": true,    "userId": "1",    "deviceId": "C305F2DB-56DC-404F-B6C1-BC52F0B680D8",    ...  }}
+{
+  "meta": {
+    "code": 200
+  },
+  "user": {
+    "_id": "56db1f4613012711002229f4",
+    "live": true,
+    "userId": "1",
+    "deviceId": "C305F2DB-56DC-404F-B6C1-BC52F0B680D8",
+    ...
+  }
+}
 ```
 
 
@@ -1171,7 +2753,9 @@ Secret
 ###### [Sample request](#sample-request-18 "Direct link to heading")
 
 ```sh
-curl "https://api.radar.io/v1/users/56db1f4613012711002229f4" \  -H "Authorization: prj_live_sk_..." \  -X DELETE
+curl "https://api.radar.io/v1/users/56db1f4613012711002229f4" \
+  -H "Authorization: prj_live_sk_..." \
+  -X DELETE
 ```
 
 
@@ -1179,7 +2763,11 @@ curl "https://api.radar.io/v1/users/56db1f4613012711002229f4" \  -H "Authorizati
 ###### [Sample response](#sample-response-16 "Direct link to heading")
 
 ```json
-{  "meta": {    "code": 200  }}
+{
+  "meta": {
+    "code": 200
+  }
+}
 ```
 
 
@@ -1215,7 +2803,61 @@ A trip is a sequence of location updates with metadata and a unique ID, optional
 ###### [Sample object](#sample-object-1 "Direct link to heading")
 
 ```json
-{  "_id": "5f3e50491c2b7d005c81f5d9",  "live": true,  "status": "started",  "externalId": "299",  "metadata": {    "Customer Name": "Jacob Pena",    "Car Model": "Green Honda Civic"  },  "mode": "car",  "destinationGeofenceTag": "store",  "destinationGeofenceExternalId": "123",  "destinationLocation": {    "coordinates": [      -105.061198,      39.779366    ],    "type": "Point"  },  "approachingThreshold": 3,  "eta": {    "duration": 5.5,    "distance": 1331  },  "createdAt": "2020-08-20T10:27:55.830Z",  "updatedAt": "2020-08-20T10:30:55.837Z",  "user": {    "_id": "56db1f4613012711002229f4",    "userId": "1",    "deviceId": "C305F2DB-56DC-404F-B6C1-BC52F0B680D8"  },  "userId": "1",  "locations": [    {      "type": "Point",      "coordinates": [        -105.062645,        39.766059819860864      ],      "updatedAt": "2020-08-20T10:29:55.897Z"    },    {      "type": "Point",      "coordinates": [        -105.06267319809022,        39.769057068070715      ],      "updatedAt": "2020-08-20T10:30:55.837Z"    }  ],  "delay": {    "delayed": false,    "scheduledArrivalTimeDelay": 0  }}
+{
+  "_id": "5f3e50491c2b7d005c81f5d9",
+  "live": true,
+  "status": "started",
+  "externalId": "299",
+  "metadata": {
+    "Customer Name": "Jacob Pena",
+    "Car Model": "Green Honda Civic"
+  },
+  "mode": "car",
+  "destinationGeofenceTag": "store",
+  "destinationGeofenceExternalId": "123",
+  "destinationLocation": {
+    "coordinates": [
+      -105.061198,
+      39.779366
+    ],
+    "type": "Point"
+  },
+  "approachingThreshold": 3,
+  "eta": {
+    "duration": 5.5,
+    "distance": 1331
+  },
+  "createdAt": "2020-08-20T10:27:55.830Z",
+  "updatedAt": "2020-08-20T10:30:55.837Z",
+  "user": {
+    "_id": "56db1f4613012711002229f4",
+    "userId": "1",
+    "deviceId": "C305F2DB-56DC-404F-B6C1-BC52F0B680D8"
+  },
+  "userId": "1",
+  "locations": [
+    {
+      "type": "Point",
+      "coordinates": [
+        -105.062645,
+        39.766059819860864
+      ],
+      "updatedAt": "2020-08-20T10:29:55.897Z"
+    },
+    {
+      "type": "Point",
+      "coordinates": [
+        -105.06267319809022,
+        39.769057068070715
+      ],
+      "updatedAt": "2020-08-20T10:30:55.837Z"
+    }
+  ],
+  "delay": {
+    "delayed": false,
+    "scheduledArrivalTimeDelay": 0
+  }
+}
 ```
 
 
@@ -1235,7 +2877,8 @@ GET `https://api.radar.io/v1/trips/:id`GET `https://api.radar.io/v1/trips/:exter
 ###### [Sample request](#sample-request-19 "Direct link to heading")
 
 ```sh
-curl "https://api.radar.io/v1/trips/299" \  -H "Authorization: prj_live_sk_..."
+curl "https://api.radar.io/v1/trips/299" \
+  -H "Authorization: prj_live_sk_..."
 ```
 
 
@@ -1247,7 +2890,31 @@ Secret
 ###### [Sample response](#sample-response-17 "Direct link to heading")
 
 ```json
-{  "_id": "5f3e50491c2b7d005c81f5d9",  "live": true,  "status": "started",  "externalId": "299",  "metadata": {    "Customer Name": "Jacob Pena",    "Car Model": "Green Honda Civic"  },  "mode": "car",  "destinationGeofenceTag": "store",  "destinationGeofenceExternalId": "123",  "destinationLocation": {    "coordinates": [      -105.061198,      39.779366    ],    "type": "Point"  },  "eta": {    "duration": 5.5,    "distance": 1331  },  ...}
+{
+  "_id": "5f3e50491c2b7d005c81f5d9",
+  "live": true,
+  "status": "started",
+  "externalId": "299",
+  "metadata": {
+    "Customer Name": "Jacob Pena",
+    "Car Model": "Green Honda Civic"
+  },
+  "mode": "car",
+  "destinationGeofenceTag": "store",
+  "destinationGeofenceExternalId": "123",
+  "destinationLocation": {
+    "coordinates": [
+      -105.061198,
+      39.779366
+    ],
+    "type": "Point"
+  },
+  "eta": {
+    "duration": 5.5,
+    "distance": 1331
+  },
+  ...
+}
 ```
 
 
@@ -1269,7 +2936,8 @@ GET `https://api.radar.io/v1/trips/:id/route`GET `https://api.radar.io/v1/trips/
 ###### [Sample request](#sample-request-20 "Direct link to heading")
 
 ```sh
-curl "https://api.radar.io/v1/trips/299/route" \  -H "Authorization: prj_live_sk_..."
+curl "https://api.radar.io/v1/trips/299/route" \
+  -H "Authorization: prj_live_sk_..."
 ```
 
 
@@ -1281,7 +2949,15 @@ Secret
 ###### [Sample response](#sample-response-18 "Direct link to heading")
 
 ```json
-{  "distance": {    "value": 1077.1173573024,    "text": "0.2 mi"  },  "geometry": {    "polyline": "waczjAhnokgEia@BcXXga@Ri|@KmIDsIDyD@mD@"  }}
+{
+  "distance": {
+    "value": 1077.1173573024,
+    "text": "0.2 mi"
+  },
+  "geometry": {
+    "polyline": "waczjAhnokgEia@BcXXga@Ri|@KmIDsIDyD@mD@"
+  }
+}
 ```
 
 
@@ -1315,7 +2991,8 @@ GET `https://api.radar.io/v1/trips`
 ###### [Sample request](#sample-request-21 "Direct link to heading")
 
 ```sh
-curl "https://api.radar.io/v1/trips?status=started&destinationGeofenceTag=store&destinationGeofenceExternalId=123&externalId=123,456,789" \  -H "Authorization: prj_live_sk_..."
+curl "https://api.radar.io/v1/trips?status=started&destinationGeofenceTag=store&destinationGeofenceExternalId=123&externalId=123,456,789" \
+  -H "Authorization: prj_live_sk_..."
 ```
 
 
@@ -1327,7 +3004,42 @@ Secret
 ###### [Sample response](#sample-response-19 "Direct link to heading")
 
 ```json
-{  "meta": {    "code": 200  },  "trips": [    {      "_id": "5f3e50491c2b7d005c81f5d9",      "live": true,      "status": "started",      "externalId": "299",      "metadata": {        "Customer Name": "Jacob Pena",        "Car Model": "Green Honda Civic"      },      "mode": "car",      "destinationGeofenceTag": "store",      "destinationGeofenceExternalId": "123",      "destinationLocation": {        "coordinates": [          -105.06119826017914,          39.7793665        ],        "type": "Point"      },      "eta": {        "duration": 5.5,        "distance": 1331      },      "createdAt": "2020-08-20T10:27:55.830Z",      "updatedAt": "2020-08-20T10:30:55.837Z",      "endedAt": "2020-08-20T10:30:55.837Z"      ...    },    ...  ]}
+{
+  "meta": {
+    "code": 200
+  },
+  "trips": [
+    {
+      "_id": "5f3e50491c2b7d005c81f5d9",
+      "live": true,
+      "status": "started",
+      "externalId": "299",
+      "metadata": {
+        "Customer Name": "Jacob Pena",
+        "Car Model": "Green Honda Civic"
+      },
+      "mode": "car",
+      "destinationGeofenceTag": "store",
+      "destinationGeofenceExternalId": "123",
+      "destinationLocation": {
+        "coordinates": [
+          -105.06119826017914,
+          39.7793665
+        ],
+        "type": "Point"
+      },
+      "eta": {
+        "duration": 5.5,
+        "distance": 1331
+      },
+      "createdAt": "2020-08-20T10:27:55.830Z",
+      "updatedAt": "2020-08-20T10:30:55.837Z",
+      "endedAt": "2020-08-20T10:30:55.837Z"
+      ...
+    },
+    ...
+  ]
+}
 ```
 
 
@@ -1362,7 +3074,16 @@ POST `https://api.radar.io/v1/trips`
 ###### [Sample request](#sample-request-22 "Direct link to heading")
 
 ```sh
-curl "https://api.radar.io/v1/trips" \  -H "Authorization: prj_test_pk_..." \  -X POST \  -d "externalId=123" \  -d "mode=car" \  -d "destinationGeofenceTag=store" \  -d "destinationGeofenceExternalId=1" \  -d "userId=001" \  -d "approachingThreshold=3" \  -d "metadata={\"foo\": \"bar\"}"
+curl "https://api.radar.io/v1/trips" \
+  -H "Authorization: prj_test_pk_..." \
+  -X POST \
+  -d "externalId=123" \
+  -d "mode=car" \
+  -d "destinationGeofenceTag=store" \
+  -d "destinationGeofenceExternalId=1" \
+  -d "userId=001" \
+  -d "approachingThreshold=3" \
+  -d "metadata={\"foo\": \"bar\"}"
 ```
 
 
@@ -1374,7 +3095,38 @@ Publishable
 ###### [Sample response](#sample-response-20 "Direct link to heading")
 
 ```json
-{  "meta": {    "code": 200,  },  "trip": {    "_id": "6334960ad9735600116b7ab5",    "live": false,    "externalId": "123",    "userId": "001",    "mode": "car",    "status": "pending",    "destinationGeofenceTag": "store",    "destinationGeofenceExternalId": "1",    "destinationLocation": {      "type": "Point",      "coordinates": [        -73.977797,        40.783826      ]    },    "metadata": {      "foo": "bar"    },    "approachingThreshold": 3,    "user": {      "_id": "56db1f4613012711002229f4",      "userId": "001",      "deviceId": "C305F2DB-56DC-404F-B6C1-BC52F0B680D8"    },    "locations": [],  }}
+{
+  "meta": {
+    "code": 200,
+  },
+  "trip": {
+    "_id": "6334960ad9735600116b7ab5",
+    "live": false,
+    "externalId": "123",
+    "userId": "001",
+    "mode": "car",
+    "status": "pending",
+    "destinationGeofenceTag": "store",
+    "destinationGeofenceExternalId": "1",
+    "destinationLocation": {
+      "type": "Point",
+      "coordinates": [
+        -73.977797,
+        40.783826
+      ]
+    },
+    "metadata": {
+      "foo": "bar"
+    },
+    "approachingThreshold": 3,
+    "user": {
+      "_id": "56db1f4613012711002229f4",
+      "userId": "001",
+      "deviceId": "C305F2DB-56DC-404F-B6C1-BC52F0B680D8"
+    },
+    "locations": [],
+  }
+}
 ```
 
 
@@ -1406,7 +3158,10 @@ PATCH `https://api.radar.io/v1/trips/:id/update`PATCH `https://api.radar.io/v1/t
 ###### [Sample request](#sample-request-23 "Direct link to heading")
 
 ```sh
-curl "https://api.radar.io/v1/trips/299/update" \  -H "Authorization: prj_live_sk_..."  -X PATCH  -d "status=completed"
+curl "https://api.radar.io/v1/trips/299/update" \
+  -H "Authorization: prj_live_sk_..."
+  -X PATCH
+  -d "status=completed"
 ```
 
 
@@ -1418,7 +3173,38 @@ Publishable
 ###### [Sample response](#sample-response-21 "Direct link to heading")
 
 ```json
-{  "meta": {    "code": 200    },   "trip": {    "_id": "6334960ad9735600116b7ab5",    "live": false,    "externalId": "123",    "userId": "001",    "mode": "car",    "status": "completed",    "destinationGeofenceTag": "store",    "destinationGeofenceExternalId": "1",    "destinationLocation": {      "type": "Point",      "coordinates": [        -73.977797,        40.783826      ]    },    "metadata": {      "foo": "bar"    },    "approachingThreshold": 3,    "user": {      "_id": "56db1f4613012711002229f4",      "userId": "001",      "deviceId": "C305F2DB-56DC-404F-B6C1-BC52F0B680D8"    },    "locations": [],  }}
+{
+  "meta": {
+    "code": 200
+    },
+   "trip": {
+    "_id": "6334960ad9735600116b7ab5",
+    "live": false,
+    "externalId": "123",
+    "userId": "001",
+    "mode": "car",
+    "status": "completed",
+    "destinationGeofenceTag": "store",
+    "destinationGeofenceExternalId": "1",
+    "destinationLocation": {
+      "type": "Point",
+      "coordinates": [
+        -73.977797,
+        40.783826
+      ]
+    },
+    "metadata": {
+      "foo": "bar"
+    },
+    "approachingThreshold": 3,
+    "user": {
+      "_id": "56db1f4613012711002229f4",
+      "userId": "001",
+      "deviceId": "C305F2DB-56DC-404F-B6C1-BC52F0B680D8"
+    },
+    "locations": [],
+  }
+}
 ```
 
 
@@ -1442,7 +3228,9 @@ Secret
 ###### [Sample request](#sample-request-24 "Direct link to heading")
 
 ```sh
-curl "https://api.radar.io/v1/trips/56db1f4613012711002229f4" \  -H "Authorization: prj_live_sk_..." \  -X DELETE
+curl "https://api.radar.io/v1/trips/56db1f4613012711002229f4" \
+  -H "Authorization: prj_live_sk_..." \
+  -X DELETE
 ```
 
 
@@ -1450,7 +3238,11 @@ curl "https://api.radar.io/v1/trips/56db1f4613012711002229f4" \  -H "Authorizati
 ###### [Sample response](#sample-response-22 "Direct link to heading")
 
 ```json
-{  "meta": {    "code": 200  }}
+{
+  "meta": {
+    "code": 200
+  }
+}
 ```
 
 
@@ -1485,7 +3277,29 @@ A geofence represents a custom region or place monitored in your project. Geofen
 ###### [Sample object](#sample-object-2 "Direct link to heading")
 
 ```json
-{  "_id": "56db1f4613012711002229f5",  "createdAt": "2016-06-10T13:44:10.535Z",  "updatedAt": "2016-06-10T14:40:10.535Z",  "live": true,  "tag": "venue",  "externalId": "2",  "description": "Coffee Shop",  "type": "circle",  "geometry": {    "type": "Polygon",    "coordinates": [[...]]  },  "geometryCenter": {    "type": "Point",    "coordinates": [-73.97536, 40.78382]  },  "geometryRadius": 50,  "metadata": {    ...  },  "enabled": true}
+{
+  "_id": "56db1f4613012711002229f5",
+  "createdAt": "2016-06-10T13:44:10.535Z",
+  "updatedAt": "2016-06-10T14:40:10.535Z",
+  "live": true,
+  "tag": "venue",
+  "externalId": "2",
+  "description": "Coffee Shop",
+  "type": "circle",
+  "geometry": {
+    "type": "Polygon",
+    "coordinates": [[...]]
+  },
+  "geometryCenter": {
+    "type": "Point",
+    "coordinates": [-73.97536, 40.78382]
+  },
+  "geometryRadius": 50,
+  "metadata": {
+    ...
+  },
+  "enabled": true
+}
 ```
 
 
@@ -1516,7 +3330,8 @@ GET `https://api.radar.io/v1/geofences`
 ###### [Sample request](#sample-request-25 "Direct link to heading")
 
 ```sh
-curl "https://api.radar.io/v1/geofences" \  -H "Authorization: prj_live_sk_..."
+curl "https://api.radar.io/v1/geofences" \
+  -H "Authorization: prj_live_sk_..."
 ```
 
 
@@ -1528,7 +3343,25 @@ Secret
 ###### [Sample response](#sample-response-23 "Direct link to heading")
 
 ```json
-{  "meta": {    "code": 200,    "hasMore": true  },  "geofences": [    {      "_id": "56db1f4613012711002229f5",      "createdAt": "2016-06-10T13:44:10.535Z",      "live": true,      "tag": "venue",      "externalId": "2",      "description": "Coffee Shop",      "type": "circle",      ...    },    ...  ]}
+{
+  "meta": {
+    "code": 200,
+    "hasMore": true
+  },
+  "geofences": [
+    {
+      "_id": "56db1f4613012711002229f5",
+      "createdAt": "2016-06-10T13:44:10.535Z",
+      "live": true,
+      "tag": "venue",
+      "externalId": "2",
+      "description": "Coffee Shop",
+      "type": "circle",
+      ...
+    },
+    ...
+  ]
+}
 ```
 
 
@@ -1552,7 +3385,8 @@ Secret
 ###### [Sample request](#sample-request-26 "Direct link to heading")
 
 ```sh
-curl "https://api.radar.io/v1/geofences/56db1f4613012711002229f5" \  -H "Authorization: prj_live_sk_..."
+curl "https://api.radar.io/v1/geofences/56db1f4613012711002229f5" \
+  -H "Authorization: prj_live_sk_..."
 ```
 
 
@@ -1560,7 +3394,21 @@ curl "https://api.radar.io/v1/geofences/56db1f4613012711002229f5" \  -H "Authori
 ###### [Sample response](#sample-response-24 "Direct link to heading")
 
 ```json
-{  "meta": {    "code": 200  },  "geofence": {    "_id": "56db1f4613012711002229f5",    "createdAt": "2016-06-10T13:44:10.535Z",    "live": true,    "tag": "venue",    "externalId": "2",    "description": "Coffee Shop",    "type": "circle",    ...  }}
+{
+  "meta": {
+    "code": 200
+  },
+  "geofence": {
+    "_id": "56db1f4613012711002229f5",
+    "createdAt": "2016-06-10T13:44:10.535Z",
+    "live": true,
+    "tag": "venue",
+    "externalId": "2",
+    "description": "Coffee Shop",
+    "type": "circle",
+    ...
+  }
+}
 ```
 
 
@@ -1605,7 +3453,13 @@ Secret
 ###### [Sample request](#sample-request-27 "Direct link to heading")
 
 ```sh
-curl "https://api.radar.io/v1/geofences/venue/2" \  -H "Authorization: prj_live_sk_..." \  -X PUT \  -d "description=Coffee Shop" \  -d "type=circle" \  -d "coordinates=[-73.97536,40.78382]" \  -d "radius=50"
+curl "https://api.radar.io/v1/geofences/venue/2" \
+  -H "Authorization: prj_live_sk_..." \
+  -X PUT \
+  -d "description=Coffee Shop" \
+  -d "type=circle" \
+  -d "coordinates=[-73.97536,40.78382]" \
+  -d "radius=50"
 ```
 
 
@@ -1613,7 +3467,21 @@ curl "https://api.radar.io/v1/geofences/venue/2" \  -H "Authorization: prj_live_
 ###### [Sample response](#sample-response-25 "Direct link to heading")
 
 ```json
-{  "meta": {    "code": 200  },  "geofence": {    "_id": "56db1f4613012711002229f5",    "createdAt": "2016-06-10T13:44:10.535Z",    "live": true,    "tag": "venue",    "externalId": "2",    "description": "Coffee Shop",    "type": "circle",    ...  }}
+{
+  "meta": {
+    "code": 200
+  },
+  "geofence": {
+    "_id": "56db1f4613012711002229f5",
+    "createdAt": "2016-06-10T13:44:10.535Z",
+    "live": true,
+    "tag": "venue",
+    "externalId": "2",
+    "description": "Coffee Shop",
+    "type": "circle",
+    ...
+  }
+}
 ```
 
 
@@ -1637,7 +3505,9 @@ Secret
 ###### [Sample request](#sample-request-28 "Direct link to heading")
 
 ```sh
-curl "https://api.radar.io/v1/geofences/56db1f4613012711002229f5" \  -H "Authorization: prj_live_sk_..." \  -X DELETE
+curl "https://api.radar.io/v1/geofences/56db1f4613012711002229f5" \
+  -H "Authorization: prj_live_sk_..." \
+  -X DELETE
 ```
 
 
@@ -1645,7 +3515,11 @@ curl "https://api.radar.io/v1/geofences/56db1f4613012711002229f5" \  -H "Authori
 ###### [Sample response](#sample-response-26 "Direct link to heading")
 
 ```json
-{  "meta": {    "code": 200  }}
+{
+  "meta": {
+    "code": 200
+  }
+}
 ```
 
 
@@ -1669,7 +3543,8 @@ Secret
 ###### [Sample request](#sample-request-29 "Direct link to heading")
 
 ```sh
-curl "https://api.radar.io/v1/geofences/venue/2/users" \  -H "Authorization: prj_live_sk_..."
+curl "https://api.radar.io/v1/geofences/venue/2/users" \
+  -H "Authorization: prj_live_sk_..."
 ```
 
 
@@ -1677,7 +3552,26 @@ curl "https://api.radar.io/v1/geofences/venue/2/users" \  -H "Authorization: prj
 ###### [Sample response](#sample-response-27 "Direct link to heading")
 
 ```json
-{  "meta": {    "code": 200,    "hasMore": false  },  "users": [    {      "_id": "611ace2eb08f300047c904e9",      "location": {        "type": "Point",        "coordinates": [          73.97536,          40.78382        ]      },      ...    }    ...  ]}
+{
+  "meta": {
+    "code": 200,
+    "hasMore": false
+  },
+  "users": [
+    {
+      "_id": "611ace2eb08f300047c904e9",
+      "location": {
+        "type": "Point",
+        "coordinates": [
+          73.97536,
+          40.78382
+        ]
+      },
+      ...
+    }
+    ...
+  ]
+}
 ```
 
 
@@ -1706,7 +3600,32 @@ An event represents a change in user state. Events can be uniquely referenced by
 ###### [Sample object](#sample-object-3 "Direct link to heading")
 
 ```json
-{  "_id": "56db1f4613012711002229f6",  "createdAt": "2016-06-10T13:44:10.535Z",  "live": true,  "type": "user.exited_geofence",  "location": {    "type": "Point",    "coordinates": [-73.97779, 40.78382]  },  "locationAccuracy": 5,  "confidence": 3,  "duration": 48.38920,  "user": {    "_id": "56db1f4613012711002229f4",    "userId": "1",    "deviceId": "C305F2DB-56DC-404F-B6C1-BC52F0B680D8",    ...  },  "geofence": {    "_id": "56db1f4613012711002229f5",    "tag": "venue",    "externalId": "2",    "description": "Coffee Shop",    ...  }}
+{
+  "_id": "56db1f4613012711002229f6",
+  "createdAt": "2016-06-10T13:44:10.535Z",
+  "live": true,
+  "type": "user.exited_geofence",
+  "location": {
+    "type": "Point",
+    "coordinates": [-73.97779, 40.78382]
+  },
+  "locationAccuracy": 5,
+  "confidence": 3,
+  "duration": 48.38920,
+  "user": {
+    "_id": "56db1f4613012711002229f4",
+    "userId": "1",
+    "deviceId": "C305F2DB-56DC-404F-B6C1-BC52F0B680D8",
+    ...
+  },
+  "geofence": {
+    "_id": "56db1f4613012711002229f5",
+    "tag": "venue",
+    "externalId": "2",
+    "description": "Coffee Shop",
+    ...
+  }
+}
 ```
 
 
@@ -1749,7 +3668,11 @@ Publishable
 ###### [Sample request](#sample-request-30 "Direct link to heading")
 
 ```sh
-curl "https://api.radar.io/v1/events" \  -H "Authorization: prj_live_pk_..." \  -X POST \  -d "name=conversion" \  -d "userId=user123"
+curl "https://api.radar.io/v1/events" \
+  -H "Authorization: prj_live_pk_..." \
+  -X POST \
+  -d "name=conversion" \
+  -d "userId=user123"
 ```
 
 
@@ -1757,7 +3680,24 @@ curl "https://api.radar.io/v1/events" \  -H "Authorization: prj_live_pk_..." \  
 ###### [Sample response](#sample-response-28 "Direct link to heading")
 
 ```json
-{  "meta": {    "code": 200  },  "event": {    "_id": "56db1f4613012711002229f6",    "createdAt": "2016-06-10T13:44:10.535Z",    "live": true,    "type": "conversion",    "confidence": 3,    "user": {      "_id": "56db1f4613012711002229f4",      "userId": "user123",      "deviceId": "C305F2DB-56DC-404F-B6C1-BC52F0B680D8",      ...    }  }}
+{
+  "meta": {
+    "code": 200
+  },
+  "event": {
+    "_id": "56db1f4613012711002229f6",
+    "createdAt": "2016-06-10T13:44:10.535Z",
+    "live": true,
+    "type": "conversion",
+    "confidence": 3,
+    "user": {
+      "_id": "56db1f4613012711002229f4",
+      "userId": "user123",
+      "deviceId": "C305F2DB-56DC-404F-B6C1-BC52F0B680D8",
+      ...
+    }
+  }
+}
 ```
 
 
@@ -1788,7 +3728,30 @@ A beacon represents a Bluetooth beacon monitored in your project. Beacons can be
 ###### [Sample object](#sample-object-4 "Direct link to heading")
 
 ```json
-{  "_id": "60f6da60cf4cc0a72a6c070b",  "createdAt": "2021-07-20T14:27:22.283Z",  "updatedAt": "2021-07-20T14:27:22.283Z",  "live": false,  "description": "Store #123 - Register #1",  "tag": "store-register",  "externalId": "123-1",  "type": "ibeacon",  "uuid": "b9407f30-f5f8-466e-aff9-25556b57fe6d",  "major": "100",  "minor": "1",  "geometry": {    "type": "Point",    "coordinates": [      -73.975384,      40.783747    ]  },  "enabled": true,  "metadata": {    "supportsContactlessPayments": true  }}
+{
+  "_id": "60f6da60cf4cc0a72a6c070b",
+  "createdAt": "2021-07-20T14:27:22.283Z",
+  "updatedAt": "2021-07-20T14:27:22.283Z",
+  "live": false,
+  "description": "Store #123 - Register #1",
+  "tag": "store-register",
+  "externalId": "123-1",
+  "type": "ibeacon",
+  "uuid": "b9407f30-f5f8-466e-aff9-25556b57fe6d",
+  "major": "100",
+  "minor": "1",
+  "geometry": {
+    "type": "Point",
+    "coordinates": [
+      -73.975384,
+      40.783747
+    ]
+  },
+  "enabled": true,
+  "metadata": {
+    "supportsContactlessPayments": true
+  }
+}
 ```
 
 
@@ -1820,7 +3783,8 @@ Secret
 ###### [Sample request](#sample-request-31 "Direct link to heading")
 
 ```sh
-curl "https://api.radar.io/v1/beacons" \  -H "Authorization: prj_live_sk_..."
+curl "https://api.radar.io/v1/beacons" \
+  -H "Authorization: prj_live_sk_..."
 ```
 
 
@@ -1828,7 +3792,23 @@ curl "https://api.radar.io/v1/beacons" \  -H "Authorization: prj_live_sk_..."
 ###### [Sample response](#sample-response-29 "Direct link to heading")
 
 ```json
-{  "meta": {    "code": 200,    "hasMore": true  },  "beacons": [    {      "_id": "6109a4b16dbfe3de2cb03924",      "createdAt": "2021-08-03T20:18:57.888Z",      "updatedAt": "2021-08-03T20:18:57.888Z",      "live": true,      "description": "Store #123 - Register #1",      ...    },    ...  ]}
+{
+  "meta": {
+    "code": 200,
+    "hasMore": true
+  },
+  "beacons": [
+    {
+      "_id": "6109a4b16dbfe3de2cb03924",
+      "createdAt": "2021-08-03T20:18:57.888Z",
+      "updatedAt": "2021-08-03T20:18:57.888Z",
+      "live": true,
+      "description": "Store #123 - Register #1",
+      ...
+    },
+    ...
+  ]
+}
 ```
 
 
@@ -1852,7 +3832,8 @@ Secret
 ###### [Sample request](#sample-request-32 "Direct link to heading")
 
 ```sh
-curl "https://api.radar.io/v1/beacons/6109a4b16dbfe3de2cb03924" \  -H "Authorization: prj_live_sk_..."
+curl "https://api.radar.io/v1/beacons/6109a4b16dbfe3de2cb03924" \
+  -H "Authorization: prj_live_sk_..."
 ```
 
 
@@ -1860,7 +3841,21 @@ curl "https://api.radar.io/v1/beacons/6109a4b16dbfe3de2cb03924" \  -H "Authoriza
 ###### [Sample response](#sample-response-30 "Direct link to heading")
 
 ```json
-{  "meta": {    "code": 200  },  "beacon": {    "_id": "6109a4b16dbfe3de2cb03924",    "createdAt": "2021-08-03T20:18:57.888Z",    "updatedAt": "2021-08-03T20:18:57.888Z",    "live": true,    "description": "Store #123 - Register #1",    "tag": "store-register",    "externalId": "123-1",    ...  }}
+{
+  "meta": {
+    "code": 200
+  },
+  "beacon": {
+    "_id": "6109a4b16dbfe3de2cb03924",
+    "createdAt": "2021-08-03T20:18:57.888Z",
+    "updatedAt": "2021-08-03T20:18:57.888Z",
+    "live": true,
+    "description": "Store #123 - Register #1",
+    "tag": "store-register",
+    "externalId": "123-1",
+    ...
+  }
+}
 ```
 
 
@@ -1899,7 +3894,18 @@ Secret
 ###### [Sample request](#sample-request-33 "Direct link to heading")
 
 ```sh
-curl "https://api.radar.io/v1/beacons" \  -H "Authorization: prj_live_sk_..." \  -X POST \  -d "description=Store 123 - Register 1" \  -d "tag=store-register" \  -d "tag=123-1" \  -d "type=ibeacon" \  -d "uuid=b9407f30-f5f8-466e-aff9-25556b57fe6d" \  -d "major=100" \  -d "minor=1"  -d "coordinates=[-105.94653744704361,35.70654086799666]" \  -d "enabled=true"
+curl "https://api.radar.io/v1/beacons" \
+  -H "Authorization: prj_live_sk_..." \
+  -X POST \
+  -d "description=Store 123 - Register 1" \
+  -d "tag=store-register" \
+  -d "tag=123-1" \
+  -d "type=ibeacon" \
+  -d "uuid=b9407f30-f5f8-466e-aff9-25556b57fe6d" \
+  -d "major=100" \
+  -d "minor=1"
+  -d "coordinates=[-105.94653744704361,35.70654086799666]" \
+  -d "enabled=true"
 ```
 
 
@@ -1907,7 +3913,21 @@ curl "https://api.radar.io/v1/beacons" \  -H "Authorization: prj_live_sk_..." \ 
 ###### [Sample response](#sample-response-31 "Direct link to heading")
 
 ```json
-{  "meta": {    "code": 200  },  "beacon": {    "_id": "6116d947049aee0089a682a2",    "createdAt": "2021-08-13T20:42:47.711Z",    "updatedAt": "2021-08-13T20:42:47.711Z",    "live": true,    "description": "Store #123 - Register #1",    "tag": "store-register",    "externalId": "123-1",    ...  }}
+{
+  "meta": {
+    "code": 200
+  },
+  "beacon": {
+    "_id": "6116d947049aee0089a682a2",
+    "createdAt": "2021-08-13T20:42:47.711Z",
+    "updatedAt": "2021-08-13T20:42:47.711Z",
+    "live": true,
+    "description": "Store #123 - Register #1",
+    "tag": "store-register",
+    "externalId": "123-1",
+    ...
+  }
+}
 ```
 
 
@@ -1944,7 +3964,18 @@ Secret
 ###### [Sample request](#sample-request-34 "Direct link to heading")
 
 ```sh
-curl "https://api.radar.io/v1/beacons/store-register/123-1" \  -H "Authorization: prj_live_sk_..." \  -X PUT \  -d "description=Store 123 - Register 1" \  -d "tag=store-register" \  -d "externalId=123-1" \  -d "type=ibeacon" \  -d "uuid=b9407f30-f5f8-466e-aff9-25556b57fe6d" \  -d "major=100" \  -d "minor=1" \  -d "coordinates=[-105.94653744704361,35.70654086799666]" \  -d "enabled=true"
+curl "https://api.radar.io/v1/beacons/store-register/123-1" \
+  -H "Authorization: prj_live_sk_..." \
+  -X PUT \
+  -d "description=Store 123 - Register 1" \
+  -d "tag=store-register" \
+  -d "externalId=123-1" \
+  -d "type=ibeacon" \
+  -d "uuid=b9407f30-f5f8-466e-aff9-25556b57fe6d" \
+  -d "major=100" \
+  -d "minor=1" \
+  -d "coordinates=[-105.94653744704361,35.70654086799666]" \
+  -d "enabled=true"
 ```
 
 
@@ -1952,7 +3983,21 @@ curl "https://api.radar.io/v1/beacons/store-register/123-1" \  -H "Authorization
 ###### [Sample response](#sample-response-32 "Direct link to heading")
 
 ```json
-{  "meta": {    "code": 200  },  "beacon": {    "_id": "6116d947049aee0089a682a2",    "createdAt": "2021-08-13T20:42:47.711Z",    "updatedAt": "2021-08-13T20:42:47.711Z",    "live": true,    "description": "Store #123 - Register #1",    "tag": "store-register",    "externalId": "123-1",    ...  }}
+{
+  "meta": {
+    "code": 200
+  },
+  "beacon": {
+    "_id": "6116d947049aee0089a682a2",
+    "createdAt": "2021-08-13T20:42:47.711Z",
+    "updatedAt": "2021-08-13T20:42:47.711Z",
+    "live": true,
+    "description": "Store #123 - Register #1",
+    "tag": "store-register",
+    "externalId": "123-1",
+    ...
+  }
+}
 ```
 
 
@@ -1976,7 +4021,9 @@ Secret
 ###### [Sample request](#sample-request-35 "Direct link to heading")
 
 ```sh
-curl "https://api.radar.io/v1/beacons/56db1f4613012711002229f4" \  -H "Authorization: prj_live_sk_..." \  -X DELETE
+curl "https://api.radar.io/v1/beacons/56db1f4613012711002229f4" \
+  -H "Authorization: prj_live_sk_..." \
+  -X DELETE
 ```
 
 
@@ -1984,7 +4031,11 @@ curl "https://api.radar.io/v1/beacons/56db1f4613012711002229f4" \  -H "Authoriza
 ###### [Sample response](#sample-response-33 "Direct link to heading")
 
 ```json
-{  "meta": {    "code": 200  }}
+{
+  "meta": {
+    "code": 200
+  }
+}
 ```
 
 
@@ -2020,7 +4071,9 @@ Secret
 ###### [Sample request](#sample-request-36 "Direct link to heading")
 
 ```sh
-curl "https://api.radar.io/v1/settings" \  -H "Authorization: prj_live_sk_..." \  -X GET
+curl "https://api.radar.io/v1/settings" \
+  -H "Authorization: prj_live_sk_..." \
+  -X GET
 ```
 
 
@@ -2028,7 +4081,32 @@ curl "https://api.radar.io/v1/settings" \  -H "Authorization: prj_live_sk_..." \
 ###### [Sample response](#sample-response-34 "Direct link to heading")
 
 ```json
-{  "meta": {    "code": 200  },  "chainMetadata": {    "mcdonalds": {      "availableDeals": true,    },    "starbucks": {      "availableDeals": true,    }  },  "chainMappings": {    "mcdonalds": "retailer1",    "starbucks": "retailer2"  },  "placeFilters": {    "chain": [      "mcdonalds",      "starbucks"    ],    "category": [      "restaurant"    ]  }}
+{
+  "meta": {
+    "code": 200
+  },
+  "chainMetadata": {
+    "mcdonalds": {
+      "availableDeals": true,
+    },
+    "starbucks": {
+      "availableDeals": true,
+    }
+  },
+  "chainMappings": {
+    "mcdonalds": "retailer1",
+    "starbucks": "retailer2"
+  },
+  "placeFilters": {
+    "chain": [
+      "mcdonalds",
+      "starbucks"
+    ],
+    "category": [
+      "restaurant"
+    ]
+  }
+}
 ```
 
 
@@ -2052,7 +4130,11 @@ Secret
 ###### [Sample request](#sample-request-37 "Direct link to heading")
 
 ```sh
-curl "https://api.radar.io/v1/settings" \  -H "Authorization: prj_live_sk_..." \  -H "Content-Type: application/json" \  -X PATCH \  -d '{"chainMetadata":{"mcdonalds":{"availableDeals":false}},"chainMappings":{"mcdonalds":"retailer1"},"placeFilters":{"chain":["mcdonalds"]}}'
+curl "https://api.radar.io/v1/settings" \
+  -H "Authorization: prj_live_sk_..." \
+  -H "Content-Type: application/json" \
+  -X PATCH \
+  -d '{"chainMetadata":{"mcdonalds":{"availableDeals":false}},"chainMappings":{"mcdonalds":"retailer1"},"placeFilters":{"chain":["mcdonalds"]}}'
 ```
 
 
@@ -2060,7 +4142,24 @@ curl "https://api.radar.io/v1/settings" \  -H "Authorization: prj_live_sk_..." \
 ###### [Sample response](#sample-response-35 "Direct link to heading")
 
 ```json
-{  "meta": {    "code": 200  },  "chainMetadata": {    "mcdonalds": {      "availableDeals": false    }  },  "chainMappings": {    "mcdonalds": "retailer1"  },  "placeFilters": {    "chain": [      "mcdonalds"    ]  }}
+{
+  "meta": {
+    "code": 200
+  },
+  "chainMetadata": {
+    "mcdonalds": {
+      "availableDeals": false
+    }
+  },
+  "chainMappings": {
+    "mcdonalds": "retailer1"
+  },
+  "placeFilters": {
+    "chain": [
+      "mcdonalds"
+    ]
+  }
+}
 ```
 
 
