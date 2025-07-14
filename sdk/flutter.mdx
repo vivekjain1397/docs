@@ -5,7 +5,7 @@ description: "This is the documentation for the Flutter package. Before integrat
 
 See the source on GitHub [here](https://github.com/radarlabs/flutter-radar). Or, see the `flutter_radar` package on pub.dev [here](https://pub.dev/packages/flutter_radar).
 
-## Install[#](#install)
+## [Install](#install)
 
 Add the package to your `pubspec.yaml` file:
 
@@ -20,7 +20,7 @@ Then, update dependencies:
 flutter pub get
 ```
 
-### iOS[#](#ios)
+### [iOS](#ios)
 
 Change to the `ios/` directory. In the `Podfile`, add `platform :ios, '10.0'` or higher to your target.
 
@@ -61,7 +61,7 @@ import RadarSDK
 ```
 </CodeGroup>
 
-### Android[#](#android)
+### [Android](#android)
 
 On Android, add the Radar Android SDK to the `dependencies` section of your Android app's `build.gradle` file. Ensure the Android SDK version matches the version of your Radar Flutter package.
 
@@ -123,9 +123,9 @@ For background tracking without a foreground service, and if targeting API level
 </manifest>
 ```
 
-## Integrate[#](#integrate)
+## [Integrate](#integrate)
 
-### Import module[#](#import-module)
+### [Import module](#import-module)
 
 First, import the package:
 
@@ -133,7 +133,7 @@ First, import the package:
 import 'package:flutter_radar/flutter_radar.dart';
 ```
 
-### Initialize[#](#initialize)
+### [Initialize](#initialize)
 
 When your app starts, initialize the SDK with your publishable key.
 
@@ -145,7 +145,7 @@ Note that you should always use your publishable API keys, which are restricted 
 Radar.initialize(publishableKey);
 ```
 
-### Identify user[#](#identify-user)
+### [Identify user](#identify-user)
 
 To identify the user when logged in, call:
 
@@ -175,7 +175,7 @@ You only need to call these functions once, as these settings will be persisted 
 
 Learn about platform-specific implementations of these functions in the [iOS SDK documentation](/sdk/ios) and [Android SDK documentation](/sdk/android).
 
-### Request permissions[#](#request-permissions)
+### [Request permissions](#request-permissions)
 
 Before tracking the user's location, the user must have granted location permissions for the app.
 
@@ -202,7 +202,7 @@ where `background` is a boolean indicating whether to request background locatio
 
 Learn about platform-specific permissions in the [iOS SDK documentation](/sdk/ios) and [Android SDK documentation](/sdk/android).
 
-### Foreground tracking[#](#foreground-tracking)
+### [Foreground tracking](#foreground-tracking)
 
 Once you have initialized the SDK and the user has granted permissions, you can track the user's location.
 
@@ -215,7 +215,7 @@ var res = await Radar.trackOnce();
 
 Learn about platform-specific implementations of this function in the [iOS SDK documentation](/sdk/ios) and [Android SDK documentation](/sdk/android).
 
-### Background tracking[#](#background-tracking)
+### [Background tracking](#background-tracking)
 
 On iOS and Android, once you have initialized the SDK and the user has granted permissions, you can start tracking the user's location in the background.
 
@@ -310,7 +310,7 @@ Listeners should be set only once and before tracking begins.
 
 Add event listeners outside of your view lifecycle if you want them to work when the app is in the background.
 
-### Mock tracking[#](#mock-tracking)
+### [Mock tracking](#mock-tracking)
 
 On iOS and Android, you can simulate a sequence of location updates for testing. For example, to simulate a sequence of 10 location updates every 3 seconds by car from an `origin` to a `destination`, we can call:
 
@@ -324,7 +324,7 @@ Radar.mockTracking(
 );
 ```
 
-### Trip tracking[#](#trip-tracking)
+### [Trip tracking](#trip-tracking)
 
 On iOS and Android, to start a trip to a destination, call:
 
@@ -366,7 +366,7 @@ If tracking was disabled before the trip started, it will stop after the trip en
 
 Learn more about [trip tracking](/trip-tracking).
 
-### Manual tracking[#](#manual-tracking)
+### [Manual tracking](#manual-tracking)
 
 You can manually update the user's location by calling:
 
@@ -381,17 +381,17 @@ var res = await Radar.trackOnce({
 
 Learn about platform-specific implementation of this function in the [iOS SDK documentation](/sdk/ios) and [Android SDK documentation](/sdk/android).
 
-### Location metadata[#](#location-metadata)
+### [Location metadata](#location-metadata)
 
 The SDK can also pass along information like motion activity detection, speed and heading via the location metadata field.
 
 Learn about platform-specific implementation of this function in the [iOS SDK documentation](/sdk/ios) and [Android SDK documentation](/sdk/android).
 
-### Other APIs[#](#other-apis)
+### [Other APIs](#other-apis)
 
 The Flutter package also exposes APIs for anonymous context, geocoding, search, and distance.
 
-#### Get location[#](#get-location)
+#### [Get location](#get-location)
 
 Get a single location update without sending it to the server:
 
@@ -399,7 +399,7 @@ Get a single location update without sending it to the server:
 var coordinates = await Radar.getLocation();
 ```
 
-#### Context[#](#context)
+#### [Context](#context)
 
 With the [context API](/api#context), get context for a location without sending device or user identifiers to the server:
 
@@ -412,7 +412,7 @@ var res = await Radar.getContext({
 // do something with res['status'], res['context']
 ```
 
-#### Geocoding[#](#geocoding)
+#### [Geocoding](#geocoding)
 
 With the [forward geocoding API](/api#forward-geocode), geocode an address, converting address to coordinates:
 
@@ -439,7 +439,7 @@ var res = await Radar.ipGeocode();
 // do something with res['status'], res['address']
 ```
 
-#### Search[#](#search)
+#### [Search](#search)
 
 With the [autocomplete API](/api#autocomplete), autocomplete partial addresses and place names, sorted by relevance:
 
@@ -476,7 +476,7 @@ var res = await Radar.searchPlaces(
 // do something with res['status'], res['places']
 ```
 
-#### Distance[#](#distance)
+#### [Distance](#distance)
 
 With the [distance API](/api#distance), calculate the travel distance and duration from an origin to a destination:
 
@@ -490,7 +490,7 @@ var res = await Radar.getDistance(
 // do something with res['status'], res['routes']
 ```
 
-## Support[#](#support)
+## [Support](#support)
 
 Have questions? We're here to help! Contact us at [radar.com/support](https://radar.com/support).
 

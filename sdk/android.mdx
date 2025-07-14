@@ -5,7 +5,7 @@ description: "The Radar SDK abstracts away cross-platform differences between lo
 
 Learn how to integrate the Android SDK below. You can also see the [source](https://github.com/radarlabs/radar-sdk-android) and a [detailed SDK reference](https://radarlabs.github.io/radar-sdk-android/) on GitHub.
 
-## Install SDK[#](#install-sdk)
+## [Install SDK](#install-sdk)
 
 The best way to add the SDK to your project is via Gradle in Android Studio.
 
@@ -13,7 +13,7 @@ For details on the latest SDK releases, see the [releases page](https://github.c
 
 The SDK is small and typically adds less than 500 KB to your compiled app.
 
-### Gradle (recommended)[#](#gradle-recommended)
+### [Gradle (recommended)](#gradle-recommended)
 
 The SDK is distributed using [Maven Central](https://search.maven.org/artifact/io.radar/sdk).
 
@@ -25,11 +25,11 @@ dependencies {
 }
 ```
 
-### Add manually[#](#add-manually)
+### [Add manually](#add-manually)
 
 You can also add the SDK to your project manually. Download [the current release](https://github.com/radarlabs/radar-sdk-android/releases) and unzip the package. The package contains an `aar` file. In Android Studio, add the SDK as a module using _File_ \> _New Module_ \> _Import .JAR/.AAR Package_.
 
-## Dependencies[#](#dependencies)
+## [Dependencies](#dependencies)
 
 The SDK depends on [Google Play Services Location](https://developer.android.com/training/location) version `21.0.1` and higher, which will be automatically included as a transitive dependency by Gradle. Learn more about managing dependencies in Gradle [here](https://docs.gradle.org/current/userguide/core_dependency_management.html).
 
@@ -41,7 +41,7 @@ As an alternative to Google Play Services, the SDK also optionally supports [Hua
 
 The SDK currently supports API level `16` or above.
 
-## Initialize SDK[#](#initialize-sdk)
+## [Initialize SDK](#initialize-sdk)
 
 When your app starts, in application `onCreate()`, initialize the SDK with your publishable API key, found on the [Settings page](https://radar.com/dashboard/settings).
 
@@ -77,7 +77,7 @@ class MyApplication : Application() {
 
 </CodeGroup>
 
-## Request permissions[#](#request-permissions)
+## [Request permissions](#request-permissions)
 
 Radar respects [standard Android location permissions](https://developer.android.com/training/permissions/requesting.html).
 
@@ -219,7 +219,7 @@ Build and run the app to make sure permissions prompts are displayed\!
 
 Not seeing permissions prompts? First, make sure you've added permissions to your manifest. Second, check your device settings to make sure you haven't already granted location permissions.
 
-## Foreground tracking[#](#foreground-tracking)
+## [Foreground tracking](#foreground-tracking)
 
 Once the user has granted foreground permissions, you can track the user's location in the foreground.
 
@@ -263,7 +263,7 @@ You may provide an optional instance of `RadarTrackCallback` with an implementat
 
 Build and run the app, then find your user on the [Users page](https://radar.com/dashboard/users)\! To trigger an event, you'll need to [create a geofence](https://radar.com/dashboard/geofencing/geofences) if you haven't already. Not seeing your user on the Users page? Check `status` in the callback to see what went wrong.
 
-## Background tracking for geofencing[#](#background-tracking-for-geofencing)
+## [Background tracking for geofencing](#background-tracking-for-geofencing)
 
 Once you have initialized the SDK and the user has authorized background permissions, you can start tracking the user's location in the background.
 
@@ -328,7 +328,7 @@ To test, go for a walk or a drive\! Not seeing location updates or events? Remem
 
 Don't forget\! You can always find your user on the [Users page](https://radar.com/dashboard/users) or events on the [Events page](https://radar.com/dashboard/events). To trigger an event, you'll need to [create a geofence](https://radar.com/dashboard/geofencing/geofences) if you haven't already.
 
-## Background tracking for trips[#](#background-tracking-for-trips)
+## [Background tracking for trips](#background-tracking-for-trips)
 
 For trips, we recommend using `RadarTrackingOptions.continuous`. This preset tells the SDK to send location updates to the server every 30 seconds, regardless of whether the device is moving.
 
@@ -405,7 +405,7 @@ Learn more about starting, completing, and canceling trips in the [trip tracking
 
 Don't forget\! You can always find your user on the [Users page](https://radar.com/dashboard/users) or events on the [Events page](https://radar.com/dashboard/events). To trigger an event, you'll need to [create a geofence](https://radar.com/dashboard/geofencing/geofences) or [start a trip](/trip-tracking) if you haven't already.
 
-## Mock tracking for testing[#](#mock-tracking-for-testing)
+## [Mock tracking for testing](#mock-tracking-for-testing)
 
 Can't go for a walk or a drive? You can simulate a sequence of location updates. For example, to simulate a sequence of 10 location updates every 3 seconds by car from an origin to a destination, call:
 
@@ -458,7 +458,7 @@ Radar.mockTracking(
 
 Don't forget\! You can always find your user on the [Users page](https://radar.com/dashboard/users) or events on the [Events page](https://radar.com/dashboard/events). To trigger an event, you'll need to [create a geofence](https://radar.com/dashboard/geofencing/geofences) if you haven't already.
 
-## Location metadata[#](#location-metadata)
+## [Location metadata](#location-metadata)
 
 The SDK can also pass along information like motion activity detection, speed and heading via the location metadata field. Turn on `useLocationMetadata` in your `sdkConfiguration` to enable this feature. Include permissions for motion activity detection in your manifest
 
@@ -484,7 +484,7 @@ ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.ACTIVITY_REC
 
 </CodeGroup>
 
-## Listening for events with a receiver[#](#listening-for-events-with-a-receiver)
+## [Listening for events with a receiver](#listening-for-events-with-a-receiver)
 
 To listen for events, location updates, and errors client-side, create a class that extends `RadarReceiver`. Then, pass in an instance of your receiver when initializing the SDK in application `onCreate()`.
 
@@ -596,7 +596,7 @@ class MyRadarReceiver: RadarReceiver() {
 
 To listen for events server-side instead, add a [webhook](/integrations/webhooks) or enable an [integration](/integrations).
 
-## Manual tracking[#](#manual-tracking)
+## [Manual tracking](#manual-tracking)
 
 If you want to manage location services yourself, you can manually update the user's location instead by calling:
 
@@ -624,7 +624,7 @@ Radar.trackOnce(location) { status, location, events, user ->
 
 where `location` is a `Location` instance with a valid latitude, longitude, and accuracy.
 
-## Identify user[#](#identify-user)
+## [Identify user](#identify-user)
 
 The SDK automatically collects `installId` (a GUID generated on fresh install) and `deviceId` ([Android ID](https://developer.android.com/reference/android/provider/Settings.Secure.html#ANDROID_ID)).
 
@@ -683,7 +683,7 @@ You only need to call these methods once, as these settings will be persisted ac
 
 Learn more about when Radar creates new user records [here](/faqs#what-is-a-unique-user-when-does-radar-create-a-new-user-record).
 
-## Debug logging[#](#debug-logging)
+## [Debug logging](#debug-logging)
 
 By default, only critical errors are logged to the console. To enable debug logging, call:
 
@@ -704,11 +704,11 @@ The Android SDK automatically logs lifecycle events without the additional setup
 
 Contact your customer success manager to enable logging app lifecycle events.
 
-## Other APIs[#](#other-apis)
+## [Other APIs](#other-apis)
 
 The Android SDK also exposes APIs for beacons, anonymous context, geocoding, search, and distance.
 
-### Beacons[#](#beacons)
+### [Beacons](#beacons)
 
 To range and monitor [beacons](/beacons), you must [request Bluetooth permissions](https://developer.android.com/about/versions/12/features/bluetooth-permissions#declare-new-permissions). If targeting API level `31` or above, both `BLUETOOTH_CONNECT` and `BLUETOOTH_SCAN` are required runtime permissions.
 
@@ -766,7 +766,7 @@ Radar.startTracking(trackingOptions)
 
 Learn more about [beacons](/beacons).
 
-### Get location[#](#get-location)
+### [Get location](#get-location)
 
 Get a single location update without sending it to the server:
 
@@ -790,7 +790,7 @@ Radar.getLocation { status, location, stopped ->
 
 </CodeGroup>
 
-### Context[#](#context)
+### [Context](#context)
 
 With the [context API](/api#context), get context for a location without sending device or user identifiers to the server:
 
@@ -814,7 +814,7 @@ Radar.getContext { status, location, context ->
 
 </CodeGroup>
 
-### Geocoding[#](#geocoding)
+### [Geocoding](#geocoding)
 
 With the [forward geocoding API](/api#forward-geocode), geocode an address, converting address to coordinates:
 
@@ -886,7 +886,7 @@ Radar.ipGeocode { status, address, proxy ->
 
 </CodeGroup>
 
-### Search[#](#search)
+### [Search](#search)
 
 With the [autocomplete API](/api#autocomplete), autocomplete partial addresses and place names, sorted by relevance:
 
@@ -1012,7 +1012,7 @@ Radar.validateAddress(address) { status, address, result ->
 
 </CodeGroup>
 
-### Distance[#](#distance)
+### [Distance](#distance)
 
 With the [distance API](/api#distance), calculate the travel distance and duration from an origin to a destination:
 
@@ -1046,7 +1046,7 @@ Radar.getDistance(
 
 </CodeGroup>
 
-### Matrix[#](#matrix)
+### [Matrix](#matrix)
 
 With the [matrix API](/api#matrix), calculate the travel distance and duration between multiple origins and destinations for up to 25 routes:
 
@@ -1080,7 +1080,7 @@ Radar.getMatrix(
 
 </CodeGroup>
 
-### Conversions[#](#conversions)
+### [Conversions](#conversions)
 
 With the [conversions API](/api#log-a-conversion), log a conversion, such as a purchase or signup, to analyze alongside your app's location activity:
 
@@ -1131,7 +1131,7 @@ Radar.logConversion(
 
 </CodeGroup>
 
-## Notifications[#](#notifications)
+## [Notifications](#notifications)
 
 With `setNotificationOptions`, set the icon and the background color of foreground service and event notifications:
 
@@ -1184,7 +1184,7 @@ Radar.setNotificationOptions(RadarNotificationsOptions(
 
 </CodeGroup>
 
-## Huawei[#](#huawei)
+## [Huawei](#huawei)
 
 By default, the SDK [depends on](#dependencies) [Google Play Services Location](https://developer.android.com/training/location). However, you can use [Huawei Mobile Services Location Kit](https://developer.huawei.com/consumer/en/hms/huawei-locationkit/) instead.
 

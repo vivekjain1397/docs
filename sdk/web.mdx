@@ -5,7 +5,7 @@ description: "This is the documentation for the Radar Web SDK."
 
 The source can be found on GitHub [here](https://github.com/radarlabs/radar-sdk-js). Or, see the `radar-sdk-js` package on npm [here](https://www.npmjs.com/package/radar-sdk-js).
 
-## Install[#](#install)
+## [Install](#install)
 
 In an HTML page, add the SDK script and stylesheet:
 
@@ -29,9 +29,9 @@ import Radar from 'radar-sdk-js';
 import 'radar-sdk-js/dist/radar.css';
 ```
 
-## Setup[#](#setup)
+## [Setup](#setup)
 
-### Initialize[#](#initialize)
+### [Initialize](#initialize)
 
 Initialize the library with your publishable API key, found on the [Settings page](https://radar.com/dashboard/settings):
 
@@ -59,9 +59,9 @@ Available options include:
 | `locationTimeout` | `30000` | number | The number of milliseconds to wait for a location update before an error is thrown. Defaults to 30 seconds. |
 | `desiredAccuracy` | `high` | `high`, `medium`, `low` | Determines the desired accuracy of location updates. Note that higher accuracy can result in slower response times. |
 
-## Geofencing[#](#geofencing)
+## [Geofencing](#geofencing)
 
-### Identify user[#](#identify-user)
+### [Identify user](#identify-user)
 
 To identify the user when logged in, call:
 
@@ -91,7 +91,7 @@ You only need to call these functions once, as these settings will be persisted 
 
 Learn more about when Radar creates new user records [here](/faqs#what-is-a-unique-user-when-does-radar-create-a-new-user-record).
 
-### Foreground tracking[#](#foreground-tracking)
+### [Foreground tracking](#foreground-tracking)
 
 Once you have initialized the SDK and the user has granted permissions, you can track the user's location.
 
@@ -132,7 +132,7 @@ err.code; // HTTP response code
 err.response; // API response body
 ```
 
-### Manual tracking[#](#manual-tracking)
+### [Manual tracking](#manual-tracking)
 
 Alternatively, you can manually update the user's location with any location by calling:
 
@@ -149,7 +149,7 @@ Radar.trackOnce({
 });
 ```
 
-### Get location[#](#get-location)
+### [Get location](#get-location)
 
 You can also get a single location update without sending it to the server:
 
@@ -164,7 +164,7 @@ Radar.getLocation()
   });
 ```
 
-### Context[#](#context)
+### [Context](#context)
 
 With the [context API](/api#context), get context for a location without sending device or user identifiers to the server:
 
@@ -179,9 +179,9 @@ Radar.getContext()
   });
 ```
 
-## Maps[#](#maps)
+## [Maps](#maps)
 
-### Geocoding[#](#geocoding)
+### [Geocoding](#geocoding)
 
 With the [forward geocoding API](/api#forward-geocode), geocode an address, converting address to coordinates:
 
@@ -227,7 +227,7 @@ Radar.ipGeocode()
   });
 ```
 
-### Search[#](#search)
+### [Search](#search)
 
 With the [autocomplete API](/api#autocomplete), autocomplete partial addresses and place names, sorted by relevance:
 
@@ -298,7 +298,7 @@ Radar.validateAddress({
 });
 ```
 
-### Distance[#](#distance)
+### [Distance](#distance)
 
 With the [distance API](/api#distance), calculate the travel distance and duration between two locations:
 
@@ -323,7 +323,7 @@ Radar.distance({
 });
 ```
 
-### Matrix[#](#matrix)
+### [Matrix](#matrix)
 
 With the [matrix API](/api#matrix), calculate the travel distances and durations between multiple origins and destinations for up to 25 routes:
 
@@ -353,11 +353,11 @@ Radar.matrix({
 });
 ```
 
-## Maps and UI kits[#](#maps-and-ui-kits)
+## [Maps and UI kits](#maps-and-ui-kits)
 
 The React Native SDK also has UI components for maps and address autocomplete. Learn more in the [Maps Platform documentation](/maps/overview).
 
-## Support[#](#support)
+## [Support](#support)
 
 Have questions? We're here to help! Contact us at [radar.com/support](https://radar.com/support).
 
