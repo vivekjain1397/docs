@@ -1,37 +1,38 @@
 ---
 title: "OneSignal"
-description: "The OneSignal integration is available on the ."
 ---
+
+<Info>
+  The OneSignal integration is available on the [**Enterprise plan**](https://radar.com/pricing).
+</Info>
 
 Radar can send tags to and trigger notifications in [OneSignal](https://onesignal.com). You can create notifications triggered by tag changes.
 
 Use the OneSignal integration to send location-triggered and location-targeted messages to increase engagement and conversion.
 
-## []()Configuration[#](#configuration "Direct link to heading")
+## Configuration
 
-On the OneSignal *Settings* page under *Keys & IDs*, copy your REST API key.
+On the OneSignal _Settings_ page under _Keys & IDs_, copy your REST API key.
 
-Then, on the Radar [Integrations page](https://radar.com/dashboard/integrations) under *OneSignal*, set *Enabled* to *Yes* and paste your API key. Note that you can set separate API keys for the *Test* and *Live* environments.
+Then, on the Radar [Integrations page](https://radar.com/dashboard/integrations) under _OneSignal_, set _Enabled_ to _Yes_ and paste your API key. Note that you can set separate API keys for the _Test_ and _Live_ environments.
 
 Whenever events are generated, Radar will call the [edit device API](https://documentation.onesignal.com/reference/edit-device) and set tags in OneSignal. You can create notifications triggered by tag changes.
 
 By default, Radar `userId` and `deviceId` do not map to OneSignal. To map users in Radar to devices in OneSignal, you must send the OneSignal player ID to Radar by setting `metadata.oneSignalPlayerId`. For example, on iOS:
 
 ```
-let playerId = OneSignal.getPermissionSubscriptionState().subscriptionStatus.userIdRadar.setMetadata(["oneSignalPlayerId": playerId])
+let playerId = OneSignal.getPermissionSubscriptionState().subscriptionStatus.userId
+Radar.setMetadata(["oneSignalPlayerId": playerId])
 ```
-
-Copy
 
 On Android:
 
 ```
-String playerId = OneSignal.getPermissionSubscriptionState().getSubscriptionStatus().getUserId();JSONObject metadata = new JSONObject();metadata.put("oneSignalPlayerId",playerId);Radar.setMetadata(metadata);
+let playerId = OneSignal.getPermissionSubscriptionState().subscriptionStatus.userId
+Radar.setMetadata(["oneSignalPlayerId": playerId])
 ```
 
-Copy
-
-## []()Event mapping[#](#event-mapping "Direct link to heading")
+## Event mapping
 
 Because OneSignal does not support associating custom events with a user, the most recent event types triggered from a location update are sent as a comma-separated list under the Onesignal tag `radar_events`. For example, if a user has exited a geofence and entered a place, the value for the `radar_events` tag would be `exited_geofence,entered_place`.
 
@@ -56,7 +57,7 @@ Because OneSignal does not support associating custom events with a user, the mo
 | `user.entered_beacon`               | [Beacons](/beacons)     | `entered_beacon`               |
 | `user.exited_beacon`                | [Beacons](/beacons)     | `exited_beacon`                |
 
-## []()User mapping[#](#user-mapping "Direct link to heading")
+## User mapping
 
 | Radar User Field                     | OneSignal Tag Name                            | Type                     | Example Tag                  | Context Type                    |
 | ------------------------------------ | --------------------------------------------- | ------------------------ | ---------------------------- | ------------------------------- |
