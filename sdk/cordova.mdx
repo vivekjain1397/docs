@@ -1,137 +1,88 @@
 ---
-title: "Capacitor Plugin"
-description: "This is the documentation for the Capacitor plugin. Before integrating, read the to familiarize yourself with the platform."
+title: "Cordova Plugin"
+description: "This is the documentation for the Cordova plugin. Before integrating, read the  to familiarize yourself with the platform."
 ---
 
-See the source on GitHub [here](https://github.com/radarlabs/capacitor-radar). Or, see the `capacitor-radar` package on npm [here](https://www.npmjs.com/package/capacitor-radar).
+See the source on GitHub [here](https://github.com/radarlabs/cordova-plugin-radar). Or, see the `@radarlabs/cordova-plugin-radar` package on npm [here](https://www.npmjs.com/package/@radarlabs/cordova-plugin-radar).
 
-## [Install](#install)
+## [Install](#install "Direct link to heading")
 
-Install the package from npm:
-
-```bash
-npm install --save capacitor-radar
-```
-
-Then, update dependencies:
-
-```bash
-npx cap sync
-```
-
-If successful, you will see:
+Install the Cordova plugin:
 
 ```
-✔ Updating Android plugins 
-Found 1 Capacitor plugin for android: capacitor-radar
-✔ update android...
-✔ Updating iOS plugins 
-Found 1 Capacitor plugin for ios: capacitor-radar
-✔ Updating iOS native dependencies with "pod install" (may take several minutes)
-✔ update ios
+cordova plugin add @radarlabs/cordova-plugin-radar
 ```
+
+Copy
 
 Before writing any JavaScript, you must integrate the Radar SDK with your iOS and Android apps as described in the [iOS SDK documentation](/sdk/ios) and [Android SDK documentation](/sdk/android).
 
-### [iOS](#ios)
+On iOS, you must add location usage descriptions and background modes to your `Info.plist`. Initialize the SDK in `application:didFinishLaunchingWithOptions:` in `AppDelegate.m`, passing in your Radar publishable API key:
 
-You must add location usage descriptions and background modes to your `Info.plist`. For foreground permissions, you must add a value for `NSLocationWhenInUseUsageDescription` *(Privacy - Location When In Use Usage Description)*. For background permissions, you must add a value for `NSLocationAlwaysAndWhenInUseUsageDescription` *(Privacy - Location Always and When In Use Usage Description)*. These strings are displayed in permissions prompts.
-
-![](/images/sdk/f2vbu16fzuly/66LUD7W9uTt7f2H5pMmpBp/1e5a2bb2baaf79328e88c3ea47a7f6ff/permissions.png)
-
-If you are planning to leverage background tracking, such as responsive or continuous mode, in your project settings, go to *Signing & Capabilities*, add *Background Modes*, and turn on *Background fetch* and *Location updates*. Note that this requires additional justification during App Store review. [Learn more](/sdk/ios#submit-to-app-store).
-
-![](/images/sdk/f2vbu16fzuly/UUjdS7HyuFgu5bzGzuOYd/3eb568125cea0d6c4cf9384327446f08/modes.png)
-
-Add the SDK to your project, preferably using CocoaPods. Finally, initialize the SDK in `application:didFinishLaunchingWithOptions:` in `AppDelegate.swift`, passing in your Radar publishable API key:
-
-```swift
-import Capacitor
-import RadarSDK
-
-@UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate {
-
-    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        Radar.initialize(publishableKey: publishableKey)
-        return true
-    }
-}
+```
+#import <RadarSDK/RadarSDK.h>
+@implementation AppDelegate
+- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {  [Radar initializeWithPublishableKey:publishableKey];  // ...}
 ```
 
-### [Android](#android)
+Copy
 
-You must add Google Play Services Location to your project *(use version 21.0.1 or higher)*.
+On Android, you must add the Google Play Services library to your project, then add the SDK to your project, preferably using Gradle. Finally, initialize the SDK in `onCreate()` in `MainActivity.java`, passing in your Radar publishable API key:
 
-```gradle
-implementation "com.google.android.gms:play-services-location:21.0.1"
 ```
-
-Make sure that the Android SDK version matches the version in the `radar-capacitor` module's `build.gradle`.
-
-When upgrading the SDK, ensure the Android SDK version is updated to match the plugin's pinned version. For details on the latest SDK releases, see the [releases page](https://github.com/radarlabs/capacitor-radar/releases) on GitHub.
-
-Add the SDK to your project, preferably using Gradle. Finally, initialize the SDK and the plugin in `onCreate()` in `MainActivity.java`, passing in your Radar publishable API key:
-
-```java
-import android.os.Bundle;
-
-import com.getcapacitor.BridgeActivity;
 import io.radar.sdk.Radar;
-
-public class MainActivity extends BridgeActivity {
-
-    @Override 
-    public void onCreate(Bundle savedInstanceState) {
-        Radar.initialize(this, publishableKey);
-        super.onCreate(savedInstanceState);
-    }
+public class MainActivity extends CordovaActivity {
+  @Override  public void onCreate() {    super.onCreate();    Radar.initialize(this, publishableKey);    // ...  }
 }
 ```
 
-Note that `Radar.initialize(this, publishableKey)` must be called before `super.onCreate(savedInstanceState)` on Capacitor v4 and higher because of changes to [plugin loading](https://capacitorjs.com/docs/updating/4-0#change-registerplugin-order).
+Copy
 
-For background tracking without a foreground service, and if targeting API level `29` or higher, Radar also requires the `ACCESS_BACKGROUND_LOCATION` permission. You must add the `ACCESS_BACKGROUND_LOCATION` permission to your manifest manually:
+## [Integrate](#integrate "Direct link to heading")
 
-```xml
-<manifest xmlns:android="http://schemas.android.com/apk/res/android">
-    <uses-permission android:name="android.permission.ACCESS_BACKGROUND_LOCATION" />
-</manifest>
+### [Initialize](#initialize "Direct link to heading")
+
+When your app starts, initialize the SDK with your publishable key.
+
+Use your `Test Publishable` key for testing and non-production environments. Use your `Live Publishable` key for production environments.
+
+Note that you should always use your publishable API keys, which are restricted in scope, in the SDK. Do not use your secret API keys, which are unrestricted in scope, in any client-side code.
+
+```
+cordova.plugins.radar.initialize(publishableKey);
 ```
 
-## [Integrate](#integrate)
+Copy
 
-### [Import module](#import-module)
-
-First, import the module:
-
-```javascript
-import { Radar } from 'capacitor-radar';
-```
-
-### [Identify user](#identify-user)
+### [Identify user](#identify-user "Direct link to heading")
 
 To identify the user when logged in, call:
 
-```javascript
-Radar.setUserId(userId);
 ```
+cordova.plugins.radar.setUserId(userId);
+```
+
+Copy
 
 where `userId` is a stable unique ID for the user.
 
 To set an optional dictionary of custom metadata for the user, call:
 
-```javascript
-Radar.setMetadata(metadata);
 ```
+cordova.plugins.radar.setMetadata(metadata);
+```
+
+Copy
 
 where `metadata` is a JSON object with up to 16 keys and values of type string, boolean, or number.
 
 Finally, to set an optional description for the user, displayed in the dashboard, call:
 
-```javascript
-Radar.setDescription(description);
 ```
+cordova.plugins.radar.setDescription(description);
+```
+
+Copy
 
 where `description` is a string.
 
@@ -139,51 +90,52 @@ You only need to call these functions once, as these settings will be persisted 
 
 Learn about platform-specific implementations of these functions in the [iOS SDK documentation](/sdk/ios) and [Android SDK documentation](/sdk/android).
 
-### [Request permissions](#request-permissions)
+### [Request permissions](#request-permissions "Direct link to heading")
 
 Before tracking the user's location, the user must have granted location permissions for the app.
 
 To determine the whether user has granted location permissions for the app, call:
 
-```javascript
-Radar.getLocationPermissionsStatus().then((result) => { 
-    // do something with result.status
-});
+```
+cordova.plugins.radar.getPermissionsStatus((status) => {  // do something with status});
 ```
 
-`result.status` will be a string, one of:
+Copy
+
+`status` will be a string, one of:
 
 * **`GRANTED_BACKGROUND`**
 * **`GRANTED_FOREGROUND`**
-* **`NOT_DETERMINED`**
 * **`DENIED`**
+* **`UNKNOWN`**
 
 To request location permissions for the app, call:
 
-```javascript
-Radar.requestLocationPermissions({ background: true });
 ```
+cordova.plugins.radar.requestPermissions(background);
+```
+
+Copy
 
 where `background` is a boolean indicating whether to request background location permissions or foreground location permissions.
 
 Learn about platform-specific permissions in the [iOS SDK documentation](/sdk/ios) and [Android SDK documentation](/sdk/android).
 
-### [Foreground tracking](#foreground-tracking)
+### [Foreground tracking](#foreground-tracking "Direct link to heading")
 
 Once you have initialized the SDK and the user has granted permissions, you can track the user's location.
 
 To track the user's location in the foreground, call:
 
-```javascript
-Radar.trackOnce().then((result) => { 
-    // do something with result.location, result.events, result.user.geofences
-}).catch((err) => { 
-    // optionally, do something with err
-});
+```
+cordova.plugins.radar.trackOnce((result) => {  // do something with result.status, result.location, result.events, result.user});
 ```
 
-`err` will be a string, one of:
+Copy
 
+`status` will be a string, one of:
+
+* **`SUCCESS`**: success
 * **`ERROR_PUBLISHABLE_KEY`**: SDK not initialized
 * **`ERROR_PERMISSIONS`**: location permissions not granted
 * **`ERROR_LOCATION`**: location services error or timeout (10 seconds)
@@ -199,9 +151,9 @@ Radar.trackOnce().then((result) => {
 
 Learn about platform-specific implementations of this function in the [iOS SDK documentation](/sdk/ios) and [Android SDK documentation](/sdk/android).
 
-### [Background tracking](#background-tracking)
+### [Background tracking](#background-tracking "Direct link to heading")
 
-On iOS and Android, once you have initialized the SDK and the user has granted permissions, you can start tracking the user's location in the background.
+Once you have initialized the SDK and the user has granted permissions, you can start tracking the user's location in the background.
 
 For background tracking, the SDK supports custom tracking options as well as three presets:
 
@@ -213,308 +165,215 @@ Learn about platform-specific implementations of these presets in the [iOS SDK d
 
 To start tracking the user's location in the background, call one of:
 
-```javascript
-Radar.startTrackingEfficient();
-Radar.startTrackingResponsive();
-Radar.startTrackingContinuous();
 ```
+cordova.plugins.radar.startTrackingEfficient();
+cordova.plugins.radar.startTrackingResponsive();
+cordova.plugins.radar.startTrackingContinuous();
+```
+
+Copy
 
 You only need to call these methods once, as these settings will be persisted across app sessions.
 
 Though we recommend using presets for most use cases, you can customize the tracking options. See the [tracking options reference](/sdk/tracking).
 
-```javascript
-// optionally adjust foreground service options for android
-Radar.setForegroundServiceOptions({ 
-    options: { 
-        text: "Location tracking started", 
-        title: "Location updates", 
-        updatesOnly: false,
-        importance: 2, 
-        activity: 'com.yourapp.MainActivity' 
-    }
-});
-
-Radar.startTrackingCustom({ 
-    options: { 
-        desiredStoppedUpdateInterval: 180, 
-        fastestStoppedUpdateInterval: 15, 
-        desiredMovingUpdateInterval: 60,
-        fastestMovingUpdateInterval: 15, 
-        desiredSyncInterval: 10,
-        desiredAccuracy: 'high', 
-        stopDuration: 140, 
-        stopDistance: 70, 
-        sync: 'all', 
-        replay: 'none', 
-        useStoppedGeofence: true, 
-        showBlueBar: true,
-        foregroundServiceEnabled: true 
-    }
-});
 ```
+// optionally adjust foreground service options for androidcordova.plugins.radar.setForegroundServiceOptions({  options: {    text: "Location tracking started",    title: "Location updates",    updatesOnly: false,    importance: 2,    activity: 'com.yourapp.MainActivity'  }});
+cordova.plugins.radar.startTrackingCustom({  desiredStoppedUpdateInterval: 180,  desiredMovingUpdateInterval: 60,  desiredSyncInterval: 50,  desiredAccuracy: 'high',  stopDuration: 140,  stopDistance: 70,  sync: 'all',  replay: 'none',  showBlueBar: true,  foregroundServiceEnabled: true});
+```
+
+Copy
 
 To determine whether tracking has been started, call:
 
-```javascript
-Radar.isTracking();
 ```
+cordova.plugins.radar.isTracking();
+```
+
+Copy
 
 To stop tracking the user's location in the background (e.g., when the user logs out), call:
 
-```javascript
-Radar.stopTracking();
 ```
+cordova.plugins.radar.stopTracking();
+```
+
+Copy
 
 Learn about platform-specific implementations of these functions in the [iOS SDK documentation](/sdk/ios) and [Android SDK documentation](/sdk/android).
 
 To listen for events, location updates, and errors, you can add event listeners:
 
-```javascript
-Radar.addListener('clientLocation', (result) => { 
-    // do something with result.location, result.stopped, result.source
-});
-
-Radar.addListener('location', (result) => { 
-    // do something with result.location, result.user
-});
-
-Radar.addListener('events', (result) => { 
-    // do something with result.events, result.user
-});
-
-Radar.addListener('error', (result) => { 
-    // do something with result.err
-});
-
-Radar.addListener('log', (result) => { 
-    // do something with result.message
-});
 ```
+cordova.plugins.radar.onClientLocation((location, stopped, source) => {  // do something with location, stopped, source});
+cordova.plugins.radar.onLocation((location, user) => {  // do something with location, user});
+cordova.plugins.radar.onEvents((events, user) => {  // do something with events, user});
+cordova.plugins.radar.onError((err) => {  // do something with err});
+```
+
+Copy
 
 Listeners should be set only once and before tracking begins.
 
-Add event listeners outside of your view lifecycle if you want them to work when the app is in the background. Capacitor event listeners will only fire while the Capacitor WebView and JavaScript engine are alive. When the Android activity is killed (e.g., swiped away), these services will shut down. To process locations in the background, implement the native event emitters (`RadarDelegate` on [iOS](/sdk/ios#listening-for-events-with-a-delegate), `RadarReceiver` on [Android](/sdk/android#listening-for-events-with-a-receiver)) or use Radar's server-side [integrations](/integrations).
+Add event listeners outside of your view lifecycle if you want them to work when the app is in the background.
 
-### [Mock tracking](#mock-tracking)
+You can also remove event listeners:
 
-On iOS and Android, you can simulate a sequence of location updates for testing. For example, to simulate a sequence of 10 location updates every 3 seconds by car from an `origin` to a `destination`, we can call:
-
-```javascript
-Radar.mockTracking({ 
-    origin: { 
-        latitude: 40.714708, 
-        longitude: -74.035807 
-    }, 
-    destination: { 
-        latitude: 40.717410, 
-        longitude: -74.053334 
-    }, 
-    mode: 'car', 
-    steps: 10, 
-    interval: 3
-});
+```
+cordova.plugins.radar.offClientLocation();
+cordova.plugins.radar.offLocation();
+cordova.plugins.radar.offEvents();
+cordova.plugins.radar.offError();
 ```
 
-### [Trip tracking](#trip-tracking)
+Copy
 
-To start a trip to a destination, call:
+### [Trip tracking](#trip-tracking "Direct link to heading")
 
-```javascript
-Radar.startTrip({
-    options: { 
-        tripOptions: { 
-            externalId: '299',
-            destinationGeofenceTag: 'store', 
-            destinationGeofenceExternalId: '123', 
-            mode: 'car' as RadarRouteMode 
-        }, 
-        trackingOptions: {
-            desiredStoppedUpdateInterval: 30, 
-            fastestStoppedUpdateInterval: 30,
-            desiredMovingUpdateInterval: 30, 
-            fastestMovingUpdateInterval: 30,
-            desiredSyncInterval: 20, 
-            desiredAccuracy: 'high' as RadarTrackingOptionsDesiredAccuracy, 
-            stopDuration: 0, 
-            stopDistance: 0,
-            replay: "none", 
-            sync: "all", 
-            showBlueBar: true, 
-            syncGeofences: false, 
-            syncGeofencesLimit: 0, 
-            beacons: false, 
-            foregroundServiceEnabled: true
-        }
-    }
-}).then((result) => { 
-    // do something with result.status
-});
+On iOS and Android, to start a trip to a destination, call:
+
+```
+cordova.plugins.radar.startTrip({  externalId: '299',  destinationGeofenceTag: 'store',  destinationGeofenceExternalId: '123',  mode: 'car'}).then((result) => {  // do something with result.status});cordova.plugins.radar.startTrackingContinuous();
 ```
 
-Later, complete the trip by calling:
+Copy
 
-```javascript
-Radar.completeTrip().then((result) => { 
-    // do something with result.status
-});
+Update information about the trip. Status can be set to 'unknown' to leave the status unchanged as it will update via location tracking.
+
+```
+cordova.plugins.radar.updateTrip({  status:'arrived',  options: {    externalId: '299',    metadata: {      parkingSpot: '5'    }  }}).then((result) => {  // do something with result.status});
 ```
 
-Or cancel the trip by calling:
+Copy
 
-```javascript
-Radar.cancelTrip().then((result) => { 
-    // do something with result.status
-});
+Later, to complete the trip and stop tracking, call:
+
+```
+cordova.plugins.radar.completeTrip().then((result) => {  // do something with result.status});cordova.plugins.radar.stopTracking();
 ```
 
-If tracking was disabled before the trip started, it will stop after the trip ends. Otherwise, it will revert to the tracking options in use before the trip started.
+Copy
+
+Or, to cancel the trip and stop tracking, call:
+
+```
+cordova.plugins.radar.cancelTrip().then((result) => {  // do something with result.status});cordova.plugins.radar.stopTracking();
+```
+
+Copy
 
 Learn more about [trip tracking](/trip-tracking).
 
-### [Manual tracking](#manual-tracking)
+### [Manual tracking](#manual-tracking "Direct link to heading")
 
 You can manually update the user's location by calling:
 
-```javascript
-Radar.trackOnce({ 
-    latitude: 39.2904, 
-    longitude: -76.6122, 
-    accuracy: 65
-}, (result) => { 
-    // do something with result.status, result.location, result.events, result.user
-});
 ```
+cordova.plugins.radar.trackOnce({  latitude: 39.2904,  longitude: -76.6122,  accuracy: 65}, (result) => {  // do something with result.status, result.location, result.events, result.user});
+```
+
+Copy
 
 Learn about platform-specific implementation of this function in the [iOS SDK documentation](/sdk/ios) and [Android SDK documentation](/sdk/android).
 
-### [Other APIs](#other-apis)
+### [Other APIs](#other-apis "Direct link to heading")
 
-The Capacitor plugin also exposes APIs for anonymous context, geocoding, search, and distance.
+The Cordova plugin also exposes APIs for anonymous context, geocoding, search, and distance.
 
-#### [Get location](#get-location)
+#### [Get location](#get-location "Direct link to heading")
 
 Get a single location update without sending it to the server:
 
-```javascript
-Radar.getLocation((result) => { 
-    // do something with result.status, result.location
-});
+```
+cordova.plugins.radar.getLocation((result) => {  // do something with result.status, result.location});
 ```
 
-#### [Context](#context)
+Copy
+
+#### [Context](#context "Direct link to heading")
 
 With the [context API](/api#context), get context for a location without sending device or user identifiers to the server:
 
-```javascript
-Radar.getContext({ 
-    latitude: 40.783826, 
-    longitude: -73.975363, 
-    accuracy: 65
-}, (result) => { 
-    // do something with result.status, result.context
-});
+```
+cordova.plugins.radar.getContext({  latitude: 40.783826,  longitude: -73.975363,  accuracy: 65}, (result) => {  // do something with result.status, result.context});
 ```
 
-#### [Geocoding](#geocoding)
+Copy
+
+#### [Geocoding](#geocoding "Direct link to heading")
 
 With the [forward geocoding API](/api#forward-geocode), geocode an address, converting address to coordinates:
 
-```javascript
-Radar.geocode({ 
-    query: '20 jay st brooklyn ny'
-}, (result) => { 
-    // do something with result.status, result.addresses
-});
 ```
+cordova.plugins.radar.geocode('20 jay st brooklyn ny', (result) => {  // do something with result.status, result.addresses});
+```
+
+Copy
 
 With the [reverse geocoding API](/api#reverse-geocode), reverse geocode a location, converting coordinates to address:
 
-```javascript
-Radar.reverseGeocode({ 
-    latitude: 40.783826, 
-    longitude: -73.975363
-}, (result) => { 
-    // do something with result.status, result.addresses
-});
 ```
+cordova.plugins.radar.reverseGeocode({  latitude: 40.783826,  longitude: -73.975363}, (result) => {  // do something with result.status, result.addresses});
+```
+
+Copy
 
 With the [IP geocoding API](/api#ip-geocode), geocode the device's current IP address, converting IP address to city, state, and country:
 
-```javascript
-Radar.ipGeocode((result) => { 
-    // do something with result.status, result.address
-});
+```
+cordova.plugins.radar.ipGeocode((result) => {  // do something with result.status, result.address});
 ```
 
-#### [Search](#search)
+Copy
+
+#### [Search](#search "Direct link to heading")
 
 With the [autocomplete API](/api#autocomplete), autocomplete partial addresses and place names, sorted by relevance:
 
-```javascript
-Radar.autocomplete({ 
-    query: 'brooklyn roasting', 
-    near: { 
-        latitude: 40.783826, 
-        longitude: -73.975363 
-    }, 
-    limit: 10
-}, (result) => { 
-    // do something with result.status, result.addresses
-});
 ```
+cordova.plugins.radar.autocomplete({  query: 'brooklyn roasting',  near: {    latitude: 40.783826,    longitude: -73.975363  },  limit: 10}, (result) => {  // do something with result.status, result.addresses});
+```
+
+Copy
 
 With the [geofence search API](/api#search-geofences), search for geofences near a location, sorted by distance:
 
-```javascript
-Radar.searchGeofences({ 
-    radius: 1000, 
-    tags: ['venue'], 
-    limit: 10
-}, (result) => { 
-    // do something with result.status, result.geofences
-});
 ```
+cordova.plugins.radar.searchGeofences({  radius: 1000,  tags: ['venue'],  limit: 10}, (result) => {  // do something with result.status, result.geofences});
+```
+
+Copy
 
 With the [places search API](/api#search-places), search for places near a location, sorted by distance:
 
-```javascript
-Radar.searchPlaces({ 
-    near: { 
-        latitude: 40.783826, 
-        longitude: -73.975363 
-    }, 
-    radius: 1000, 
-    chains: ['starbucks'], 
-    limit: 10
-}, (result) => { 
-    // do something with result.status, result.places
-});
+```
+cordova.plugins.radar.searchPlaces({  near: {    latitude: 40.783826,    longitude: -73.975363  },  radius: 1000,  chains: ['starbucks'],  limit: 10}, (result) => {  // do something with result.status, result.places});
 ```
 
-#### [Distance](#distance)
+Copy
+
+#### [Distance](#distance "Direct link to heading")
 
 With the [distance API](/api#distance), calculate the travel distance and duration from an origin to a destination:
 
-```javascript
-Radar.getDistance({ 
-    origin: { 
-        latitude: 40.78382, 
-        longitude: -73.97536 
-    }, 
-    destination: { 
-        latitude: 40.70390, 
-        longitude: -73.98670 
-    }, 
-    modes: [ 'foot', 'car' ], 
-    units: 'imperial'
-}, (result) => { 
-    // do something with result.status, result.routes
-});
+```
+cordova.plugins.radar.getDistance({  origin: {    latitude: 40.78382,    longitude: -73.97536  },  destination: {    latitude: 40.70390,    longitude: -73.98670  },  modes: [    'foot',    'car'  ],  units: 'imperial'}, (result) => {  // do something with result.status, result.routes});
 ```
 
-## [Support](#support)
+Copy
+
+#### [Matrix](#matrix "Direct link to heading")
+
+With the [matrix API](/api#matrix), calculate the travel distance and duration between multiple origins and destinations for up to 25 routes:
+
+```
+cordova.plugins.radar.getMatrix({  origins: [    {      latitude: 40.78382,      longitude: -73.97536    }  ],  destinations: [    [      {        latitude: 40.70390,        longitude: -73.98670      },      {        latitude: 40.73237,        longitude: -73.94884      }    ]  ],  mode: 'car',  units: 'imperial'}, (result) => {  // do something with result.status, result.matrix});
+```
+
+Copy
+
+## []()Support[#](#support "Direct link to heading")
 
 Have questions? We're here to help! Contact us at [radar.com/support](https://radar.com/support).
 
-[Edit this page](https://github.com/radarlabs/docs/edit/main/docs/sdk/capacitor.mdx)
+[Edit this page](https://github.com/radarlabs/docs/edit/main/docs/sdk/cordova.mdx)
