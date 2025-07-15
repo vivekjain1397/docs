@@ -32,7 +32,7 @@
             "pages": [
               "integrations",
               "integrations/webhooks",
-              "integrations/urban-airship",
+              "integrations/airship",
               "integrations/amplitude",
               "integrations/aws-pinpoint",
               "integrations/aws-s3",
