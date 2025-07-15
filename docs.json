@@ -73,7 +73,7 @@
       {
         "group": "SDK Reference",
         "pages": [
-          "sdk",
+          "sdk/sdk",
           "sdk/ios",
           "sdk/android",
           "sdk/react-native",
