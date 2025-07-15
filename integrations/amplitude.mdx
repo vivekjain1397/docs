@@ -1,69 +1,72 @@
 ---
 title: "Amplitude"
-description: "The Amplitude integration is available on the ."
 ---
+
+<Info>
+  The Amplitude integration is available on the [**Enterprise plan**](https://radar.com/pricing).
+</Info>
 
 Radar can send events and user properties to [Amplitude](https://amplitude.com).
 
 Use the Amplitude integration to enrich behavioral events with location context, measure the ROI of location-based features, and build location-based user segments.
 
-## [Configuration](#configuration "Direct link to heading")
+## Configuration
 
-On the Amplitude *Manage Project* page, copy your API key.
+On the Amplitude _Manage Project_ page, copy your API key.
 
-Then, on the Radar [Integrations page](https://radar.com/dashboard/integrations) under *Amplitude*, set *Enabled* to *Yes* and paste your API key. Note that you can set separate API keys for the *Test* and *Live* environments.
+Then, on the Radar [Integrations page](https://radar.com/dashboard/integrations) under _Amplitude_, set _Enabled_ to _Yes_ and paste your API key. Note that you can set separate API keys for the _Test_ and _Live_ environments.
 
 Whenever events are generated, Radar will send events and user properties to Amplitude.
 
-## [User mapping](#user-mapping "Direct link to heading")
+## User mapping
 
 Note that Radar uses the special string `"(null)"` to represent `null` user property values.
 
-| Radar User Field                     | Amplitude User Property                         | Type           | Example Value                              | Context Type                    |
-| ------------------------------------ | ----------------------------------------------- | -------------- | ------------------------------------------ | ------------------------------- |
-| `userId`                             | `userId`                                        | string         | `"1"`                                      |                                 |
-| `deviceId`                           | `deviceId`                                      | string         | `"10974a2ee035770b9"`                      |                                 |
-| `location.coordinates[0]`            | `location_lng`                                  | number         | `-76.350663`                               |                                 |
-| `location.coordinates[1]`            | `location_lat`                                  | number         | `39.525665`                                |                                 |
-| `locationAuthorization`              | `[Radar] Location Authorization`                | string         | `GRANTED_FOREGROUND`                       |                                 |
-| `locationAccuracyAuthorization`      | `[Radar] Location Accuracy Authorization`       | string         | `FULL`                                     |                                 |
-| `updatedAt`                          | `time`                                          | timestamp      | `"2018-06-22T15:23:39.000Z"`               |                                 |
-| `_id`                                | `[Radar] ID`                                    | string         | `"5b2c0906f5874b001aecfd8d"`               |                                 |
-| `segments[*].externalId`             | `[Radar] Segment External IDs`                  | array\[string] | `["starbucks-visitors"]`                   |                                 |
-| `topChains[*].slug`                  | `[Radar] Top Chain Slugs`                       | array\[string] | `["starbucks", "walmart"]`                 |                                 |
-| `topChains[*].externalId`            | `[Radar] Top Chain External IDs`                | array\[string] | `["123", "456"]`                           |                                 |
-| `geofences[*]._id`                   | `[Radar] Geofence IDs`                          | array\[string] | `["5b2c0906f5874b001aecfd8e"]`             | [Geofences](/geofences)         |
-| `geofences[*].description`           | `[Radar] Geofence Descriptions`                 | array\[string] | `["Store #123"]`                           | [Geofences](/geofences)         |
-| `geofences[*].tag`                   | `[Radar] Geofence Tags`                         | array\[string] | `["store"]`                                | [Geofences](/geofences)         |
-| `geofences[*].externalId`            | `[Radar] Geofence External IDs`                 | array\[string] | `["123"]`                                  | [Geofences](/geofences)         |
-| `place._id`                          | `[Radar] Place ID`                              | string         | `"59302bcf8f27e8a156bd4f91"`               | [Places](/places)               |
-| `place.name`                         | `[Radar] Place Name`                            | string         | `"Starbucks"`                              | [Places](/places)               |
-| `place.categories`                   | `[Radar] Place Categories`                      | array\[string] | `["food-beverage", "cafe", "coffee-shop"]` | [Places](/places)               |
-| `place.chain.slug`                   | `[Radar] Place Chain Slug`                      | string         | `"starbucks"`                              | [Places](/places)               |
-| `place.chain.name`                   | `[Radar] Place Chain Name`                      | string         | `"Starbucks"`                              | [Places](/places)               |
-| `country.code`                       | `[Radar] Region Country Code`                   | string         | `"US"`                                     | [Regions](/regions)             |
-| `country.name`                       | `[Radar] Region Country Name`                   | string         | `"United States"`                          | [Regions](/regions)             |
-| `country._id`                        | `[Radar] Region Country ID`                     | string         | `"5b2c0906f5874b001aecfd8f"`               | [Regions](/regions)             |
-| `state.code`                         | `[Radar] Region State Code`                     | string         | `"MD"`                                     | [Regions](/regions)             |
-| `state.name`                         | `[Radar] Region State Name`                     | string         | `"Maryland"`                               | [Regions](/regions)             |
-| `state._id`                          | `[Radar] Region State ID`                       | string         | `"5b2c0906f5874b001aecfd8f"`               | [Regions](/regions)             |
-| `dma.code`                           | `[Radar] Region DMA Code`                       | string         | `"26"`                                     | [Regions](/regions)             |
-| `dma.name`                           | `[Radar] Region DMA Name`                       | string         | `"Baltimore"`                              | [Regions](/regions)             |
-| `dma._id`                            | `[Radar] Region DMA ID`                         | string         | `"5b2c0906f5874b001aecfd8f"`               | [Regions](/regions)             |
-| `city.code`                          | `[Radar] Region City Code`                      | string         | `"_"`                                      | [Regions](/regions)             |
-| `city.name`                          | `[Radar] Region City Name`                      | string         | `"Tokyo"`                                  | [Regions](/regions)             |
-| `city._id`                           | `[Radar] City ID`                               | string         | `"5b2c0906f5874b001aecfd8f"`               | [Regions](/regions)             |
-| `postalCode.code`                    | `[Radar] Region Postal Code`                    | string         | `"21014"`                                  | [Regions](/regions)             |
-| `postalCode._id`                     | `[Radar] Region Postal Code ID`                 | string         | `"5b2c0906f5874b001aecfd8f"`               | [Regions](/regions)             |
-| `trip.externalId`                    | `[Radar] Trip External ID`                      | string         | `"299"`                                    | [Trip Tracking](/trip-tracking) |
-| `trip.destinationGeofenceTag`        | `[Radar] Trip Destination Geofence Tag`         | string         | `"store"`                                  | [Trip Tracking](/trip-tracking) |
-| `trip.destinationGeofenceExternalId` | `[Radar] Trip Destination Geofence External ID` | string         | `"123"`                                    | [Trip Tracking](/trip-tracking) |
-| `beacons[*]._id`                     | `[Radar] Beacon IDs`                            | array\[string] | `["5b2c0906f5874b001aecfd8f"]`             | [Beacons](/beacons)             |
-| `beacons[*].description`             | `[Radar] Beacon Descriptions`                   | array\[string] | `["Store #123 - Drive-Thru"]`              | [Beacons](/beacons)             |
-| `beacons[*].tag`                     | `[Radar] Beacon Tags`                           | array\[string] | `["drive-thru"]`                           | [Beacons](/beacons)             |
-| `beacons[*].externalId`              | `[Radar] Beacon External IDs`                   | array\[string] | `["123"]`                                  | [Beacons](/beacons)             |
+| Radar User Field                     | Amplitude User Property                         | Type          | Example Value                              | Context Type                    |
+| ------------------------------------ | ----------------------------------------------- | ------------- | ------------------------------------------ | ------------------------------- |
+| `userId`                             | `userId`                                        | string        | `"1"`                                      |                                 |
+| `deviceId`                           | `deviceId`                                      | string        | `"10974a2ee035770b9"`                      |                                 |
+| `location.coordinates[0]`            | `location_lng`                                  | number        | `-76.350663`                               |                                 |
+| `location.coordinates[1]`            | `location_lat`                                  | number        | `39.525665`                                |                                 |
+| `locationAuthorization`              | `[Radar] Location Authorization`                | string        | `GRANTED_FOREGROUND`                       |                                 |
+| `locationAccuracyAuthorization`      | `[Radar] Location Accuracy Authorization`       | string        | `FULL`                                     |                                 |
+| `updatedAt`                          | `time`                                          | timestamp     | `"2018-06-22T15:23:39.000Z"`               |                                 |
+| `_id`                                | `[Radar] ID`                                    | string        | `"5b2c0906f5874b001aecfd8d"`               |                                 |
+| `segments[*].externalId`             | `[Radar] Segment External IDs`                  | array[string] | `["starbucks-visitors"]`                   |                                 |
+| `topChains[*].slug`                  | `[Radar] Top Chain Slugs`                       | array[string] | `["starbucks", "walmart"]`                 |                                 |
+| `topChains[*].externalId`            | `[Radar] Top Chain External IDs`                | array[string] | `["123", "456"]`                           |                                 |
+| `geofences[*]._id`                   | `[Radar] Geofence IDs`                          | array[string] | `["5b2c0906f5874b001aecfd8e"]`             | [Geofences](/geofences)         |
+| `geofences[*].description`           | `[Radar] Geofence Descriptions`                 | array[string] | `["Store #123"]`                           | [Geofences](/geofences)         |
+| `geofences[*].tag`                   | `[Radar] Geofence Tags`                         | array[string] | `["store"]`                                | [Geofences](/geofences)         |
+| `geofences[*].externalId`            | `[Radar] Geofence External IDs`                 | array[string] | `["123"]`                                  | [Geofences](/geofences)         |
+| `place._id`                          | `[Radar] Place ID`                              | string        | `"59302bcf8f27e8a156bd4f91"`               | [Places](/places)               |
+| `place.name`                         | `[Radar] Place Name`                            | string        | `"Starbucks"`                              | [Places](/places)               |
+| `place.categories`                   | `[Radar] Place Categories`                      | array[string] | `["food-beverage", "cafe", "coffee-shop"]` | [Places](/places)               |
+| `place.chain.slug`                   | `[Radar] Place Chain Slug`                      | string        | `"starbucks"`                              | [Places](/places)               |
+| `place.chain.name`                   | `[Radar] Place Chain Name`                      | string        | `"Starbucks"`                              | [Places](/places)               |
+| `country.code`                       | `[Radar] Region Country Code`                   | string        | `"US"`                                     | [Regions](/regions)             |
+| `country.name`                       | `[Radar] Region Country Name`                   | string        | `"United States"`                          | [Regions](/regions)             |
+| `country._id`                        | `[Radar] Region Country ID`                     | string        | `"5b2c0906f5874b001aecfd8f"`               | [Regions](/regions)             |
+| `state.code`                         | `[Radar] Region State Code`                     | string        | `"MD"`                                     | [Regions](/regions)             |
+| `state.name`                         | `[Radar] Region State Name`                     | string        | `"Maryland"`                               | [Regions](/regions)             |
+| `state._id`                          | `[Radar] Region State ID`                       | string        | `"5b2c0906f5874b001aecfd8f"`               | [Regions](/regions)             |
+| `dma.code`                           | `[Radar] Region DMA Code`                       | string        | `"26"`                                     | [Regions](/regions)             |
+| `dma.name`                           | `[Radar] Region DMA Name`                       | string        | `"Baltimore"`                              | [Regions](/regions)             |
+| `dma._id`                            | `[Radar] Region DMA ID`                         | string        | `"5b2c0906f5874b001aecfd8f"`               | [Regions](/regions)             |
+| `city.code`                          | `[Radar] Region City Code`                      | string        | `"_"`                                      | [Regions](/regions)             |
+| `city.name`                          | `[Radar] Region City Name`                      | string        | `"Tokyo"`                                  | [Regions](/regions)             |
+| `city._id`                           | `[Radar] City ID`                               | string        | `"5b2c0906f5874b001aecfd8f"`               | [Regions](/regions)             |
+| `postalCode.code`                    | `[Radar] Region Postal Code`                    | string        | `"21014"`                                  | [Regions](/regions)             |
+| `postalCode._id`                     | `[Radar] Region Postal Code ID`                 | string        | `"5b2c0906f5874b001aecfd8f"`               | [Regions](/regions)             |
+| `trip.externalId`                    | `[Radar] Trip External ID`                      | string        | `"299"`                                    | [Trip Tracking](/trip-tracking) |
+| `trip.destinationGeofenceTag`        | `[Radar] Trip Destination Geofence Tag`         | string        | `"store"`                                  | [Trip Tracking](/trip-tracking) |
+| `trip.destinationGeofenceExternalId` | `[Radar] Trip Destination Geofence External ID` | string        | `"123"`                                    | [Trip Tracking](/trip-tracking) |
+| `beacons[*]._id`                     | `[Radar] Beacon IDs`                            | array[string] | `["5b2c0906f5874b001aecfd8f"]`             | [Beacons](/beacons)             |
+| `beacons[*].description`             | `[Radar] Beacon Descriptions`                   | array[string] | `["Store #123 - Drive-Thru"]`              | [Beacons](/beacons)             |
+| `beacons[*].tag`                     | `[Radar] Beacon Tags`                           | array[string] | `["drive-thru"]`                           | [Beacons](/beacons)             |
+| `beacons[*].externalId`              | `[Radar] Beacon External IDs`                   | array[string] | `["123"]`                                  | [Beacons](/beacons)             |
 
-## [Event mapping](#event-mapping "Direct link to heading")
+## Event mapping
 
 | Radar Event                         | Context Type                    | Amplitude Event                        |
 | ----------------------------------- | ------------------------------- | -------------------------------------- |
@@ -86,7 +89,7 @@ Note that Radar uses the special string `"(null)"` to represent `null` user prop
 | `user.entered_beacon`               | [Beacons](/beacons)             | `[Radar] Beacon Entered`               |
 | `user.exited_beacon`                | [Beacons](/beacons)             | `[Radar] Beacon Exited`                |
 
-### [Radar Geofence Entered](#radar-geofence-entered "Direct link to heading")
+### [Radar] Geofence Entered
 
 | Radar Event Field          | Amplitude Event Property  | Type            | Example Value                |
 | -------------------------- | ------------------------- | --------------- | ---------------------------- |
@@ -94,7 +97,7 @@ Note that Radar uses the special string `"(null)"` to represent `null` user prop
 | `geofence.description`     | `Geofence Description`    | string          | `"Store #123"`               |
 | `geofence.tag`             | `Geofence Tag`            | string          | `"store"`                    |
 | `geofence.externalId`      | `Geofence External ID`    | string          | `"123"`                      |
-| `geofence.metadata[{key}]` | `Geofence Metadata {key}` | \{type}         | `{value}`                    |
+| `geofence.metadata[{key}]` | `Geofence Metadata {key}` | {type}          | `{value}`                    |
 | `confidence`               | `Confidence`              | string          | `"high"`                     |
 | `accuracy`                 | `Accuracy`                | number (meters) | `5`                          |
 | `foreground`               | `Foreground`              | boolean         | `true`                       |
@@ -118,7 +121,7 @@ If [Regions](/regions) is enabled, Radar will also send the following attributes
 | `postalCode.code` | `Postal Code`            | string | `"21014"`                    |
 | `postalCode._id`  | `Postal Code ID`         | string | `"5b2c0906f5874b001aecfd8f"` |
 
-### [Radar Geofence Exited](#radar-geofence-exited "Direct link to heading")
+### [Radar] Geofence Exited
 
 | Radar Event Field          | Amplitude Event Property  | Type             | Example Value                |
 | -------------------------- | ------------------------- | ---------------- | ---------------------------- |
@@ -126,7 +129,7 @@ If [Regions](/regions) is enabled, Radar will also send the following attributes
 | `geofence.description`     | `Geofence Description`    | string           | `"Store #123"`               |
 | `geofence.tag`             | `Geofence Tag`            | string           | `"store"`                    |
 | `geofence.externalId`      | `Geofence External ID`    | string           | `"123"`                      |
-| `geofence.metadata[{key}]` | `Geofence Metadata {key}` | \{type}          | `{value}`                    |
+| `geofence.metadata[{key}]` | `Geofence Metadata {key}` | {type}           | `{value}`                    |
 | `confidence`               | `Confidence`              | string           | `"high"`                     |
 | `accuracy`                 | `Accuracy`                | number (meters)  | `5`                          |
 | `foreground`               | `Foreground`              | boolean          | `true`                       |
@@ -151,7 +154,7 @@ If [Regions](/regions) is enabled, Radar will also send the following attributes
 | `postalCode.code` | `Postal Code`            | string | `"21014"`                    |
 | `postalCode._id`  | `Postal Code ID`         | string | `"5b2c0906f5874b001aecfd8f"` |
 
-### [Radar Dwelled in Geofence](#radar-dwelled-in-geofence "Direct link to heading")
+### [Radar] Dwelled in Geofence
 
 | Radar Event Field          | Amplitude Event Property  | Type             | Example Value                |
 | -------------------------- | ------------------------- | ---------------- | ---------------------------- |
@@ -159,7 +162,7 @@ If [Regions](/regions) is enabled, Radar will also send the following attributes
 | `geofence.description`     | `Geofence Description`    | string           | `"Store #123"`               |
 | `geofence.tag`             | `Geofence Tag`            | string           | `"store"`                    |
 | `geofence.externalId`      | `Geofence External ID`    | string           | `"123"`                      |
-| `geofence.metadata[{key}]` | `Geofence Metadata {key}` | \{type}          | `{value}`                    |
+| `geofence.metadata[{key}]` | `Geofence Metadata {key}` | {type}           | `{value}`                    |
 | `confidence`               | `Confidence`              | string           | `"high"`                     |
 | `accuracy`                 | `Accuracy`                | number (meters)  | `5`                          |
 | `foreground`               | `Foreground`              | boolean          | `true`                       |
@@ -184,7 +187,7 @@ If [Regions](/regions) is enabled, Radar will also send the following attributes
 | `postalCode.code` | `Postal Code`            | string | `"21014"`                    |
 | `postalCode._id`  | `Postal Code ID`         | string | `"5b2c0906f5874b001aecfd8f"` |
 
-### [Radar Place Entered](#radar-place-entered "Direct link to heading")
+### [Radar] Place Entered
 
 | Radar Event Field  | Amplitude Event Property | Type            | Example Value                              |
 | ------------------ | ------------------------ | --------------- | ------------------------------------------ |
@@ -192,7 +195,7 @@ If [Regions](/regions) is enabled, Radar will also send the following attributes
 | `place.name`       | `Place Name`             | string          | `"Starbucks"`                              |
 | `place.chain.slug` | `Place Chain Slug`       | string          | `"starbucks"`                              |
 | `place.chain.name` | `Place Chain Name`       | string          | `"Starbucks"`                              |
-| `place.categories` | `Place Categories`       | array\[string]  | `["food-beverage", "cafe", "coffee-shop"]` |
+| `place.categories` | `Place Categories`       | array[string]   | `["food-beverage", "cafe", "coffee-shop"]` |
 | `confidence`       | `Confidence`             | string          | `"high"`                                   |
 | `accuracy`         | `Accuracy`               | number (meters) | `5`                                        |
 | `foreground`       | `Foreground`             | boolean         | `true`                                     |
@@ -216,7 +219,7 @@ If [Regions](/regions) is enabled, Radar will also send the following attributes
 | `postalCode.code` | `Postal Code`            | string | `"21014"`                    |
 | `postalCode._id`  | `Postal Code ID`         | string | `"5b2c0906f5874b001aecfd8f"` |
 
-### [Radar Place Exited](#radar-place-exited "Direct link to heading")
+### [Radar] Place Exited
 
 | Radar Event Field  | Amplitude Event Property | Type             | Example Value                              |
 | ------------------ | ------------------------ | ---------------- | ------------------------------------------ |
@@ -224,7 +227,7 @@ If [Regions](/regions) is enabled, Radar will also send the following attributes
 | `place.name`       | `Place Name`             | string           | `"Starbucks"`                              |
 | `place.chain.slug` | `Place Chain Slug`       | string           | `"starbucks"`                              |
 | `place.chain.name` | `Place Chain Name`       | string           | `"Starbucks"`                              |
-| `place.categories` | `Place Categories`       | array\[string]   | `["food-beverage", "cafe", "coffee-shop"]` |
+| `place.categories` | `Place Categories`       | array[string]    | `["food-beverage", "cafe", "coffee-shop"]` |
 | `confidence`       | `Confidence`             | string           | `"high"`                                   |
 | `accuracy`         | `Accuracy`               | number (meters)  | `5`                                        |
 | `foreground`       | `Foreground`             | boolean          | `true`                                     |
@@ -249,7 +252,7 @@ If [Regions](/regions) is enabled, Radar will also send the following attributes
 | `postalCode.code` | `Postal Code`            | string | `"21014"`                    |
 | `postalCode._id`  | `Postal Code ID`         | string | `"5b2c0906f5874b001aecfd8f"` |
 
-### [Radar Country Entered](#radar-country-entered "Direct link to heading")
+### [Radar] Country Entered
 
 | Radar Event Field | Amplitude Event Property | Type            | Example Value     |
 | ----------------- | ------------------------ | --------------- | ----------------- |
@@ -278,7 +281,7 @@ If [Regions](/regions) is enabled, Radar will also send the following attributes
 | `postalCode.code` | `Postal Code`            | string | `"21014"`                    |
 | `postalCode._id`  | `Postal Code ID`         | string | `"5b2c0906f5874b001aecfd8f"` |
 
-### [Radar Country Exited](#radar-country-exited "Direct link to heading")
+### [Radar] Country Exited
 
 | Radar Event Field | Amplitude Event Property | Type            | Example Value     |
 | ----------------- | ------------------------ | --------------- | ----------------- |
@@ -307,7 +310,7 @@ If [Regions](/regions) is enabled, Radar will also send the following attributes
 | `postalCode.code` | `Postal Code`            | string | `"21014"`                    |
 | `postalCode._id`  | `Postal Code ID`         | string | `"5b2c0906f5874b001aecfd8f"` |
 
-### [Radar State Entered](#radar-state-entered "Direct link to heading")
+### [Radar] State Entered
 
 | Radar Event Field | Amplitude Event Property | Type            | Example Value |
 | ----------------- | ------------------------ | --------------- | ------------- |
@@ -336,7 +339,7 @@ If [Regions](/regions) is enabled, Radar will also send the following attributes
 | `postalCode.code` | `Postal Code`            | string | `"21014"`                    |
 | `postalCode._id`  | `Postal Code ID`         | string | `"5b2c0906f5874b001aecfd8f"` |
 
-### [Radar State Exited](#radar-state-exited "Direct link to heading")
+### [Radar] State Exited
 
 | Radar Event Field | Amplitude Event Property | Type            | Example Value |
 | ----------------- | ------------------------ | --------------- | ------------- |
@@ -365,7 +368,7 @@ If [Regions](/regions) is enabled, Radar will also send the following attributes
 | `postalCode.code` | `Postal Code`            | string | `"21014"`                    |
 | `postalCode._id`  | `Postal Code ID`         | string | `"5b2c0906f5874b001aecfd8f"` |
 
-### [Radar DMA Entered](#radar-dma-entered "Direct link to heading")
+### [Radar] DMA Entered
 
 | Radar Event Field | Amplitude Event Property | Type            | Example Value |
 | ----------------- | ------------------------ | --------------- | ------------- |
@@ -394,7 +397,7 @@ If [Regions](/regions) is enabled, Radar will also send the following attributes
 | `postalCode.code` | `Postal Code`            | string | `"21014"`                    |
 | `postalCode._id`  | `Postal Code ID`         | string | `"5b2c0906f5874b001aecfd8f"` |
 
-### [Radar DMA Exited](#radar-dma-exited "Direct link to heading")
+### [Radar] DMA Exited
 
 | Radar Event Field | Amplitude Event Property | Type            | Example Value |
 | ----------------- | ------------------------ | --------------- | ------------- |
@@ -423,12 +426,12 @@ If [Regions](/regions) is enabled, Radar will also send the following attributes
 | `postalCode.code` | `Postal Code`            | string | `"21014"`                    |
 | `postalCode._id`  | `Postal Code ID`         | string | `"5b2c0906f5874b001aecfd8f"` |
 
-### [Radar Started Trip](#radar-started-trip "Direct link to heading")
+### [Radar] Started Trip
 
 | Radar Event Attribute                | Amplitude Event Property                | Type            | Example Value |
 | ------------------------------------ | --------------------------------------- | --------------- | ------------- |
 | `trip.externalId`                    | `Trip External ID`                      | string          | `"299"`       |
-| `trip.metadata[{key}]`               | `Trip Metadata {key}`                   | \{type}         | `{value}`     |
+| `trip.metadata[{key}]`               | `Trip Metadata {key}`                   | {type}          | `{value}`     |
 | `trip.destinationGeofenceTag`        | `Trip Destination Geofence Tag`         | string          | `"store"`     |
 | `trip.destinationGeofenceExternalId` | `Trip Destination Geofence External ID` | string          | `"123"`       |
 | `accuracy`                           | `Accuracy`                              | number (meters) | `5`           |
@@ -453,12 +456,12 @@ If [Regions](/regions) is enabled, Radar will also send the following attributes
 | `postalCode.code` | `Postal Code`            | string | `"21014"`                    |
 | `postalCode._id`  | `Postal Code ID`         | string | `"5b2c0906f5874b001aecfd8f"` |
 
-### [Radar Updated Trip](#radar-updated-trip "Direct link to heading")
+### [Radar] Updated Trip
 
 | Radar Event Attribute                | Amplitude Event Property                | Type            | Example Value |
 | ------------------------------------ | --------------------------------------- | --------------- | ------------- |
 | `trip.externalId`                    | `Trip External ID`                      | string          | `"299"`       |
-| `trip.metadata[{key}]`               | `Trip Metadata {key}`                   | \{type}         | `{value}`     |
+| `trip.metadata[{key}]`               | `Trip Metadata {key}`                   | {type}          | `{value}`     |
 | `trip.destinationGeofenceTag`        | `Trip Destination Geofence Tag`         | string          | `"store"`     |
 | `trip.destinationGeofenceExternalId` | `Trip Destination Geofence External ID` | string          | `"123"`       |
 | `accuracy`                           | `Accuracy`                              | number (meters) | `5`           |
@@ -483,12 +486,12 @@ If [Regions](/regions) is enabled, Radar will also send the following attributes
 | `postalCode.code` | `Postal Code`            | string | `"21014"`                    |
 | `postalCode._id`  | `Postal Code ID`         | string | `"5b2c0906f5874b001aecfd8f"` |
 
-### [Radar Approaching Trip Destination](#radar-approaching-trip-destination "Direct link to heading")
+### [Radar] Approaching Trip Destination
 
 | Radar Event Attribute                | Amplitude Event Property                | Type            | Example Value |
 | ------------------------------------ | --------------------------------------- | --------------- | ------------- |
 | `trip.externalId`                    | `Trip External ID`                      | string          | `"299"`       |
-| `trip.metadata[{key}]`               | `Trip Metadata {key}`                   | \{type}         | `{value}`     |
+| `trip.metadata[{key}]`               | `Trip Metadata {key}`                   | {type}          | `{value}`     |
 | `trip.destinationGeofenceTag`        | `Trip Destination Geofence Tag`         | string          | `"store"`     |
 | `trip.destinationGeofenceExternalId` | `Trip Destination Geofence External ID` | string          | `"123"`       |
 | `accuracy`                           | `Accuracy`                              | number (meters) | `5`           |
@@ -513,12 +516,12 @@ If [Regions](/regions) is enabled, Radar will also send the following attributes
 | `postalCode.code` | `Postal Code`            | string | `"21014"`                    |
 | `postalCode._id`  | `Postal Code ID`         | string | `"5b2c0906f5874b001aecfd8f"` |
 
-### [Radar Arrived at Trip Destination](#radar-arrived-at-trip-destination "Direct link to heading")
+### [Radar] Arrived at Trip Destination
 
 | Radar Event Attribute                | Amplitude Event Property                | Type            | Example Value |
 | ------------------------------------ | --------------------------------------- | --------------- | ------------- |
 | `trip.externalId`                    | `Trip External ID`                      | string          | `"299"`       |
-| `trip.metadata[{key}]`               | `Trip Metadata {key}`                   | \{type}         | `{value}`     |
+| `trip.metadata[{key}]`               | `Trip Metadata {key}`                   | {type}          | `{value}`     |
 | `trip.destinationGeofenceTag`        | `Trip Destination Geofence Tag`         | string          | `"store"`     |
 | `trip.destinationGeofenceExternalId` | `Trip Destination Geofence External ID` | string          | `"123"`       |
 | `accuracy`                           | `Accuracy`                              | number (meters) | `5`           |
@@ -543,12 +546,12 @@ If [Regions](/regions) is enabled, Radar will also send the following attributes
 | `postalCode.code` | `Postal Code`            | string | `"21014"`                    |
 | `postalCode._id`  | `Postal Code ID`         | string | `"5b2c0906f5874b001aecfd8f"` |
 
-### [Radar Stopped Trip](#radar-stopped-trip "Direct link to heading")
+### [Radar] Stopped Trip
 
 | Radar Event Attribute                | Amplitude Event Property                | Type            | Example Value |
 | ------------------------------------ | --------------------------------------- | --------------- | ------------- |
 | `trip.externalId`                    | `Trip External ID`                      | string          | `"299"`       |
-| `trip.metadata[{key}]`               | `Trip Metadata {key}`                   | \{type}         | `{value}`     |
+| `trip.metadata[{key}]`               | `Trip Metadata {key}`                   | {type}          | `{value}`     |
 | `trip.destinationGeofenceTag`        | `Trip Destination Geofence Tag`         | string          | `"store"`     |
 | `trip.destinationGeofenceExternalId` | `Trip Destination Geofence External ID` | string          | `"123"`       |
 | `accuracy`                           | `Accuracy`                              | number (meters) | `5`           |
@@ -573,16 +576,16 @@ If [Regions](/regions) is enabled, Radar will also send the following attributes
 | `postalCode.code` | `Postal Code`            | string | `"21014"`                    |
 | `postalCode._id`  | `Postal Code ID`         | string | `"5b2c0906f5874b001aecfd8f"` |
 
-### [Radar Beacon Entered](#radar-beacon-entered "Direct link to heading")
+### [Radar] Beacon Entered
 
-| Radar Event Attribute    | Amplitude Event Property | Type    | Example Value                |
-| ------------------------ | ------------------------ | ------- | ---------------------------- |
-| `beacon._id`             | `Beacon ID`              | string  | `"5b2c0906f5874b001aecfd8f"` |
-| `beacon.description`     | `Beacon Description`     | string  | `"Store #123 - Drive-Thru"`  |
-| `beacon.tag`             | `Beacon Tag`             | string  | `"drive-thru"`               |
-| `beacon.externalId`      | `Beacon External ID`     | string  | `"123"`                      |
-| `beacon.metadata[{key}]` | `Beacon Metadata {key}`  | \{type} | `{value}`                    |
-| `confidence`             | `Confidence`             | string  | `"high"`                     |
+| Radar Event Attribute    | Amplitude Event Property | Type   | Example Value                |
+| ------------------------ | ------------------------ | ------ | ---------------------------- |
+| `beacon._id`             | `Beacon ID`              | string | `"5b2c0906f5874b001aecfd8f"` |
+| `beacon.description`     | `Beacon Description`     | string | `"Store #123 - Drive-Thru"`  |
+| `beacon.tag`             | `Beacon Tag`             | string | `"drive-thru"`               |
+| `beacon.externalId`      | `Beacon External ID`     | string | `"123"`                      |
+| `beacon.metadata[{key}]` | `Beacon Metadata {key}`  | {type} | `{value}`                    |
+| `confidence`             | `Confidence`             | string | `"high"`                     |
 
 If [Regions](/regions) is enabled, Radar will also send the following attributes:
 
@@ -603,7 +606,7 @@ If [Regions](/regions) is enabled, Radar will also send the following attributes
 | `postalCode.code` | `Postal Code`            | string | `"21014"`                    |
 | `postalCode._id`  | `Postal Code ID`         | string | `"5b2c0906f5874b001aecfd8f"` |
 
-### [Radar Beacon Exited](#radar-beacon-exited "Direct link to heading")
+### [Radar] Beacon Exited
 
 | Radar Event Attribute    | Amplitude Event Property | Type             | Example Value                |
 | ------------------------ | ------------------------ | ---------------- | ---------------------------- |
@@ -611,7 +614,7 @@ If [Regions](/regions) is enabled, Radar will also send the following attributes
 | `beacon.description`     | `Beacon Description`     | string           | `"Store #123 - Drive-Thru"`  |
 | `beacon.tag`             | `Beacon Tag`             | string           | `"drive-thru"`               |
 | `beacon.externalId`      | `Beacon External ID`     | string           | `"123"`                      |
-| `beacon.metadata[{key}]` | `Beacon Metadata {key}`  | \{type}          | `{value}`                    |
+| `beacon.metadata[{key}]` | `Beacon Metadata {key}`  | {type}           | `{value}`                    |
 | `confidence`             | `Confidence`             | string           | `"high"`                     |
 | `duration`               | `Duration`               | number (minutes) | `1.42`                       |
 
