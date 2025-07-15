@@ -17,12 +17,9 @@ Whenever events are generated, Radar will send custom events and tags to Airship
 
 If you are using Airship SDK `13.x` or earlier with Radar iOS SDK `3.0.4` or earlier or Radar Android SDK `3.0.6` or earlier, the Radar SDK will automatically collect Airship channel ID and Airship session ID. However, if you are using Airship SDK `14.0` or later with Radar iOS SDK `3.0.5` or later or Radar Android SDK `3.0.7` or later, you must set Radar `metadata.airshipChannelId` and `metadata.airshipSessionId` manually to collect Airship channel ID and Airship session ID.
 
-- Swift
-- Kotlin
-
 <CodeGroup>
 
-```swift SetMetadata.swift
+```swift Swift
 Radar.setMetadata([
   "airshipChannelId": Airship.channel.identifier,
   "airshipSessionId": Airship.analytics.sessionID
@@ -30,7 +27,7 @@ Radar.setMetadata([
 ```
 
 
-```kotlin SetMetadata.kt
+```kotlin Kotlin
 val channelId = UAirship.shared().channel.id
 val sessionId = UAirship.shared().analytics.sessionId
 
@@ -75,12 +72,9 @@ All integration delivery can be monitored via the integration's event logs by cl
 
 To trigger in-app messaging from detected user state on app open, custom events need to deliver through Airship's SDK rather than via Radar's server to server integration with Airship. To support this, implement custom logic in the SDK leveraging Radar's location update listener, on [iOS](/sdk/ios#listening-for-events-with-a-delegate) or [Android](/sdk/android#listening-for-events-with-a-receiver), to send foreground detections to Airship. The example code below assumes you are calling `Radar.trackOnce()` on application launch. See the [iOS](/sdk/ios#foreground-tracking) and [Android](/sdk/android#foreground-tracking) tracking references if needed.
 
-- Swift
-- Kotlin
-
 <CodeGroup>
 
-```swift AppDelegate.swift
+```swift Swift
 import RadarSDK
 import AirshipKit
 
@@ -116,7 +110,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, RadarDelegate {
 ```
 
 
-```kotlin MyRadarReceiver.kt
+```kotlin Kotlin
 class MyRadarReceiver : RadarReceiver() {
   override fun onLocationUpdated(context: Context, location: Location, user: RadarUser) {
     if (user.foreground && user.source == RadarLocationSource.FOREGROUND_LOCATION) {
