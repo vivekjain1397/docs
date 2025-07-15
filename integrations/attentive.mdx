@@ -1,31 +1,33 @@
 ---
 title: "Attentive"
-description: "The Attentive integration is available on the ."
 ---
+
+<Info>
+  The Attentive integration is available on the [**Enterprise plan**](https://radar.com/pricing).
+</Info>
 
 Radar can send events and user attributes to [Attentive](https://www.attentivemobile.com/).
 
 Use the Attentive integration to send location-triggered and location-targeted messages to increase engagement and conversion.
 
-## []()Configuration[#](#configuration "Direct link to heading")
+## Configuration
 
-After logging in to the Attentive console, go to *Marketplace* and click *Create app*. Fill out the form to create your app, making sure to include the `Write` permission for *Custom Events*. Other permissions such as *Subscribers*, *Custom Attributes*, and *Identity* might be needed to assign users to subscription channels and modify their identifiers.
+After logging in to the Attentive console, go to _Marketplace_ and click _Create app_. Fill out the form to create your app, making sure to include the `Write` permission for _Custom Events_. Other permissions such as _Subscribers_, _Custom Attributes_, and _Identity_ might be needed to assign users to subscription channels and modify their identifiers.
 
-Then, on the Radar [Integrations page](https://radar.com/dashboard/integrations) under *Attentive*, set *Enabled* to *Yes* and paste your API key. Note that you can set separate API keys for the *Test* and *Live* environments.
+Then, on the Radar [Integrations page](https://radar.com/dashboard/integrations) under _Attentive_, set _Enabled_ to _Yes_ and paste your API key. Note that you can set separate API keys for the _Test_ and _Live_ environments.
 
-Whenever events are generated, Radar will send custom events and user mappings to Attentive. Once Attentive is receiving Radar custom events, set up a *Segment* or *Journey* to create triggers from those events to send messages.
+Whenever events are generated, Radar will send custom events and user mappings to Attentive. Once Attentive is receiving Radar custom events, set up a _Segment_ or _Journey_ to create triggers from those events to send messages.
 
 By default, Radar `userId` maps to Attentive `clientUserId`. However, you can specify custom mappings by setting Radar `metadata.attentiveUserId`. For example, on iOS:
 
 ```
-// track users with a custom userId mapping (not required if using default mapping)Radar.setMetadata(["attentiveUserId": userId])
+// track users with a custom userId mapping (not required if using default mapping)
+Radar.setMetadata(["attentiveUserId": userId])
 ```
 
-Copy
+## Event mapping
 
-## []()Event mapping[#](#event-mapping "Direct link to heading")
-
-### []()user.entered\_geofence[#](#userentered_geofence "Direct link to heading")
+### user.entered_geofence
 
 | Radar Event Field          | Attentive Event Property  | Type    | Example Value                |
 | -------------------------- | ------------------------- | ------- | ---------------------------- |
@@ -33,7 +35,7 @@ Copy
 | `geofence.description`     | `geofence_description`    | string  | `"Store #123"`               |
 | `geofence.tag`             | `geofence_tag`            | string  | `"store"`                    |
 | `geofence.externalId`      | `geofence_external_id`    | string  | `"123"`                      |
-| `geofence.metadata[{key}]` | `geofence_metadata_{key}` | \{type} | `{value}`                    |
+| `geofence.metadata[{key}]` | `geofence_metadata_{key}` | type    | `{value}`                    |
 | `confidence`               | `confidence`              | string  | `"high"`                     |
 | `foreground`               | `foreground`              | boolean | `true`                       |
 
@@ -49,7 +51,7 @@ If [Regions](/regions) is enabled, Radar will also send the following attributes
 | `dma.name`        | `dma_name`               | string | `"Baltimore"`     |
 | `postalCode.code` | `postal_code`            | string | `"21014"`         |
 
-### []()user.exited\_geofence[#](#userexited_geofence "Direct link to heading")
+### user.exited_geofence
 
 | Radar Event Field          | Attentive Event Property  | Type             | Example Value                |
 | -------------------------- | ------------------------- | ---------------- | ---------------------------- |
@@ -57,7 +59,7 @@ If [Regions](/regions) is enabled, Radar will also send the following attributes
 | `geofence.description`     | `geofence_description`    | string           | `"Store #123"`               |
 | `geofence.tag`             | `geofence_tag`            | string           | `"store"`                    |
 | `geofence.externalId`      | `geofence_external_id`    | string           | `"123"`                      |
-| `geofence.metadata[{key}]` | `geofence_metadata_{key}` | \{type}          | `{value}`                    |
+| `geofence.metadata[{key}]` | `geofence_metadata_{key}` | type             | `{value}`                    |
 | `confidence`               | `confidence`              | string           | `"high"`                     |
 | `duration`                 | `duration`                | number (minutes) | `42.1`                       |
 | `foreground`               | `foreground`              | boolean          | `true`                       |
@@ -74,7 +76,7 @@ If [Regions](/regions) is enabled, Radar will also send the following attributes
 | `dma.name`        | `dma_name`               | string | `"Baltimore"`     |
 | `postalCode.code` | `postal_code`            | string | `"21014"`         |
 
-### []()user.dwelled\_in\_geofence[#](#userdwelled_in_geofence "Direct link to heading")
+### user.dwelled_in_geofence
 
 | Radar Event Field          | Attentive Event Property  | Type             | Example Value                |
 | -------------------------- | ------------------------- | ---------------- | ---------------------------- |
@@ -82,7 +84,7 @@ If [Regions](/regions) is enabled, Radar will also send the following attributes
 | `geofence.description`     | `geofence_description`    | string           | `"Store #123"`               |
 | `geofence.tag`             | `geofence_tag`            | string           | `"store"`                    |
 | `geofence.externalId`      | `geofence_external_id`    | string           | `"123"`                      |
-| `geofence.metadata[{key}]` | `geofence_metadata_{key}` | \{type}          | `{value}`                    |
+| `geofence.metadata[{key}]` | `geofence_metadata_{key}` | type             | `{value}`                    |
 | `confidence`               | `confidence`              | string           | `"high"`                     |
 | `duration`                 | `duration`                | number (minutes) | `5`                          |
 | `foreground`               | `foreground`              | boolean          | `true`                       |
@@ -99,7 +101,7 @@ If [Regions](/regions) is enabled, Radar will also send the following attributes
 | `dma.name`        | `dma_name`               | string | `"Baltimore"`     |
 | `postalCode.code` | `postal_code`            | string | `"21014"`         |
 
-### []()user.entered\_place[#](#userentered_place "Direct link to heading")
+### user.entered_place
 
 | Radar Event Field             | Attentive Event Property     | Type                     | Example Value                      |
 | ----------------------------- | ---------------------------- | ------------------------ | ---------------------------------- |
@@ -108,7 +110,7 @@ If [Regions](/regions) is enabled, Radar will also send the following attributes
 | `place.chain.slug`            | `place_chain_id`             | string                   | `"starbucks"`                      |
 | `place.chain.name`            | `place_chain_name`           | string                   | `"Starbucks"`                      |
 | `place.chain.externalId`      | `place_chain_external_id`    | string                   | `"123"`                            |
-| `place.chain.metadata[{key}]` | `place_chain_metadata_{key}` | \{type}                  | `{value}`                          |
+| `place.chain.metadata[{key}]` | `place_chain_metadata_{key}` | type                     | `{value}`                          |
 | `place.categories`            | `place_categories`           | string (comma-separated) | `"food-beverage,cafe,coffee-shop"` |
 | `confidence`                  | `confidence`                 | string                   | `"high"`                           |
 | `foreground`                  | `foreground`                 | boolean                  | `true`                             |
@@ -125,7 +127,7 @@ If [Regions](/regions) is enabled, Radar will also send the following attributes
 | `dma.name`        | `dma_name`               | string | `"Baltimore"`     |
 | `postalCode.code` | `postal_code`            | string | `"21014"`         |
 
-### []()user.exited\_place[#](#userexited_place "Direct link to heading")
+### user.exited_place
 
 | Radar Event Field             | Attentive Event Property     | Type                     | Example Value                      |
 | ----------------------------- | ---------------------------- | ------------------------ | ---------------------------------- |
@@ -134,7 +136,7 @@ If [Regions](/regions) is enabled, Radar will also send the following attributes
 | `place.chain.slug`            | `place_chain_id`             | string                   | `"starbucks"`                      |
 | `place.chain.name`            | `place_chain_name`           | string                   | `"Starbucks"`                      |
 | `place.chain.externalId`      | `place_chain_external_id`    | string                   | `"123"`                            |
-| `place.chain.metadata[{key}]` | `place_chain_metadata_{key}` | \{type}                  | `{value}`                          |
+| `place.chain.metadata[{key}]` | `place_chain_metadata_{key}` | type                     | `{value}`                          |
 | `place.categories`            | `place_categories`           | string (comma-separated) | `"food-beverage,cafe,coffee-shop"` |
 | `confidence`                  | `confidence`                 | string                   | `"high"`                           |
 | `duration`                    | `duration`                   | number (minutes)         | `42.1`                             |
@@ -152,7 +154,7 @@ If [Regions](/regions) is enabled, Radar will also send the following attributes
 | `dma.name`        | `dma_name`               | string | `"Baltimore"`     |
 | `postalCode.code` | `postal_code`            | string | `"21014"`         |
 
-### []()user.entered\_country[#](#userentered_country "Direct link to heading")
+### user.entered_country
 
 | Radar Event Attribute | Attentive Event Property | Type    | Example Value     |
 | --------------------- | ------------------------ | ------- | ----------------- |
@@ -161,7 +163,7 @@ If [Regions](/regions) is enabled, Radar will also send the following attributes
 | `confidence`          | `confidence`             | string  | `"high"`          |
 | `foreground`          | `foreground`             | boolean | `true`            |
 
-### []()user.exited\_country[#](#userexited_country "Direct link to heading")
+### user.exited_country
 
 | Radar Event Attribute | Attentive Event Property | Type    | Example Value     |
 | --------------------- | ------------------------ | ------- | ----------------- |
@@ -170,7 +172,7 @@ If [Regions](/regions) is enabled, Radar will also send the following attributes
 | `confidence`          | `confidence`             | string  | `"high"`          |
 | `foreground`          | `foreground`             | boolean | `true`            |
 
-### []()user.entered\_state[#](#userentered_state "Direct link to heading")
+### user.entered_state
 
 | Radar Event Attribute | Attentive Event Property | Type    | Example Value |
 | --------------------- | ------------------------ | ------- | ------------- |
@@ -179,7 +181,7 @@ If [Regions](/regions) is enabled, Radar will also send the following attributes
 | `confidence`          | `confidence`             | string  | `"high"`      |
 | `foreground`          | `foreground`             | boolean | `true`        |
 
-### []()user.exited\_state[#](#userexited_state "Direct link to heading")
+### user.exited_state
 
 | Radar Event Attribute | Attentive Event Property | Type    | Example Value |
 | --------------------- | ------------------------ | ------- | ------------- |
@@ -188,7 +190,7 @@ If [Regions](/regions) is enabled, Radar will also send the following attributes
 | `confidence`          | `confidence`             | string  | `"high"`      |
 | `foreground`          | `foreground`             | boolean | `true`        |
 
-### []()user.entered\_dma[#](#userentered_dma "Direct link to heading")
+### user.entered_dma
 
 | Radar Event Attribute | Attentive Event Property | Type    | Example Value |
 | --------------------- | ------------------------ | ------- | ------------- |
@@ -197,7 +199,7 @@ If [Regions](/regions) is enabled, Radar will also send the following attributes
 | `confidence`          | `confidence`             | string  | `"high"`      |
 | `foreground`          | `foreground`             | boolean | `true`        |
 
-### []()user.exited\_dma[#](#userexited_dma "Direct link to heading")
+### user.exited_dma
 
 | Radar Event Attribute | Attentive Event Property | Type    | Example Value |
 | --------------------- | ------------------------ | ------- | ------------- |
@@ -206,57 +208,57 @@ If [Regions](/regions) is enabled, Radar will also send the following attributes
 | `confidence`          | `confidence`             | string  | `"high"`      |
 | `foreground`          | `foreground`             | boolean | `true`        |
 
-### []()user.started\_trip[#](#userstarted_trip "Direct link to heading")
+### user.started_trip
 
 | Radar Event Attribute                | Attentive Event Property                | Type    | Example Value |
 | ------------------------------------ | --------------------------------------- | ------- | ------------- |
 | `trip.externalId`                    | `trip_external_id`                      | string  | `"299"`       |
-| `trip.metadata[{key}]`               | `trip_metadata_{key}`                   | \{type} | `{value}`     |
+| `trip.metadata[{key}]`               | `trip_metadata_{key}`                   | type    | `{value}`     |
 | `trip.destinationGeofenceTag`        | `trip_destination_geofence_tag`         | string  | `"store"`     |
 | `trip.destinationGeofenceExternalId` | `trip_destination_geofence_external_id` | string  | `"123"`       |
 | `foreground`                         | `foreground`                            | boolean | `true`        |
 
-### []()user.updated\_trip[#](#userupdated_trip "Direct link to heading")
+### user.updated_trip
 
 | Radar Event Attribute                | Attentive Event Property                | Type    | Example Value |
 | ------------------------------------ | --------------------------------------- | ------- | ------------- |
 | `trip.externalId`                    | `trip_external_id`                      | string  | `"299"`       |
-| `trip.metadata[{key}]`               | `trip_metadata_{key}`                   | \{type} | `{value}`     |
+| `trip.metadata[{key}]`               | `trip_metadata_{key}`                   | type    | `{value}`     |
 | `trip.destinationGeofenceTag`        | `trip_destination_geofence_tag`         | string  | `"store"`     |
 | `trip.destinationGeofenceExternalId` | `trip_destination_geofence_external_id` | string  | `"123"`       |
 | `foreground`                         | `foreground`                            | boolean | `true`        |
 
-### []()user.approaching\_trip\_destination[#](#userapproaching_trip_destination "Direct link to heading")
+### user.approaching_trip_destination
 
 | Radar Event Attribute                | Attentive Event Property                | Type    | Example Value |
 | ------------------------------------ | --------------------------------------- | ------- | ------------- |
 | `trip.externalId`                    | `trip_external_id`                      | string  | `"299"`       |
-| `trip.metadata[{key}]`               | `trip_metadata_{key}`                   | \{type} | `{value}`     |
+| `trip.metadata[{key}]`               | `trip_metadata_{key}`                   | type    | `{value}`     |
 | `trip.destinationGeofenceTag`        | `trip_destination_geofence_tag`         | string  | `"store"`     |
 | `trip.destinationGeofenceExternalId` | `trip_destination_geofence_external_id` | string  | `"123"`       |
 | `foreground`                         | `foreground`                            | boolean | `true`        |
 
-### []()user.arrived\_at\_trip\_destination[#](#userarrived_at_trip_destination "Direct link to heading")
+### user.arrived_at_trip_destination
 
 | Radar Event Attribute                | Attentive Event Property                | Type    | Example Value |
 | ------------------------------------ | --------------------------------------- | ------- | ------------- |
 | `trip.externalId`                    | `trip_external_id`                      | string  | `"299"`       |
-| `trip.metadata[{key}]`               | `trip_metadata_{key}`                   | \{type} | `{value}`     |
+| `trip.metadata[{key}]`               | `trip_metadata_{key}`                   | type    | `{value}`     |
 | `trip.destinationGeofenceTag`        | `trip_destination_geofence_tag`         | string  | `"store"`     |
 | `trip.destinationGeofenceExternalId` | `trip_destination_geofence_external_id` | string  | `"123"`       |
 | `foreground`                         | `foreground`                            | boolean | `true`        |
 
-### []()user.stopped\_trip[#](#userstopped_trip "Direct link to heading")
+### user.stopped_trip
 
 | Radar Event Attribute                | Attentive Event Property                | Type    | Example Value |
 | ------------------------------------ | --------------------------------------- | ------- | ------------- |
 | `trip.externalId`                    | `trip_external_id`                      | string  | `"299"`       |
-| `trip.metadata[{key}]`               | `trip_metadata_{key}`                   | \{type} | `{value}`     |
+| `trip.metadata[{key}]`               | `trip_metadata_{key}`                   | type    | `{value}`     |
 | `trip.destinationGeofenceTag`        | `trip_destination_geofence_tag`         | string  | `"store"`     |
 | `trip.destinationGeofenceExternalId` | `trip_destination_geofence_external_id` | string  | `"123"`       |
 | `foreground`                         | `foreground`                            | boolean | `true`        |
 
-### []()user.entered\_beacon[#](#userentered_beacon "Direct link to heading")
+### user.entered_beacon
 
 | Radar Event Attribute    | Attentive Event Property | Type    | Example Value                |
 | ------------------------ | ------------------------ | ------- | ---------------------------- |
@@ -264,11 +266,11 @@ If [Regions](/regions) is enabled, Radar will also send the following attributes
 | `beacon.description`     | `beacon_description`     | string  | `"Store #123 - Drive-Thru"`  |
 | `beacon.tag`             | `beacon_tag`             | string  | `"drive-thru"`               |
 | `beacon.externalId`      | `beacon_external_id`     | string  | `"123"`                      |
-| `beacon.metadata[{key}]` | `trip_metadata_{key}`    | \{type} | `{value}`                    |
+| `beacon.metadata[{key}]` | `trip_metadata_{key}`    | type    | `{value}`                    |
 | `confidence`             | `confidence`             | string  | `"high"`                     |
 | `foreground`             | `foreground`             | boolean | `true`                       |
 
-### []()user.exited\_beacon[#](#userexited_beacon "Direct link to heading")
+### user.exited_beacon
 
 | Radar Event Attribute    | Attentive Event Property | Type             | Example Value                |
 | ------------------------ | ------------------------ | ---------------- | ---------------------------- |
@@ -276,7 +278,7 @@ If [Regions](/regions) is enabled, Radar will also send the following attributes
 | `beacon.description`     | `beacon_description`     | string           | `"Store #123 - Drive-Thru"`  |
 | `beacon.tag`             | `beacon_tag`             | string           | `"drive-thru"`               |
 | `beacon.externalId`      | `beacon_external_id`     | string           | `"123"`                      |
-| `beacon.metadata[{key}]` | `beacon_metadata_{key}`  | \{type}          | `{value}`                    |
+| `beacon.metadata[{key}]` | `beacon_metadata_{key}`  | type             | `{value}`                    |
 | `confidence`             | `confidence`             | string           | `"high"`                     |
 | `duration`               | `radar_duration`         | number (minutes) | `1.42`                       |
 | `foreground`             | `foreground`             | boolean          | `true`                       |

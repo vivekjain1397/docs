@@ -1,7 +1,10 @@
 ---
 title: "AWS S3"
-description: "The AWS S3 integration is available on the ."
 ---
+
+<Info>
+  The AWS S3 integration is available on the [**Enterprise plan**](https://radar.com/pricing).
+</Info>
 
 Radar can stream both events and locations to [AWS S3](https://aws.amazon.com/s3/).
 
@@ -9,7 +12,7 @@ Use the AWS S3 integration to make Radar data available in a simple object stora
 
 By having all of your event and location data in S3, you can integrate your location data with other analysis tools like AWS Athena or Snowflake. Files are delivered via an [AWS Kinesis Data Firehose](https://aws.amazon.com/kinesis/data-firehose/) as snappy-compressed parquet files. Each `/dt=YYYY-MM-DD/` folder will have multiple files in it. This format should be consumable out-of-the-box with Apache Spark, AWS Athena, or other data engineering tools. This can enable you to build custom dashboard visualizations of data like foot traffic, trip duration, or dwell time in a location.
 
-## []()Configuration[#](#configuration "Direct link to heading")
+## Configuration
 
 Contact your customer success manager to enable this feature.
 
@@ -17,15 +20,15 @@ The AWS S3 integration uses an [AWS Kinesis Data Firehose](https://aws.amazon.co
 
 ![AWS S3 configuration diagram](/images/integrations/assets/images/aws_s3_diagram-986ab7cca2152056e92bfb5c40905bbb.png)
 
-### []()Create a bucket[#](#create-a-bucket "Direct link to heading")
+### Create a bucket
 
 Create an S3 bucket for Radar to deliver data to, for example, `s3://com.example.bucket/`. Data will be delivered to `s3://com.example.bucket/radar/events/project=$PROJECT/dt=YYYY-MM-DD/X.parquet.snappy`. Provide the name of the bucket to your customer success manager.
 
-### []()Create an AWS Cross-Account IAM policy[#](#create-an-aws-cross-account-iam-policy "Direct link to heading")
+### Create an AWS Cross-Account IAM policy
 
 Create an IAM Policy that allows Radar to deliver data to this bucket. To do this, implement step 2 in the [Cross-Account Delivery to an Amazon S3 Destination IAM Policy documentation](https://docs.aws.amazon.com/firehose/latest/dev/controlling-access.html#cross-account-delivery-s3). Radar will implement steps 1 and 3. Contact your Customer Support Manager to obtain the values for the `accountA-id` and `iam-role-name` values to use in the IAM Policy.
 
-### []()Location Schema[#](#location-schema "Direct link to heading")
+### Location Schema
 
 | Name                            | Type            | Description                                                                      |
 | ------------------------------- | --------------- | -------------------------------------------------------------------------------- |
@@ -60,7 +63,7 @@ Create an IAM Policy that allows Radar to deliver data to this bucket. To do thi
 | `project`                       | `string`        | Partition key. The Radar Project ID publishing locations                         |
 | `dt`                            | `string`        | Partition key. The day of location delivery, formatted as YYYY-MM-DD             |
 
-### []()Event Schema[#](#event-schema "Direct link to heading")
+### Event Schema
 
 | Name                                | Type            | Description                                                                      |
 | ----------------------------------- | --------------- | -------------------------------------------------------------------------------- |

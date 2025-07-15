@@ -1,31 +1,33 @@
 ---
 title: "Branch"
-description: "The Branch integration is available on the ."
 ---
+
+<Info>
+  The Branch integration is available on the [**Enterprise plan**](https://radar.com/pricing).
+</Info>
 
 Radar can send events to [Branch](https://branch.io).
 
 Use the Branch integration to attribute offline actions to online campaigns and measure the ROI of location-based features.
 
-## []()Configuration[#](#configuration "Direct link to heading")
+## Configuration
 
-On the Branch *Account Settings* page under *Profile*, copy your Branch key.
+On the Branch _Account Settings_ page under _Profile_, copy your Branch key.
 
-Then, on the Radar [Integrations page](https://radar.com/dashboard/integrations) under *Branch*, set *Enabled* to *Yes* and paste your key. Note that you can set separate keys for the *Test* and *Live* environments.
+Then, on the Radar [Integrations page](https://radar.com/dashboard/integrations) under _Branch_, set _Enabled_ to _Yes_ and paste your key. Note that you can set separate keys for the _Test_ and _Live_ environments.
 
 Whenever events are generated, Radar will send custom events to Branch.
 
-## []()User mapping[#](#user-mapping "Direct link to heading")
+## User mapping
 
 Radar `deviceId` maps to `idfv` for iOS devices and `android_id` for Android devices in Branch. For web devices, set Radar `metadata.branchFingerprintId` to the Branch Browser Fingerprint Id.
 
 ```
-// track web devices with a Branch fingerprint mappingbranch.getBrowserFingerprintId(function(err, data) {  Radar.setMetadata({ 'branchFingerprintId': data });});
+// track web devices with a Branch fingerprint mapping
+branch.getBrowserFingerprintId(function(err, data) {  Radar.setMetadata({ 'branchFingerprintId': data });});
 ```
 
-Copy
-
-## []()Event mapping[#](#event-mapping "Direct link to heading")
+## Event mapping
 
 | Radar Event                         | Context Type                    | Branch Event                   |
 | ----------------------------------- | ------------------------------- | ------------------------------ |
@@ -48,7 +50,7 @@ Copy
 | `user.entered_beacon`               | [Beacons](/beacons)             | `entered_beacon`               |
 | `user.exited_beacon`                | [Beacons](/beacons)             | `exited_beacon`                |
 
-### []()entered\_geofence[#](#entered_geofence "Direct link to heading")
+### entered_geofence
 
 | Radar Event Field          | Branch Event Property     | Type    | Example Value                |
 | -------------------------- | ------------------------- | ------- | ---------------------------- |
@@ -56,7 +58,7 @@ Copy
 | `geofence.description`     | `geofence_description`    | string  | `"Store #123"`               |
 | `geofence.tag`             | `geofence_tag`            | string  | `"store"`                    |
 | `geofence.externalId`      | `geofence_external_id`    | string  | `"123"`                      |
-| `geofence.metadata[{key}]` | `geofence_metadata_{key}` | \{type} | `{value}`                    |
+| `geofence.metadata[{key}]` | `geofence_metadata_{key}` | {type}  | `{value}`                    |
 | `confidence`               | `confidence`              | string  | `"high"`                     |
 | `foreground`               | `foreground`              | boolean | `true`                       |
 
@@ -72,7 +74,7 @@ If [Regions](/regions) is enabled, Radar will also send the following attributes
 | `dma.name`        | `dma_name`            | string | `"Baltimore"`     |
 | `postalCode.code` | `postal_code`         | string | `"21014"`         |
 
-### []()exited\_geofence[#](#exited_geofence "Direct link to heading")
+### exited_geofence
 
 | Radar Event Field          | Branch Event Property     | Type             | Example Value                |
 | -------------------------- | ------------------------- | ---------------- | ---------------------------- |
@@ -80,7 +82,7 @@ If [Regions](/regions) is enabled, Radar will also send the following attributes
 | `geofence.description`     | `geofence_description`    | string           | `"Store #123"`               |
 | `geofence.tag`             | `geofence_tag`            | string           | `"store"`                    |
 | `geofence.externalId`      | `geofence_external_id`    | string           | `"123"`                      |
-| `geofence.metadata[{key}]` | `geofence_metadata_{key}` | \{type}          | `{value}`                    |
+| `geofence.metadata[{key}]` | `geofence_metadata_{key}` | {type}           | `{value}`                    |
 | `confidence`               | `confidence`              | string           | `"high"`                     |
 | `duration`                 | `duration`                | number (minutes) | `42.1`                       |
 | `foreground`               | `foreground`              | boolean          | `true`                       |
@@ -97,7 +99,7 @@ If [Regions](/regions) is enabled, Radar will also send the following attributes
 | `dma.name`        | `dma_name`            | string | `"Baltimore"`     |
 | `postalCode.code` | `postal_code`         | string | `"21014"`         |
 
-### []()dwelled\_in\_geofence[#](#dwelled_in_geofence "Direct link to heading")
+### dwelled_in_geofence
 
 | Radar Event Field          | Branch Event Property     | Type             | Example Value                |
 | -------------------------- | ------------------------- | ---------------- | ---------------------------- |
@@ -105,7 +107,7 @@ If [Regions](/regions) is enabled, Radar will also send the following attributes
 | `geofence.description`     | `geofence_description`    | string           | `"Store #123"`               |
 | `geofence.tag`             | `geofence_tag`            | string           | `"store"`                    |
 | `geofence.externalId`      | `geofence_external_id`    | string           | `"123"`                      |
-| `geofence.metadata[{key}]` | `geofence_metadata_{key}` | \{type}          | `{value}`                    |
+| `geofence.metadata[{key}]` | `geofence_metadata_{key}` | {type}           | `{value}`                    |
 | `confidence`               | `confidence`              | string           | `"high"`                     |
 | `duration`                 | `duration`                | number (minutes) | `5`                          |
 | `foreground`               | `foreground`              | boolean          | `true`                       |
@@ -122,7 +124,7 @@ If [Regions](/regions) is enabled, Radar will also send the following attributes
 | `dma.name`        | `dma_name`            | string | `"Baltimore"`     |
 | `postalCode.code` | `postal_code`         | string | `"21014"`         |
 
-### []()entered\_place[#](#entered_place "Direct link to heading")
+### entered_place
 
 | Radar Event Field             | Branch Event Property        | Type                     | Example Value                      |
 | ----------------------------- | ---------------------------- | ------------------------ | ---------------------------------- |
@@ -131,7 +133,7 @@ If [Regions](/regions) is enabled, Radar will also send the following attributes
 | `place.chain.slug`            | `place_chain_id`             | string                   | `"starbucks"`                      |
 | `place.chain.name`            | `place_chain_name`           | string                   | `"Starbucks"`                      |
 | `place.chain.externalId`      | `place_chain_external_id`    | string                   | `"123"`                            |
-| `place.chain.metadata[{key}]` | `place_chain_metadata_{key}` | \{type}                  | `{value}`                          |
+| `place.chain.metadata[{key}]` | `place_chain_metadata_{key}` | {type}                   | `{value}`                          |
 | `place.categories`            | `place_categories`           | string (comma-separated) | `"food-beverage,cafe,coffee-shop"` |
 | `confidence`                  | `confidence`                 | string                   | `"high"`                           |
 | `foreground`                  | `foreground`                 | boolean                  | `true`                             |
@@ -148,7 +150,7 @@ If [Regions](/regions) is enabled, Radar will also send the following attributes
 | `dma.name`        | `dma_name`            | string | `"Baltimore"`     |
 | `postalCode.code` | `postal_code`         | string | `"21014"`         |
 
-### []()exited\_place[#](#exited_place "Direct link to heading")
+### exited_place
 
 | Radar Event Field             | Branch Event Property        | Type                     | Example Value                      |
 | ----------------------------- | ---------------------------- | ------------------------ | ---------------------------------- |
@@ -157,7 +159,7 @@ If [Regions](/regions) is enabled, Radar will also send the following attributes
 | `place.chain.slug`            | `place_chain_id`             | string                   | `"starbucks"`                      |
 | `place.chain.name`            | `place_chain_name`           | string                   | `"Starbucks"`                      |
 | `place.chain.externalId`      | `place_chain_external_id`    | string                   | `"123"`                            |
-| `place.chain.metadata[{key}]` | `place_chain_metadata_{key}` | \{type}                  | `{value}`                          |
+| `place.chain.metadata[{key}]` | `place_chain_metadata_{key}` | {type}                   | `{value}`                          |
 | `place.categories`            | `place_categories`           | string (comma-separated) | `"food-beverage,cafe,coffee-shop"` |
 | `confidence`                  | `confidence`                 | string                   | `"high"`                           |
 | `duration`                    | `duration`                   | number (minutes)         | `42.1`                             |
@@ -175,7 +177,7 @@ If [Regions](/regions) is enabled, Radar will also send the following attributes
 | `dma.name`        | `dma_name`            | string | `"Baltimore"`               |
 | `postalCode.code` | `postal_code`         | string | `"21014"`                   |
 
-### []()entered\_country[#](#entered_country "Direct link to heading")
+### entered_country
 
 | Radar Event Attribute | Branch Event Property | Type    | Example Value     |
 | --------------------- | --------------------- | ------- | ----------------- |
@@ -184,7 +186,7 @@ If [Regions](/regions) is enabled, Radar will also send the following attributes
 | `confidence`          | `confidence`          | string  | `"high"`          |
 | `foreground`          | `foreground`          | boolean | `true`            |
 
-### []()exited\_country[#](#exited_country "Direct link to heading")
+### exited_country
 
 | Radar Event Attribute | Branch Event Property | Type    | Example Value     |
 | --------------------- | --------------------- | ------- | ----------------- |
@@ -193,7 +195,7 @@ If [Regions](/regions) is enabled, Radar will also send the following attributes
 | `confidence`          | `confidence`          | string  | `"high"`          |
 | `foreground`          | `foreground`          | boolean | `true`            |
 
-### []()entered\_state[#](#entered_state "Direct link to heading")
+### entered_state
 
 | Radar Event Attribute | Branch Event Property | Type    | Example Value |
 | --------------------- | --------------------- | ------- | ------------- |
@@ -202,7 +204,7 @@ If [Regions](/regions) is enabled, Radar will also send the following attributes
 | `confidence`          | `confidence`          | string  | `"high"`      |
 | `foreground`          | `foreground`          | boolean | `true`        |
 
-### []()exited\_state[#](#exited_state "Direct link to heading")
+### exited_state
 
 | Radar Event Attribute | Branch Event Property | Type    | Example Value |
 | --------------------- | --------------------- | ------- | ------------- |
@@ -211,7 +213,7 @@ If [Regions](/regions) is enabled, Radar will also send the following attributes
 | `confidence`          | `confidence`          | string  | `"high"`      |
 | `foreground`          | `foreground`          | boolean | `true`        |
 
-### []()entered\_dma[#](#entered_dma "Direct link to heading")
+### entered_dma
 
 | Radar Event Attribute | Branch Event Property | Type    | Example Value |
 | --------------------- | --------------------- | ------- | ------------- |
@@ -220,7 +222,7 @@ If [Regions](/regions) is enabled, Radar will also send the following attributes
 | `confidence`          | `confidence`          | string  | `"high"`      |
 | `foreground`          | `foreground`          | boolean | `true`        |
 
-### []()exited\_dma[#](#exited_dma "Direct link to heading")
+### exited_dma
 
 | Radar Event Attribute | Branch Event Property | Type    | Example Value |
 | --------------------- | --------------------- | ------- | ------------- |
@@ -229,57 +231,57 @@ If [Regions](/regions) is enabled, Radar will also send the following attributes
 | `confidence`          | `confidence`          | string  | `"high"`      |
 | `foreground`          | `foreground`          | boolean | `true`        |
 
-### []()started\_trip[#](#started_trip "Direct link to heading")
+### started_trip
 
 | Radar Event Attribute                | Branch Event Property                   | Type    | Example Value |
 | ------------------------------------ | --------------------------------------- | ------- | ------------- |
 | `trip.externalId`                    | `trip_external_id`                      | string  | `"299"`       |
-| `trip.metadata[{key}]`               | `trip_metadata_{key}`                   | \{type} | `{value}`     |
+| `trip.metadata[{key}]`               | `trip_metadata_{key}`                   | {type}  | `{value}`     |
 | `trip.destinationGeofenceTag`        | `trip_destination_geofence_tag`         | string  | `"store"`     |
 | `trip.destinationGeofenceExternalId` | `trip_destination_geofence_external_id` | string  | `"123"`       |
 | `foreground`                         | `foreground`                            | boolean | `true`        |
 
-### []()updated\_trip[#](#updated_trip "Direct link to heading")
+### updated_trip
 
 | Radar Event Attribute                | Branch Event Property                   | Type    | Example Value |
 | ------------------------------------ | --------------------------------------- | ------- | ------------- |
 | `trip.externalId`                    | `trip_external_id`                      | string  | `"299"`       |
-| `trip.metadata[{key}]`               | `trip_metadata_{key}`                   | \{type} | `{value}`     |
+| `trip.metadata[{key}]`               | `trip_metadata_{key}`                   | {type}  | `{value}`     |
 | `trip.destinationGeofenceTag`        | `trip_destination_geofence_tag`         | string  | `"store"`     |
 | `trip.destinationGeofenceExternalId` | `trip_destination_geofence_external_id` | string  | `"123"`       |
 | `foreground`                         | `foreground`                            | boolean | `true`        |
 
-### []()approaching\_trip\_destination[#](#approaching_trip_destination "Direct link to heading")
+### approaching_trip_destination
 
 | Radar Event Attribute                | Branch Event Property                   | Type    | Example Value |
 | ------------------------------------ | --------------------------------------- | ------- | ------------- |
 | `trip.externalId`                    | `trip_external_id`                      | string  | `"299"`       |
-| `trip.metadata[{key}]`               | `trip_metadata_{key}`                   | \{type} | `{value}`     |
+| `trip.metadata[{key}]`               | `trip_metadata_{key}`                   | {type}  | `{value}`     |
 | `trip.destinationGeofenceTag`        | `trip_destination_geofence_tag`         | string  | `"store"`     |
 | `trip.destinationGeofenceExternalId` | `trip_destination_geofence_external_id` | string  | `"123"`       |
 | `foreground`                         | `foreground`                            | boolean | `true`        |
 
-### []()arrived\_at\_trip\_destination[#](#arrived_at_trip_destination "Direct link to heading")
+### arrived_at_trip_destination
 
 | Radar Event Attribute                | Branch Event Property                   | Type    | Example Value |
 | ------------------------------------ | --------------------------------------- | ------- | ------------- |
 | `trip.externalId`                    | `trip_external_id`                      | string  | `"299"`       |
-| `trip.metadata[{key}]`               | `trip_metadata_{key}`                   | \{type} | `{value}`     |
+| `trip.metadata[{key}]`               | `trip_metadata_{key}`                   | {type}  | `{value}`     |
 | `trip.destinationGeofenceTag`        | `trip_destination_geofence_tag`         | string  | `"store"`     |
 | `trip.destinationGeofenceExternalId` | `trip_destination_geofence_external_id` | string  | `"123"`       |
 | `foreground`                         | `foreground`                            | boolean | `true`        |
 
-### []()stopped\_trip[#](#stopped_trip "Direct link to heading")
+### stopped_trip
 
 | Radar Event Attribute                | Branch Event Property                   | Type    | Example Value |
 | ------------------------------------ | --------------------------------------- | ------- | ------------- |
 | `trip.externalId`                    | `trip_external_id`                      | string  | `"299"`       |
-| `trip.metadata[{key}]`               | `trip_metadata_{key}`                   | \{type} | `{value}`     |
+| `trip.metadata[{key}]`               | `trip_metadata_{key}`                   | {type}  | `{value}`     |
 | `trip.destinationGeofenceTag`        | `trip_destination_geofence_tag`         | string  | `"store"`     |
 | `trip.destinationGeofenceExternalId` | `trip_destination_geofence_external_id` | string  | `"123"`       |
 | `foreground`                         | `foreground`                            | boolean | `true`        |
 
-### []()entered\_beacon[#](#entered_beacon "Direct link to heading")
+### entered_beacon
 
 | Radar Event Attribute    | Branch Event Property   | Type    | Example Value                |
 | ------------------------ | ----------------------- | ------- | ---------------------------- |
@@ -287,11 +289,11 @@ If [Regions](/regions) is enabled, Radar will also send the following attributes
 | `beacon.description`     | `beacon_description`    | string  | `"Store #123 - Drive-Thru"`  |
 | `beacon.tag`             | `beacon_tag`            | string  | `"drive-thru"`               |
 | `beacon.externalId`      | `beacon_external_id`    | string  | `"123"`                      |
-| `beacon.metadata[{key}]` | `beacon_metadata_{key}` | \{type} | `{value}`                    |
+| `beacon.metadata[{key}]` | `beacon_metadata_{key}` | {type}  | `{value}`                    |
 | `confidence`             | `confidence`            | string  | `"high"`                     |
 | `foreground`             | `foreground`            | boolean | `true`                       |
 
-### []()exited\_beacon[#](#exited_beacon "Direct link to heading")
+### exited_beacon
 
 | Radar Event Attribute    | Branch Event Property   | Type             | Example Value                |
 | ------------------------ | ----------------------- | ---------------- | ---------------------------- |
@@ -299,7 +301,7 @@ If [Regions](/regions) is enabled, Radar will also send the following attributes
 | `beacon.description`     | `beacon_description`    | string           | `"Store #123 - Drive-Thru"`  |
 | `beacon.tag`             | `beacon_tag`            | string           | `"drive-thru"`               |
 | `beacon.externalId`      | `beacon_external_id`    | string           | `"123"`                      |
-| `beacon.metadata[{key}]` | `beacon_metadata_{key}` | \{type}          | `{value}`                    |
+| `beacon.metadata[{key}]` | `beacon_metadata_{key}` | {type}           | `{value}`                    |
 | `confidence`             | `confidence`            | string           | `"high"`                     |
 | `duration`               | `duration`              | number (minutes) | `1.42`                       |
 | `foreground`             | `foreground`            | boolean          | `true`                       |
