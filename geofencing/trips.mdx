@@ -1,9 +1,8 @@
 ---
 title: "Trips"
-description: "With Trips, you can track trips and calculate live ETAs from an origin to a destination. Use Trips for use cases like pickup or delivery tracking."
 ---
 
-![](/images/f2vbu16fzuly/3mCbGy60EiCQn4fJw6HJe6/8446774f578a05630fa6ca5f196cdff7/trips_event.svg)
+With Trips, you can track trips and calculate live ETAs from an origin to a destination. Use Trips for use cases like pickup or delivery tracking.
 
 Trips provides the following user context:
 
@@ -39,8 +38,6 @@ Trips provides the following user context:
 }
 ```
 
-Copy
-
 Trips also provides the following events:
 
 - `user.started_trip`
@@ -49,7 +46,7 @@ Trips also provides the following events:
 - `user.arrived_at_trip_destination`
 - `user.stopped_trip`
 
-## [Quickstart](#quickstart)
+## Quickstart
 
 First, [sign up](https://radar.com/signup) for Radar and get an API key.
 
@@ -57,7 +54,7 @@ Then, [create a destination geofence](/geofences#create-a-geofence).
 
 From there, [integrate the SDK](/sdk) and call `Radar.startTrip()`. Radar will generate trip events with ETAs to the destination geofence.
 
-## [Starting trips](#starting-trips)
+## Starting trips
 
 When it's time to start a trip (e.g., when a user taps "I'm on my way" for a pickup, or when a delivery starts), start a trip with trip options (including an external ID for the trip, a destination geofence, a travel mode, and any custom metadata) and tracking options to be used during the trip (usually `RadarTrackingOptions.CONTINUOUS`).
 
@@ -149,7 +146,7 @@ Radar.startTrip(tripOptions, RadarTrackingOptions.CONTINUOUS, new Radar.RadarTri
 
 </CodeGroup>
 
-## [Updating trips](#updating-trips)
+## Updating trips
 
 As the trip progresses, you can update the trip metadata (e.g., when a parking space is assigned for a pickup) or the trip status (e.g., to manually advance the status to `approaching` or `arrived`). This can be done either using the SDK or the [API](/api#update-a-trip).
 
@@ -221,7 +218,7 @@ Radar.updateTrip(tripOptions, RadarTrip.RadarTripStatus.ARRIVED, (status, trip, 
 
 </CodeGroup>
 
-## [Stopping trips](#stopping-trips)
+## Stopping trips
 
 Finally, when the trip is complete (e.g., when an order is picked up or a delivery is dropped off), stop the trip. This can be done either using the SDK or the [API](/api#stop-or-restart-trip).
 
@@ -282,7 +279,7 @@ Radar.cancelTrip(new Radar.RadarTripCallback() {
 
 </CodeGroup>
 
-## Trip events[#](#trip-events)
+## Trip events
 
 Radar calculates ETAs and generates events when trips are updated:
 
@@ -342,23 +339,23 @@ You can receive events client-side via the [SDK](/sdk) or server-side via [event
 }
 ```
 
-## [Anomaly detection](#anomaly-detection)
+## Anomaly detection
 
-### [Wrong destination arrival detection](#wrong-destination-arrival-detection)
+### Wrong destination arrival detection
 
 The wrong destination arrival detection feature identifies when a user on a trip may have entered a different destination than the one intended. Specifically, it triggers an event when the user enters a geofence that shares the same `tag` as the destination geofence, but possesses a different `externalId`.
 
 To enable this feature, navigate to the [Settings page](https://radar.com/dashboard/settings#trips-settings) and enable the `user.arrived_at_wrong_trip_destination` event under _Trips_ section.
 
-### [Delay detection](#delay-detection)
+### Delay detection
 
 Delay detection identifies trips at risk of being delayed or incomplete. To enable this feature, configure a _Delay threshold_ on the [Settings page](https://radar.com/dashboard/settings#trips-settings) under _Trips_.
 
 If `scheduledArrivalAt` is set for a trip, delay information is captured in the trip's `delay` field. The `scheduledArrivalTimeDelay` is the predicted arrival delay from the `scheduledArrivalAt` time in minutes. The `delayed` flag is `true` when `scheduledArrivalTimeDelay` exceeds the delay threshold.
 
-## [Display live trips and ETAs](#display-live-trips-and-etas)
+## Display live trips and ETAs
 
-### [In the Radar trip tracking dashboard](#in-the-radar-trip-tracking-dashboard)
+### In the Radar trip tracking dashboard
 
 The trip tracking dashboard is available on the [Enterprise plan](https://radar.com/pricing).
 
@@ -368,17 +365,17 @@ Ask your customer success manager for a distribution of the app specific to your
 
 ![](https://images.ctfassets.net/f2vbu16fzuly/38fY5fD4H47UGa4KZXHLib/989305812e9b35a741141b1fd9c3befa/tablet-view.gif)
 
-### [In your own UI](#in-your-own-ui)
+### In your own UI
 
 Poll the [list trips API](/api#list-trips) to retrieve active trips for a specific destination geofence, including ID, custom metadata, and ETA. For example, you might poll the list trips API from an internal dashboard.
 
 Or, listen for [trip events](/trip-tracking#trip-events) sent to a webhook. From there, forward trip information, including ID, custom metadata, and ETA, to other systems. For example, you might set up a webhook that sends ETA to an order management or kitchen display system.
 
-## [Analytics](#analytics)
+## Analytics
 
 Radar offers analytics on trip data and location opt-in rates from [users](/api#users) in your project. [Analytics](https://radar.com/dashboard/analytics) on trip data can be found on the Analytics page and grouped under the Trips tab. Analytics on location permission opt-in rates is grouped under the Permissions tab. Read more about Permissions [here](/faqs#location-permissions).
 
-### [How to filter your data](#how-to-filter-your-data)
+### How to filter your data
 
 The Filters button at the top of the page offers ways to look at more granular views of your trip data. The filters will apply to the statistics cards and graphs as well as the data in the By Destination table.
 
@@ -392,7 +389,7 @@ The Filters button at the top of the page offers ways to look at more granular v
 
 Trip analytics apply to the environment in which you view the metrics. For example, when viewing the metrics in the test environment, the metrics only include trip data from the test environment.
 
-### [Trips overview](#trips-overview)
+### Trips overview
 
 - **`Median wait time`**: the median duration between the moment when a user arrives at a destination (`user.arrived_at_trip_destination`) and the moment when the trip is marked complete (`completed`). This statistic omits trips which are missing an arrival timestamp.
 - **`Number of trips`**: the total count of all live trips for a specific project which have a status of `completed`.
@@ -408,7 +405,7 @@ The graphs for each card show the change over time in each statistic. The time w
 | 60             | Week          |
 | 60\+           | Month         |
 
-### [By Destination table](#by-destination-table)
+### By Destination table
 
 The By Destination table groups your trip data by individual destination geofence and allows you to identify your **slowest and fastest stores** by wait time as well as your **most popular stores** by the number of trips made to the store.
 
@@ -430,11 +427,11 @@ The table has 6 sortable headers:
 - **`Filter by destination`**: This will filter the entire analytics page to only include this single destination.
 - **`View destination`**: This will bring you to the destination geofence's detail page.
 
-### [Calculations](#calculations)
+### Calculations
 
 Wait time and trip time are only calculated for trips that have a status of `completed` and have timestamp entries for `started_at`, `arrived_at`, and `completed_at`. Reminder that all trip analytics are updated nightly and trip analytics from today will not be shown in the Analytics page until tomorrow.
 
-### [Data retention settings and frequency of updates](#data-retention-settings-and-frequency-of-updates)
+### Data retention settings and frequency of updates
 
 Data retention settings (a setting on the _project_ level) apply to the data in Analytics as well. The default data retention settings for trip data is 90 days.
 
@@ -442,7 +439,7 @@ Median wait time, trip count, and median trip duration metrics are all updated n
 
 If your project does not have any past trips, you will not see any data in the analytics section of your dashboard. Take your first trip to see the statistics populate\!
 
-## [Support](#support)
+## Support
 
 Have questions? We're here to help\! Contact us at [radar.com/support](https://radar.com/support).
 

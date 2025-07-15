@@ -1,7 +1,10 @@
 ---
 title: "Beacons"
-description: "Beacons is available on the ."
 ---
+
+<Info>
+  Beacons is available on the [Enterprise plan](https://radar.com/pricing).
+</Info>
 
 With Beacons, you can detect nearby Bluetooth beacons. Use Beacons for indoor or drive-thru use cases.
 
@@ -37,16 +40,14 @@ Beacons provides the following user context:
 }
 ```
 
-Copy
-
 Beacons also provides the following events:
 
-* `user.entered_beacon`
-* `user.exited_beacon`
+- `user.entered_beacon`
+- `user.exited_beacon`
 
 You can receive events client-side via the [SDK](/sdk) or server-side via [event integrations](/integrations), including webhooks.
 
-## [Quickstart](#quickstart "Direct link to heading")
+## Quickstart
 
 First, [sign up](https://radar.com/signup) for Radar and get an API key.
 
@@ -54,7 +55,7 @@ Then, [create beacons](#create-beacons).
 
 From there, [integrate the SDK](/sdk) and call `Radar.trackOnce()` with `beacons = true` or `Radar.startTracking()` with `trackingOptions.beacons = true`, depending on your use case. Radar will generate an entry event on the first location update within range of a beacon.
 
-## [How it works](#how-it-works "Direct link to heading")
+## How it works
 
 Beacon detection works on iOS and Android in the foreground and in the background. After you import beacons, Radar will sync nearby beacons to the SDK on every location update.
 
@@ -66,46 +67,48 @@ To range beacons, the user must grant location permissions. On Android, the user
 
 Beacon entry and exit events are sent to the SDK, to [webhooks](/integrations#webhooks), and to [integrations](/integrations) just like geofence entry and exit events.
 
-### [Ranging by UUID only](#ranging-by-uuid-only "Direct link to heading")
+### Ranging by UUID only
 
 By default, Radar will sync nearby beacons to the SDK on every location update using the `coordinates` specified for each beacon. The SDK will then range nearby beacons based on `uuid`, `major`, and `minor` for iBeacon or `uid` and `instance` for Eddystone.
 
-Alternatively, the SDK can range beacons based on `uuid` or `uid` only, regardless of the `coordinates` specified for each beacon. To enable this, set *iBeacon UUIDs* and/or `Eddystone UIDs` on the [Settings page](https://radar.com/dashboard/settings), under *Beacons*. On iOS, you must also enable the *Location updates* [background mode](/sdk/ios#background-modes).
+Alternatively, the SDK can range beacons based on `uuid` or `uid` only, regardless of the `coordinates` specified for each beacon. To enable this, set _iBeacon UUIDs_ and/or `Eddystone UIDs` on the [Settings page](https://radar.com/dashboard/settings), under _Beacons_. On iOS, you must also enable the _Location updates_ [background mode](/sdk/ios#background-modes).
 
-## [Create beacons](#create-beacons "Direct link to heading")
+## Create beacons
 
 You can create beacons via the dashboard, CSV import, or through the API. You can create beacons in the Test environment for development and testing, and in the Live environment for production.
 
-Like [geofences](/geofences), you also specify the metadata for beacons when you create them, including *tag* (a group for the beacon, e.g., `store-register`), external ID (an external ID for the beacon that maps to your internal database, e.g., `123-1`), *description* (a display name for the beacon, e.g., `Store 123 - Register 1`).
+Like [geofences](/geofences), you also specify the metadata for beacons when you create them, including _tag_ (a group for the beacon, e.g., `store-register`), external ID (an external ID for the beacon that maps to your internal database, e.g., `123-1`), _description_ (a display name for the beacon, e.g., `Store 123 - Register 1`).
 
 You also specify the identifiers used to range the beacon, including `uuid`, `major`, and `minor` for iBeacon or `uid` and `instance` for Eddystone, as well as an approximate latitude and longitude used to sync nearby beacons (within 1 kilometer) to the SDK.
 
 **Beacons should be uniquely referenced by tag and external ID, assigned by you when a beacon is created. To disable or rotate identifiers for a beacon, re-import the beacon with the same tag and external ID.**
 
-### [Dashboard](#dashboard "Direct link to heading")
+### Dashboard
 
-To create a beacon via the dashboard, go to the [Beacons page](https://radar.com/dashboard/beacons) and click the *New* button. Optionally search for an address or place, then enter a type, tag, external ID, UUID, major, minor, and optional metadata. Click *Create* to create the beacon.
+To create a beacon via the dashboard, go to the [Beacons page](https://radar.com/dashboard/beacons) and click the _New_ button. Optionally search for an address or place, then enter a type, tag, external ID, UUID, major, minor, and optional metadata. Click _Create_ to create the beacon.
 
-### [CSV import](#csv-import "Direct link to heading")
+### CSV import
 
-To import beacons via CSV import, go to the [Beacons page](https://radar.com/dashboard/beacons) and click the *Import* button. Then, select a CSV to upload.
+To import beacons via CSV import, go to the [Beacons page](https://radar.com/dashboard/beacons) and click the _Import_ button. Then, select a CSV to upload.
 
-Headers are required as the first row of the CSV.
+<Info>
+  Headers are required as the first row of the CSV.
+</Info>
 
 The CSV may have the following columns:
 
-* **`description`** (string, required): A display name for the beacon.
-* **`tag`** (string, optional): A group for the beacon.
-* **`externalId`** (string, optional): An external ID for the beacon that maps to your internal database.
-* **`type`** (string, required): The type of beacon, one of `ibeacon` (supported on iOS and Android) or `eddystone` (supported on Android only).
-* **`uuid`** (string, required for `ibeacon`): For iBeacons, the UUID of the beacon.
-* **`major`** (string, required for `ibeacon`): For iBeacons, the major ID of the beacon.
-* **`minor`** (string, required for `ibeacon`): For iBeacons, the minor ID of the beacon.
-* **`uid`** (string, required for `eddystone`): For Eddystone beacons, the UID of the beacon.
-* **`instance`** (string, required for `eddystone`): For Eddystone beacons, the instance ID of the beacon.
-* **`coordinates`** (array, required): The approximate location of the beacon, used to sync nearby beacons (within 1 kilometer) to the SDK. A JSON string in the format `[longitude,latitude]`. **Note that longitude comes before latitude, a GeoJSON convention.**
-* **`enabled`** (boolean, required): If true, the beacon will generate events. If false, the beacon will not generate events.
-* **`metadata`** (dictionary, optional): A set of custom key-value pairs for the beacon. A JSON string representing a dictionary with up to 16 keys and values of type string, boolean, or number.
+- **`description`** (string, required): A display name for the beacon.
+- **`tag`** (string, optional): A group for the beacon.
+- **`externalId`** (string, optional): An external ID for the beacon that maps to your internal database.
+- **`type`** (string, required): The type of beacon, one of `ibeacon` (supported on iOS and Android) or `eddystone` (supported on Android only).
+- **`uuid`** (string, required for `ibeacon`): For iBeacons, the UUID of the beacon.
+- **`major`** (string, required for `ibeacon`): For iBeacons, the major ID of the beacon.
+- **`minor`** (string, required for `ibeacon`): For iBeacons, the minor ID of the beacon.
+- **`uid`** (string, required for `eddystone`): For Eddystone beacons, the UID of the beacon.
+- **`instance`** (string, required for `eddystone`): For Eddystone beacons, the instance ID of the beacon.
+- **`coordinates`** (array, required): The approximate location of the beacon, used to sync nearby beacons (within 1 kilometer) to the SDK. A JSON string in the format `[longitude,latitude]`. **Note that longitude comes before latitude, a GeoJSON convention.**
+- **`enabled`** (boolean, required): If true, the beacon will generate events. If false, the beacon will not generate events.
+- **`metadata`** (dictionary, optional): A set of custom key-value pairs for the beacon. A JSON string representing a dictionary with up to 16 keys and values of type string, boolean, or number.
 
 **If a beacon with the specified tag and external ID already exists, it will be updated. If not, it will be created.**
 
@@ -125,7 +128,7 @@ description,tag,externalId,type,uuid,major,minor,uid,instance,coordinates,enable
 
 You can find a history of past imports on the [Beacons import history page](https://radar.com/dashboard/beacons/imports).
 
-### [API](#api "Direct link to heading")
+### API
 
 You can also create beacons programmatically via the [API](/api). You can create a beacon via POST `/api/v1/beacons`, or upsert a beacon based on tag and external ID via PUT `/api/v1/beacons/:tag/:externalId`.
 
@@ -145,8 +148,6 @@ curl "https://api.radar.io/v1/beacons/drive-thru/store123-beacon-1" \
     -d "coordinates=[-73.975384,40.783747]" \
     -d "enabled=true"
 ```
-
-Copy
 
 **Again, note that longitude comes before latitude, a GeoJSON convention.**
 
