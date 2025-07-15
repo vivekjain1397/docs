@@ -1,5 +1,6 @@
 ---
 title: "Segment"
+description: "Delete me"
 ---
 
 <Info>
@@ -100,7 +101,7 @@ Note that Radar uses the special string `"(null)"` to represent `null` user trai
 | `geofence.description`     | `geofence_description`    | string  | `"Store #123"`               |
 | `geofence.tag`             | `geofence_tag`            | string  | `"store"`                    |
 | `geofence.externalId`      | `geofence_external_id`    | string  | `"123"`                      |
-| `geofence.metadata[{key}]` | `geofence_metadata_{key}` | {type}  | `{value}`                    |
+| `geofence.metadata[{key}]` | `geofence_metadata_{key}` | type    | `{value}`                    |
 | `confidence`               | `confidence`              | string  | `"high"`                     |
 | `foreground`               | `foreground`              | boolean | `true`                       |
 
@@ -112,7 +113,7 @@ Note that Radar uses the special string `"(null)"` to represent `null` user trai
 | `geofence.description`     | `geofence_description`    | string           | `"Store #123"`               |
 | `geofence.tag`             | `geofence_tag`            | string           | `"store"`                    |
 | `geofence.externalId`      | `geofence_external_id`    | string           | `"123"`                      |
-| `geofence.metadata[{key}]` | `geofence_metadata_{key}` | {type}           | `{value}`                    |
+| `geofence.metadata[{key}]` | `geofence_metadata_{key}` | type             | `{value}`                    |
 | `confidence`               | `confidence`              | string           | `"high"`                     |
 | `duration`                 | `duration`                | number (minutes) | `42.1`                       |
 | `foreground`               | `foreground`              | boolean          | `true`                       |
@@ -125,7 +126,7 @@ Note that Radar uses the special string `"(null)"` to represent `null` user trai
 | `geofence.description`     | `geofence_description`    | string           | `"Store #123"`               |
 | `geofence.tag`             | `geofence_tag`            | string           | `"store"`                    |
 | `geofence.externalId`      | `geofence_external_id`    | string           | `"123"`                      |
-| `geofence.metadata[{key}]` | `geofence_metadata_{key}` | {type}           | `{value}`                    |
+| `geofence.metadata[{key}]` | `geofence_metadata_{key}` | type             | `{value}`                    |
 | `confidence`               | `confidence`              | string           | `"high"`                     |
 | `duration`                 | `duration`                | number (minutes) | `42.1`                       |
 | `foreground`               | `foreground`              | boolean          | `true`                       |
@@ -138,7 +139,7 @@ Note that Radar uses the special string `"(null)"` to represent `null` user trai
 | `place.name`                  | `place_name`                 | string        | `"Starbucks"`                              |
 | `place.chain.slug`            | `place_chain_id`             | string        | `"starbucks"`                              |
 | `place.chain.name`            | `place_chain_name`           | string        | `"Starbucks"`                              |
-| `place.chain.metadata[{key}]` | `place_chain_metadata_{key}` | {type}        | `{value}`                                  |
+| `place.chain.metadata[{key}]` | `place_chain_metadata_{key}` | type          | `{value}`                                  |
 | `place.categories`            | `place_categories`           | array[string] | `["food-beverage", "cafe", "coffee-shop"]` |
 | `confidence`                  | `confidence`                 | string        | `"high"`                                   |
 | `foreground`                  | `foreground`                 | boolean       | `true`                                     |
@@ -151,7 +152,7 @@ Note that Radar uses the special string `"(null)"` to represent `null` user trai
 | `place.name`                  | `place_name`                 | string           | `"Starbucks"`                              |
 | `place.chain.slug`            | `place_chain_id`             | string           | `"starbucks"`                              |
 | `place.chain.name`            | `place_chain_name`           | string           | `"Starbucks"`                              |
-| `place.chain.metadata[{key}]` | `place_chain_metadata_{key}` | {type}           | `{value}`                                  |
+| `place.chain.metadata[{key}]` | `place_chain_metadata_{key}` | type             | `{value}`                                  |
 | `place.categories`            | `place_categories`           | array[string]    | `["food-beverage", "cafe", "coffee-shop"]` |
 | `confidence`                  | `confidence`                 | string           | `"high"`                                   |
 | `duration`                    | `duration`                   | number (minutes) | `42.1`                                     |
@@ -216,7 +217,7 @@ Note that Radar uses the special string `"(null)"` to represent `null` user trai
 | Radar Event Attribute                | Segment Event Property                  | Type    | Example Value |
 | ------------------------------------ | --------------------------------------- | ------- | ------------- |
 | `trip.externalId`                    | `trip_external_id`                      | string  | `"299"`       |
-| `trip.metadata[{key}]`               | `trip_metadata_{key}`                   | {type}  | `{value}`     |
+| `trip.metadata[{key}]`               | `trip_metadata_{key}`                   | type    | `{value}`     |
 | `trip.destinationGeofenceTag`        | `trip_destination_geofence_tag`         | string  | `"store"`     |
 | `trip.destinationGeofenceExternalId` | `trip_destination_geofence_external_id` | string  | `"123"`       |
 | `foreground`                         | `foreground`                            | boolean | `true`        |
@@ -226,7 +227,7 @@ Note that Radar uses the special string `"(null)"` to represent `null` user trai
 | Radar Event Attribute                | Segment Event Property                  | Type    | Example Value |
 | ------------------------------------ | --------------------------------------- | ------- | ------------- |
 | `trip.externalId`                    | `trip_external_id`                      | string  | `"299"`       |
-| `trip.metadata[{key}]`               | `trip_metadata_{key}`                   | {type}  | `{value}`     |
+| `trip.metadata[{key}]`               | `trip_metadata_{key}`                   | type    | `{value}`     |
 | `trip.destinationGeofenceTag`        | `trip_destination_geofence_tag`         | string  | `"store"`     |
 | `trip.destinationGeofenceExternalId` | `trip_destination_geofence_external_id` | string  | `"123"`       |
 | `foreground`                         | `foreground`                            | boolean | `true`        |
@@ -236,7 +237,7 @@ Note that Radar uses the special string `"(null)"` to represent `null` user trai
 | Radar Event Attribute                | Segment Event Property                  | Type    | Example Value |
 | ------------------------------------ | --------------------------------------- | ------- | ------------- |
 | `trip.externalId`                    | `trip_external_id`                      | string  | `"299"`       |
-| `trip.metadata[{key}]`               | `trip_metadata_{key}`                   | {type}  | `{value}`     |
+| `trip.metadata[{key}]`               | `trip_metadata_{key}`                   | type    | `{value}`     |
 | `trip.destinationGeofenceTag`        | `trip_destination_geofence_tag`         | string  | `"store"`     |
 | `trip.destinationGeofenceExternalId` | `trip_destination_geofence_external_id` | string  | `"123"`       |
 | `foreground`                         | `foreground`                            | boolean | `true`        |
@@ -246,7 +247,7 @@ Note that Radar uses the special string `"(null)"` to represent `null` user trai
 | Radar Event Attribute                | Segment Event Property                  | Type    | Example Value |
 | ------------------------------------ | --------------------------------------- | ------- | ------------- |
 | `trip.externalId`                    | `trip_external_id`                      | string  | `"299"`       |
-| `trip.metadata[{key}]`               | `trip_metadata_{key}`                   | {type}  | `{value}`     |
+| `trip.metadata[{key}]`               | `trip_metadata_{key}`                   | type    | `{value}`     |
 | `trip.destinationGeofenceTag`        | `trip_destination_geofence_tag`         | string  | `"store"`     |
 | `trip.destinationGeofenceExternalId` | `trip_destination_geofence_external_id` | string  | `"123"`       |
 | `foreground`                         | `foreground`                            | boolean | `true`        |
@@ -256,7 +257,7 @@ Note that Radar uses the special string `"(null)"` to represent `null` user trai
 | Radar Event Attribute                | Segment Event Property                  | Type    | Example Value |
 | ------------------------------------ | --------------------------------------- | ------- | ------------- |
 | `trip.externalId`                    | `trip_external_id`                      | string  | `"299"`       |
-| `trip.metadata[{key}]`               | `trip_metadata_{key}`                   | {type}  | `{value}`     |
+| `trip.metadata[{key}]`               | `trip_metadata_{key}`                   | type    | `{value}`     |
 | `trip.destinationGeofenceTag`        | `trip_destination_geofence_tag`         | string  | `"store"`     |
 | `trip.destinationGeofenceExternalId` | `trip_destination_geofence_external_id` | string  | `"123"`       |
 | `foreground`                         | `foreground`                            | boolean | `true`        |
@@ -269,7 +270,7 @@ Note that Radar uses the special string `"(null)"` to represent `null` user trai
 | `beacon.description`     | `beacon_description`    | string  | `"Store #123 - Drive-Thru"`  |
 | `beacon.tag`             | `beacon_tag`            | string  | `"drive-thru"`               |
 | `beacon.externalId`      | `beacon_external_id`    | string  | `"123"`                      |
-| `beacon.metadata[{key}]` | `beacon_metadata_{key}` | {type}  | `{value}`                    |
+| `beacon.metadata[{key}]` | `beacon_metadata_{key}` | type    | `{value}`                    |
 | `confidence`             | `confidence`            | string  | `"high"`                     |
 | `foreground`             | `foreground`            | boolean | `true`                       |
 
@@ -281,7 +282,7 @@ Note that Radar uses the special string `"(null)"` to represent `null` user trai
 | `beacon.description`     | `beacon_description`    | string           | `"Store #123 - Drive-Thru"`  |
 | `beacon.tag`             | `beacon_tag`            | string           | `"drive-thru"`               |
 | `beacon.externalId`      | `beacon_external_id`    | string           | `"123"`                      |
-| `beacon.metadata[{key}]` | `beacon_metadata_{key}` | {type}           | `{value}`                    |
+| `beacon.metadata[{key}]` | `beacon_metadata_{key}` | type             | `{value}`                    |
 | `confidence`             | `confidence`            | string           | `"high"`                     |
 | `duration`               | `duration`              | number (minutes) | `1.42`                       |
 | `foreground`             | `foreground`            | boolean          | `true`                       |

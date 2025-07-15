@@ -1,5 +1,6 @@
 ---
 title: "Lytics"
+description: "Delete me"
 ---
 
 <Info>
@@ -71,7 +72,7 @@ Note that Radar uses the special string `"(null)"` to represent `null` user data
 | `geofence.description`     | `geofenceDescription`   | string  | `"Store #123"`               |
 | `geofence.tag`             | `geofenceTag`           | string  | `"store"`                    |
 | `geofence.externalId`      | `geofenceExternalId`    | string  | `"123"`                      |
-| `geofence.metadata[{key}]` | `geofenceMetadata{key}` | {type}  | `{value}`                    |
+| `geofence.metadata[{key}]` | `geofenceMetadata{key}` | type    | `{value}`                    |
 | `confidence`               | `confidence`            | string  | `"high"`                     |
 | `foreground`               | `foreground`            | boolean | `true`                       |
 
@@ -85,7 +86,7 @@ Note that Radar uses the special string `"(null)"` to represent `null` user data
 | `geofence.description`     | `geofenceDescription`   | string           | `"Store #123"`               |
 | `geofence.tag`             | `geofenceTag`           | string           | `"store"`                    |
 | `geofence.externalId`      | `geofenceExternalId`    | string           | `"123"`                      |
-| `geofence.metadata[{key}]` | `geofenceMetadata{key}` | {type}           | `{value}`                    |
+| `geofence.metadata[{key}]` | `geofenceMetadata{key}` | type             | `{value}`                    |
 | `confidence`               | `confidence`            | string           | `"high"`                     |
 | `duration`                 | `duration`              | number (minutes) | `42.1`                       |
 | `foreground`               | `foreground`            | boolean          | `true`                       |
@@ -100,7 +101,7 @@ Note that Radar uses the special string `"(null)"` to represent `null` user data
 | `geofence.description`     | `geofenceDescription`   | string           | `"Store #123"`               |
 | `geofence.tag`             | `geofenceTag`           | string           | `"store"`                    |
 | `geofence.externalId`      | `geofenceExternalId`    | string           | `"123"`                      |
-| `geofence.metadata[{key}]` | `geofenceMetadata{key}` | {type}           | `{value}`                    |
+| `geofence.metadata[{key}]` | `geofenceMetadata{key}` | type             | `{value}`                    |
 | `confidence`               | `confidence`            | string           | `"high"`                     |
 | `duration`                 | `duration`              | number (minutes) | `5`                          |
 | `foreground`               | `foreground`            | boolean          | `true`                       |
@@ -205,7 +206,7 @@ Note that Radar uses the special string `"(null)"` to represent `null` user data
 | Radar Event Attribute                | Lytics Event Data Field             | Type    | Example Value |
 | ------------------------------------ | ----------------------------------- | ------- | ------------- |
 | `trip.externalId`                    | `tripExternalId`                    | string  | `"299"`       |
-| `trip.metadata[{key}]`               | `tripMetadata{key}`                 | {type}  | `{value}`     |
+| `trip.metadata[{key}]`               | `tripMetadata{key}`                 | type    | `{value}`     |
 | `trip.destinationGeofenceTag`        | `tripDestinationGeofenceTag`        | string  | `"store"`     |
 | `trip.destinationGeofenceExternalId` | `tripDestinationGeofenceExternalId` | string  | `"123"`       |
 | `foreground`                         | `foreground`                        | boolean | `true`        |
@@ -215,7 +216,7 @@ Note that Radar uses the special string `"(null)"` to represent `null` user data
 | Radar Event Attribute                | Lytics Event Data Field             | Type    | Example Value |
 | ------------------------------------ | ----------------------------------- | ------- | ------------- |
 | `trip.externalId`                    | `tripExternalId`                    | string  | `"299"`       |
-| `trip.metadata[{key}]`               | `tripMetadata{key}`                 | {type}  | `{value}`     |
+| `trip.metadata[{key}]`               | `tripMetadata{key}`                 | type    | `{value}`     |
 | `trip.destinationGeofenceTag`        | `tripDestinationGeofenceTag`        | string  | `"store"`     |
 | `trip.destinationGeofenceExternalId` | `tripDestinationGeofenceExternalId` | string  | `"123"`       |
 | `foreground`                         | `foreground`                        | boolean | `true`        |
@@ -225,7 +226,7 @@ Note that Radar uses the special string `"(null)"` to represent `null` user data
 | Radar Event Attribute                | Lytics Event Data Field             | Type    | Example Value |
 | ------------------------------------ | ----------------------------------- | ------- | ------------- |
 | `trip.externalId`                    | `tripExternalId`                    | string  | `"299"`       |
-| `trip.metadata[{key}]`               | `tripMetadata{key}`                 | {type}  | `{value}`     |
+| `trip.metadata[{key}]`               | `tripMetadata{key}`                 | type    | `{value}`     |
 | `trip.destinationGeofenceTag`        | `tripDestinationGeofenceTag`        | string  | `"store"`     |
 | `trip.destinationGeofenceExternalId` | `tripDestinationGeofenceExternalId` | string  | `"123"`       |
 | `foreground`                         | `foreground`                        | boolean | `true`        |
@@ -235,7 +236,7 @@ Note that Radar uses the special string `"(null)"` to represent `null` user data
 | Radar Event Attribute                | Lytics Event Data Field             | Type    | Example Value |
 | ------------------------------------ | ----------------------------------- | ------- | ------------- |
 | `trip.externalId`                    | `tripExternalId`                    | string  | `"299"`       |
-| `trip.metadata[{key}]`               | `tripMetadata{key}`                 | {type}  | `{value}`     |
+| `trip.metadata[{key}]`               | `tripMetadata{key}`                 | type    | `{value}`     |
 | `trip.destinationGeofenceTag`        | `tripDestinationGeofenceTag`        | string  | `"store"`     |
 | `trip.destinationGeofenceExternalId` | `tripDestinationGeofenceExternalId` | string  | `"123"`       |
 | `foreground`                         | `foreground`                        | boolean | `true`        |
@@ -245,7 +246,7 @@ Note that Radar uses the special string `"(null)"` to represent `null` user data
 | Radar Event Attribute                | Lytics Event Data Field             | Type    | Example Value |
 | ------------------------------------ | ----------------------------------- | ------- | ------------- |
 | `trip.externalId`                    | `tripExternalId`                    | string  | `"299"`       |
-| `trip.metadata[{key}]`               | `tripMetadata{key}`                 | {type}  | `{value}`     |
+| `trip.metadata[{key}]`               | `tripMetadata{key}`                 | type    | `{value}`     |
 | `trip.destinationGeofenceTag`        | `tripDestinationGeofenceTag`        | string  | `"store"`     |
 | `trip.destinationGeofenceExternalId` | `tripDestinationGeofenceExternalId` | string  | `"123"`       |
 | `foreground`                         | `foreground`                        | boolean | `true`        |
@@ -258,7 +259,7 @@ Note that Radar uses the special string `"(null)"` to represent `null` user data
 | `beacon.description`     | `beaconDescription`     | string  | `"Store #123 - Drive-Thru"`  |
 | `beacon.tag`             | `beaconTag`             | string  | `"drive-thru"`               |
 | `beacon.externalId`      | `beaconExternalId`      | string  | `"123"`                      |
-| `beacon.metadata[{key}]` | `beaconMetadata{key}`   | {type}  | `{value}`                    |
+| `beacon.metadata[{key}]` | `beaconMetadata{key}`   | type    | `{value}`                    |
 | `confidence`             | `confidence`            | string  | `"high"`                     |
 | `foreground`             | `foreground`            | boolean | `true`                       |
 
@@ -270,7 +271,7 @@ Note that Radar uses the special string `"(null)"` to represent `null` user data
 | `beacon.description`     | `beaconDescription`     | string           | `"Store #123 - Drive-Thru"`  |
 | `beacon.tag`             | `beaconTag`             | string           | `"drive-thru"`               |
 | `beacon.externalId`      | `beaconExternalId`      | string           | `"123"`                      |
-| `beacon.metadata[{key}]` | `beaconMetadata{key}`   | {type}           | `{value}`                    |
+| `beacon.metadata[{key}]` | `beaconMetadata{key}`   | type             | `{value}`                    |
 | `confidence`             | `confidence`            | string           | `"high"`                     |
 | `duration`               | `duration`              | number (minutes) | `1.42`                       |
 | `foreground`             | `foreground`            | boolean          | `true`                       |
