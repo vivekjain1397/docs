@@ -4,8 +4,8 @@
   "name": "Radar",
   "colors": {
     "primary": "#0003A5",
-    "light": "#0003A5",
-    "dark": "#A6BAED"
+    "light": "#A6BAED",
+    "dark": "#0003A5"
   },
   "favicon": "/favicon.svg",
   "navigation": {
