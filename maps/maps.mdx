@@ -7,19 +7,19 @@ For example, here's a Radar Map displaying a marker for Radar HQ:
 
 You can also check out the [maps explorer](https://radar.com/dashboard/maps/maps-explorer/maps) in the dashboard, or check out a full-page [maps demo](https://radar.com/demo/maps) and [store locator demo](https://radar.com/demo/locator).
 
-## [How it works](#how-it-works "Direct link to heading")
+## How it works
 
 To use Radar Maps, simply initialize the Radar SDK with your publishable key and specify the container to render the map into.
 
 Radar Maps is an extension of the [MapLibre GL JS](https://maplibre.org) library. See their [docs](https://maplibre.org/maplibre-gl-js/docs/API/) for more customization info.
 
-## [Getting Started](#getting-started "Direct link to heading")
+## [Getting Started](#getting-started)
 
 First, [sign up](https://radar.com/signup) for Radar and get an API key.
 
 Then add the Radar SDK to your application.
 
-### [With npm or yarn](#with-npm-or-yarn "Direct link to heading")
+### [With npm or yarn](#with-npm-or-yarn)
 
 Add the radar-sdk-js and maplibre-gl packages
 
@@ -39,7 +39,7 @@ Radar.initialize('prj_test_pk_...', { /* map config options */ });
 
 Note: The Radar SDK has a dependency on [maplibre-gl](https://github.com/maplibre/maplibre-gl-js).
 
-### [With HTML](#with-html "Direct link to heading")
+### [With HTML](#with-html)
 
 Add the following script in your `html` file
 
@@ -55,7 +55,7 @@ Then initialize the Radar SDK
 </script>
 ```
 
-### [Create a map](#create-a-map "Direct link to heading")
+### [Create a map](#create-a-map)
 
 Specify the HTML element where you want to render the map, by providing the element's ID, or the element object itself.
 
@@ -121,11 +121,12 @@ class RadarMap extends React.Component {
 
 export default RadarMap;
 ```
+
 </CodeGroup>
 
-## [Configuration](#configuration "Direct link to heading")
+## [Configuration](#configuration)
 
-### [Map](#map "Direct link to heading")
+### [Map](#map)
 
 You can configure a map with any MapLibre [MapOptions](https://maplibre.org/maplibre-gl-js/docs/API/type-aliases/MapOptions/).
 
@@ -151,22 +152,22 @@ const map = Radar.ui.map({
 
 Copy
 
-#### [Functions](#functions "Direct link to heading")
+#### [Functions](#functions)
 
 The Radar map class also includes some additional functions for handling common map interactions
 
-| Function        | Arguments                                                                                 | Return value       | Description                                                                                                                 |
-| --------------- | ----------------------------------------------------------------------------------------- | ------------------ | --------------------------------------------------------------------------------------------------------------------------- |
-| `on`            | [MapLibre event](https://maplibre.org/maplibre-gl-js/docs/API/type-aliases/MapEventType/) | void               | Register a callback to fire on a map event.                                                                                 |
-| `getMarkers`    | none                                                                                      | RadarMarker\[]     | Returns an array of all markers currently associated with the map.                                                          |
-| `fitToMarkers`  | fitBoundsOptions, RadarMarker\[] (optional)                                               | void               | Fit the map zoom and bounds to all markers on the map. Optionally takes a list of markers to fit (defaults to all markers). |
-| `clearMarkers`  | none                                                                                      | void               | Remove all markers from the map.                                                                                            |
-| `getFeatures`   | none                                                                                      | RadarMapFeature\[] | Returns an array of all features currently associated with the map.                                                         |
-| `fitToFeatures` | fitBoundsOptions                                                                          | void               | Fit the map zoom and bounds to all features on the map.                                                                     |
-| `clearFeatures` | none                                                                                      | void               | Remove all features from the map.                                                                                           |
-| `addPolygon`    | GeoJSON\<Polygon \| MultiPolygon> Feature, polygonOptions                                 | RadarMapFeature    | Add a new polygon [Feature](/maps/maps#polygon-and-multipolygon) to the map.                                                |
-| `addLine`       | GeoJSON\<LineString> Feature, lineOptions                                                 | RadarMapFeature    | Add a new line [Feature](/maps/maps#line-and-polyline) to the map.                                                          |
-| `addPolyline`   | encodedPolyline, polylineOptions                                                          | RadarMapFeature    | Accepts an encoded polyline and converts it to a line feature. Defaults to six decimals precision.                          |
+| Function        | Arguments                                                                                 | Return value      | Description                                                                                                                 |
+| --------------- | ----------------------------------------------------------------------------------------- | ----------------- | --------------------------------------------------------------------------------------------------------------------------- |
+| `on`            | [MapLibre event](https://maplibre.org/maplibre-gl-js/docs/API/type-aliases/MapEventType/) | void              | Register a callback to fire on a map event.                                                                                 |
+| `getMarkers`    | none                                                                                      | RadarMarker[]     | Returns an array of all markers currently associated with the map.                                                          |
+| `fitToMarkers`  | fitBoundsOptions, RadarMarker[] (optional)                                                | void              | Fit the map zoom and bounds to all markers on the map. Optionally takes a list of markers to fit (defaults to all markers). |
+| `clearMarkers`  | none                                                                                      | void              | Remove all markers from the map.                                                                                            |
+| `getFeatures`   | none                                                                                      | RadarMapFeature[] | Returns an array of all features currently associated with the map.                                                         |
+| `fitToFeatures` | fitBoundsOptions                                                                          | void              | Fit the map zoom and bounds to all features on the map.                                                                     |
+| `clearFeatures` | none                                                                                      | void              | Remove all features from the map.                                                                                           |
+| `addPolygon`    | GeoJSON\<Polygon \| MultiPolygon\> Feature, polygonOptions                                | RadarMapFeature   | Add a new polygon [Feature](/maps/maps#polygon-and-multipolygon) to the map.                                                |
+| `addLine`       | GeoJSON\<LineString\> Feature, lineOptions                                                | RadarMapFeature   | Add a new line [Feature](/maps/maps#line-and-polyline) to the map.                                                          |
+| `addPolyline`   | encodedPolyline, polylineOptions                                                          | RadarMapFeature   | Accepts an encoded polyline and converts it to a line feature. Defaults to six decimals precision.                          |
 
 ```javascript
 map.on('load', (event) => {
@@ -184,7 +185,7 @@ map.fitToFeatures({ padding: 20 }); // fit map view to features
 
 Copy
 
-### [Styles](#styles "Direct link to heading")
+### [Styles](#styles)
 
 Radar provides several out-of-the box map styles:
 
@@ -196,7 +197,7 @@ Radar provides several out-of-the box map styles:
 | `radar-satellite-v1` | ![](/images/maps/f2vbu16fzuly/5i3mYUXQ0wwO98Pc0dX3N7/44b2d6583e533f1676c2e42ee7350c68/satellite.png)           | A map style featuring detailed satellite imagery. Available on Enterprise plans.                                                                          |
 | `radar-hybrid-v1`    | ![](/images/maps/f2vbu16fzuly/5oKN5MDDTROttnqVEUT6g4/14f2765fbef1212b5dff64df3b2c0289/hybrid.png)              | A map style showcasing both satellite imagery and features such as roads. Available on Enterprise plans.                                                  |
 
-#### [Custom styles](#custom-styles "Direct link to heading")
+#### [Custom styles](#custom-styles)
 
 You can also [create a custom map style](/tutorials/create-a-custom-map-style) with Radar Maps Studio. Maps Studio is a visual maps editor available in the Radar dashboard, and supports advanced maps customizations, custom fonts, and custom markers.
 
@@ -204,7 +205,7 @@ You can also [create a custom map style](/tutorials/create-a-custom-map-style) w
 | ----------------- | ----------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `CUSTOM_STYLE_ID` | ![](/images/maps/f2vbu16fzuly/3naX6faTulCSd9C23cMtzE/1cc8252084b9a874b38a5a92dbae5493/custom-map-style.png) | Custom map style that can be tailored to your brand, or support more advanced map visualizations and features. The custom style ID can be found in the **share** modal when viewing or editing a map style in the Radar dashboard. |
 
-### [Marker](#marker "Direct link to heading")
+### [Marker](#marker)
 
 Markers can be used to denote places on the map. Radar Maps support custom marker images, and easily attaching popup's when a marker is clicked.
 
@@ -234,7 +235,7 @@ const marker = Radar.ui.marker({
 .addTo(map);
 ```
 
-### [Popup](#popup "Direct link to heading")
+### [Popup](#popup)
 
 Popups can be used to display text or custom HTML at a point on the map, usually upon some user interaction.
 
@@ -254,7 +255,7 @@ const popup = Radar.ui.popup({
 .addTo(map);
 ```
 
-### [Feature](#feature "Direct link to heading")
+### [Feature](#feature)
 
 Radar Map Features are custom lines and geometries that can be styled and interacted with on the map.
 
@@ -262,7 +263,7 @@ The primary format for a map feature is a [GeoJSON Feature](https://datatracker.
 
 Feature ids should be unique, and properties can be used for attaching additional metadata to the features.
 
-#### [Polygon and MultiPolygon](#polygon-and-multipolygon "Direct link to heading")
+#### [Polygon and MultiPolygon](#polygon-and-multipolygon)
 
 Polygons and MultiPolygons can be added to the map through the `map.addPolygon(feature, options)` function.
 
@@ -301,7 +302,7 @@ feature.on('click', ({ feature, event }) => {
 });
 ```
 
-#### [Line and Polyline](#line-and-polyline "Direct link to heading")
+#### [Line and Polyline](#line-and-polyline)
 
 Lines can be added to the map through the `map.addLine(feature, options)` function for GeoJSON LineStrings, or `map.addPolyline(polyline, options)` for encoded polylines.
 
@@ -315,7 +316,7 @@ The following `paint` properties for styling.
 | `line-cap`       | 'butt' \| 'round' \| 'square'                                                  |
 | `line-offset`    | number (px)                                                                    |
 | `line-blur`      | number (px)                                                                    |
-| `line-dasharray` | number\[]                                                                      |
+| `line-dasharray` | number[]                                                                       |
 | `line-gap-width` | number (px)                                                                    |
 | `line-gradient`  | [expression](https://maplibre.org/maplibre-gl-js/docs/examples/line-gradient/) |
 | `border-width`   | number (px)                                                                    |
@@ -339,9 +340,9 @@ const feature = Radar.ui.addPolyline('iyeulAveaclCuVfw...', {
 });
 ```
 
-## [Examples](#examples "Direct link to heading")
+## [Examples](#examples)
 
-### [Fit map to markers](#fit-map-to-markers "Direct link to heading")
+### [Fit map to markers](#fit-map-to-markers)
 
 Use the `map.fitToMarkers()` function to center and zoom the map to encompass all the markers on the map. It accepts [FlyToOptions](https://maplibre.org/maplibre-gl-js/docs/API/type-aliases/FlyToOptions/) as an optional argument.
 
@@ -440,9 +441,10 @@ class RadarMap extends React.Component {
 
 export default RadarMap;
 ```
+
 </CodeGroup>
 
-### [Add a custom icon](#add-a-custom-icon "Direct link to heading")
+### [Add a custom icon](#add-a-custom-icon)
 
 Add a `Marker` with a custom image to the map by specifying the image URL.
 
@@ -533,9 +535,10 @@ class RadarMap extends React.Component {
 
 export default RadarMap;
 ```
+
 </CodeGroup>
 
-### [Display a custom popup](#display-a-custom-popup "Direct link to heading")
+### [Display a custom popup](#display-a-custom-popup)
 
 Display a popup with customized HTML.
 
@@ -672,9 +675,10 @@ class RadarMap extends React.Component {
 
 export default RadarMap;
 ```
+
 </CodeGroup>
 
-### [Display a route](#display-a-route "Direct link to heading")
+### [Display a route](#display-a-route)
 
 Routes can be plotted on a Radar Map as a GeoJSON LineString, or an encoded polyline, both of which are formats provided by Radar's [routing APIs](/maps/routing).
 
@@ -825,9 +829,10 @@ class RadarMap extends React.Component {
 
 export default RadarMap;
 ```
+
 </CodeGroup>
 
-### []()Display a polygon[#](#display-a-polygon "Direct link to heading")
+### Display a polygon[#](#display-a-polygon)
 
 Polygons or complex shapes can be drawn on a Radar Map by providing a GeoJSON Polygon or MultiPolygon feature to the `map.addPolygon` function.
 
@@ -946,9 +951,10 @@ class RadarMap extends React.Component {
 
 export default RadarMap;
 ```
+
 </CodeGroup>
 
-### [Display a globe](#display-a-globe "Direct link to heading")
+### [Display a globe](#display-a-globe)
 
 Display a Radar Map with an interactive globe projection.
 
@@ -1041,9 +1047,10 @@ const RadarMap = () => {
 
 export default RadarMap;
 ```
+
 </CodeGroup>
 
-### [Change map language](#change-map-language "Direct link to heading")
+### [Change map language](#change-map-language)
 
 The map display language can be changed by setting the `language` option to the ISO language code (`en`), or the browser's current setting from `navigator.language`.
 
@@ -1078,13 +1085,13 @@ Local (local)
 </html>
 ```
 
-## [Compatibility](#compatibility "Direct link to heading")
+## [Compatibility](#compatibility)
 
 Radar Maps are built using the [Mapbox Vector Tile (MVT)](https://github.com/mapbox/vector-tile-spec) and [TileJSON](https://github.com/mapbox/tilejson-spec) standards, which means they can be used with any SDK that supports these protocols.
 
 Below are some alternative libraries that can be used to display Radar Maps.
 
-### [MapLibre GL JS](#maplibre-gl-js "Direct link to heading")
+### [MapLibre GL JS](#maplibre-gl-js)
 
 The Radar SDK uses the [MapLibre GL JS](https://maplibre.org/maplibre-gl-js/docs/) library, which offers some usability enhancements when creating maps.
 
@@ -1121,7 +1128,7 @@ https://api.radar.io/maps/styles/radar-default-v1?publishableKey=prj_live_pk_...
 </html>
 ```
 
-### [Leaflet](#leaflet "Direct link to heading")
+### [Leaflet](#leaflet)
 
 Radar Maps can be used as a base map for Leaflet through the [maplibre-gl-leaflet](https://github.com/maplibre/maplibre-gl-leaflet) library.
 
@@ -1169,41 +1176,41 @@ It uses the same style URL format as in the MapLibre example above.
 </html>
 ```
 
-### [iOS](#ios "Direct link to heading")
+### [iOS](#ios)
 
 Radar Maps are compatible with [MapLibre Native for iOS](https://maplibre.org/maplibre-native/ios/latest/documentation/maplibre/).
 
 For more info, see the [displaying Radar Maps on iOS](/tutorials/displaying-radar-maps-on-ios) tutorial.
 
-### [Android](#android "Direct link to heading")
+### [Android](#android)
 
 Radar Maps are compatible with [MapLibre Native for Android](https://maplibre.org/maplibre-native/android/examples/getting-started/).
 
 For more info, see the [displaying Radar Maps on Android](/tutorials/displaying-radar-maps-on-android) tutorial.
 
-### [React Native](#react-native "Direct link to heading")
+### [React Native](#react-native)
 
 Radar's React Native SDK has built-in support for displaying Radar Maps.
 
 See the [displaying Radar Maps with React Native](/tutorials/displaying-radar-maps-with-react-native) tutorial for more info.
 
-### [Flutter](#flutter "Direct link to heading")
+### [Flutter](#flutter)
 
-Radar Maps can be used in a flutter application with [flutter-maplibre-gl](https://github.com/maplibre/flutter-maplibre-gl) or [flutter\_map](https://docs.fleaflet.dev/).
+Radar Maps can be used in a flutter application with [flutter-maplibre-gl](https://github.com/maplibre/flutter-maplibre-gl) or [flutter_map](https://docs.fleaflet.dev/).
 
 See the [displaying Radar Maps with Flutter](/tutorials/displaying-radar-maps-with-flutter) tutorial for more info.
 
-### [Google Maps](#google-maps "Direct link to heading")
+### [Google Maps](#google-maps)
 
 To use Radar Maps with your existing Google Maps implementation, see our [Migration SDK](/maps/migration-sdk) for more details.
 
-## [Coverage](#coverage "Direct link to heading")
+## [Coverage](#coverage)
 
 Radar map data comes from [OpenStreetMap](https://www.openstreetmap.org).
 
 The following table describes data coverage for maps, by country, for consumer use cases (e.g., store locators) and logistics use cases (e.g., ride sharing, delivery).
 
-#### [Legend](#legend "Direct link to heading")
+#### [Legend](#legend)
 
 | Icon | Description                               |
 | ---- | ----------------------------------------- |
@@ -1211,9 +1218,9 @@ The following table describes data coverage for maps, by country, for consumer u
 | ◐    | Good data quality and availability        |
 | ◯    | Approximate data quality and availability |
 
-#### [Coverage](#coverage-1 "Direct link to heading")
+#### [Coverage](#coverage-1)
 
-|                      | Maps |
+|                      | Maps |
 | -------------------- | ---- |
 | 🇺🇸 US (consumer)   | ⬤    |
 | 🇺🇸 US (logistics)  | ⬤    |
@@ -1224,8 +1231,8 @@ The following table describes data coverage for maps, by country, for consumer u
 | 🌎 Other (consumer)  | ⬤    |
 | 🌎 Other (logistics) | ◐    |
 
-## [Support](#support "Direct link to heading")
+## [Support](#support)
 
-Have questions? We're here to help! Contact us at [radar.com/support](https://radar.com/support).
+Have questions? We're here to help\! Contact us at [radar.com/support](https://radar.com/support).
 
 [Edit this page](https://github.com/radarlabs/docs/edit/main/docs/maps/maps.mdx)
