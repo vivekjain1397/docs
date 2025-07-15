@@ -20,18 +20,24 @@ Whenever events are generated, Radar will send custom events and user attributes
 
 By default, Radar `userId` maps to Braze `external_id` for logged in users. However, you can track logged out users or specify custom mappings by setting Radar `metadata.brazeAlias` or `metadata.brazeExternalId`. If you set `metadata.brazeAlias`, you must also add a matching alias in Braze with label `radarAlias`.
 
-- Swift
-- Kotlin
+<CodeGroup>
 
-```
-// track logged out users with alias (deviceId recommended, not required if not tracking logged out users)Radar.setMetadata(["brazeAlias": deviceId])AppDelegate.braze?.user.addAlias(deviceId, withLabel: "radarAlias")
-// track logged in users with custom external_id mapping (not required if using default mapping)Radar.setMetadata(["brazeExternalId": userId])AppDelegate.braze?.changeUser(userId: userId)
+```swift Swift
+// track logged out users with alias (deviceId recommended, not required if not tracking logged out users)
+Radar.setMetadata(["brazeAlias": deviceId])AppDelegate.braze?.user.addAlias(deviceId, withLabel: "radarAlias")
+// track logged in users with custom external_id mapping (not required if using default mapping)
+Radar.setMetadata(["brazeExternalId": userId])AppDelegate.braze?.changeUser(userId: userId)
 ```
 
+
+```kotlin Kotlin
+// track logged out users with alias (deviceId recommended, not required if not tracking logged out users)
+Radar.setMetadata(JSONObject().put("brazeAlias", deviceId))Braze.getInstance(context).currentUser?.addAlias(deviceId, "radarAlias")
+// track logged in users with custom external_id mapping (not required if using default mapping)
+Radar.setMetadata(JSONObject().put("brazeExternalId", userId))Braze.getInstance(context).changeUser(userId)
 ```
-// track logged out users with alias (deviceId recommended, not required if not tracking logged out users)Radar.setMetadata(JSONObject().put("brazeAlias", deviceId))Braze.getInstance(context).currentUser?.addAlias(deviceId, "radarAlias")
-// track logged in users with custom external_id mapping (not required if using default mapping)Radar.setMetadata(JSONObject().put("brazeExternalId", userId))Braze.getInstance(context).changeUser(userId)
-```
+
+</CodeGroup>
 
 ## Verify integration data delivery
 
@@ -64,15 +70,65 @@ To trigger in-app messaging from the user state detected on app open, custom eve
 - Swift
 - Kotlin
 
-```
-import RadarSDKimport Appboy_iOS_SDK
-@UIApplicationMainclass AppDelegate: UIResponder, UIApplicationDelegate, RadarDelegate {
-  func didUpdateLocation(_ location: CLLocation, user: RadarUser) {    if (user.foreground && user.source == RadarLocationSource.foregroundLocation) {      if let geofences = user.geofences {        var customEventProperties = [String:Array<String>]()        customEventProperties["radar_geofence_descriptions"] = geofences.compactMap({ $0.__description })        customEventProperties["radar_geofence_tags"] = geofences.compactMap({ $0.tag })        customEventProperties["radar_geofence_external_ids"] = geofences.compactMap({ $0.externalId })        Appboy.sharedInstance()?.logCustomEvent("radar_fg_geofences_entered", withProperties: customEventProperties)      }      if let place = user.place {        var customEventProperties = [String:Any]()        customEventProperties["radar_place_name"] = place.name        customEventProperties["radar_place_categories"] = place.categories        customEventProperties["radar_place_chain_slug"] = place.chain?.slug ?? ""        Appboy.sharedInstance()?.logCustomEvent("radar_fg_place_entered", withProperties: customEventProperties)      }    }    return  }}
+<CodeGroup>
+
+```swift Swift
+import RadarSDK
+import Appboy_iOS_SDK
+
+@UIApplicationMain
+class AppDelegate: UIResponder, UIApplicationDelegate, RadarDelegate {
+  func didUpdateLocation(_ location: CLLocation, user: RadarUser) {
+    if user.foreground && user.source == RadarLocationSource.foregroundLocation {
+      if let geofences = user.geofences {
+        var customEventProperties = [String: [String]]()
+        customEventProperties["radar_geofence_descriptions"] = geofences.compactMap({ $0.__description })
+        customEventProperties["radar_geofence_tags"] = geofences.compactMap({ $0.tag })
+        customEventProperties["radar_geofence_external_ids"] = geofences.compactMap({ $0.externalId })
+        Appboy.sharedInstance()?.logCustomEvent("radar_fg_geofences_entered", withProperties: customEventProperties)
+      }
+      if let place = user.place {
+        var customEventProperties = [String: Any]()
+        customEventProperties["radar_place_name"] = place.name
+        customEventProperties["radar_place_categories"] = place.categories
+        customEventProperties["radar_place_chain_slug"] = place.chain?.slug ?? ""
+        Appboy.sharedInstance()?.logCustomEvent("radar_fg_place_entered", withProperties: customEventProperties)
+      }
+    }
+    return
+  }
+}
 ```
 
+
+```kotlin Kotlin
+class MyRadarReceiver: RadarReceiver() {
+  override fun onLocationUpdated(context: Context, location: Location, user: RadarUser) {
+    val userGeofences = user.geofences
+    val userPlace = user.place
+
+    if (userGeofences != null && userGeofences.isNotEmpty()) {
+      val eventPropertiesJson = JSONObject()
+      eventPropertiesJson.put("geofenceTags", userGeofences.map { it.tag })
+      eventPropertiesJson.put("geofenceDescriptions", userGeofences.map { it.description })
+      eventPropertiesJson.put("geofenceExternalIds", userGeofences.map { it.externalId })
+      val eventProperties = BrazeProperties(eventPropertiesJson)
+      Braze.getInstance(context).logCustomEvent("radar_fg_geofences_entered", eventProperties)
+    }
+
+    if (userPlace != null) {
+      val eventPropertiesJson = JSONObject()
+      eventPropertiesJson.put("placeChainSlug", userPlace.chain?.slug ?: "")
+      eventPropertiesJson.put("placeName", userPlace.name)
+      eventPropertiesJson.put("placeCategories", userPlace.categories.toList())
+      val eventProperties = BrazeProperties(eventPropertiesJson)
+      Braze.getInstance(context).logCustomEvent("radar_fg_place_entered", eventProperties)
+    }
+  }
+}
 ```
-class MyRadarReceiver: RadarReceiver() {  override fun onLocationUpdated(context: Context, location: Location, user: RadarUser) {    var userGeofences = user.geofences    var userPlace = user.place    if (userGeofences != null && userGeofences.isNotEmpty()) {      var eventPropertiesJson = JSONObject()      eventPropertiesJson.put("geofenceTags", userGeofences.map { it.tag })      eventPropertiesJson.put("geofenceDescriptions", userGeofences.map { it.description })      eventPropertiesJson.put("geofenceExternalIds", userGeofences.map { it.externalId })      var eventProperties = BrazeProperties (eventPropertiesJson)      Braze.getInstance(context).logCustomEvent("radar_fg_geofences_entered", eventProperties)    }    if (userPlace != null) {      var eventPropertiesJson = JSONObject()      eventPropertiesJson.put("placeChainSlug", userPlace.chain?.slug ?: "")      eventPropertiesJson.put("placeName", userPlace.name)      eventPropertiesJson.put("placeCategories",userPlace.categories.toList())      var eventProperties = BrazeProperties (eventPropertiesJson)      Braze.getInstance(context).logCustomEvent("radar_fg_place_entered", eventProperties)    }  }}
-```
+
+</CodeGroup>
 
 ### Connected content
 
@@ -149,7 +205,7 @@ Note that Radar uses the special string `"(null)"` to represent `null` user attr
 | `geofence.description`     | `geofence_description`    | string  | `"Store #123"`               |
 | `geofence.tag`             | `geofence_tag`            | string  | `"store"`                    |
 | `geofence.externalId`      | `geofence_external_id`    | string  | `"123"`                      |
-| `geofence.metadata[{key}]` | `geofence_metadata_{key}` | {type}  | `{value}`                    |
+| `geofence.metadata[{key}]` | `geofence_metadata_{key}` | type    | `{value}`                    |
 | `confidence`               | `confidence`              | string  | `"high"`                     |
 | `foreground`               | `foreground`              | boolean | `true`                       |
 
@@ -173,7 +229,7 @@ If [Regions](/regions) is enabled, Radar will also send the following attributes
 | `geofence.description`     | `geofence_description`    | string           | `"Store #123"`               |
 | `geofence.tag`             | `geofence_tag`            | string           | `"store"`                    |
 | `geofence.externalId`      | `geofence_external_id`    | string           | `"123"`                      |
-| `geofence.metadata[{key}]` | `geofence_metadata_{key}` | {type}           | `{value}`                    |
+| `geofence.metadata[{key}]` | `geofence_metadata_{key}` | type             | `{value}`                    |
 | `confidence`               | `confidence`              | string           | `"high"`                     |
 | `duration`                 | `duration`                | number (minutes) | `42.1`                       |
 | `foreground`               | `foreground`              | boolean          | `true`                       |
@@ -198,7 +254,7 @@ If [Regions](/regions) is enabled, Radar will also send the following attributes
 | `geofence.description`     | `geofence_description`    | string           | `"Store #123"`               |
 | `geofence.tag`             | `geofence_tag`            | string           | `"store"`                    |
 | `geofence.externalId`      | `geofence_external_id`    | string           | `"123"`                      |
-| `geofence.metadata[{key}]` | `geofence_metadata_{key}` | {type}           | `{value}`                    |
+| `geofence.metadata[{key}]` | `geofence_metadata_{key}` | type             | `{value}`                    |
 | `confidence`               | `confidence`              | string           | `"high"`                     |
 | `duration`                 | `duration`                | number (minutes) | `5`                          |
 | `foreground`               | `foreground`              | boolean          | `true`                       |
@@ -224,7 +280,7 @@ If [Regions](/regions) is enabled, Radar will also send the following attributes
 | `place.chain.slug`            | `place_chain_id`             | string                   | `"starbucks"`                      |
 | `place.chain.name`            | `place_chain_name`           | string                   | `"Starbucks"`                      |
 | `place.chain.externalId`      | `place_chain_external_id`    | string                   | `"123"`                            |
-| `place.chain.metadata[{key}]` | `place_chain_metadata_{key}` | {type}                   | `{value}`                          |
+| `place.chain.metadata[{key}]` | `place_chain_metadata_{key}` | type                     | `{value}`                          |
 | `place.categories`            | `place_categories`           | string (comma-separated) | `"food-beverage,cafe,coffee-shop"` |
 | `confidence`                  | `confidence`                 | string                   | `"high"`                           |
 | `foreground`                  | `foreground`                 | boolean                  | `true`                             |
@@ -250,7 +306,7 @@ If [Regions](/regions) is enabled, Radar will also send the following attributes
 | `place.chain.slug`            | `place_chain_id`             | string                   | `"starbucks"`                      |
 | `place.chain.name`            | `place_chain_name`           | string                   | `"Starbucks"`                      |
 | `place.chain.externalId`      | `place_chain_external_id`    | string                   | `"123"`                            |
-| `place.chain.metadata[{key}]` | `place_chain_metadata_{key}` | {type}                   | `{value}`                          |
+| `place.chain.metadata[{key}]` | `place_chain_metadata_{key}` | type                     | `{value}`                          |
 | `place.categories`            | `place_categories`           | string (comma-separated) | `"food-beverage,cafe,coffee-shop"` |
 | `confidence`                  | `confidence`                 | string                   | `"high"`                           |
 | `duration`                    | `duration`                   | number (minutes)         | `42.1`                             |
@@ -327,7 +383,7 @@ If [Regions](/regions) is enabled, Radar will also send the following attributes
 | Radar Event Attribute                | Braze Event Property                    | Type    | Example Value |
 | ------------------------------------ | --------------------------------------- | ------- | ------------- |
 | `trip.externalId`                    | `trip_external_id`                      | string  | `"299"`       |
-| `trip.metadata[{key}]`               | `trip_metadata_{key}`                   | {type}  | `{value}`     |
+| `trip.metadata[{key}]`               | `trip_metadata_{key}`                   | type    | `{value}`     |
 | `trip.destinationGeofenceTag`        | `trip_destination_geofence_tag`         | string  | `"store"`     |
 | `trip.destinationGeofenceExternalId` | `trip_destination_geofence_external_id` | string  | `"123"`       |
 | `foreground`                         | `foreground`                            | boolean | `true`        |
@@ -337,7 +393,7 @@ If [Regions](/regions) is enabled, Radar will also send the following attributes
 | Radar Event Attribute                | Braze Event Property                    | Type    | Example Value |
 | ------------------------------------ | --------------------------------------- | ------- | ------------- |
 | `trip.externalId`                    | `trip_external_id`                      | string  | `"299"`       |
-| `trip.metadata[{key}]`               | `trip_metadata_{key}`                   | {type}  | `{value}`     |
+| `trip.metadata[{key}]`               | `trip_metadata_{key}`                   | type    | `{value}`     |
 | `trip.destinationGeofenceTag`        | `trip_destination_geofence_tag`         | string  | `"store"`     |
 | `trip.destinationGeofenceExternalId` | `trip_destination_geofence_external_id` | string  | `"123"`       |
 | `foreground`                         | `foreground`                            | boolean | `true`        |
@@ -347,7 +403,7 @@ If [Regions](/regions) is enabled, Radar will also send the following attributes
 | Radar Event Attribute                | Braze Event Property                    | Type    | Example Value |
 | ------------------------------------ | --------------------------------------- | ------- | ------------- |
 | `trip.externalId`                    | `trip_external_id`                      | string  | `"299"`       |
-| `trip.metadata[{key}]`               | `trip_metadata_{key}`                   | {type}  | `{value}`     |
+| `trip.metadata[{key}]`               | `trip_metadata_{key}`                   | type    | `{value}`     |
 | `trip.destinationGeofenceTag`        | `trip_destination_geofence_tag`         | string  | `"store"`     |
 | `trip.destinationGeofenceExternalId` | `trip_destination_geofence_external_id` | string  | `"123"`       |
 | `foreground`                         | `foreground`                            | boolean | `true`        |
@@ -357,7 +413,7 @@ If [Regions](/regions) is enabled, Radar will also send the following attributes
 | Radar Event Attribute                | Braze Event Property                    | Type    | Example Value |
 | ------------------------------------ | --------------------------------------- | ------- | ------------- |
 | `trip.externalId`                    | `trip_external_id`                      | string  | `"299"`       |
-| `trip.metadata[{key}]`               | `trip_metadata_{key}`                   | {type}  | `{value}`     |
+| `trip.metadata[{key}]`               | `trip_metadata_{key}`                   | type    | `{value}`     |
 | `trip.destinationGeofenceTag`        | `trip_destination_geofence_tag`         | string  | `"store"`     |
 | `trip.destinationGeofenceExternalId` | `trip_destination_geofence_external_id` | string  | `"123"`       |
 | `foreground`                         | `foreground`                            | boolean | `true`        |
@@ -367,7 +423,7 @@ If [Regions](/regions) is enabled, Radar will also send the following attributes
 | Radar Event Attribute                | Braze Event Property                    | Type    | Example Value |
 | ------------------------------------ | --------------------------------------- | ------- | ------------- |
 | `trip.externalId`                    | `trip_external_id`                      | string  | `"299"`       |
-| `trip.metadata[{key}]`               | `trip_metadata_{key}`                   | {type}  | `{value}`     |
+| `trip.metadata[{key}]`               | `trip_metadata_{key}`                   | type    | `{value}`     |
 | `trip.destinationGeofenceTag`        | `trip_destination_geofence_tag`         | string  | `"store"`     |
 | `trip.destinationGeofenceExternalId` | `trip_destination_geofence_external_id` | string  | `"123"`       |
 | `foreground`                         | `foreground`                            | boolean | `true`        |
@@ -380,7 +436,7 @@ If [Regions](/regions) is enabled, Radar will also send the following attributes
 | `beacon.description`     | `radar_beacon_description`   | string  | `"Store #123 - Drive-Thru"`  |
 | `beacon.tag`             | `radar_beacon_tag`           | string  | `"drive-thru"`               |
 | `beacon.externalId`      | `radar_beacon_external_id`   | string  | `"123"`                      |
-| `beacon.metadata[{key}]` | `radar_beacon_metadata{key}` | {type}  | `{value}`                    |
+| `beacon.metadata[{key}]` | `radar_beacon_metadata{key}` | type    | `{value}`                    |
 | `confidence`             | `confidence`                 | string  | `"high"`                     |
 | `foreground`             | `foreground`                 | boolean | `true`                       |
 
@@ -392,7 +448,7 @@ If [Regions](/regions) is enabled, Radar will also send the following attributes
 | `beacon.description`     | `radar_beacon_description`   | string           | `"Store #123 - Drive-Thru"`  |
 | `beacon.tag`             | `radar_beacon_tag`           | string           | `"drive-thru"`               |
 | `beacon.externalId`      | `radar_beacon_external_id`   | string           | `"123"`                      |
-| `beacon.metadata[{key}]` | `radar_beacon_metadata{key}` | {type}           | `{value}`                    |
+| `beacon.metadata[{key}]` | `radar_beacon_metadata{key}` | type             | `{value}`                    |
 | `confidence`             | `confidence`                 | string           | `"high"`                     |
 | `duration`               | `radar_duration`             | number (minutes) | `1.42`                       |
 | `foreground`             | `foreground`                 | boolean          | `true`                       |
