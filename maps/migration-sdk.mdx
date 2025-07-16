@@ -3,14 +3,18 @@ title: "Migration SDK"
 description: "The Radar Maps Migration SDK allows you to easily convert your Google Maps web implementations with Radar Maps by simply swapping the script import tag."
 ---
 
-## [How it works](#how-it-works "Direct link to heading")
+## How it works
 
 The Google maps import will look like one of the following:
 
 **Direct src import**
 
 ```html
-<script  async  src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&loading=async&callback=initMap"></script>
+<script
+  async
+  src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&loading=async&callback=initMap"
+>
+</script>
 ```
 
 **Dynamic Library import**
@@ -34,13 +38,13 @@ For either of these imports, simply replace these lines with the Radar Migration
 
 Additionally you can specify a callback and Radar map style which is defined below.
 
-## [Configuration](#configuration "Direct link to heading")
+## Configuration
 
-#### [Definition](#definition "Direct link to heading")
+#### Definition
 
-src `https://js.radar.com/v1/radar-migration-sdk.js`
+`src` `https://js.radar.com/v1/radar-migration-sdk.js`
 
-### [Query Parameters](#query-parameters "Direct link to heading")
+### Query Parameters
 
 | Name       | Default            | Possible values                                                          | Description                                                                                                                                                                          |
 | ---------- | ------------------ | ------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
@@ -48,12 +52,12 @@ src `https://js.radar.com/v1/radar-migration-sdk.js`
 | `style`    | `radar-default-v1` | `radar-default-v1`, `radar-light-v1`, `radar-dark-v1`, `CUSTOM_STYLE_ID` | The style of the map. One of Radar's out-of-the box styles, or a [custom style](/maps/maps#custom-styles) ID. See [map styles](https://radar.com/maps/maps#styles) for more details. |
 | `callback` | none               | string                                                                   | The name of a maps callback function to be called once the library is imported                                                                                                       |
 
-## [Coverage](#coverage "Direct link to heading")
+## Coverage
 
 See [Maps coverage](https://radar.com/maps/maps#coverage) for more details.
 
-## [Support](#support "Direct link to heading")
+## Support
 
-Have questions? We're here to help! Contact us at [radar.com/support](https://radar.com/support).
+Have questions? We're here to help\! Contact us at [radar.com/support](https://radar.com/support).
 
 [Edit this page](https://github.com/radarlabs/docs/edit/main/docs/maps/migration-sdk.mdx)

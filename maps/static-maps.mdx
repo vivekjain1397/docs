@@ -9,23 +9,21 @@ For example, here's a Radar Static Map displaying a marker for Radar HQ:
 <img src="https://api.radar.io/maps/static?width=910&height=320&center=40.73430,-73.99110&zoom=15&style=radar-default-v1&scale=2&markers=color:0x000257|40.73430,-73.99110&publishableKey=prj_live_pk_..." alt="Radar static map over New York City" />
 ```
 
-Copy
-
 ![Radar static map over New York City](/images/maps/maps/static)
 
-## [How it works](#how-it-works "Direct link to heading")
+## How it works
 
 To generate an image with Radar's Static Maps API, simply make an HTTP request with your desired map size, location, and any markers (map pins) for highlighting important features.
 
 Static Map images can be used inline with HTML `<img>` tags by setting the `src` attribute to the Static Maps endpoint.
 
-## [Configuration](#configuration "Direct link to heading")
+## Configuration
 
-#### [Definition](#definition "Direct link to heading")
+#### Definition
 
-GET `https://api.radar.io/maps/static`
+`GET` `https://api.radar.io/maps/static`
 
-### [Parameters](#parameters "Direct link to heading")
+### [Parameters](#parameters)
 
 | Name             | Default                                                     | Possible values                                                          | Description                                                                                                                                                                                                                           |
 | ---------------- | ----------------------------------------------------------- | ------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -40,7 +38,7 @@ GET `https://api.radar.io/maps/static`
 | `path`           | none                                                        | string                                                                   | For rendering paths on the map. See [paths](#paths) for more details.                                                                                                                                                                 |
 | `publishableKey` | none (required)                                             | string                                                                   | Your Radar publishable API key.                                                                                                                                                                                                       |
 
-### [Markers](#markers "Direct link to heading")
+### Markers
 
 Adding markers (or map pins) to your static images can be useful for highlighting important features on your map. The Static Maps endpoint accepts a `markers` parameter that can be configured for rendering one, or many markers on the map.
 
@@ -50,13 +48,13 @@ Each markers parameter is made up of optional `markerStyle` sections, and one or
 markers=markerStyle|markerLocation1|markerLocation2|...
 ```
 
-*markerLocation* are specified in the following format `latitude,longitude` and are pipe separated.
+_markerLocation_ are specified in the following format `latitude,longitude` and are pipe separated.
 
-*markerStyle* are specified in the following format `optionName:optionValue` and are pipe separated. *markerStyle* have the following options:
+_markerStyle_ are specified in the following format `optionName:optionValue` and are pipe separated. _markerStyle_ have the following options:
 
-* `color` (string, optional): The color of the image specified as a hex in the following format `0xFFFFFF` or a [standard color](https://developer.mozilla.org/en-US/docs/Web/CSS/named-color). The default value if color is not specified is `0x000257`.
-* `size` (string, optional): By specifying `size:small` as an option, you can render a scaled down version of the marker.
-* `icon` (string, optional): The marker image to use. Can be a URL to valid SVG or PNG file, or the ID of custom uploaded marker. The default marker image will be used if not provided.
+- `color` (string, optional): The color of the image specified as a hex in the following format `0xFFFFFF` or a [standard color](https://developer.mozilla.org/en-US/docs/Web/CSS/named-color). The default value if color is not specified is `0x000257`.
+- `size` (string, optional): By specifying `size:small` as an option, you can render a scaled down version of the marker.
+- `icon` (string, optional): The marker image to use. Can be a URL to valid SVG or PNG file, or the ID of custom uploaded marker. The default marker image will be used if not provided.
 
 For instance, to apply a single marker styling to multiple pins:
 
@@ -76,7 +74,7 @@ https://api.radar.io/maps/static?width=900&height=600&center=37.80176,-122.42376
 
 ![Radar Static Map over San Francisco](/images/maps/maps/static)
 
-### [Paths](#paths "Direct link to heading")
+### Paths
 
 Paths lines can be added to highlight routes or connect items on your map. The `path` parameter can be configured for rendering a connected list of coordinates or an encoded polyline.
 
@@ -86,7 +84,7 @@ Each paths parameter is made up of optional `pathStyle` sections, an encoded pol
 path=pathStyle|pathLocation1|pathLocation2|...
 ```
 
-*pathLocation* are specified in the following format `latitude,longitude` and are pipe separated. Locations must come *after* the style options.
+_pathLocation_ are specified in the following format `latitude,longitude` and are pipe separated. Locations must come _after_ the style options.
 
 The locations can also be provided via encoded polyline by specifying `enc:` as the option (or `enc6:` for a polyline with 6 decimals precision).
 
@@ -94,43 +92,34 @@ The locations can also be provided via encoded polyline by specifying `enc:` as 
 path=pathStyle|enc:g{rwFnlrbMkArDENGRiCfIEJCJHFpA|@VPHFDOBGdC_IFQDO|BiHHUJBb@FxARLBH@
 ```
 
-*pathStyle* are specified in the following format `optionName:optionValue` and are pipe separated. *pathStyle* have the following options:
+_pathStyle_ are specified in the following format `optionName:optionValue` and are pipe separated. _pathStyle_ have the following options:
 
-* `stroke` (string, optional): The color of the path specified as a hex in the following format `0xFFFFFF` or a [standard color](https://developer.mozilla.org/en-US/docs/Web/CSS/named-color). The default value if color is not specified is `0x000257`.
-* `width` (number, optional): The width of the path in pixels. The default is `3`.
-* `border` (string, optional): The color of the path border as a hex in the following format `0xFFFFFF` or a [standard color](https://developer.mozilla.org/en-US/docs/Web/CSS/named-color). The default value if color is not specified is `white`.
-* `borderWidth` (number, optional): The width of the border in pixels. The default is `2`.
+- `stroke` (string, optional): The color of the path specified as a hex in the following format `0xFFFFFF` or a [standard color](https://developer.mozilla.org/en-US/docs/Web/CSS/named-color). The default value if color is not specified is `0x000257`.
+- `width` (number, optional): The width of the path in pixels. The default is `3`.
+- `border` (string, optional): The color of the path border as a hex in the following format `0xFFFFFF` or a [standard color](https://developer.mozilla.org/en-US/docs/Web/CSS/named-color). The default value if color is not specified is `white`.
+- `borderWidth` (number, optional): The width of the border in pixels. The default is `2`.
 
 ```
 https://api.radar.io/maps/static?width=900&height=600&style=radar-light-v1&scale=2&path=stroke:0xFF0000|width:3|border:0xFFFFFF|borderwidth:2|40.715442411463755,-74.01477925566485|40.71536228528052,-74.0135811740668|40.70948610234797,-74.01499068182932|40.70491834742046,-74.01675256653202|40.701953145830515,-74.01583638648677|40.70120514620143,-74.0143916410303|40.701819575084386,-74.01051549468332|40.70409024134315,-74.006357446784|40.706975211514106,-74.00167083347398|40.70871147591237,-73.99786516251531|40.709405968996606,-73.99455281927393|40.70961965771903,-73.99289664765297|40.71023400897673,-73.9875052804617|40.710901775653895,-73.9812682086125|40.711168880450145,-73.97918918466307|40.712798196502035,-73.97735682457207|40.71418709018175,-73.97682825916088|40.71765919762373,-73.97527780062218|40.72105100464597,-73.97464352212923|40.72334772071008,-73.97407971902413|40.72513696783835,-73.97267021126159|40.727032983196096,-73.97185974429856|40.728501692329786,-73.97566548297984|40.72588470062763,-73.97763879384702|40.72460287122638,-73.97837878542222|40.725671064108695,-73.98077494861835&path=|stroke:0x000257|width:3|border:0xFFFFFF|borderwidth:2|40.70376498115374,-73.98661916459334|40.700657698018915,-73.98670300220783|40.70003622399656,-73.9863583364594|40.70003622399656,-73.98677752453152|40.70514908788235,-73.98957211168081|40.71508654363487,-73.99501313325952|40.71646714228771,-73.99607566267477|40.72020611986693,-73.99421623619756|40.71750257248871,-73.98518473616696|40.71128974971751,-73.96465514996301|40.71005286858238,-73.9601393999477|40.710486585375435,-73.95607565049288|40.71330547192764,-73.95433006645362|40.71577909038294,-73.95155990047758|40.71934554124928,-73.95243269249747&publishableKey=prj_live_pk_...
 ```
 
-Copy
-
 ![Radar Static Map with multiple paths](/images/maps/maps/static)
 
-## [Examples](#examples "Direct link to heading")
+## Examples
 
-### [Embedding a Radar Static Map using HTML](#embedding-a-radar-static-map-using-html "Direct link to heading")
+### Embedding a Radar Static Map using HTML
 
 Radar Static Maps can easily be embedded into `<img>` using the element's `src` attribute. For instance, if we wanted an image of a map with the following attributes:
 
-* **width**: 900
-
-* **height**: 600
-
-* **center**: 43.64259,-79.387087
-
-* **zoom**: 13
-
-* **style**: `radar-default-v1`
-
-* **scale**: 2
-
-* **marker**:
-
-  * color: `0x000257`
-  * location: 43.64259,-79.387087
+- **width**: 900
+- **height**: 600
+- **center**: 43.64259,-79.387087
+- **zoom**: 13
+- **style**: `radar-default-v1`
+- **scale**: 2
+- **marker**:
+  - color: `0x000257`
+  - location: 43.64259,-79.387087
 
 We can specify these options as query parameters in the image `src`.
 
@@ -138,11 +127,9 @@ We can specify these options as query parameters in the image `src`.
 https://api.radar.io/maps/static?width=900&height=600&center=43.64259,-79.387087&zoom=13&style=radar-default-v1&scale=2&markers=color:0x000257|43.64259,-79.387087&publishableKey=prj_live_pk_...
 ```
 
-Copy
-
 ![Radar Static Map centered around the CN Tower](/images/maps/maps/static)
 
-### [Autofitting map bounds to markers or paths](#autofitting-map-bounds-to-markers-or-paths "Direct link to heading")
+### Autofitting map bounds to markers or paths
 
 When markers or paths are included as part of the Static Image request, you have the option for the `center` and `zoom` to automatically be determined based on the items' locations.
 
@@ -154,7 +141,7 @@ https://api.radar.io/maps/static?width=900&height=600&style=radar-default-v1&sca
 
 ![Radar Static Map over New York City museums](/images/maps/maps/static)
 
-### [Using a custom marker image](#using-a-custom-marker-image "Direct link to heading")
+### Using a custom marker image
 
 To use a custom marker image, set the `icon:` option as a URL that resolves to a valid `.png` or `.svg` file.
 
@@ -166,7 +153,7 @@ https://api.radar.io/maps/static?width=900&height=600&style=radar-default-v1&sca
 
 ![Radar Static Map with custom marker images](/images/maps/maps/static)
 
-### [Rendering a route](#rendering-a-route "Direct link to heading")
+### Rendering a route
 
 Radar [Routing API](/api#routing) responses include the shape of the route in either the polyine or LineString format. Both of these formats are supported for rendering a path, which can be used to plot the route in a static image.
 
@@ -176,7 +163,7 @@ https://api.radar.io/maps/static?width=900&height=600&style=radar-light-v1&scale
 
 ![Radar Static Map with route](/images/maps/maps/static)
 
-### [Images for high resolution device](#images-for-high-resolution-device "Direct link to heading")
+### Images for high resolution device
 
 When embedding images on high resolution devices, images may look blurry (low resolution) or be too small if the image is not scaled to match the device's pixel ratio.
 
@@ -190,12 +177,12 @@ https://api.radar.io/maps/static?width=200&height=200&center=40.71257,-74.00260&
 | ---------------------------------------------------------------- | ---------------------------------------------------------------- |
 | ![Radar Static Map over New York City](/images/maps/maps/static) | ![Radar Static Map over New York City](/images/maps/maps/static) |
 
-## [Coverage](#coverage "Direct link to heading")
+## Coverage
 
 See [Maps coverage](https://radar.com/maps/maps#coverage) for more details.
 
-## [Support](#support "Direct link to heading")
+## Support
 
-Have questions? We're here to help! Contact us at [radar.com/support](https://radar.com/support).
+Have questions? We're here to help\! Contact us at [radar.com/support](https://radar.com/support).
 
 [Edit this page](https://github.com/radarlabs/docs/edit/main/docs/maps/static-maps.mdx)
