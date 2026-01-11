@@ -17,6 +17,13 @@
         ]
       },
       {
+        "group": "Ben's area",
+        "pages": [
+          "bens-area/ben-1",
+          "bens-area/ben-2"
+        ]
+      },
+      {
         "group": "Geofencing Platform",
         "pages": [
           "geofencing/overview",
